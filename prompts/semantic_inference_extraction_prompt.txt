@@ -1,0 +1,43 @@
+Create a clinically useful semantic interpretation of the provided prescription/document.
+
+Rules:
+- Keep raw evidence separate from inferred interpretation.
+- You may expand abbreviations when confident, group related findings, interpret medication timing, and infer likely clinical categories.
+- Do not invent unsupported content.
+- Every inferred field should include raw evidence text when possible.
+- Do not overwrite or replace raw extraction fields.
+- Return only valid JSON, without Markdown fences or commentary.
+
+Use this schema:
+{
+  "document_id": "",
+  "raw_evidence_summary": {
+    "pages": [],
+    "key_raw_lines": []
+  },
+  "semantic_patient_context": {},
+  "clinical_groupings": {
+    "complaints": [],
+    "diagnoses_or_assessments": [],
+    "history": [],
+    "examination_findings": [],
+    "investigations": [],
+    "medications": [],
+    "procedures": [],
+    "advice": [],
+    "follow_up": []
+  },
+  "inferences": [
+    {
+      "inferred_field": "",
+      "inferred_value": "",
+      "confidence": "",
+      "raw_evidence": "",
+      "caveat": ""
+    }
+  ],
+  "hallucination_safety": {
+    "unsupported_items_avoided": [],
+    "uncertain_items": []
+  }
+}

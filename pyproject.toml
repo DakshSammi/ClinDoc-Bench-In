@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clindoc-bench-in"
+version = "0.1.0"
+description = "Benchmark tools for Indian outpatient prescription OCR, VLM extraction, and semantic enrichment."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Daksh Sammi" }]
+dependencies = [
+  "numpy",
+  "pandas",
+  "pydantic",
+  "requests",
+  "scipy",
+  "scikit-learn",
+  "Pillow",
+  "rich",
+  "python-dotenv",
+]
+
+[project.optional-dependencies]
+server1-ollama = ["qwen-vl-utils", "torch", "transformers", "accelerate", "sentencepiece"]
+server2-ocr = ["torch", "transformers", "Pillow", "opencv-python"]
+server2-vllm = ["vllm", "torch", "transformers", "accelerate"]
+external-apis = ["google-genai", "datalab-python-sdk", "zai-sdk", "sarvamai"]
+
+[tool.setuptools.packages.find]
+include = ["src*"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"

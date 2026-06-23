@@ -1,0 +1,54 @@
+document_id,department_inferred,is_multi_page,is_same_page_multi_view,json_parse_success,schema_validity,output_completeness,field_coverage,scalar_accuracy_exact,scalar_accuracy_lenient,entity_exact_f1,entity_lenient_f1,hallucination_rate,missing_entity_rate,runtime_seconds,status
+p1,Ophthalmology,false,false,1,1,0.125,0.0,0.7143,0.7143,0.0,0.0,0.0,1.0,36.091,success
+p2,Ophthalmology,false,false,1,1,0.125,0.0,0.3571,0.3571,0.0,0.0,0.0,1.0,9.2,success
+p3,Ophthalmology,false,false,0,0,0.0,0.0,,,,,,,1.577,failed
+p4,Ophthalmology,false,false,1,1,0.125,0.0,0.5,0.5,0.0,0.0,0.0,1.0,8.883,success
+p5,Ophthalmology,false,false,1,1,0.125,0.0,0.3571,0.3571,0.0,0.0,0.0,1.0,9.164,success
+p6,Ophthalmology,false,false,1,1,0.125,0.0,0.7143,0.7143,0.0,0.0,0.0,1.0,9.236,success
+p7,Ophthalmology,false,false,1,1,0.125,0.2143,0.3571,0.3571,0.0,0.0,0.0,1.0,10.486,success
+p8,Ophthalmology,false,false,1,1,0.125,0.1429,0.5714,0.5714,0.0,0.0,0.0,1.0,10.138,success
+p9,Ophthalmology,false,false,0,0,0.0,0.0,,,,,,,2.165,failed
+p10,Ophthalmology,false,false,1,1,0.125,0.0,0.3571,0.3571,0.0,0.0,0.0,1.0,8.984,success
+p11,Ophthalmology,false,false,1,1,0.125,0.0,0.2857,0.2857,0.0,0.0,0.0,1.0,9.241,success
+p12,Ophthalmology,false,false,1,1,0.25,0.2857,0.2143,0.2857,0.0,0.0,0.0,1.0,11.676,success
+p13,Ophthalmology,false,false,1,1,0.125,0.0,0.5714,0.5714,0.0,0.0,0.0,1.0,9.336,success
+p14,Ophthalmology,false,false,1,1,0.125,0.0,0.5714,0.5714,0.0,0.0,0.0,1.0,9.234,success
+p15,Ophthalmology,false,false,1,1,0.25,0.0,0.4286,0.4286,0.0,0.0,0.0,1.0,15.692,success
+p16,Ophthalmology,false,false,1,1,0.125,0.1429,0.6429,0.6429,0.0,0.0,0.0,1.0,9.848,success
+p17,Ophthalmology,false,false,1,1,0.125,0.1429,0.7143,0.7143,0.0,0.0,0.0,1.0,9.645,success
+p18,Ophthalmology,false,false,0,0,0.0,0.0,,,,,,,2.123,failed
+p19,Ophthalmology,false,false,0,0,0.0,0.0,,,,,,,1.313,failed
+p20,Ophthalmology,false,false,0,0,0.0,0.0,,,,,,,1.312,failed
+p21,Ophthalmology,false,false,1,1,0.125,0.0,0.6429,0.6429,0.0,0.0,0.0,1.0,9.609,success
+p22,Ophthalmology,false,false,1,1,0.25,0.0,0.7143,0.7143,0.0,0.0,0.0,1.0,11.204,success
+p23,Ophthalmology,false,false,1,1,0.125,0.1429,0.2857,0.3571,0.0,0.0,0.0,1.0,10.171,success
+p24,Ophthalmology,false,false,1,1,0.5,0.1429,0.4286,0.4286,0.0,0.0,0.0,1.0,12.923,success
+p25_1,Medicine / General Medicine,true,false,1,1,0.125,0.0,0.4286,0.4286,0.0,0.0,0.0,1.0,11.124,success
+p26,Medicine / General Medicine,true,false,1,1,0.125,0.0,0.5714,0.5714,0.0,0.0,0.0,1.0,14.019,success
+p27,Medicine / General Medicine,true,false,0,0,0.0,0.0,,,,,,,2.525,failed
+p28,Medicine / General Medicine,true,false,0,0,0.0,0.0,,,,,,,5.366,failed
+p29,Medicine / General Medicine,true,false,0,0,0.0,0.0,,,,,,,2.217,failed
+p30,Medicine / General Medicine,true,false,0,0,0.0,0.0,,,,,,,4.347,failed
+p31_1,Surgery,true,false,1,1,0.125,0.0,0.5,0.5,0.0,0.0,0.0,1.0,11.866,success
+p32_1,Surgery,true,false,0,0,0.0,0.0,,,,,,,2.836,failed
+p33_1,Medicine / General Medicine,true,false,0,0,0.0,0.0,,,,,,,2.921,failed
+p34_1,Medicine / General Medicine,true,false,0,0,0.0,0.0,,,,,,,2.808,failed
+p35_1,Medicine / General Medicine,true,false,1,1,0.125,0.0,0.5,0.5,0.0,0.0,0.0,1.0,11.629,success
+p36_1,Endocrinology,true,false,1,1,0.25,0.0,0.0,0.0,0.0,0.0,0.0,1.0,12.292,success
+p37_1,Dermatology,false,true,0,0,0.0,0.0,,,,,,,3.917,failed
+p38_1,Medicine / General Medicine,false,false,0,0,0.0,0.0,,,,,,,1.678,failed
+p39_1,Medicine / General Medicine,false,false,0,0,0.0,0.0,,,,,,,1.446,failed
+p40_1,Radiotherapy,true,false,0,0,0.0,0.0,,,,,,,2.458,failed
+p41_1,Medicine / General Medicine,false,false,0,0,0.0,0.0,,,,,,,1.653,failed
+p42_1,Endocrinology,false,true,0,0,0.0,0.0,,,,,,,2.959,failed
+p43_1,Medicine / General Medicine,true,false,0,0,0.0,0.0,,,,,,,2.019,failed
+p44_1,Radiotherapy,false,false,0,0,0.0,0.0,,,,,,,2.957,failed
+p45_1,Unknown / not annotated,false,false,0,0,0.0,0.0,,,,,,,1.884,failed
+p45_2,Unknown / not annotated,false,false,0,0,0.0,0.0,,,,,,,1.708,failed
+p45_3,Unknown / not annotated,true,false,1,1,0.125,0.0,0.4286,0.4286,0.0,0.0,0.0,1.0,12.239,success
+p45_4,Unknown / not annotated,true,false,0,0,0.0,0.0,,,,,,,4.077,failed
+p45_5,Radiology,false,false,1,1,0.125,0.0,0.2857,0.2857,0.0,0.0,0.0,1.0,10.032,success
+p45_6,Radiology,true,false,0,0,0.0,0.0,,,,,,,3.093,failed
+p45_7,Obstetrics & Gynaecology,true,false,0,0,0.0,0.0,,,,,,,3.185,failed
+p45_8,Medicine / General Medicine,false,false,0,0,0.0,0.0,,,,,,,1.947,failed
+p45_9,Unknown / not annotated,false,false,1,1,0.125,0.0,0.8571,0.8571,0.0,0.0,0.0,1.0,8.979,success

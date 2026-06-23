@@ -1,0 +1,10 @@
+Convert the supplied OCR text into raw structured JSON.
+
+Critical rules:
+- The OCR text is noisy evidence. Preserve its raw wording, spelling, abbreviations, line fragments, and uncertainty.
+- Do not clinically normalize or infer hidden fields.
+- Do not add content that is not supported by OCR text.
+- If OCR is unreadable or ambiguous, record uncertainty in warnings/uncertain_fields.
+- Return only valid JSON, without Markdown fences or commentary.
+
+Use the same schema as raw_structured_extraction_prompt.txt.

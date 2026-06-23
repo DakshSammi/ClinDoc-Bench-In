@@ -1,0 +1,104 @@
+Extract raw visible content from the provided Indian outpatient prescription/document into JSON.
+
+Critical rules:
+- Preserve raw visible text, spelling, abbreviations, shorthand, units, and uncertainty.
+- Do not clinically normalize.
+- Do not expand abbreviations unless the expansion is visibly written.
+- Do not infer hidden fields.
+- Do not invent missing values.
+- Keep page-wise evidence. For multi-image evidence of the same page, use the same page number and note the source image role when helpful.
+- Use empty strings or empty lists for absent fields.
+- Return only valid JSON, without Markdown fences or commentary.
+
+Use this schema:
+{
+  "document_metadata": {
+    "document_id": "",
+    "source_type": "",
+    "language": [],
+    "ocr_engine": "model_extraction",
+    "source_images": [],
+    "total_pages": 0,
+    "page_numbers": []
+  },
+  "document_layout": {
+    "hospital_header": "",
+    "sections_detected": [],
+    "page_wise_sections": []
+  },
+  "raw_text": {
+    "full_text": "",
+    "pages": [
+      {
+        "page_number": 1,
+        "image_name": "",
+        "text": ""
+      }
+    ]
+  },
+  "ocr_coordinates": {
+    "words": [],
+    "lines": []
+  },
+  "raw_entities": {
+    "patient_information": {
+      "name": "",
+      "age": "",
+      "gender": "",
+      "address": "",
+      "phone": "",
+      "patient_identifier": "",
+      "abha_id": ""
+    },
+    "encounter_information": {
+      "date": "",
+      "department": "",
+      "hospital_name": "",
+      "doctor_name": "",
+      "visit_type": "",
+      "fees": "",
+      "room_or_queue_no": ""
+    },
+    "complaints_or_diagnosis": [],
+    "clinical_history": [],
+    "observations": [],
+    "vitals": {
+      "height": "",
+      "weight": "",
+      "bmi": "",
+      "bp": "",
+      "pulse": "",
+      "temperature": ""
+    },
+    "lab_observations": [],
+    "medications": [
+      {
+        "raw_medication_text": "",
+        "raw_dosage_text": "",
+        "raw_dose_text": "",
+        "raw_route_text": "",
+        "raw_frequency_text": "",
+        "raw_duration_text": "",
+        "raw_timing_text": "",
+        "raw_instruction_text": "",
+        "raw_notes": "",
+        "page_number": 1
+      }
+    ],
+    "procedures": [],
+    "advice": [],
+    "follow_up": {
+      "raw_text": "",
+      "date": "",
+      "review_after": ""
+    },
+    "allergy_mentions": [],
+    "other_notes": []
+  },
+  "extraction_metadata": {
+    "confidence": "",
+    "warnings": [],
+    "uncertain_fields": [],
+    "model_notes": ""
+  }
+}

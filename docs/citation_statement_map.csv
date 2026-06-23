@@ -1,0 +1,6 @@
+statement_id,claim_or_context,reference_status,reference_target,notes
+S1,Indian outpatient prescription extraction requires benchmark-first evaluation,to_verify,Antimicrobial stewardship India review,Context only; do not overstate clinical deployment claims.
+S2,Handwritten clinical text remains challenging for LLM/VLM systems,to_verify,Benchmarking Large Language Models for Handwritten Text Recognition,Verify exact scope and claims.
+S3,Medical report/document benchmarks inform structured extraction evaluation,to_verify,MedRepBench,Verify benchmark design and metric framing.
+S4,Prescription-label AI work motivates medication extraction evaluation,to_verify,Thai prescription label AI paper,Verify task and dataset setting.
+S5,MIRAGE informs medical image/report reasoning comparison,to_verify,MIRAGE,Verify relevance before citing.

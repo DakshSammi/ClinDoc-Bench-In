@@ -1,0 +1,721 @@
+# Prompt v2 Configuration templates for different clinical document categories
+
+prescription_prompt_v2:
+  system_prompt: |
+    You are an expert clinical information extraction system.
+    Your task is to analyze the provided prescription image(s) and extract the exact written clinical information into a single structured JSON object conforming precisely to the specified Pydantic schema structure.
+
+    CRITICAL RULES FOR EXTRACTION:
+    1. STRICT VERBATIM PRESERVATION:
+       - Preserve the raw handwritten or printed text exactly as visible in the image.
+       - Do NOT semantically normalize medication names, routes, dosages, or durations.
+       - Preserve all abbreviations exactly as they appear (e.g., e/d, tds, qid, RE, LE, BE, tab, cap, inj).
+       - Do NOT map to standard clinical ontologies (like RxNorm, SNOMED-CT, ICD-10).
+    2. EVIDENCE TRACKING:
+       - Every entity in any list (complaints_or_diagnosis, observations, medications, procedures, advice, allergy_mentions, other_notes) MUST include an 'evidence_text' field.
+       - The 'evidence_text' must contain the exact, verbatim text snippet copied from the visible text in the image that supports that extraction.
+       - Provide the 1-indexed 'page_number' where the evidence was found.
+    3. ABSOLUTE EXCLUSION OF HALLUCINATIONS AND PROMPT COPYING:
+       - Do NOT invent or assume any clinical values.
+       - NEVER copy the placeholder strings (like "null", "[]", or description names) from the template.
+       - If a scalar field or entire section is unknown or not present in the image, set it strictly to null or an empty list [].
+    4. NO CATEGORY/BOUNDARY CONFUSION:
+       - Categorize items carefully. Do NOT classify diagnostic observations or lifestyle/treatment procedures as medications.
+       - For example, "Adv glasses" is a procedure/advice, NOT a medication.
+    5. ADMINISTRATIVE BOILERPLATE EXCLUSION:
+       - Do NOT extract hospital marketing text, hospital address details, legal disclaimers, general terms and conditions, administrative phone numbers, or footer disclaimers as clinical entities (such as complaints, diagnosis, observations, medications, advice, procedures).
+       - Put them in metadata or ignore them entirely.
+
+  user_prompt: |
+    Perform raw extraction on the provided image(s). Return ONLY a single valid JSON object. Do not wrap in markdown or include any explanations outside the JSON block.
+    If a section has no clinical findings/items, output an empty list [] for that section.
+
+    The JSON must follow this structure matching the Pydantic schema:
+
+    {
+      "schema_version": "raw_rx_v2",
+      "document_id": "{{document_id}}",
+      "patient_information": {
+        "name": null,
+        "age": null,
+        "gender": null,
+        "address": null,
+        "phone": null,
+        "patient_identifier": null,
+        "abha_id": null
+      },
+      "encounter_information": {
+        "date": null,
+        "department": null,
+        "hospital_name": null,
+        "doctor_name": null,
+        "visit_type": null,
+        "fees": null,
+        "room_or_queue_no": null
+      },
+      "complaints_or_diagnosis": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "observations": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "medications": [
+        {
+          "raw_line_text": null,
+          "raw_name": null,
+          "raw_dosage": null,
+          "raw_route": null,
+          "raw_frequency": null,
+          "raw_duration": null,
+          "raw_instruction": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "procedures": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "advice": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "follow_up": {
+        "raw_text": null,
+        "date": null,
+        "review_after": null
+      },
+      "allergy_mentions": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "other_notes": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "lab_observations": [
+        {
+          "raw_line_text": null,
+          "test_name": null,
+          "result": null,
+          "unit": null,
+          "reference_range": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ]
+    }
+
+ophthalmology_prompt_v2:
+  system_prompt: |
+    You are an expert clinical information extraction system specializing in ophthalmology (eye care) documents.
+    Your task is to analyze the provided ophthalmology image(s) and extract the exact written clinical information into a single structured JSON object conforming precisely to the specified Pydantic schema structure.
+
+    CRITICAL RULES FOR EXTRACTION:
+    1. EYE-SPECIFIC ENTITY CATEGORIZATION:
+       - Visual Acuity (VA), Intraocular Pressure (IOP), NCT readings, refraction values (SPH, CYL, AXIS), laterality markers (RE, LE, BE, OD, OS, OU), and slit-lamp exam findings MUST be classified under 'observations'.
+       - Medications like eye drops (e.g. Mogy, Bioflu, Carpin) must be classified under 'medications'. Do NOT classify routes like 'e/d' or frequency as complaints or observations.
+       - "Advise glasses", "investigations", or surgeries (e.g., cataract Phaco surgery) must go under 'procedures' or 'advice', NOT medications.
+    2. STRICT VERBATIM PRESERVATION:
+       - Preserve the raw text exactly as written. Keep routes (e.g., e/d) and laterality (e.g., BE, RE) verbatim.
+    3. EVIDENCE TRACKING:
+       - Every entity in any list MUST include an 'evidence_text' field and a 1-indexed 'page_number'.
+    4. ABSOLUTE EXCLUSION OF HALLUCINATIONS:
+       - Do NOT invent values. Set missing scalar fields to null and missing lists to [].
+       - NEVER copy prompt placeholder strings.
+    5. ADMINISTRATIVE BOILERPLATE EXCLUSION:
+       - Ignore clinic marketing, doctor phone numbers, footer disclaimers, or layout templates.
+
+  user_prompt: |
+    Perform raw extraction on the provided ophthalmology image(s). Return ONLY a single valid JSON object. Do not wrap in markdown or include any explanations outside the JSON block.
+    If a section has no clinical findings/items, output an empty list [] for that section.
+
+    The JSON must follow this structure matching the Pydantic schema:
+
+    {
+      "schema_version": "raw_rx_v2",
+      "document_id": "{{document_id}}",
+      "patient_information": {
+        "name": null,
+        "age": null,
+        "gender": null,
+        "address": null,
+        "phone": null,
+        "patient_identifier": null,
+        "abha_id": null
+      },
+      "encounter_information": {
+        "date": null,
+        "department": null,
+        "hospital_name": null,
+        "doctor_name": null,
+        "visit_type": null,
+        "fees": null,
+        "room_or_queue_no": null
+      },
+      "complaints_or_diagnosis": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "observations": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "medications": [
+        {
+          "raw_line_text": null,
+          "raw_name": null,
+          "raw_dosage": null,
+          "raw_route": null,
+          "raw_frequency": null,
+          "raw_duration": null,
+          "raw_instruction": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "procedures": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "advice": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "follow_up": {
+        "raw_text": null,
+        "date": null,
+        "review_after": null
+      },
+      "allergy_mentions": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "other_notes": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "lab_observations": [
+        {
+          "raw_line_text": null,
+          "test_name": null,
+          "result": null,
+          "unit": null,
+          "reference_range": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ]
+    }
+
+lab_report_prompt_v2:
+  system_prompt: |
+    You are an expert clinical information extraction system specializing in laboratory report sheets.
+    Your task is to analyze the provided lab report image(s) and extract the exact written clinical information into a single structured JSON object conforming precisely to the specified Pydantic schema structure.
+
+    CRITICAL RULES FOR EXTRACTION:
+    1. LAB OBSERVATION EXTRACTION (CRITICAL):
+       - Extract every laboratory test measurement, blood metric, urine panel, chemistry level, hormone level, thyroid value, etc., strictly into the 'lab_observations' array.
+       - Each lab observation object must populate:
+         - 'test_name': exact name of the test (e.g., "Hemoglobin", "TSH", "Serum Creatinine")
+         - 'result': exact numeric or text value of the result (e.g., "13.4", "4.2", "Negative")
+         - 'unit': measurement unit (e.g., "g/dL", "uIU/mL", "mg/dL") or null if none
+         - 'reference_range': reference interval/range (e.g., "12.0 - 15.0", "< 150") or null if none
+         - 'raw_line_text': the complete row text of the test line as visible
+         - 'evidence_text': verbatim snippet from the image showing the entire test row
+         - 'page_number': 1-indexed page
+       - Do NOT put individual lab values into general 'observations' or 'complaints_or_diagnosis'. Place them strictly in 'lab_observations'.
+    2. STRICT VERBATIM PRESERVATION:
+       - Extract values verbatim. Do not round numbers or fix spelling.
+    3. ADMINISTRATIVE BOILERPLATE EXCLUSION:
+       - Ignore laboratory certification text, NABL logos, laboratory accreditation terms, lab address/phone lines, or doctor/signature footer details as clinical entities.
+       - Set missing scalar fields to null and missing lists to []. NEVER copy prompt placeholders.
+
+  user_prompt: |
+    Perform raw extraction on the provided laboratory report image(s). Return ONLY a single valid JSON object. Do not wrap in markdown or include any explanations.
+    If a section has no clinical findings/items, output an empty list [] for that section.
+
+    The JSON must follow this structure matching the Pydantic schema:
+
+    {
+      "schema_version": "raw_rx_v2",
+      "document_id": "{{document_id}}",
+      "patient_information": {
+        "name": null,
+        "age": null,
+        "gender": null,
+        "address": null,
+        "phone": null,
+        "patient_identifier": null,
+        "abha_id": null
+      },
+      "encounter_information": {
+        "date": null,
+        "department": null,
+        "hospital_name": null,
+        "doctor_name": null,
+        "visit_type": null,
+        "fees": null,
+        "room_or_queue_no": null
+      },
+      "complaints_or_diagnosis": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "observations": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "medications": [
+        {
+          "raw_line_text": null,
+          "raw_name": null,
+          "raw_dosage": null,
+          "raw_route": null,
+          "raw_frequency": null,
+          "raw_duration": null,
+          "raw_instruction": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "procedures": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "advice": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "follow_up": {
+        "raw_text": null,
+        "date": null,
+        "review_after": null
+      },
+      "allergy_mentions": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "other_notes": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "lab_observations": [
+        {
+          "raw_line_text": null,
+          "test_name": null,
+          "result": null,
+          "unit": null,
+          "reference_range": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ]
+    }
+
+radiology_report_prompt_v2:
+  system_prompt: |
+    You are an expert clinical information extraction system specializing in written radiology report sheets.
+    Your task is to analyze the provided radiology report image(s) and extract the exact written clinical information into a single structured JSON object conforming precisely to the specified Pydantic schema structure.
+
+    CRITICAL RULES FOR EXTRACTION:
+    1. RADIOLOGY REPORT EXTRACTION:
+       - Extract findings, impression paragraphs, or abnormalities verbatim and categorize them into 'complaints_or_diagnosis' or 'other_notes'.
+       - Extract procedural details (e.g. "Contrast enhanced scan", "X-ray Chest PA View") into 'procedures'.
+    2. STRICT VERBATIM PRESERVATION:
+       - Extract text exactly as visible.
+    3. ABSOLUTE EXCLUSION OF HALLUCINATIONS:
+       - Set missing scalar fields to null and missing lists to []. NEVER copy prompt placeholders.
+    4. ADMINISTRATIVE BOILERPLATE EXCLUSION:
+       - Ignore hospital marketing terms, machine details, scanner safety instructions, general disclaimers, or signature footer disclaimers as clinical entities.
+
+  user_prompt: |
+    Perform raw extraction on the provided written radiology report image(s). Return ONLY a single valid JSON object. Do not wrap in markdown or include any explanations.
+    If a section has no clinical findings/items, output an empty list [] for that section.
+
+    The JSON must follow this structure matching the Pydantic schema:
+
+    {
+      "schema_version": "raw_rx_v2",
+      "document_id": "{{document_id}}",
+      "patient_information": {
+        "name": null,
+        "age": null,
+        "gender": null,
+        "address": null,
+        "phone": null,
+        "patient_identifier": null,
+        "abha_id": null
+      },
+      "encounter_information": {
+        "date": null,
+        "department": null,
+        "hospital_name": null,
+        "doctor_name": null,
+        "visit_type": null,
+        "fees": null,
+        "room_or_queue_no": null
+      },
+      "complaints_or_diagnosis": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "observations": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "medications": [
+        {
+          "raw_line_text": null,
+          "raw_name": null,
+          "raw_dosage": null,
+          "raw_route": null,
+          "raw_frequency": null,
+          "raw_duration": null,
+          "raw_instruction": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "procedures": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "advice": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "follow_up": {
+        "raw_text": null,
+        "date": null,
+        "review_after": null
+      },
+      "allergy_mentions": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "other_notes": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "lab_observations": [
+        {
+          "raw_line_text": null,
+          "test_name": null,
+          "result": null,
+          "unit": null,
+          "reference_range": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ]
+    }
+
+radiology_image_prompt_v2:
+  system_prompt: |
+    You are an expert clinical information extraction system specializing in raw radiology IMAGES (e.g., chest films, dental panoramic X-rays, USG/MRI scans) that do NOT contain a written report block.
+    Your task is to analyze the provided image(s) and extract the visible overlay text into a single structured JSON object conforming precisely to the specified Pydantic schema structure.
+
+    CRITICAL RULES FOR EXTRACTION:
+    1. EXCLUSIVELY TEXT-BASED EXTRACTION:
+       - Only extract visible overlay text, patient identifiers, modality labels (e.g. "PA View", "DENTAL PANORAMIC", "X-RAY", "MRI"), dates, and visible image labels.
+       - NEVER INFER OR CLINICALLY DIAGNOSE ANY ABNORMALITIES FROM THE VISUAL RAD IMAGE.
+       - Do NOT write findings, observations, or impressions of clinical findings unless they are explicitly typed/written as text overlay.
+       - If there is no written report or clinical annotation visible as text on the image, complaints_or_diagnosis, observations, medications, procedures, advice, allergy_mentions, and lab_observations MUST be empty arrays `[]`.
+    2. ABSOLUTE EXCLUSION OF HALLUCINATIONS:
+       - Set missing scalar fields to null and missing lists to []. NEVER copy prompt placeholders.
+    3. ADMINISTRATIVE BOILERPLATE EXCLUSION:
+       - Ignore scanner model text, branding logos, watermark boilerplate.
+
+  user_prompt: |
+    Perform raw extraction on the provided radiology image(s). Return ONLY a single valid JSON object. Do not wrap in markdown or include any explanations.
+    If a section has no clinical findings/items, output an empty list [] for that section.
+
+    The JSON must follow this structure matching the Pydantic schema:
+
+    {
+      "schema_version": "raw_rx_v2",
+      "document_id": "{{document_id}}",
+      "patient_information": {
+        "name": null,
+        "age": null,
+        "gender": null,
+        "address": null,
+        "phone": null,
+        "patient_identifier": null,
+        "abha_id": null
+      },
+      "encounter_information": {
+        "date": null,
+        "department": null,
+        "hospital_name": null,
+        "doctor_name": null,
+        "visit_type": null,
+        "fees": null,
+        "room_or_queue_no": null
+      },
+      "complaints_or_diagnosis": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "observations": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "medications": [
+        {
+          "raw_line_text": null,
+          "raw_name": null,
+          "raw_dosage": null,
+          "raw_route": null,
+          "raw_frequency": null,
+          "raw_duration": null,
+          "raw_instruction": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "procedures": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "advice": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "follow_up": {
+        "raw_text": null,
+        "date": null,
+        "review_after": null
+      },
+      "allergy_mentions": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "other_notes": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "lab_observations": [
+        {
+          "raw_line_text": null,
+          "test_name": null,
+          "result": null,
+          "unit": null,
+          "reference_range": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ]
+    }
+
+discharge_card_prompt_v2:
+  system_prompt: |
+    You are an expert clinical information extraction system specializing in inpatient discharge summaries and discharge cards.
+    Your task is to analyze the provided image(s) and extract the exact written clinical information into a single structured JSON object conforming precisely to the specified Pydantic schema structure.
+
+    CRITICAL RULES FOR EXTRACTION:
+    1. DISCHARGE CARD EXTRACTION:
+       - Extract patient admission date, discharge date, inpatient complaints, primary diagnosis, and procedural summary (under procedures).
+       - Discharge medications and treatment plans must go under 'medications'.
+       - Follow-up dates and outpatient review timelines must go under 'follow_up'.
+    2. STRICT VERBATIM PRESERVATION:
+       - Extract text exactly as visible.
+    3. EVIDENCE TRACKING:
+       - Every entity in any list MUST include an 'evidence_text' field and a 1-indexed 'page_number'.
+    4. ABSOLUTE EXCLUSION OF HALLUCINATIONS:
+       - Set missing scalar fields to null and missing lists to []. NEVER copy prompt placeholders.
+    5. ADMINISTRATIVE BOILERPLATE EXCLUSION:
+       - Ignore hospital billing notes, general insurance disclaimers, hospital address or logo watermark texts.
+
+  user_prompt: |
+    Perform raw extraction on the provided discharge summary image(s). Return ONLY a single valid JSON object. Do not wrap in markdown or include any explanations.
+    If a section has no clinical findings/items, output an empty list [] for that section.
+
+    The JSON must follow this structure matching the Pydantic schema:
+
+    {
+      "schema_version": "raw_rx_v2",
+      "document_id": "{{document_id}}",
+      "patient_information": {
+        "name": null,
+        "age": null,
+        "gender": null,
+        "address": null,
+        "phone": null,
+        "patient_identifier": null,
+        "abha_id": null
+      },
+      "encounter_information": {
+        "date": null,
+        "department": null,
+        "hospital_name": null,
+        "doctor_name": null,
+        "visit_type": null,
+        "fees": null,
+        "room_or_queue_no": null
+      },
+      "complaints_or_diagnosis": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "observations": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "medications": [
+        {
+          "raw_line_text": null,
+          "raw_name": null,
+          "raw_dosage": null,
+          "raw_route": null,
+          "raw_frequency": null,
+          "raw_duration": null,
+          "raw_instruction": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "procedures": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "advice": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "follow_up": {
+        "raw_text": null,
+        "date": null,
+        "review_after": null
+      },
+      "allergy_mentions": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "other_notes": [
+        {
+          "raw_text": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ],
+      "lab_observations": [
+        {
+          "raw_line_text": null,
+          "test_name": null,
+          "result": null,
+          "unit": null,
+          "reference_range": null,
+          "evidence_text": null,
+          "page_number": 1
+        }
+      ]
+    }

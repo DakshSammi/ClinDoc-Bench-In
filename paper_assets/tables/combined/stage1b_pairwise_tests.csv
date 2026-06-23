@@ -1,0 +1,31 @@
+family,metric,system_a,system_b,paired_n,mean_a,mean_b,mean_difference_a_minus_b,test,p_value,holm_adjusted_p
+structured,overall_extraction_score,Qwen3-VL 8B,LLaVA 13B,53,0.213745,0.150943,0.062801,wilcoxon_signed_rank,6.793590408090096e-06,8.2e-05
+structured,overall_extraction_score,Qwen3-VL 8B,GLM-OCR + qwen3:8b,53,0.213745,0.353226,-0.139482,wilcoxon_signed_rank,9.902541601381213e-09,0.0
+structured,overall_extraction_score,Qwen3-VL 8B,docTR + qwen3:8b,53,0.213745,0.319223,-0.105478,wilcoxon_signed_rank,1.4819744239978762e-07,2e-06
+structured,overall_extraction_score,Qwen3-VL 8B,TrOCR + qwen3:8b,53,0.213745,0.269511,-0.055767,wilcoxon_signed_rank,4.854865829837781e-05,0.000437
+structured,overall_extraction_score,LLaVA 13B,GLM-OCR + qwen3:8b,53,0.150943,0.353226,-0.202283,wilcoxon_signed_rank,6.909460272914559e-10,0.0
+structured,overall_extraction_score,LLaVA 13B,docTR + qwen3:8b,53,0.150943,0.319223,-0.168279,wilcoxon_signed_rank,1.4541809074089258e-09,0.0
+structured,overall_extraction_score,LLaVA 13B,TrOCR + qwen3:8b,53,0.150943,0.269511,-0.118568,wilcoxon_signed_rank,1.0779170429165205e-08,0.0
+structured,overall_extraction_score,GLM-OCR + qwen3:8b,docTR + qwen3:8b,53,0.353226,0.319223,0.034004,wilcoxon_signed_rank,0.00034163819684594857,0.00205
+structured,overall_extraction_score,GLM-OCR + qwen3:8b,TrOCR + qwen3:8b,53,0.353226,0.269511,0.083715,wilcoxon_signed_rank,2.852710639579072e-06,3.7e-05
+structured,overall_extraction_score,docTR + qwen3:8b,TrOCR + qwen3:8b,53,0.319223,0.269511,0.049711,wilcoxon_signed_rank,0.0012019151363981107,0.00601
+structured,entity_lenient_f1,Qwen3-VL 8B,LLaVA 13B,53,0.047985,0.0,0.047985,wilcoxon_signed_rank,2.6670445532979518e-05,0.000293
+structured,entity_lenient_f1,Qwen3-VL 8B,GLM-OCR + qwen3:8b,53,0.047985,0.076358,-0.028374,wilcoxon_signed_rank,0.08284074491696944,0.248522
+structured,entity_lenient_f1,Qwen3-VL 8B,docTR + qwen3:8b,53,0.047985,0.043713,0.004272,wilcoxon_signed_rank,0.30826328791692126,0.616527
+structured,entity_lenient_f1,Qwen3-VL 8B,TrOCR + qwen3:8b,53,0.047985,0.000787,0.047198,wilcoxon_signed_rank,2.808126119948642e-05,0.000293
+structured,entity_lenient_f1,LLaVA 13B,GLM-OCR + qwen3:8b,53,0.0,0.076358,-0.076358,wilcoxon_signed_rank,1.1638555351094802e-06,1.7e-05
+structured,entity_lenient_f1,LLaVA 13B,docTR + qwen3:8b,53,0.0,0.043713,-0.043713,wilcoxon_signed_rank,5.9264183246226055e-05,0.000474
+structured,entity_lenient_f1,LLaVA 13B,TrOCR + qwen3:8b,53,0.0,0.000787,-0.000787,wilcoxon_signed_rank,0.31731050786291415,0.616527
+structured,entity_lenient_f1,GLM-OCR + qwen3:8b,docTR + qwen3:8b,53,0.076358,0.043713,0.032645,wilcoxon_signed_rank,0.00776234923958598,0.031049
+structured,entity_lenient_f1,GLM-OCR + qwen3:8b,TrOCR + qwen3:8b,53,0.076358,0.000787,0.075572,wilcoxon_signed_rank,1.1638555351094802e-06,1.7e-05
+structured,entity_lenient_f1,docTR + qwen3:8b,TrOCR + qwen3:8b,53,0.043713,0.000787,0.042926,wilcoxon_signed_rank,8.807368035275503e-05,0.000617
+raw_ocr,token_f1,GLM-OCR,docTR,53,0.246423,0.198038,0.048385,wilcoxon_signed_rank,3.7352964617001356e-06,1.9e-05
+raw_ocr,token_f1,GLM-OCR,TrOCR,53,0.246423,0.008168,0.238255,wilcoxon_signed_rank,2.386484752546066e-10,0.0
+raw_ocr,token_f1,GLM-OCR,Docling,43,0.232021,0.148033,0.083988,wilcoxon_signed_rank,3.422878244973236e-08,0.0
+raw_ocr,token_f1,GLM-OCR,Surya,25,0.262684,0.239476,0.023208,wilcoxon_signed_rank,0.0008079344363874253,0.001616
+raw_ocr,token_f1,docTR,TrOCR,53,0.198038,0.008168,0.18987,wilcoxon_signed_rank,2.386484752546066e-10,0.0
+raw_ocr,token_f1,docTR,Docling,43,0.18864,0.148033,0.040607,wilcoxon_signed_rank,4.482344138523331e-06,1.9e-05
+raw_ocr,token_f1,docTR,Surya,25,0.215232,0.239476,-0.024244,wilcoxon_signed_rank,0.0050716400146484375,0.005072
+raw_ocr,token_f1,TrOCR,Docling,43,0.008258,0.148033,-0.139774,wilcoxon_signed_rank,1.7098674207084764e-08,0.0
+raw_ocr,token_f1,TrOCR,Surya,25,0.005892,0.239476,-0.233584,wilcoxon_signed_rank,5.960464477539063e-08,0.0
+raw_ocr,token_f1,Docling,Surya,25,0.207064,0.239476,-0.032412,wilcoxon_signed_rank,0.00016230344772338867,0.000487

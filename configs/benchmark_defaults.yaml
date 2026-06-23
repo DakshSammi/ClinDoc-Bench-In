@@ -1,0 +1,32 @@
+# Evaluation and Benchmarking Pipeline Configuration Defaults
+
+thresholds:
+  exact_match_ratio: 95.0
+  lenient_match_ratio: 80.0
+  review_required_ratio: 65.0
+  hallucination_detection_ratio: 60.0
+  annotation_gap_detection_ratio: 80.0
+
+experimental_headline_weights:
+  schema_parse: 0.10
+  scalar_field: 0.20
+  entity_lenient_f1: 0.45
+  entity_exact_f1: 0.15
+  hallucination_penalty: 0.10
+
+null_handling:
+  scalar_default: null
+  list_default: []
+  hallucinate_defaults_blacklist:
+    - "As prescribed"
+    - "Use as needed"
+    - "As directed"
+    - "No comments"
+
+medication_component_weights:
+  name: 0.55
+  frequency: 0.15
+  dosage: 0.10
+  route: 0.10
+  duration: 0.05
+  instruction: 0.05

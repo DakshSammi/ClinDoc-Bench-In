@@ -1,0 +1,38 @@
+doctr_ocr_text_to_raw_rx_v2_prompt_v2:
+  prompt_version: phase_d_ocr_text_v2
+  user_prompt: |
+    Convert the following OCR/transcribed clinical document text into one valid CanonicalRawDoc JSON object using the raw_rx_v2 schema. Return only JSON. Do not include markdown, explanation, or reasoning.
+
+    Target JSON skeleton:
+    {
+      "schema_version": "raw_rx_v2",
+      "document_id": "{{document_id}}",
+      "patient_information": {"name": null, "age": null, "gender": null, "address": null, "phone": null, "patient_identifier": null, "abha_id": null},
+      "encounter_information": {"date": null, "department": null, "hospital_name": null, "doctor_name": null, "visit_type": null, "fees": null, "room_or_queue_no": null},
+      "complaints_or_diagnosis": [],
+      "observations": [],
+      "medications": [],
+      "procedures": [],
+      "advice": [],
+      "follow_up": null,
+      "allergy_mentions": [],
+      "other_notes": [],
+      "lab_observations": []
+    }
+
+    Rules:
+    1. Entity recall is more important than perfect normalization at this raw extraction stage.
+    2. Preserve raw OCR wording. Do not over-normalize, translate, or silently correct uncertain text.
+    3. Reconstruct complete clinically relevant raw lines from nearby OCR tokens. Prefer "IOP Right Eye 21mmHg" over separate "IOP", "Right Eye", and "21".
+    4. Do not extract pure headings such as VISUAL ACUITY, SPH, CYL, AXIS, TREATMENT, REMARKS, or SIGNATURE as entities unless a value-bearing line cannot be reconstructed.
+    5. Extract every medication/drop/injection/tablet-like line into medications. Include uncertain medication-like fragments if they are near Rx, TREATMENT, drops, injection, tablet, OD/BD/TDS/QID, RE/LE/BE/OD/OS, or dosage/frequency text.
+    6. If unsure whether a line is medication, advice, or observation, preserve it in observations or other_notes rather than dropping it.
+    7. For ophthalmology documents, explicitly extract complaints, visual acuity, IOP, RE/LE/BE/OD/OS markers, refraction-like SPH/CYL/AXIS values, drops/medications, procedures, advice, and follow-up.
+    8. For p36_1/endocrine handwritten text, preserve noisy but plausible clinical shorthand, including ANC/G/P/L/A, pregnancy weeks, DM, hypothyroid, BP, RBS, insulin, NPH, Regu, Thyronorm, HYPO mgmt, food gap, no missing pill, and follow-up.
+    9. Use raw_line_text for medications and raw_text for other entity arrays. Include evidence_text when it helps preserve the original OCR line.
+    10. If OCR lines have IDs like [L001], put those IDs in evidence_line_ids for entities based on those lines.
+    11. Do not invent facts not present in the OCR text. A noisy OCR fragment may be preserved, but unsupported clinical content must not be created.
+    12. Use null or empty arrays for fields genuinely not visible in the OCR text.
+
+    OCR text:
+    {{ocr_text}}

@@ -1,0 +1,67 @@
+# VLM and OCR Backend Configurations
+
+backends:
+  qwen25_vl_7b:
+    backend_name: "qwen25_vl_7b"
+    model_name: "Qwen/Qwen2.5-VL-7B-Instruct"
+    model_version: "2.5"
+    endpoint_url: "http://localhost:8090/v1"
+    temperature: 0.0
+    max_tokens: 4096
+    top_p: 0.9
+    local_weights_path: "/Data/user-data/nlp/my_models/qwen3"
+
+  qwen25_vl_3b:
+    backend_name: "qwen25_vl_3b"
+    model_name: "Qwen/Qwen2.5-VL-3B-Instruct"
+    model_version: "2.5"
+    temperature: 0.0
+    max_tokens: 4096
+    top_p: 0.9
+
+  qwen2_vl_7b:
+    backend_name: "qwen2_vl_7b"
+    model_name: "Qwen/Qwen2-VL-7B-Instruct"
+    model_version: "2.0"
+    temperature: 0.0
+    max_tokens: 4096
+    top_p: 0.9
+
+  florence2_large:
+    backend_name: "florence2_large"
+    model_name: "microsoft/Florence-2-large"
+    model_version: "1.0"
+
+  donut:
+    backend_name: "donut"
+    model_name: "naver-clova-ix/donut-base"
+    model_version: "1.0"
+
+  paddleocr_text_llm:
+    backend_name: "paddleocr_text_llm"
+    model_name: "paddleocr + llm"
+    model_version: "1.0"
+
+  gemini_2_flash:
+    backend_name: "gemini_2_flash"
+    model_name: "gemini-2.0-flash-exp"
+    model_version: "2.0"
+    temperature: 0.0
+    max_tokens: 4096
+
+  openrouter:
+    backend_name: "openrouter"
+    model_name: "google/gemini-2.5-flash"
+    model_version: "1.0"
+    temperature: 0.0
+    max_tokens: 7000
+    top_p: 0.9
+
+  internal_qwen3_27b_vlm:
+    backend_name: "internal_qwen3_27b_vlm"
+    model_name: "qwen3-27b"
+    model_version: "3.0"
+    base_url: "http://10.10.110.37:4000/v1"
+    temperature: 0.0
+    max_tokens: 100000
+    top_p: 0.9

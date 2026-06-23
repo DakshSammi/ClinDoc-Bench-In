@@ -1,0 +1,9 @@
+Transcribe the visible prescription/document content exactly as raw OCR text.
+
+Rules:
+- Do not summarize, normalize, translate, correct spelling, or infer missing content.
+- Preserve visible abbreviations, spelling, punctuation, symbols, units, and uncertain fragments.
+- Preserve page order and line order as much as possible.
+- Mark unreadable text as [illegible] and uncertain readings as [?candidate].
+- Do not add clinical interpretation.
+- Return plain text only.

@@ -1,0 +1,54 @@
+document_id,department,schema_parse_success,scalar_exact_accuracy,scalar_lenient_accuracy,entity_exact_f1,entity_lenient_f1,hallucination_rate,missing_entity_rate,annotation_gap_rate,overall_extraction_score,runtime_seconds,status,failure_label,likely_hallucination_count,annotation_gap_candidate_count,manual_review_required_count
+p1,Ophthalmology,1,0.5,0.5714,0.0,0.0,0.0,1.0,0.5,0.3143,13.715,success,,0,2,2
+p2,Ophthalmology,1,0.6429,0.6429,0.0,0.0,0.0,1.0,1.0,0.3286,39.193,success,,0,16,0
+p3,Ophthalmology,1,0.5714,0.8571,0.0,0.0625,0.0,0.8,0.8333,0.3996,16.634,success,,0,10,1
+p4,Ophthalmology,1,0.6429,0.7857,0.0,0.0,0.0,1.0,1.0,0.3571,14.925,success,,0,7,0
+p5,Ophthalmology,1,0.3571,0.4286,0.0,0.0625,0.0,0.9375,0.75,0.3138,12.821,success,,0,3,0
+p6,Ophthalmology,1,0.6429,0.7857,0.0,0.0,0.0,1.0,1.0,0.3571,10.747,success,,0,7,0
+p7,Ophthalmology,1,0.3571,0.5,0.0,0.0,0.0,1.0,1.0,0.3,9.456,success,,0,5,0
+p8,Ophthalmology,1,0.5714,0.5714,0.0,0.0147,0.0667,0.9545,0.8667,0.3142,14.38,success,,1,13,0
+p9,Ophthalmology,1,0.5,0.5714,0.0,0.0,0.0,1.0,1.0,0.3143,15.813,success,,0,18,0
+p10,Ophthalmology,0,,,,,,,,,11.536,failed,schema_invalid_wrong_json_shape,,,
+p11,Ophthalmology,1,0.6429,0.6429,0.0,0.0,0.0,1.0,1.0,0.3286,12.882,success,,0,21,0
+p12,Ophthalmology,1,0.3571,0.5,0.0,0.0,0.0,1.0,1.0,0.3,9.56,success,,0,2,0
+p13,Ophthalmology,1,0.7143,0.7143,0.0,0.0,0.0,1.0,0.5556,0.3429,11.312,success,,0,5,0
+p14,Ophthalmology,1,0.6429,0.7143,0.0,0.0,0.0,1.0,1.0,0.3429,12.812,success,,0,8,0
+p15,Ophthalmology,1,0.3571,0.5,0.0,0.0,0.0,1.0,1.0,0.3,17.385,success,,0,9,0
+p16,Ophthalmology,1,0.6429,0.6429,0.0,0.0,0.1429,1.0,0.8571,0.3143,11.932,success,,1,6,0
+p17,Ophthalmology,1,0.7143,0.7143,0.0,0.0,0.5,1.0,0.5,0.2929,11.6,success,,1,1,0
+p18,Ophthalmology,1,0.6429,0.7857,0.0,0.0833,0.0,0.9375,0.9091,0.3946,35.862,success,,0,10,0
+p19,Ophthalmology,1,0.5714,0.5714,0.0,0.0,0.0,1.0,1.0,0.3143,23.19,success,,0,7,0
+p20,Ophthalmology,1,0.3571,0.5,0.0,0.0089,0.0,0.9333,0.9655,0.304,29.143,success,,0,28,0
+p21,Ophthalmology,1,0.6429,0.6429,0.0,0.0208,0.0,0.9375,0.8889,0.3379,31.609,success,,0,8,0
+p22,Ophthalmology,1,0.7143,0.7143,0.0,0.0,0.25,1.0,0.75,0.3179,24.072,success,,1,3,0
+p23,Ophthalmology,1,0.5714,0.6429,0.0,0.0114,0.0,0.9545,0.9655,0.3337,28.93,success,,0,28,0
+p24,Ophthalmology,1,0.7857,0.7857,0.0,0.125,0.0,0.95,0.8,0.4134,20.146,success,,0,4,0
+p25_1,Medicine / General Medicine,1,0.5,0.5714,0.0,0.2054,0.0,0.5385,0.7692,0.4067,27.657,success,,0,20,0
+p26,Medicine / General Medicine,1,0.7143,0.7143,0.1042,0.125,0.0,0.8571,0.625,0.4147,262.664,success,,0,5,0
+p27,Medicine / General Medicine,1,0.5,0.5714,0.0425,0.1715,0.0,0.6944,0.5769,0.3978,21.613,success,,0,15,0
+p28,Medicine / General Medicine,1,0.6429,0.7857,0.0972,0.2997,0.0,0.6129,0.4,0.5066,17.357,success,,0,8,0
+p29,Medicine / General Medicine,0,,,,,,,,,41.538,failed,json_parse_failed,,,
+p30,Medicine / General Medicine,1,0.5714,0.7143,0.0,0.0,0.0,1.0,1.0,0.3429,12.531,success,,0,9,0
+p31_1,Surgery,1,0.6429,0.7857,0.0,0.075,0.0,0.88,0.8235,0.3909,16.466,success,,0,14,0
+p32_1,Surgery,1,0.5714,0.7143,0.125,0.2708,0.0,0.5,0.4706,0.4835,15.856,success,,0,8,0
+p33_1,Medicine / General Medicine,1,0.5,0.6429,0.0,0.0868,0.0,0.8421,0.8696,0.3676,22.551,success,,0,20,0
+p34_1,Medicine / General Medicine,1,0.5714,0.6429,0.0,0.2083,0.0,0.7619,0.375,0.4223,14.116,success,,0,3,0
+p35_1,Medicine / General Medicine,1,0.6429,0.6429,0.0,0.175,0.0,0.8333,0.6923,0.4073,15.118,success,,0,9,0
+p36_1,Endocrinology,1,0.5714,0.6429,0.0227,0.1,0.0,0.8462,0.8148,0.377,26.35,success,,0,22,1
+p37_1,Dermatology,1,0.3571,0.5,0.0,0.0833,0.0,0.963,0.8333,0.3375,12.529,success,,0,5,0
+p38_1,Medicine / General Medicine,1,0.4286,0.5,0.0,0.0714,0.0,0.9048,0.8571,0.3321,15.631,success,,0,12,0
+p39_1,Medicine / General Medicine,1,0.4286,0.5714,0.0,0.175,0.0,0.8889,0.6667,0.393,11.209,success,,0,4,0
+p40_1,Radiotherapy,1,0.5714,0.5714,0.0625,0.0937,0.0,0.9091,0.7692,0.3658,13.991,success,,0,10,0
+p41_1,Medicine / General Medicine,1,0.7857,0.7857,0.0,0.0,0.0,1.0,1.0,0.3571,14.02,success,,0,9,0
+p42_1,Endocrinology,1,0.5,0.5,0.05,0.05,0.0,0.9583,0.8571,0.33,13.1,success,,0,6,0
+p43_1,Medicine / General Medicine,1,0.5,0.5714,0.0,0.4312,0.0,0.5,0.2857,0.5083,24.675,success,,0,6,0
+p44_1,Radiotherapy,1,0.5714,0.6429,0.0,0.05,0.0,0.9565,0.8,0.3511,14.11,success,,0,4,0
+p45_1,Unknown / not annotated,1,0.4286,0.5714,0.0,0.0625,0.0,0.9565,0.8889,0.3424,21.405,success,,0,16,1
+p45_2,Unknown / not annotated,1,0.7143,0.7857,0.0,0.0625,0.0,0.9412,0.8889,0.3853,10.831,success,,0,8,0
+p45_3,Unknown / not annotated,1,0.7857,0.8571,0.125,0.1471,0.0,0.8462,0.8571,0.4564,39.442,success,,0,24,0
+p45_4,Unknown / not annotated,1,0.5714,0.5714,0.0804,0.0804,0.0,0.6296,0.5714,0.3625,38.617,success,,0,28,1
+p45_5,Radiology,1,0.5714,0.7143,0.0,0.0,0.0,1.0,1.0,0.3429,7.786,success,,0,2,0
+p45_6,Radiology,0,,,,,,,,,13.509,failed,schema_invalid_wrong_json_shape,,,
+p45_7,Obstetrics & Gynaecology,1,0.7143,0.8571,0.0833,0.2083,0.0,0.8966,0.75,0.4777,14.681,success,,0,9,0
+p45_8,Medicine / General Medicine,1,0.5,0.7143,0.425,0.425,0.0,0.1333,0.1875,0.5979,16.898,success,,0,3,0
+p45_9,Unknown / not annotated,1,1.0,1.0,0.0,0.0,0.7273,1.0,0.0909,0.3273,19.775,success,,8,1,2

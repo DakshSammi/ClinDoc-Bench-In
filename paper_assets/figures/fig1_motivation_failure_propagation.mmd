@@ -1,0 +1,9 @@
+flowchart LR
+  A[Prescription image] --> B[Raw OCR or VLM reading]
+  B --> C[Structured extraction]
+  C --> D[Semantic enrichment]
+  B -. recognition error .-> E[Wrong or missing text]
+  E --> F[Missing entity]
+  E --> G[Unsupported inferred entity]
+  F --> H[Manual review queue]
+  G --> H

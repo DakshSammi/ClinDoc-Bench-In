@@ -1,0 +1,15 @@
+server_name: server1_4090_ollama
+role: local_ollama_vlm_and_hybrid_benchmarks
+gpu:
+  model: RTX 4090
+  vram_gb: 24
+runtime:
+  ollama_base_url: http://localhost:11434
+  default_context_tokens: 16384
+paths:
+  project_root: /path/to/ClinDoc-Bench-In
+  benchmark_outputs: /path/to/private/benchmark_outputs
+  private_manifest: /path/to/private/data/full_benchmark_manifest.csv
+notes:
+  - Keep raw images, annotations, model outputs, logs, and caches outside this repository.
+  - Use local Ollama models only for final Server 1 benchmark rows.
