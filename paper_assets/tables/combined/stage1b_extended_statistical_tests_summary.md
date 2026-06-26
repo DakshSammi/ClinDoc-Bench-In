@@ -1,15 +1,19 @@
 # Stage 1B Extended Statistical Tests Summary
 
-Generated: 2026-06-26T15:07:50
+Generated: 2026-06-26T18:48:31
 
-## Included full-53 systems
+## Included full-53 systems (primary paired tests)
 - Structured: Qwen3-VL 8B, LLaVA 13B, GLM-OCR + qwen3:8b, docTR + qwen3:8b, TrOCR + qwen3:8b, EasyOCR + qwen3:8b, Surya + qwen3:8b, Docling + qwen3:8b.
 - Raw OCR: GLM-OCR, docTR, TrOCR, EasyOCR, Surya, Docling.
 
 ## Excluded from primary paired tests
-- Marker raw OCR and Marker + qwen3 partial: partial/interim coverage only.
-- Qwen2.5-VL raw OCR and structured rows: imported package provides coverage/runtime status but not per-document benchmark scores needed for paired testing.
-- Internal Qwen3-27B recovered-plus: aggregate row imported, but no per-document compatible metric table is available on Server 1 for paired tests.
+- Marker raw OCR and Marker + qwen3 partial: partial/interim coverage only (19/53).
+- Qwen2.5-VL raw OCR and structured rows: coverage-limited at 52/53; cannot be paired over the full 53-document set.
+- Internal Qwen3-27B recovered-plus: aggregate row imported; no per-document compatible metric table available on Server 1 for paired tests.
+
+## Systems with per-document metrics available (not in primary tests)
+- Qwen2.5-VL raw OCR: 52/53 coverage, per-document scores available. Mean token_f1=0.4449, text_similarity=0.1636.
+- Qwen2.5-VL structured: 52/53 coverage, 45/53 schema-valid, mean overall=0.2731, entity_lenient_f1=0.0000.
 
 ## Methods
 - Paired bootstrap 95% confidence intervals for system-level means.
