@@ -1,0 +1,5 @@
+family,metric,systems_compared,common_paired_n,test,p_value
+structured,overall_extraction_score,8,53,friedman,2.0459842300825426e-42
+structured,entity_lenient_f1,8,53,friedman,7.957635498346217e-29
+raw_ocr,token_f1,6,53,friedman,2.673871381526857e-40
+raw_ocr,text_similarity,6,53,friedman,6.955914044383275e-35

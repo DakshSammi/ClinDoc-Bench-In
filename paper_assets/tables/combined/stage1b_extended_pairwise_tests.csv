@@ -1,0 +1,87 @@
+family,metric,system_a,system_b,paired_n,mean_a,mean_b,mean_difference_a_minus_b,test,p_value,holm_adjusted_p
+structured,overall_extraction_score,Qwen3-VL 8B,LLaVA 13B,53,0.213745,0.150943,0.062801,wilcoxon_signed_rank,6.793590408090096e-06,0.000299
+structured,overall_extraction_score,Qwen3-VL 8B,GLM-OCR + qwen3:8b,53,0.213745,0.353226,-0.139482,wilcoxon_signed_rank,9.902541601381213e-09,0.000001
+structured,overall_extraction_score,Qwen3-VL 8B,docTR + qwen3:8b,53,0.213745,0.319223,-0.105478,wilcoxon_signed_rank,1.4819744239978762e-07,0.000009
+structured,overall_extraction_score,Qwen3-VL 8B,TrOCR + qwen3:8b,53,0.213745,0.269511,-0.055767,wilcoxon_signed_rank,4.854865829837781e-05,0.001748
+structured,overall_extraction_score,Qwen3-VL 8B,EasyOCR + qwen3:8b,53,0.213745,0.283492,-0.069748,wilcoxon_signed_rank,1.9694631244217014e-07,0.000012
+structured,overall_extraction_score,Qwen3-VL 8B,Surya + qwen3:8b,53,0.213745,0.281606,-0.067861,wilcoxon_signed_rank,2.494685019121865e-07,0.000014
+structured,overall_extraction_score,Qwen3-VL 8B,Docling + qwen3:8b,53,0.213745,0.285111,-0.071367,wilcoxon_signed_rank,7.861433357342154e-08,0.000005
+structured,overall_extraction_score,LLaVA 13B,GLM-OCR + qwen3:8b,53,0.150943,0.353226,-0.202283,wilcoxon_signed_rank,6.909460272914559e-10,0.000000
+structured,overall_extraction_score,LLaVA 13B,docTR + qwen3:8b,53,0.150943,0.319223,-0.168279,wilcoxon_signed_rank,1.4541809074089258e-09,0.000000
+structured,overall_extraction_score,LLaVA 13B,TrOCR + qwen3:8b,53,0.150943,0.269511,-0.118568,wilcoxon_signed_rank,1.0779170429165205e-08,0.000001
+structured,overall_extraction_score,LLaVA 13B,EasyOCR + qwen3:8b,53,0.150943,0.283492,-0.132549,wilcoxon_signed_rank,5.441892921171386e-10,0.000000
+structured,overall_extraction_score,LLaVA 13B,Surya + qwen3:8b,53,0.150943,0.281606,-0.130662,wilcoxon_signed_rank,3.370707253041965e-10,0.000000
+structured,overall_extraction_score,LLaVA 13B,Docling + qwen3:8b,53,0.150943,0.285111,-0.134168,wilcoxon_signed_rank,3.377786541823573e-10,0.000000
+structured,overall_extraction_score,GLM-OCR + qwen3:8b,docTR + qwen3:8b,53,0.353226,0.319223,0.034004,wilcoxon_signed_rank,0.00034163819684594857,0.010249
+structured,overall_extraction_score,GLM-OCR + qwen3:8b,TrOCR + qwen3:8b,53,0.353226,0.269511,0.083715,wilcoxon_signed_rank,2.852710639579072e-06,0.000143
+structured,overall_extraction_score,GLM-OCR + qwen3:8b,EasyOCR + qwen3:8b,53,0.353226,0.283492,0.069734,wilcoxon_signed_rank,7.119564533622184e-06,0.000306
+structured,overall_extraction_score,GLM-OCR + qwen3:8b,Surya + qwen3:8b,53,0.353226,0.281606,0.071621,wilcoxon_signed_rank,4.0620893568729195e-06,0.000187
+structured,overall_extraction_score,GLM-OCR + qwen3:8b,Docling + qwen3:8b,53,0.353226,0.285111,0.068115,wilcoxon_signed_rank,7.755646700953977e-06,0.000326
+structured,overall_extraction_score,docTR + qwen3:8b,TrOCR + qwen3:8b,53,0.319223,0.269511,0.049711,wilcoxon_signed_rank,0.0012019151363981107,0.034856
+structured,overall_extraction_score,docTR + qwen3:8b,EasyOCR + qwen3:8b,53,0.319223,0.283492,0.035730,wilcoxon_signed_rank,0.0023558946789964154,0.063609
+structured,overall_extraction_score,docTR + qwen3:8b,Surya + qwen3:8b,53,0.319223,0.281606,0.037617,wilcoxon_signed_rank,0.001583918192745716,0.044350
+structured,overall_extraction_score,docTR + qwen3:8b,Docling + qwen3:8b,53,0.319223,0.285111,0.034111,wilcoxon_signed_rank,0.003032371196128616,0.078842
+structured,overall_extraction_score,TrOCR + qwen3:8b,EasyOCR + qwen3:8b,53,0.269511,0.283492,-0.013981,wilcoxon_signed_rank,0.5701896513450153,1.000000
+structured,overall_extraction_score,TrOCR + qwen3:8b,Surya + qwen3:8b,53,0.269511,0.281606,-0.012094,wilcoxon_signed_rank,0.8616591076313852,1.000000
+structured,overall_extraction_score,TrOCR + qwen3:8b,Docling + qwen3:8b,53,0.269511,0.285111,-0.015600,wilcoxon_signed_rank,0.23017323281399893,1.000000
+structured,overall_extraction_score,EasyOCR + qwen3:8b,Surya + qwen3:8b,53,0.283492,0.281606,0.001887,wilcoxon_signed_rank,0.47496038004032803,1.000000
+structured,overall_extraction_score,EasyOCR + qwen3:8b,Docling + qwen3:8b,53,0.283492,0.285111,-0.001619,wilcoxon_signed_rank,0.4079446987715286,1.000000
+structured,overall_extraction_score,Surya + qwen3:8b,Docling + qwen3:8b,53,0.281606,0.285111,-0.003506,wilcoxon_signed_rank,0.16630933273408577,1.000000
+structured,entity_lenient_f1,Qwen3-VL 8B,LLaVA 13B,53,0.047985,0.000000,0.047985,wilcoxon_signed_rank,2.6670445532979518e-05,0.001093
+structured,entity_lenient_f1,Qwen3-VL 8B,GLM-OCR + qwen3:8b,53,0.047985,0.076358,-0.028374,wilcoxon_signed_rank,0.08284074491696944,1.000000
+structured,entity_lenient_f1,Qwen3-VL 8B,docTR + qwen3:8b,53,0.047985,0.043713,0.004272,wilcoxon_signed_rank,0.30826328791692126,1.000000
+structured,entity_lenient_f1,Qwen3-VL 8B,TrOCR + qwen3:8b,53,0.047985,0.000787,0.047198,wilcoxon_signed_rank,2.808126119948642e-05,0.001123
+structured,entity_lenient_f1,Qwen3-VL 8B,EasyOCR + qwen3:8b,53,0.047985,0.000787,0.047198,wilcoxon_signed_rank,2.808126119948642e-05,0.001123
+structured,entity_lenient_f1,Qwen3-VL 8B,Surya + qwen3:8b,53,0.047985,0.000787,0.047198,wilcoxon_signed_rank,2.808126119948642e-05,0.001123
+structured,entity_lenient_f1,Qwen3-VL 8B,Docling + qwen3:8b,53,0.047985,0.000787,0.047198,wilcoxon_signed_rank,2.808126119948642e-05,0.001123
+structured,entity_lenient_f1,LLaVA 13B,GLM-OCR + qwen3:8b,53,0.000000,0.076358,-0.076358,wilcoxon_signed_rank,1.1638555351094802e-06,0.000064
+structured,entity_lenient_f1,LLaVA 13B,docTR + qwen3:8b,53,0.000000,0.043713,-0.043713,wilcoxon_signed_rank,5.9264183246226055e-05,0.002074
+structured,entity_lenient_f1,LLaVA 13B,TrOCR + qwen3:8b,53,0.000000,0.000787,-0.000787,wilcoxon_signed_rank,0.31731050786291415,1.000000
+structured,entity_lenient_f1,LLaVA 13B,EasyOCR + qwen3:8b,53,0.000000,0.000787,-0.000787,wilcoxon_signed_rank,0.31731050786291415,1.000000
+structured,entity_lenient_f1,LLaVA 13B,Surya + qwen3:8b,53,0.000000,0.000787,-0.000787,wilcoxon_signed_rank,0.31731050786291415,1.000000
+structured,entity_lenient_f1,LLaVA 13B,Docling + qwen3:8b,53,0.000000,0.000787,-0.000787,wilcoxon_signed_rank,0.31731050786291415,1.000000
+structured,entity_lenient_f1,GLM-OCR + qwen3:8b,docTR + qwen3:8b,53,0.076358,0.043713,0.032645,wilcoxon_signed_rank,0.00776234923958598,0.194059
+structured,entity_lenient_f1,GLM-OCR + qwen3:8b,TrOCR + qwen3:8b,53,0.076358,0.000787,0.075572,wilcoxon_signed_rank,1.1638555351094802e-06,0.000064
+structured,entity_lenient_f1,GLM-OCR + qwen3:8b,EasyOCR + qwen3:8b,53,0.076358,0.000787,0.075572,wilcoxon_signed_rank,1.1638555351094802e-06,0.000064
+structured,entity_lenient_f1,GLM-OCR + qwen3:8b,Surya + qwen3:8b,53,0.076358,0.000787,0.075572,wilcoxon_signed_rank,1.1638555351094802e-06,0.000064
+structured,entity_lenient_f1,GLM-OCR + qwen3:8b,Docling + qwen3:8b,53,0.076358,0.000787,0.075572,wilcoxon_signed_rank,1.1638555351094802e-06,0.000064
+structured,entity_lenient_f1,docTR + qwen3:8b,TrOCR + qwen3:8b,53,0.043713,0.000787,0.042926,wilcoxon_signed_rank,8.807368035275503e-05,0.002995
+structured,entity_lenient_f1,docTR + qwen3:8b,EasyOCR + qwen3:8b,53,0.043713,0.000787,0.042926,wilcoxon_signed_rank,8.807368035275503e-05,0.002995
+structured,entity_lenient_f1,docTR + qwen3:8b,Surya + qwen3:8b,53,0.043713,0.000787,0.042926,wilcoxon_signed_rank,8.807368035275503e-05,0.002995
+structured,entity_lenient_f1,docTR + qwen3:8b,Docling + qwen3:8b,53,0.043713,0.000787,0.042926,wilcoxon_signed_rank,8.807368035275503e-05,0.002995
+structured,entity_lenient_f1,TrOCR + qwen3:8b,EasyOCR + qwen3:8b,53,0.000787,0.000787,0.000000,wilcoxon_signed_rank,1.0,1.000000
+structured,entity_lenient_f1,TrOCR + qwen3:8b,Surya + qwen3:8b,53,0.000787,0.000787,0.000000,wilcoxon_signed_rank,1.0,1.000000
+structured,entity_lenient_f1,TrOCR + qwen3:8b,Docling + qwen3:8b,53,0.000787,0.000787,0.000000,wilcoxon_signed_rank,1.0,1.000000
+structured,entity_lenient_f1,EasyOCR + qwen3:8b,Surya + qwen3:8b,53,0.000787,0.000787,0.000000,wilcoxon_signed_rank,1.0,1.000000
+structured,entity_lenient_f1,EasyOCR + qwen3:8b,Docling + qwen3:8b,53,0.000787,0.000787,0.000000,wilcoxon_signed_rank,1.0,1.000000
+structured,entity_lenient_f1,Surya + qwen3:8b,Docling + qwen3:8b,53,0.000787,0.000787,0.000000,wilcoxon_signed_rank,1.0,1.000000
+raw_ocr,token_f1,GLM-OCR,docTR,53,0.246423,0.198038,0.048385,wilcoxon_signed_rank,3.7352964617001356e-06,0.000179
+raw_ocr,token_f1,GLM-OCR,TrOCR,53,0.246423,0.008168,0.238255,wilcoxon_signed_rank,2.386484752546066e-10,0.000000
+raw_ocr,token_f1,GLM-OCR,EasyOCR,53,0.246423,0.160558,0.085864,wilcoxon_signed_rank,1.6980545775552244e-09,0.000000
+raw_ocr,token_f1,GLM-OCR,Surya,53,0.246423,0.236240,0.010183,wilcoxon_signed_rank,0.03287811652588928,0.756197
+raw_ocr,token_f1,GLM-OCR,Docling,53,0.246423,0.153581,0.092842,wilcoxon_signed_rank,2.2303929597190334e-09,0.000000
+raw_ocr,token_f1,docTR,TrOCR,53,0.198038,0.008168,0.189870,wilcoxon_signed_rank,2.386484752546066e-10,0.000000
+raw_ocr,token_f1,docTR,EasyOCR,53,0.198038,0.160558,0.037479,wilcoxon_signed_rank,1.0061123803063933e-09,0.000000
+raw_ocr,token_f1,docTR,Surya,53,0.198038,0.236240,-0.038202,wilcoxon_signed_rank,2.887190471937464e-06,0.000143
+raw_ocr,token_f1,docTR,Docling,53,0.198038,0.153581,0.044457,wilcoxon_signed_rank,1.1469189743149857e-06,0.000064
+raw_ocr,token_f1,TrOCR,EasyOCR,53,0.008168,0.160558,-0.152391,wilcoxon_signed_rank,2.5274053877318e-10,0.000000
+raw_ocr,token_f1,TrOCR,Surya,53,0.008168,0.236240,-0.228072,wilcoxon_signed_rank,2.386004626825078e-10,0.000000
+raw_ocr,token_f1,TrOCR,Docling,53,0.008168,0.153581,-0.145413,wilcoxon_signed_rank,3.3625660575300827e-10,0.000000
+raw_ocr,token_f1,EasyOCR,Surya,53,0.160558,0.236240,-0.075681,wilcoxon_signed_rank,2.112330533128417e-09,0.000000
+raw_ocr,token_f1,EasyOCR,Docling,53,0.160558,0.153581,0.006977,wilcoxon_signed_rank,0.044009118630358605,0.968201
+raw_ocr,token_f1,Surya,Docling,53,0.236240,0.153581,0.082658,wilcoxon_signed_rank,4.037196334609331e-09,0.000000
+raw_ocr,text_similarity,GLM-OCR,docTR,53,0.187391,0.185060,0.002330,wilcoxon_signed_rank,0.5442396241675977,1.000000
+raw_ocr,text_similarity,GLM-OCR,TrOCR,53,0.187391,0.009762,0.177628,wilcoxon_signed_rank,2.386484752546066e-10,0.000000
+raw_ocr,text_similarity,GLM-OCR,EasyOCR,53,0.187391,0.172847,0.014543,wilcoxon_signed_rank,0.021853778343738008,0.524491
+raw_ocr,text_similarity,GLM-OCR,Surya,53,0.187391,0.187321,0.000070,wilcoxon_signed_rank,0.4335127061990187,1.000000
+raw_ocr,text_similarity,GLM-OCR,Docling,53,0.187391,0.152921,0.034470,wilcoxon_signed_rank,4.216411127993193e-07,0.000024
+raw_ocr,text_similarity,docTR,TrOCR,53,0.185060,0.009762,0.175298,wilcoxon_signed_rank,2.386484752546066e-10,0.000000
+raw_ocr,text_similarity,docTR,EasyOCR,53,0.185060,0.172847,0.012213,wilcoxon_signed_rank,1.0998078100586443e-08,0.000001
+raw_ocr,text_similarity,docTR,Surya,53,0.185060,0.187321,-0.002260,wilcoxon_signed_rank,0.2821013098454187,1.000000
+raw_ocr,text_similarity,docTR,Docling,53,0.185060,0.152921,0.032140,wilcoxon_signed_rank,1.0602354651220371e-07,0.000007
+raw_ocr,text_similarity,TrOCR,EasyOCR,53,0.009762,0.172847,-0.163085,wilcoxon_signed_rank,2.386484752546066e-10,0.000000
+raw_ocr,text_similarity,TrOCR,Surya,53,0.009762,0.187321,-0.177558,wilcoxon_signed_rank,2.386484752546066e-10,0.000000
+raw_ocr,text_similarity,TrOCR,Docling,53,0.009762,0.152921,-0.143158,wilcoxon_signed_rank,2.386484752546066e-10,0.000000
+raw_ocr,text_similarity,EasyOCR,Surya,53,0.172847,0.187321,-0.014474,wilcoxon_signed_rank,3.887603591177075e-06,0.000183
+raw_ocr,text_similarity,EasyOCR,Docling,53,0.172847,0.152921,0.019926,wilcoxon_signed_rank,6.203377925637438e-06,0.000279
+raw_ocr,text_similarity,Surya,Docling,53,0.187321,0.152921,0.034400,wilcoxon_signed_rank,1.1002748222399213e-07,0.000007

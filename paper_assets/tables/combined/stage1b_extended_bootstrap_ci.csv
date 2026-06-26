@@ -1,0 +1,29 @@
+family,system,metric,n,mean,ci_lower,ci_upper,bootstrap_iterations
+structured,Qwen3-VL 8B,overall_extraction_score,53,0.213745,0.199546,0.228247,5000
+structured,Qwen3-VL 8B,entity_lenient_f1,53,0.047985,0.030221,0.068972,5000
+structured,LLaVA 13B,overall_extraction_score,53,0.150943,0.137736,0.164151,5000
+structured,LLaVA 13B,entity_lenient_f1,53,0.000000,0.000000,0.000000,5000
+structured,GLM-OCR + qwen3:8b,overall_extraction_score,53,0.353226,0.328917,0.375617,5000
+structured,GLM-OCR + qwen3:8b,entity_lenient_f1,53,0.076358,0.049906,0.105881,5000
+structured,docTR + qwen3:8b,overall_extraction_score,53,0.319223,0.295055,0.342279,5000
+structured,docTR + qwen3:8b,entity_lenient_f1,53,0.043713,0.023223,0.068504,5000
+structured,TrOCR + qwen3:8b,overall_extraction_score,53,0.269511,0.251351,0.286530,5000
+structured,TrOCR + qwen3:8b,entity_lenient_f1,53,0.000787,0.000000,0.002360,5000
+structured,EasyOCR + qwen3:8b,overall_extraction_score,53,0.283492,0.271362,0.295149,5000
+structured,EasyOCR + qwen3:8b,entity_lenient_f1,53,0.000787,0.000000,0.002360,5000
+structured,Surya + qwen3:8b,overall_extraction_score,53,0.281606,0.269340,0.292658,5000
+structured,Surya + qwen3:8b,entity_lenient_f1,53,0.000787,0.000000,0.002360,5000
+structured,Docling + qwen3:8b,overall_extraction_score,53,0.285111,0.272975,0.296502,5000
+structured,Docling + qwen3:8b,entity_lenient_f1,53,0.000787,0.000000,0.002360,5000
+raw_ocr,GLM-OCR,token_f1,53,0.246423,0.225177,0.269517,5000
+raw_ocr,GLM-OCR,text_similarity,53,0.187391,0.175547,0.199864,5000
+raw_ocr,docTR,token_f1,53,0.198038,0.173375,0.222577,5000
+raw_ocr,docTR,text_similarity,53,0.185060,0.173191,0.197764,5000
+raw_ocr,TrOCR,token_f1,53,0.008168,0.006694,0.009870,5000
+raw_ocr,TrOCR,text_similarity,53,0.009762,0.007702,0.012079,5000
+raw_ocr,EasyOCR,token_f1,53,0.160558,0.136166,0.186070,5000
+raw_ocr,EasyOCR,text_similarity,53,0.172847,0.158545,0.187355,5000
+raw_ocr,Surya,token_f1,53,0.236240,0.217140,0.255802,5000
+raw_ocr,Surya,text_similarity,53,0.187321,0.177075,0.196572,5000
+raw_ocr,Docling,token_f1,53,0.153581,0.128228,0.178945,5000
+raw_ocr,Docling,text_similarity,53,0.152921,0.136768,0.168825,5000
