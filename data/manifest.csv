@@ -1,4 +1,0 @@
-document_id,image_path,gt_path,prediction_path,patient_id,prescription_id,page_number,split
-p1,prescriptions/p1.jpeg,raw_ground_truths/p1.json,outputs/raw_extractions/Qwen_Final/p1.json,pat_01,rx_01,1,validation
-p2,prescriptions/p2.jpeg,raw_ground_truths/p2.json,outputs/raw_extractions/Qwen_Final/p2.json,pat_02,rx_02,1,validation
-p3,prescriptions/p3.jpeg,raw_ground_truths/p3.json,outputs/raw_extractions/Qwen_Final/p3.json,pat_03,rx_03,1,validation

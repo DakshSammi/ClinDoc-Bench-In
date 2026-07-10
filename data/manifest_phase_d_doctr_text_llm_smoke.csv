@@ -1,4 +1,0 @@
-document_id,image_path,gt_path,prediction_path,patient_id,prescription_id,page_number,split
-p1,prescriptions/p1.jpeg,raw_ground_truths/p1.json,outputs/raw_extractions/doctr_text_llm_smoke/p1.json,pat_01,rx_01,1,validation
-p2,prescriptions/p2.jpeg,raw_ground_truths/p2.json,outputs/raw_extractions/doctr_text_llm_smoke/p2.json,pat_02,rx_02,1,validation
-p36_1,prescriptions/p36/p36_1/presc_image16902685410.jpg;prescriptions/p36/p36_1/presc_image16902685411.jpg,raw_ground_truths/p36/p36_1.json,outputs/raw_extractions/doctr_text_llm_smoke/p36_1.json,p36,p36_1,2,validation

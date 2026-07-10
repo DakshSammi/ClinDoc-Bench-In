@@ -1,6 +1,0 @@
-document_id,image_path,gt_path,prediction_path,patient_id,prescription_id,page_number,split
-p1,prescriptions/p1.jpeg,raw_ground_truths/p1.json,outputs/raw_extractions/qwen25_vl_7b/p1.json,pat_01,rx_01,1,validation
-p2,prescriptions/p2.jpeg,raw_ground_truths/p2.json,outputs/raw_extractions/qwen25_vl_7b/p2.json,pat_02,rx_02,1,validation
-p45_4,"prescriptions/p45/p45_4/Adobe Scan May 15, 2026 (3)_page-0001.jpg;prescriptions/p45/p45_4/Adobe Scan May 15, 2026 (3)_page-0002.jpg;prescriptions/p45/p45_4/Adobe Scan May 15, 2026 (3)_page-0003.jpg;prescriptions/p45/p45_4/Adobe Scan May 15, 2026 (3)_page-0004.jpg;prescriptions/p45/p45_4/Adobe Scan May 15, 2026 (3)_page-0005.jpg",raw_ground_truths/p45/p45_4.json,outputs/raw_extractions/qwen25_vl_7b/p45_4.json,p45,p45_4,5,validation
-p45_3,"prescriptions/p45/p45_3/Adobe Scan May 15, 2026 (2)_page-0001.jpg;prescriptions/p45/p45_3/Adobe Scan May 15, 2026 (2)_page-0002.jpg;prescriptions/p45/p45_3/Adobe Scan May 15, 2026 (2)_page-0003.jpg",raw_ground_truths/p45/p45_3.json,outputs/raw_extractions/qwen25_vl_7b/p45_3.json,p45,p45_3,3,validation
-p45_1,"prescriptions/p45/p45_1/Adobe Scan May 15, 2026_page-0001.jpg",raw_ground_truths/p45/p45_1.json,outputs/raw_extractions/qwen25_vl_7b/p45_1.json,p45,p45_1,1,validation
