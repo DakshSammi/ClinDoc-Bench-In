@@ -1,0 +1,67 @@
+{
+  "schema_version": "raw_rx_v2",
+  "document_id": "example_doc_001",
+  "patient_information": {
+    "name": "Example Patient",
+    "age": "42 years",
+    "gender": "Female",
+    "phone": null,
+    "address": null,
+    "patient_identifier": "EX-001",
+    "abha_id": null
+  },
+  "encounter_information": {
+    "date": "2026-01-15",
+    "department": "General Medicine",
+    "hospital_name": "Example Hospital",
+    "doctor_name": "Dr Example",
+    "visit_type": "OPD",
+    "fees": null,
+    "room_or_queue_no": "12"
+  },
+  "complaints_or_diagnosis": [
+    {
+      "raw_text": "Fever for 3 days",
+      "evidence_text": "Fever x 3 days",
+      "page_number": 1,
+      "section": "complaints"
+    }
+  ],
+  "observations": [],
+  "medications": [
+    {
+      "raw_line_text": "Tab Paracetamol 650 mg SOS after food",
+      "raw_name": "Paracetamol",
+      "raw_dosage": "650 mg",
+      "raw_frequency": "SOS",
+      "raw_instruction": "after food",
+      "page_number": 1,
+      "section": "medications"
+    }
+  ],
+  "procedures": [],
+  "advice": [
+    {
+      "raw_text": "Drink fluids",
+      "evidence_text": "Drink plenty of fluids",
+      "page_number": 1,
+      "section": "advice"
+    }
+  ],
+  "follow_up": {
+    "raw_text": "Review after 5 days",
+    "date": null,
+    "review_after": "5 days"
+  },
+  "allergy_mentions": [],
+  "other_notes": [],
+  "lab_observations": [],
+  "metadata": {
+    "model_name": "example_submission_model",
+    "model_version": "v1",
+    "backend_name": "example_backend",
+    "processing_time_ms": 1482.5,
+    "schema_version": "raw_rx_v2",
+    "document_type": "prescription"
+  }
+}

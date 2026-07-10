@@ -4,7 +4,19 @@ ClinDoc-Bench-IN compares different systems by mapping them into one shared docu
 
 The authoritative implementation lives in:
 
-- [`src/schemas/raw_extraction.py`](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/src/schemas/raw_extraction.py:18)
+- [`src/schemas/raw_extraction.py`](../src/schemas/raw_extraction.py)
+
+Two different file roles use this exact same schema:
+
+| File role | Owned by | Purpose |
+| --- | --- | --- |
+| Ground-truth canonical JSON | Benchmark maintainers | Reference annotation used for scoring |
+| Prediction canonical JSON | Model submitter | System output compared against the reference |
+
+Public examples:
+
+- [example_ground_truth_canonical.json](examples/example_ground_truth_canonical.json)
+- [example_model_prediction_canonical.json](examples/example_model_prediction_canonical.json)
 
 ## Why Canonical JSON Exists
 
@@ -48,6 +60,8 @@ Image
   }
 }
 ```
+
+The benchmark compares prediction JSON against ground-truth JSON with the same top-level structure. Runtime is stored separately in `runtime.csv`; it is required for structured lanes as well as raw OCR lanes.
 
 ## Core Field Groups
 

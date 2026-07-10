@@ -1,6 +1,6 @@
 # ClinDoc-Bench-IN
 
-Clinical document understanding benchmark for Indian prescription OCR, vision-language extraction, and hybrid OCR-to-LLM pipelines.
+Open benchmark for Indian prescription OCR, direct vision-language extraction, and hybrid OCR-to-LLM pipelines. It ships frozen publication results, reusable evaluation code, and a community-ready submission format.
 
 [![Dataset](https://img.shields.io/badge/Dataset-90%20patients%20%7C%20125%20documents%20%7C%20150%20images-2f6f6d)](#dataset)
 [![Benchmark](https://img.shields.io/badge/Benchmark-OCR%20%7C%20Direct%20VLM%20%7C%20Hybrid-44546a)](#benchmark-tracks)
@@ -88,10 +88,10 @@ python scripts/validate_submission.py \
 
 The canonical frozen benchmark is stored under:
 
-- [benchmark_v2/final_day_freeze_20260709/reports](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/benchmark_v2/final_day_freeze_20260709/reports)
-- [FINAL_BENCHMARK_FROZEN.txt](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/benchmark_v2/final_day_freeze_20260709/reports/FINAL_BENCHMARK_FROZEN.txt)
-- [final_model_registry.csv](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/benchmark_v2/final_day_freeze_20260709/reports/final_model_registry.csv)
-- [selected_lanes_provenance.md](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/benchmark_v2/final_day_freeze_20260709/reports/selected_lanes_provenance.md)
+- [benchmark_v2/final_day_freeze_20260709/reports/](benchmark_v2/final_day_freeze_20260709/reports/)
+- [final_benchmark_report.md](benchmark_v2/final_day_freeze_20260709/reports/final_benchmark_report.md)
+- [final_model_registry.csv](benchmark_v2/final_day_freeze_20260709/reports/final_model_registry.csv)
+- [selected_lanes_provenance.md](benchmark_v2/final_day_freeze_20260709/reports/selected_lanes_provenance.md)
 
 Do not rerun, overwrite, or edit anything under `benchmark_v2/final_day_freeze_20260709/`.
 
@@ -105,7 +105,7 @@ The frozen benchmark covers:
 | Documents | 125 |
 | Images | 150 |
 
-Ground truth is stored as canonical JSON linked by manifest rows. Public paper examples are anonymized derivatives only.
+Benchmark-owned ground truth is stored as canonical JSON linked by manifest rows. The public repo includes sanitized example JSON files so the format is visible without exposing the private benchmark annotations.
 
 For a fuller dataset overview, see:
 
@@ -133,9 +133,15 @@ More detail:
 
 ## Canonical JSON
 
-Structured outputs are benchmarked in a canonical JSON format defined by [`CanonicalRawDoc`](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/src/schemas/raw_extraction.py:102).
+Structured outputs are benchmarked in a canonical JSON format defined by [`CanonicalRawDoc`](src/schemas/raw_extraction.py).
 
 This schema is the contract between model outputs and evaluation. It exists so that OCR, direct VLM, and hybrid pipelines can be compared using one shared representation.
+
+- Benchmark ground truth: evaluator-owned reference annotations in canonical JSON.
+- Model prediction: your system's output JSON for the same document, using the same schema.
+- Public examples:
+  - [docs/examples/example_ground_truth_canonical.json](docs/examples/example_ground_truth_canonical.json)
+  - [docs/examples/example_model_prediction_canonical.json](docs/examples/example_model_prediction_canonical.json)
 
 Start here:
 
@@ -147,10 +153,11 @@ Start here:
 
 ### Structured lanes
 
-1. Produce one canonical JSON file per document with filename `<document_id>.json`.
-2. Validate those files against the public schema.
-3. Build an evaluation manifest pointing each document to its prediction JSON.
-4. Run the structured benchmark CLI.
+1. Produce one canonical JSON prediction file per document with filename `<document_id>.json`.
+2. Record per-document runtime in `runtime.csv` for every processed document. This is required for direct VLM and hybrid lanes too.
+3. Validate those prediction files against the public schema.
+4. Build an evaluation manifest that points each document to your prediction JSON while the benchmark manifest points to the reference ground-truth JSON.
+5. Run the structured benchmark CLI.
 
 Example extraction command surface:
 
@@ -177,12 +184,16 @@ python -m src.cli.benchmark \
     --output-dir experiments/template_eval_reports
 ```
 
+In other words: the benchmark already owns the ground truth, while your submission supplies only the prediction JSON and runtime metadata.
+
 ### Raw OCR lanes
 
 1. Produce one UTF-8 text file per document with filename `<document_id>.txt`.
 2. Record per-document runtime in `runtime.csv`.
 3. Validate the submission package.
 4. Generate an OCR handoff CSV and run the OCR evaluator.
+
+Raw OCR lanes submit transcription text. Structured lanes submit canonical JSON. Both track types must include runtime metadata.
 
 ```bash
 python scripts/validate_submission.py \
@@ -250,8 +261,8 @@ Frozen publication leaderboard:
 
 Frozen provenance and coverage:
 
-- [final_benchmark_report.md](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/benchmark_v2/final_day_freeze_20260709/reports/final_benchmark_report.md)
-- [selected_lanes_provenance.md](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/benchmark_v2/final_day_freeze_20260709/reports/selected_lanes_provenance.md)
+- [final_benchmark_report.md](benchmark_v2/final_day_freeze_20260709/reports/final_benchmark_report.md)
+- [selected_lanes_provenance.md](benchmark_v2/final_day_freeze_20260709/reports/selected_lanes_provenance.md)
 
 Community submissions are standardized, but there is not yet an auto-updating public leaderboard service. The submission format and validator are the current bridge toward that workflow.
 
