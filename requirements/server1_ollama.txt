@@ -1,7 +1,0 @@
--r base.txt
-torch
-transformers
-accelerate
-sentencepiece
-qwen-vl-utils
-timm

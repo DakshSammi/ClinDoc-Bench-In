@@ -1,3 +1,17 @@
+# Copyright 2026 ClinDoc-Bench-IN contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import time
 import logging
 from typing import Dict, Any, Optional
@@ -29,7 +43,7 @@ class DonutBackendAdapter(BaseBackendAdapter):
     async def run(self, prompt: str, image: Optional[Image.Image] = None, **kwargs) -> Dict[str, Any]:
         start_time = time.time()
         decoding_params = {}
-
+        
         if not image:
             return {
                 "error": "Donut requires an image input",
@@ -39,7 +53,7 @@ class DonutBackendAdapter(BaseBackendAdapter):
                 "backend_name": self.name,
                 "decoding_parameters": decoding_params
             }
-
+            
         self._lazy_load()
         if not self.model or not self.processor:
             return {
@@ -50,22 +64,22 @@ class DonutBackendAdapter(BaseBackendAdapter):
                 "backend_name": self.name,
                 "decoding_parameters": decoding_params
             }
-
+            
         try:
             import torch
             import re
             import asyncio
-
+            
             # Prepare Donut prompt
             task_name = "docvqa"
             task_prompt = f"<s_{task_name}><s_question>{prompt}</s_question><s_answer>"
             decoder_input_ids = self.processor.tokenizer(task_prompt, add_special_tokens=False, return_tensors="pt").input_ids
-
+            
             pixel_values = self.processor(image, return_tensors="pt").pixel_values
             device = next(self.model.parameters()).device
             pixel_values = pixel_values.to(device)
             decoder_input_ids = decoder_input_ids.to(device)
-
+            
             def generate():
                 with torch.no_grad():
                     outputs = self.model.generate(
@@ -81,17 +95,17 @@ class DonutBackendAdapter(BaseBackendAdapter):
                         return_dict_in_generate=True
                     )
                 return outputs
-
+                
             loop = asyncio.get_event_loop()
             outputs = await loop.run_in_executor(None, generate)
-
+            
             seq = self.processor.batch_decode(outputs.sequences)[0]
             seq = seq.replace(self.processor.tokenizer.eos_token, "").replace(self.processor.tokenizer.pad_token, "")
             seq = re.sub(r"<.*?>", "", seq, count=1).strip()
-
+            
             content = self.processor.token2json(seq)
             processing_time_ms = (time.time() - start_time) * 1000
-
+            
             import json
             return {
                 "content": json.dumps(content) if isinstance(content, dict) else str(content),

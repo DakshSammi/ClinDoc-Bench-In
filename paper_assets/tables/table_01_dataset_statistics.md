@@ -1,0 +1,8 @@
+| statistic | value |
+| --- | --- |
+| patients | 90 |
+| documents | 125 |
+| images | 150 |
+| single_page_documents | 105 |
+| multi_page_documents | 20 |
+| departments | 28 |

@@ -1,3 +1,17 @@
+# Copyright 2026 ClinDoc-Bench-IN contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import time
 import logging
 from typing import Dict, Any, Optional
@@ -18,7 +32,7 @@ class FlorenceBackendAdapter(BaseBackendAdapter):
                 from transformers import AutoModelForImageTextToText, AutoProcessor
                 self.logger.info(f"Loading local Florence-2 model: {self.model_id}")
                 self.model = AutoModelForImageTextToText.from_pretrained(
-                    self.model_id,
+                    self.model_id, 
                     trust_remote_code=True,
                     device_map="auto",
                     torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32
@@ -30,7 +44,7 @@ class FlorenceBackendAdapter(BaseBackendAdapter):
     async def run(self, prompt: str, image: Optional[Image.Image] = None, **kwargs) -> Dict[str, Any]:
         start_time = time.time()
         decoding_params = {}
-
+        
         if not image:
             return {
                 "error": "Florence-2 requires an image input",
@@ -40,7 +54,7 @@ class FlorenceBackendAdapter(BaseBackendAdapter):
                 "backend_name": self.name,
                 "decoding_parameters": decoding_params
             }
-
+            
         self._lazy_load()
         if not self.model or not self.processor:
             return {
@@ -51,18 +65,18 @@ class FlorenceBackendAdapter(BaseBackendAdapter):
                 "backend_name": self.name,
                 "decoding_parameters": decoding_params
             }
-
+            
         try:
             import torch
             import asyncio
-
+            
             # Florence-2 tasks (e.g. '<OCR_WITH_REGION>')
             task_prompt = prompt if prompt.startswith("<") else "<OCR_WITH_REGION>"
-
+            
             inputs = self.processor(text=task_prompt, images=image, return_tensors="pt")
             device = next(self.model.parameters()).device
             inputs = {k: v.to(device) for k, v in inputs.items()}
-
+            
             # Run in executor to avoid blocking event loop
             def generate():
                 with torch.no_grad():
@@ -75,13 +89,13 @@ class FlorenceBackendAdapter(BaseBackendAdapter):
                         num_beams=3
                     )
                 return generated_ids
-
+                
             loop = asyncio.get_event_loop()
             generated_ids = await loop.run_in_executor(None, generate)
-
+            
             content = self.processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
             processing_time_ms = (time.time() - start_time) * 1000
-
+            
             return {
                 "content": content,
                 "processing_time_ms": processing_time_ms,

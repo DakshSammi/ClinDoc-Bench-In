@@ -1,0 +1,29 @@
+family,track,system,origin_server,publication_status,records,primary_score,runtime_seconds,rank
+raw_ocr,raw_ocr,qwen3_vl_raw_ocr,server1,PRIMARY TABLE,125,0.223796,,1.0
+raw_ocr,raw_ocr,glm_ocr,server1,PRIMARY TABLE,125,0.223192,,2.0
+raw_ocr,raw_ocr,surya,server2,PRIMARY TABLE,125,0.2082848,,3.0
+raw_ocr,raw_ocr,doctr,server2,PRIMARY TABLE,125,0.162648,,4.0
+raw_ocr,raw_ocr,easyocr,server2,PRIMARY TABLE,125,0.1158927999999999,,5.0
+raw_ocr,raw_ocr,docling,server2,PRIMARY TABLE,125,0.1140848,,6.0
+raw_ocr,raw_ocr,trocr,server2,PRIMARY TABLE,125,0.0098967999999999,,7.0
+structured,direct_vlm,qwen3_27b,server2,PRIMARY TABLE,125,0.3563016,,1.0
+structured,direct_vlm,qwen3_vl,server2,PRIMARY TABLE,125,0.3563016,,1.0
+structured,direct_vlm,google_gemini_2_5_flash,server2,PRIMARY TABLE,125,0.3530744,,3.0
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,server1,APPENDIX,125,0.3457672268907563,17.252423999999998,4.0
+structured,hybrid,glm_ocr_qwen3_8b,server1,APPENDIX,125,0.3405934959349593,16.055,5.0
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,server1,APPENDIX,125,0.3370273684210526,14.17716,6.0
+structured,hybrid,glm_ocr_qwen25_14b,server1,APPENDIX,125,0.3362402173913043,13.948696,7.0
+structured,direct_vlm,hf_qwen25_vl_72b,server2,APPENDIX,125,0.3295631578947368,,8.0
+structured,hybrid,surya_qwen25_14b,server1,APPENDIX,125,0.3270392156862745,21.048896,9.0
+structured,hybrid,doctr_qwen25_14b,server1,APPENDIX,125,0.3153518518518518,13.782392,10.0
+structured,hybrid,docling_qwen25_14b,server1,APPENDIX,125,0.310682075471698,12.388408,11.0
+structured,hybrid,easyocr_qwen25_14b,server1,APPENDIX,125,0.2999732142857143,13.456936,12.0
+structured,hybrid,docling_qwen3_8b,server1,APPENDIX,125,0.2972330645161291,13.848536,13.0
+structured,hybrid,surya_qwen3_8b,server1,APPENDIX,125,0.2950666666666666,,14.0
+structured,hybrid,trocr_qwen25_14b,server1,APPENDIX,125,0.2942854838709677,8.731176,15.0
+structured,direct_vlm,qwen25_vl_7b_local,server2,PRIMARY TABLE,125,0.2906696,,16.0
+structured,hybrid,doctr_qwen3_8b,server2,PRIMARY TABLE,125,0.2720079999999999,,17.0
+structured,hybrid,easyocr_qwen3_8b,server2,PRIMARY TABLE,125,0.2694488,,18.0
+structured,hybrid,trocr_qwen3_8b,server2,PRIMARY TABLE,125,0.257216,,19.0
+structured,direct_vlm,ollama_llava_13b,server1,EXCLUDED,125,,6.30452,
+structured,hybrid,ollama_qwen3_vl_8b,server1,EXCLUDED,125,,16.480984,

@@ -1,3 +1,17 @@
+# Copyright 2026 ClinDoc-Bench-IN contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import re
 from typing import List, Optional
 try:
@@ -31,19 +45,19 @@ class HallucinationDetector:
         Collect all text fragments present in the ground truth document to form an evidence pool.
         """
         pool = []
-
+        
         # Patient Info
         p = gt_doc.patient_information
         for val in [p.name, p.age, p.gender, p.address, p.phone, p.patient_identifier, p.abha_id]:
             if val:
                 pool.append(val)
-
+                
         # Encounter Info
         e = gt_doc.encounter_information
         for val in [e.date, e.department, e.hospital_name, e.doctor_name, e.visit_type, e.fees, e.room_or_queue_no]:
             if val:
                 pool.append(val)
-
+                
         # List entities
         for cat_list in [
             gt_doc.complaints_or_diagnosis,
@@ -58,7 +72,7 @@ class HallucinationDetector:
                     pool.append(item.raw_text)
                 if item.evidence_text:
                     pool.append(item.evidence_text)
-
+                    
         # Medications
         for med in gt_doc.medications:
             if med.raw_line_text:
@@ -66,7 +80,7 @@ class HallucinationDetector:
             for val in [med.raw_name, med.raw_dosage, med.raw_route, med.raw_frequency, med.raw_duration, med.raw_instruction, med.raw_timing]:
                 if val:
                     pool.append(val)
-
+                    
         # Lab Observations
         for lab in gt_doc.lab_observations:
             if lab.raw_line_text:
@@ -76,7 +90,7 @@ class HallucinationDetector:
             for val in [lab.test_name, lab.result, lab.unit, lab.reference_range]:
                 if val:
                     pool.append(val)
-
+                    
         # Follow Up
         if gt_doc.follow_up:
             f = gt_doc.follow_up
@@ -86,36 +100,36 @@ class HallucinationDetector:
                 pool.append(f.date)
             if f.review_after:
                 pool.append(f.review_after)
-
+                
         return pool
 
     def detect_hallucinations(
-        self,
-        gt_doc: CanonicalRawDoc,
-        pred_doc: CanonicalRawDoc,
+        self, 
+        gt_doc: CanonicalRawDoc, 
+        pred_doc: CanonicalRawDoc, 
         entity_alignments: List[EntityMatchDetail]
     ) -> List[UnmatchedPredictionRecord]:
         records = []
-
+        
         # 1. Gather Ground Truth Evidence Pool
         gt_pool = self._get_gt_text_pool(gt_doc)
         gt_pool_norm = [TextNormaliser.normalise(t) for t in gt_pool if t]
-
+        
         # 2. Check Entity False Positives (Unmatched Predictions)
         for align in entity_alignments:
             if align.alignment_status != "FP":
                 continue
-
+                
             pred_text = align.pred_raw_text
             if not pred_text:
                 continue
-
+                
             pred_norm = TextNormaliser.normalise(pred_text)
-
+            
             # Find best match in ground truth text pool (any category)
             best_score = 0.0
             best_snippet = None
-
+            
             for gt_orig, gt_norm in zip(gt_pool, gt_pool_norm):
                 if not gt_norm:
                     continue
@@ -123,7 +137,7 @@ class HallucinationDetector:
                 if score > best_score:
                     best_score = score
                     best_snippet = gt_orig
-
+            
             # Determine classification
             if best_score >= self.gap_threshold:
                 # Text is in GT, but mapped to wrong category or is annotation gap
@@ -145,7 +159,7 @@ class HallucinationDetector:
                     f"Predicted text '{pred_text}' has moderate match with GT '{best_snippet}' "
                     f"(similarity {best_score:.1f}%), requiring human review."
                 )
-
+                
             records.append(UnmatchedPredictionRecord(
                 category=align.category,
                 pred_text=pred_text,
@@ -155,23 +169,23 @@ class HallucinationDetector:
                 rationale=rationale,
                 matched_snippet=best_snippet
             ))
-
+            
         # 3. Check specific Scalar Hallucination: Kumar Nagar case
         # "Kumar Nagar predicted as patient name in p2 is flagged as likely hallucination/OCR confusion
         # because GT patient name is empty and address is Kirti Nagar"
         gt_name = gt_doc.patient_information.name
         pred_name = pred_doc.patient_information.name
         gt_address = gt_doc.patient_information.address
-
+        
         if pred_name and not gt_name:
             pred_name_norm = TextNormaliser.normalise(pred_name)
-
+            
             # Check if prediction is similar to GT address (like Kirti Nagar vs Kumar Nagar)
             address_sim = 0.0
             if gt_address:
                 gt_addr_norm = TextNormaliser.normalise(gt_address)
                 address_sim = fuzz.partial_ratio(pred_name_norm, gt_addr_norm)
-
+                
             if address_sim >= 70.0:
                 records.append(UnmatchedPredictionRecord(
                     category="patient_info.name",
@@ -197,5 +211,5 @@ class HallucinationDetector:
                     rationale="Predicted patient name when ground truth name is empty and no matching fields exist.",
                     matched_snippet=None
                 ))
-
+                
         return records

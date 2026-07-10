@@ -1,0 +1,13 @@
+ClinDoc-Bench-IN
+Copyright 2026 ClinDoc-Bench-IN contributors
+
+This product includes software and documentation developed for the
+ClinDoc-Bench-IN benchmark and released under the Apache License, Version 2.0.
+
+The benchmark may reference third-party model names, APIs, libraries, or
+datasets for descriptive and reproducibility purposes. Such names remain the
+property of their respective owners.
+
+Clinical example images included in public paper assets must be anonymized
+copies only. Original clinical documents are not covered by this NOTICE as
+open public data unless separately released with the required approvals.

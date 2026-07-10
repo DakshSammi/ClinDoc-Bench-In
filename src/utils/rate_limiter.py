@@ -1,3 +1,17 @@
+# Copyright 2026 ClinDoc-Bench-IN contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 """
 Rate limiter for managing token-per-minute (TPM) and requests-per-minute (RPM) budgets.
 
@@ -29,7 +43,7 @@ class TokenUsageRecord:
     total_tokens: int
     estimated: bool = False  # Whether values are estimated or from API
     reason: str = ""  # "rate_limit", "timeout", etc.
-
+    
     def age_seconds(self) -> float:
         """Return age of this record in seconds."""
         return time.time() - self.timestamp
@@ -38,10 +52,10 @@ class TokenUsageRecord:
 class RollingWindowRateLimiter:
     """
     Tracks token usage in a rolling 60-second window.
-
+    
     Provides intelligent backoff when approaching rate limits.
     """
-
+    
     def __init__(
         self,
         tpm_limit: int = 500000,
@@ -63,10 +77,10 @@ class RollingWindowRateLimiter:
         self.window_seconds = window_seconds
         self.buffer_seconds = buffer_seconds
         self.max_retries_rate_limit = max_retries_rate_limit
-
+        
         self.usage_history: List[TokenUsageRecord] = []
         self.retry_count: Dict[str, int] = {}  # Per document ID
-
+        
     def _prune_old_records(self) -> None:
         """Remove records older than window_seconds."""
         cutoff_time = time.time() - self.window_seconds
@@ -74,40 +88,40 @@ class RollingWindowRateLimiter:
             r for r in self.usage_history
             if r.timestamp > cutoff_time
         ]
-
+    
     def get_rolling_tokens(self) -> int:
         """Get total tokens used in current rolling window."""
         self._prune_old_records()
         return sum(r.total_tokens for r in self.usage_history)
-
+    
     def get_rolling_requests(self) -> int:
         """Get total requests in current rolling window."""
         self._prune_old_records()
         return len(self.usage_history)
-
+    
     def get_time_to_available_tokens(self, needed_tokens: int) -> float:
         """
         Calculate seconds to wait until 'needed_tokens' become available.
-
+        
         Returns: float >= 0 (wait time in seconds)
         """
         self._prune_old_records()
-
+        
         current_tokens = self.get_rolling_tokens()
         available = self.tpm_limit - current_tokens
-
+        
         if available >= needed_tokens:
             return 0.0
-
+        
         # Find the oldest record; once it ages past window_seconds, tokens free up
         if not self.usage_history:
             return 0.0
-
+        
         oldest = min(self.usage_history, key=lambda r: r.timestamp)
         wait_time = (oldest.timestamp + self.window_seconds + self.buffer_seconds) - time.time()
-
+        
         return max(0.0, wait_time)
-
+    
     def record_usage(
         self,
         document_id: str,
@@ -129,14 +143,14 @@ class RollingWindowRateLimiter:
         )
         self.usage_history.append(record)
         self._prune_old_records()
-
+        
         logger.info(
             f"Recorded usage for {document_id}: "
             f"{prompt_tokens} prompt + {completion_tokens} completion = {total} total "
             f"({'estimated' if estimated else 'from API'}). "
             f"Rolling total: {self.get_rolling_tokens()}/{self.tpm_limit} TPM"
         )
-
+    
     def estimate_token_components(
         self,
         document_id: str,
@@ -197,7 +211,7 @@ class RollingWindowRateLimiter:
             prompt_length_chars=prompt_length_chars,
             reserve_full_output_budget=reserve_full_output_budget,
         )["total_tokens"]
-
+    
     def should_wait_before_request(
         self,
         document_id: str,
@@ -205,14 +219,14 @@ class RollingWindowRateLimiter:
     ) -> tuple[bool, float]:
         """
         Check if we should wait before making the next request.
-
+        
         Returns: (should_wait: bool, wait_seconds: float)
         """
         self._prune_old_records()
-
+        
         current_tokens = self.get_rolling_tokens()
         current_requests = self.get_rolling_requests()
-
+        
         # Check TPM limit
         if current_tokens + estimated_tokens > self.tpm_limit:
             wait_time = self.get_time_to_available_tokens(estimated_tokens)
@@ -222,7 +236,7 @@ class RollingWindowRateLimiter:
                 f"Need: {estimated_tokens}. Wait: {wait_time:.1f} sec"
             )
             return True, wait_time
-
+        
         # Check RPM limit
         if current_requests >= self.rpm_limit:
             oldest = min(self.usage_history, key=lambda r: r.timestamp)
@@ -232,9 +246,9 @@ class RollingWindowRateLimiter:
                 f"Current: {current_requests}/{self.rpm_limit}. Wait: {max(0, wait_time):.1f} sec"
             )
             return True, max(0.0, wait_time)
-
+        
         return False, 0.0
-
+    
     def wait_if_needed(
         self,
         document_id: str,
@@ -244,16 +258,16 @@ class RollingWindowRateLimiter:
         Sleep if rate limit would be exceeded. Return actual sleep time.
         """
         should_wait, wait_time = self.should_wait_before_request(document_id, estimated_tokens)
-
+        
         if should_wait:
             # Add a small buffer
             adjusted_wait = wait_time + self.buffer_seconds
             logger.info(f"Rate limit: sleeping {adjusted_wait:.1f} sec before {document_id}")
             time.sleep(adjusted_wait)
             return adjusted_wait
-
+        
         return 0.0
-
+    
     def should_retry_after_rate_limit_error(self, document_id: str) -> bool:
         """Check if we should retry this document after a rate-limit error."""
         count = self.retry_count.get(document_id, 0)
@@ -261,11 +275,11 @@ class RollingWindowRateLimiter:
             self.retry_count[document_id] = count + 1
             return True
         return False
-
+    
     def reset_retry_count(self, document_id: str) -> None:
         """Reset retry counter for a document (after success)."""
         self.retry_count[document_id] = 0
-
+    
     def get_summary(self) -> Dict[str, Any]:
         """Get current rate limiter state summary."""
         self._prune_old_records()
@@ -279,7 +293,7 @@ class RollingWindowRateLimiter:
             "window_seconds": self.window_seconds,
             "usage_records": len(self.usage_history),
         }
-
+    
     def format_summary_for_log(self) -> str:
         """Format summary as a single log line."""
         summary = self.get_summary()

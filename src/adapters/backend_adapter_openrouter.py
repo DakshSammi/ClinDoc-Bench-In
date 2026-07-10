@@ -1,3 +1,17 @@
+# Copyright 2026 ClinDoc-Bench-IN contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import os
 import time
 import base64
@@ -29,7 +43,7 @@ class OpenRouterBackendAdapter(BaseBackendAdapter):
             new_size = (int(w * scale), int(h * scale))
             image = image.resize(new_size, Image.Resampling.LANCZOS)
 
-
+            
         buffered = io.BytesIO()
         image.save(buffered, format="JPEG", quality=85)
         return base64.b64encode(buffered.getvalue()).decode("utf-8")
@@ -41,7 +55,7 @@ class OpenRouterBackendAdapter(BaseBackendAdapter):
             "max_tokens": kwargs.get("max_tokens", 4096),
             "top_p": kwargs.get("top_p", 0.9)
         }
-
+        
         if not self.api_key:
             return {
                 "error": "OPENROUTER_API_KEY is not configured",
@@ -55,10 +69,10 @@ class OpenRouterBackendAdapter(BaseBackendAdapter):
         # Build messages payload
         messages = []
         user_content = []
-
+        
         # Text prompt is always included
         user_content.append({"type": "text", "text": prompt})
-
+        
         # Handle images
         if image:
             images_list = image if isinstance(image, list) else [image]
@@ -70,28 +84,28 @@ class OpenRouterBackendAdapter(BaseBackendAdapter):
                         "url": f"data:image/jpeg;base64,{base64_str}"
                     }
                 })
-
+                
         messages.append({
             "role": "user",
             "content": user_content
         })
-
+        
         payload = {
             "model": self.model_id,
             "messages": messages,
             **decoding_params
         }
-
+        
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",
             "HTTP-Referer": "https://github.com/google-deepmind/antigravity",
             "X-Title": "Clinical Prescription Pipeline"
         }
-
+        
         url = "https://openrouter.ai/api/v1/chat/completions"
         self.logger.info(f"Querying OpenRouter model '{self.model_id}'...")
-
+        
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.post(url, json=payload, headers=headers, timeout=300) as response:
@@ -101,20 +115,20 @@ class OpenRouterBackendAdapter(BaseBackendAdapter):
                         choices = resp_json.get("choices", [])
                         if not choices:
                             raise Exception(f"No choices returned in OpenRouter response: {resp_json}")
-
+                            
                         content = choices[0]["message"]["content"]
                         usage = resp_json.get("usage", {})
-
+                        
                         # Extract usage details
                         input_tokens = usage.get("prompt_tokens", 0)
                         output_tokens = usage.get("completion_tokens", 0)
                         total_tokens = usage.get("total_tokens", 0)
-
+                        
                         # OpenRouter sometimes returns estimated cost in usage or choices, or we can check usage.get("cost", 0.0)
                         estimated_cost = resp_json.get("usage", {}).get("cost", 0.0)
                         if estimated_cost is None:
                             estimated_cost = 0.0
-
+                            
                         return {
                             "content": content,
                             "processing_time_ms": latency_ms,

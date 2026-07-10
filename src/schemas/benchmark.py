@@ -1,3 +1,17 @@
+# Copyright 2026 ClinDoc-Bench-IN contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel, Field
 
@@ -42,28 +56,28 @@ class DocumentBenchmarkResult(BaseModel):
     schema_parse_success: int = 1
     scalar_accuracy_exact: float = 0.0
     scalar_accuracy_lenient: float = 0.0
-
+    
     # Granular entity metrics
     metrics_by_category: Dict[str, CategoryMetrics] = Field(default_factory=dict)
-
+    
     # Counts of categorizations
     likely_hallucination_count: int = 0
     annotation_gap_candidate_count: int = 0
     manual_review_required_count: int = 0
-
+    
     # Rates
     hallucination_rate: float = 0.0
     missing_entity_rate: float = 0.0
     annotation_gap_rate: float = 0.0
-
+    
     # Experimental headline score
     experimental_overall_score: float = 0.0
-
+    
     # Detail lists
     scalars: List[ScalarMatchDetail] = Field(default_factory=list)
     entity_alignments: List[EntityMatchDetail] = Field(default_factory=list)
     unmatched_predictions: List[UnmatchedPredictionRecord] = Field(default_factory=list)
-
+    
     # Runtime info
     model_name: Optional[str] = None
     backend_name: Optional[str] = None

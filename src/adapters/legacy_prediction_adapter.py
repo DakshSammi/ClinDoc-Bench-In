@@ -1,3 +1,17 @@
+# Copyright 2026 ClinDoc-Bench-IN contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import json
 from pathlib import Path
 from typing import Dict, Any, List, Optional
@@ -22,12 +36,12 @@ class LegacyPredictionAdapter:
     def from_dict(data: Dict[str, Any], doc_id: str) -> CanonicalRawDoc:
         # Extract patient_info
         p_info = data.get("patient_info", {})
-
+        
         def safe_str(val) -> Optional[str]:
             if val is None:
                 return None
             return str(val).strip() or None
-
+            
         patient_info = PatientInformation(
             name=safe_str(p_info.get("name")),
             age=safe_str(p_info.get("age")),
@@ -37,10 +51,10 @@ class LegacyPredictionAdapter:
             patient_identifier=safe_str(p_info.get("patient_identifier") or p_info.get("weight")),
             abha_id=safe_str(p_info.get("abha_id"))
         )
-
+        
         # Encounter info is empty in legacy predictions, but we initialize it cleanly
         encounter_info = EncounterInformation()
-
+        
         complaints: List[RawEntityItem] = []
         observations: List[RawEntityItem] = []
         medications: List[RawMedicationItem] = []
@@ -48,14 +62,14 @@ class LegacyPredictionAdapter:
         advice: List[RawEntityItem] = []
         allergies: List[RawEntityItem] = []
         notes: List[RawEntityItem] = []
-
+        
         # Parse items
         items = data.get("items", [])
         for i, item in enumerate(items):
             field_path = f"items[{i}]"
             med_name = item.get("medicine_name") or item.get("raw_text") or item.get("name") or ""
             category = item.get("category", "medication")
-
+            
             # Map strictly based on explicitly specified category in the prediction JSON, without keyword heuristics
             if category == "procedure":
                 procedures.append(RawEntityItem(
@@ -95,10 +109,10 @@ class LegacyPredictionAdapter:
                 duration = safe_str(item.get("duration"))
                 inst = safe_str(item.get("instructions"))
                 raw_t = safe_str(item.get("raw_text"))
-
+                
                 raw_line = raw_t or med_name_val
                 evidence = raw_t or med_name_val
-
+                
                 medications.append(RawMedicationItem(
                     raw_line_text=raw_line,
                     raw_name=med_name_val,
@@ -113,7 +127,7 @@ class LegacyPredictionAdapter:
                     original_field_path=field_path,
                     adapter_transformation_notes=f"Mapped legacy item '{med_name_val}' into CanonicalRawDoc medications structure."
                 ))
-
+                
         # Parse clinical notes
         clin_notes = data.get("clinical_notes")
         if clin_notes:
@@ -126,7 +140,7 @@ class LegacyPredictionAdapter:
                         note_lines.append(item)
                     elif isinstance(item, dict):
                         note_lines.append(item.get("raw_text") or item.get("text") or str(item))
-
+            
             for idx, line in enumerate(note_lines):
                 # Map clinical notes strictly to other_notes, preserving the original predicted category
                 notes.append(RawEntityItem(
@@ -137,7 +151,7 @@ class LegacyPredictionAdapter:
                     original_field_path=f"clinical_notes[{idx}]",
                     adapter_transformation_notes="Mapped legacy clinical note line to other_notes."
                 ))
-
+                    
         # Parse metadata
         legacy_meta = data.get("metadata", {})
         metadata = Metadata(
@@ -150,7 +164,7 @@ class LegacyPredictionAdapter:
             timestamp=legacy_meta.get("timestamp"),
             confidence_score=legacy_meta.get("confidence_score")
         )
-
+        
         return CanonicalRawDoc(
             schema_version="raw_rx_v2",
             document_id=doc_id,

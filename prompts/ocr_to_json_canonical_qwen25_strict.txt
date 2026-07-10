@@ -1,0 +1,123 @@
+Return exactly one valid JSON object for one document only.
+
+No markdown fences. No prose. No explanation. No wrapper object.
+
+Forbidden top-level keys:
+- structured_data
+- raw_text
+- document_metadata
+- raw_entities
+- output
+- result
+- data
+
+Required top-level keys, exactly:
+- schema_version
+- document_id
+- patient_information
+- encounter_information
+- complaints_or_diagnosis
+- observations
+- medications
+- procedures
+- advice
+- follow_up
+- allergy_mentions
+- other_notes
+- lab_observations
+- metadata
+
+Hard requirements:
+- `schema_version` must be `raw_rx_v2`.
+- `document_id` must equal the provided document id.
+- Preserve raw OCR wording.
+- Do not clinically normalize medication names, diagnoses, frequencies, or dosages.
+- Do not infer hidden content.
+- If a scalar is absent, use null.
+- If a list has no visible entries, use [].
+- Every list item must cite visible OCR evidence in `evidence_text` when possible.
+- Use page_number 1 when page is unknown.
+
+Minimal schema skeleton:
+
+{
+  "schema_version": "raw_rx_v2",
+  "document_id": "",
+  "patient_information": {
+    "name": null,
+    "age": null,
+    "gender": null,
+    "address": null,
+    "phone": null,
+    "patient_identifier": null,
+    "abha_id": null
+  },
+  "encounter_information": {
+    "date": null,
+    "department": null,
+    "hospital_name": null,
+    "doctor_name": null,
+    "visit_type": null,
+    "fees": null,
+    "room_or_queue_no": null
+  },
+  "complaints_or_diagnosis": [
+    {"raw_text": "", "evidence_text": "", "page_number": 1, "section": ""}
+  ],
+  "observations": [
+    {"raw_text": "", "evidence_text": "", "page_number": 1, "section": ""}
+  ],
+  "medications": [
+    {
+      "raw_line_text": "",
+      "raw_name": null,
+      "raw_dosage": null,
+      "raw_route": null,
+      "raw_frequency": null,
+      "raw_duration": null,
+      "raw_instruction": null,
+      "raw_timing": null,
+      "evidence_text": "",
+      "page_number": 1,
+      "section": ""
+    }
+  ],
+  "procedures": [
+    {"raw_text": "", "evidence_text": "", "page_number": 1, "section": ""}
+  ],
+  "advice": [
+    {"raw_text": "", "evidence_text": "", "page_number": 1, "section": ""}
+  ],
+  "follow_up": {
+    "raw_text": null,
+    "date": null,
+    "review_after": null
+  },
+  "allergy_mentions": [
+    {"raw_text": "", "evidence_text": "", "page_number": 1, "section": ""}
+  ],
+  "other_notes": [
+    {"raw_text": "", "evidence_text": "", "page_number": 1, "section": ""}
+  ],
+  "lab_observations": [
+    {
+      "raw_line_text": "",
+      "test_name": null,
+      "result": null,
+      "unit": null,
+      "reference_range": null,
+      "evidence_text": "",
+      "page_number": 1,
+      "section": ""
+    }
+  ],
+  "metadata": {
+    "model_name": "",
+    "backend_name": "ocr_to_json",
+    "schema_version": "raw_rx_v2",
+    "processing_time_ms": 0.0,
+    "document_type": "unknown",
+    "validation_warnings": [],
+    "pages": []
+  }
+}

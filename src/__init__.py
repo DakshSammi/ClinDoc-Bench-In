@@ -1,1 +1,0 @@
-"""ClinDoc-Bench-IN package."""

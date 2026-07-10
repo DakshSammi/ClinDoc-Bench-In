@@ -1,59 +1,303 @@
 # ClinDoc-Bench-IN
 
-ClinDoc-Bench-IN is a benchmark codebase for evaluating clinical document understanding on Indian outpatient prescriptions. The current in-house benchmark uses 53 prescription records with private annotations; raw images, raw ground-truth annotations, OCR text, model outputs, logs, failed cases, and model caches are intentionally not included in this repository.
+Clinical document understanding benchmark for Indian prescription OCR, vision-language extraction, and hybrid OCR-to-LLM pipelines.
 
-The benchmark separates three evaluation families:
+[![Dataset](https://img.shields.io/badge/Dataset-90%20patients%20%7C%20125%20documents%20%7C%20150%20images-2f6f6d)](#dataset)
+[![Benchmark](https://img.shields.io/badge/Benchmark-OCR%20%7C%20Direct%20VLM%20%7C%20Hybrid-44546a)](#benchmark-tracks)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-3776ab)](#installation)
+[![License](https://img.shields.io/badge/License-Apache--2.0-green)](LICENSE)
+[![Frozen Benchmark](https://img.shields.io/badge/Frozen-v1.0%20read--only-orange)](#frozen-benchmark)
+[![BDA 2026](https://img.shields.io/badge/BDA%202026-Submitted-purple)](#citation)
 
-1. Raw OCR/document parser baselines, scored with OCR/token F1 and text similarity.
-2. Direct VLM structured extraction baselines, scored against a canonical JSON schema.
-3. Hybrid OCR-plus-LLM pipelines, where OCR output is converted into canonical structured JSON.
+ClinDoc-Bench-IN is both a frozen paper benchmark and an open repository for benchmarking new OCR, VLM, and hybrid extraction systems against the same evaluation logic.
 
-Stage 1C adds a separate semantic-enhanced extraction benchmark. It evaluates evidence-backed semantic inference over valid Stage 1B structured outputs; it is not treated as gold semantic accuracy.
+The frozen benchmark under `benchmark_v2/final_day_freeze_20260709/` is read-only. New experiments, community submissions, and future benchmark revisions must live outside that directory.
 
-No paid API results are included as completed final benchmark results. Redacted examples only should be committed.
+## Overview
 
-## Repository Layout
+- Reproduce the paper benchmark from frozen reports and assets.
+- Run a new model lane without modifying frozen outputs.
+- Validate a community submission before scoring it.
+- Benchmark your own dataset using the same canonical JSON schema and evaluation rules.
 
-- `src/`: schemas, adapters, and benchmark metric modules.
-- `scripts/`: reproducible runners and evaluators.
-- `configs/`: local and server configuration templates.
-- `prompts/`: prompt templates for extraction and semantic enrichment.
-- `docs/`: protocol, schema, setup, reference audit, and GitHub safety notes.
-- `paper_assets/`: paper-ready tables and non-PHI figure drafts.
+## Repository Modes
 
-## Current Paper Assets
+ClinDoc-Bench-IN has three working modes:
 
-Server 1 paper-facing assets are under `paper_assets/tables/server1/` and combined assets are under `paper_assets/tables/combined/`. Server 2 assets are expected under `paper_assets/tables/server2/` once imported from the private Server 2 environment.
+| Mode | Purpose | Mutability |
+| --- | --- | --- |
+| Frozen benchmark | Canonical BDA 2026 reference results, provenance, statistics, and paper assets | Read-only |
+| Experiments | New local runs, ablations, debugging, and unpublished comparisons | Writable |
+| Community submissions | Standardized external model submissions and validation artifacts | Writable |
 
-## Statistical Tests
+Recommended working areas:
 
-Run paired statistical testing from the repository root:
-
-```bash
-python scripts/run_stage1b_statistical_tests.py \
-  --structured "Qwen3-VL 8B=paper_assets/tables/server1/per_document_structured/qwen3_vl_8b.csv" \
-  --structured "LLaVA 13B=paper_assets/tables/server1/per_document_structured/llava_13b_diagnostic.csv" \
-  --structured "GLM-OCR + qwen3:8b=paper_assets/tables/server1/per_document_structured/glm_ocr_qwen3_8b.csv" \
-  --structured "docTR + qwen3:8b=paper_assets/tables/server1/per_document_structured/doctr_qwen3_8b.csv" \
-  --structured "TrOCR + qwen3:8b=paper_assets/tables/server1/per_document_structured/trocr_qwen3_8b.csv" \
-  --ocr "GLM-OCR=paper_assets/tables/server1/per_document_raw_ocr/glm_ocr.csv" \
-  --ocr "docTR=paper_assets/tables/server1/per_document_raw_ocr/doctr.csv" \
-  --ocr "TrOCR=paper_assets/tables/server1/per_document_raw_ocr/trocr.csv" \
-  --ocr "Docling=paper_assets/tables/server1/per_document_raw_ocr/docling.csv" \
-  --ocr "Surya=paper_assets/tables/server1/per_document_raw_ocr/surya.csv" \
-  --output-dir paper_assets/tables/combined
+```text
+benchmark_v2/final_day_freeze_20260709/   # frozen publication benchmark
+experiments/                              # new local experiments
+community/submissions/                    # community-formatted submissions
+paper_assets/                             # regenerated publication assets from frozen CSVs
 ```
 
-Add the Server 2 internal Qwen3-27B compact CSV after importing the final Server 2 package.
+## Installation
 
-## Data Safety
+```bash
+git clone <repository-url>
+cd prescription_pipeline
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+```
 
-Do not commit:
+For Conda users:
 
-- Prescription images.
-- Raw ground-truth annotations.
-- Raw OCR/model outputs.
-- Failed cases, logs, compressed images, or benchmark output directories.
-- `.env`, API keys, model weights, or archives.
+```bash
+conda env create -f environment.yml
+conda activate clindoc-bench-in
+```
 
-See `docs/github_ready_checklist.md` before committing or pushing.
+## Quick Start
+
+Inspect the frozen summary:
+
+```bash
+python scripts/read_frozen_summary.py
+```
+
+Regenerate publication tables and figures from frozen CSVs without touching benchmark outputs:
+
+```bash
+python scripts/generate_publication_assets.py
+```
+
+Validate a directory of canonical JSON predictions against the benchmark schema:
+
+```bash
+python scripts/validate_outputs.py --input-dir outputs/raw_extractions/my_lane
+```
+
+Validate a community-formatted submission package:
+
+```bash
+python scripts/validate_submission.py \
+    --submission-dir community/submissions/your_submission
+```
+
+## Frozen Benchmark
+
+The canonical frozen benchmark is stored under:
+
+- [benchmark_v2/final_day_freeze_20260709/reports](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/benchmark_v2/final_day_freeze_20260709/reports)
+- [FINAL_BENCHMARK_FROZEN.txt](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/benchmark_v2/final_day_freeze_20260709/reports/FINAL_BENCHMARK_FROZEN.txt)
+- [final_model_registry.csv](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/benchmark_v2/final_day_freeze_20260709/reports/final_model_registry.csv)
+- [selected_lanes_provenance.md](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/benchmark_v2/final_day_freeze_20260709/reports/selected_lanes_provenance.md)
+
+Do not rerun, overwrite, or edit anything under `benchmark_v2/final_day_freeze_20260709/`.
+
+## Dataset
+
+The frozen benchmark covers:
+
+| Item | Count |
+| --- | ---: |
+| Patients | 90 |
+| Documents | 125 |
+| Images | 150 |
+
+Ground truth is stored as canonical JSON linked by manifest rows. Public paper examples are anonymized derivatives only.
+
+For a fuller dataset overview, see:
+
+- [DATASET_CARD.md](DATASET_CARD.md)
+- [docs/Dataset.md](docs/Dataset.md)
+- [docs/create_dataset.md](docs/create_dataset.md)
+
+## Benchmark Tracks
+
+| Track | Input | Output | Primary score |
+| --- | --- | --- | --- |
+| Raw OCR | Document images | Plain text | Token F1 |
+| Direct VLM | Document images | Canonical JSON | Overall extraction score |
+| Hybrid OCR+LLM | OCR text | Canonical JSON | Overall extraction score |
+
+Raw OCR scoring focuses on transcription fidelity. Structured scoring focuses on schema validity, scalar accuracy, entity matching, hallucination rate, missing entity rate, and overall extraction quality.
+
+More detail:
+
+- [docs/Benchmark.md](docs/Benchmark.md)
+- [docs/Evaluation.md](docs/Evaluation.md)
+- [docs/OCRModels.md](docs/OCRModels.md)
+- [docs/DirectVLMs.md](docs/DirectVLMs.md)
+- [docs/HybridPipelines.md](docs/HybridPipelines.md)
+
+## Canonical JSON
+
+Structured outputs are benchmarked in a canonical JSON format defined by [`CanonicalRawDoc`](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/src/schemas/raw_extraction.py:102).
+
+This schema is the contract between model outputs and evaluation. It exists so that OCR, direct VLM, and hybrid pipelines can be compared using one shared representation.
+
+Start here:
+
+- [docs/schema.md](docs/schema.md)
+- [docs/annotation_guide.md](docs/annotation_guide.md)
+- [docs/GroundTruth.md](docs/GroundTruth.md)
+
+## Benchmark Your Model
+
+### Structured lanes
+
+1. Produce one canonical JSON file per document with filename `<document_id>.json`.
+2. Validate those files against the public schema.
+3. Build an evaluation manifest pointing each document to its prediction JSON.
+4. Run the structured benchmark CLI.
+
+Example extraction command surface:
+
+```bash
+python -m src.cli.extract \
+    --manifest path/to/extraction_manifest.csv \
+    --backend your_backend_name \
+    --config configs/backends.yaml \
+    --prompts configs/prompts.yaml \
+    --output-dir outputs/raw_extractions/your_lane \
+    --resume
+```
+
+Example structured scoring flow using a community submission package:
+
+```bash
+python scripts/validate_submission.py \
+    --submission-dir community/submissions/your_submission \
+    --write-benchmark-manifest experiments/template_eval_manifest.csv
+
+python -m src.cli.benchmark \
+    --manifest experiments/template_eval_manifest.csv \
+    --config configs/benchmark_defaults.yaml \
+    --output-dir experiments/template_eval_reports
+```
+
+### Raw OCR lanes
+
+1. Produce one UTF-8 text file per document with filename `<document_id>.txt`.
+2. Record per-document runtime in `runtime.csv`.
+3. Validate the submission package.
+4. Generate an OCR handoff CSV and run the OCR evaluator.
+
+```bash
+python scripts/validate_submission.py \
+    --submission-dir community/submissions/your_raw_ocr_submission \
+    --write-ocr-handoff experiments/template_raw_ocr_handoff.csv
+
+python scripts/benchmark_raw_ocr_outputs.py \
+    --handoff experiments/template_raw_ocr_handoff.csv \
+    --manifest benchmark_v2/data/benchmark_manifest_v2.csv \
+    --engine your_ocr_engine_name \
+    --output-dir experiments/template_raw_ocr_reports
+```
+
+## Benchmark Your Dataset
+
+If you want to benchmark a different hospital or a new document collection, the repository expects:
+
+```text
+my_dataset/
+├── images/
+├── annotations/
+└── manifest.csv
+```
+
+Your dataset should preserve the same canonical JSON semantics even if document layouts, departments, or institutions differ.
+
+Start here:
+
+- [docs/create_dataset.md](docs/create_dataset.md)
+- [docs/schema.md](docs/schema.md)
+- [docs/annotation_guide.md](docs/annotation_guide.md)
+
+## Community Submissions
+
+Community submissions should not modify the frozen benchmark. Instead, place them under:
+
+```text
+community/submissions/<submission_name>/
+├── metadata.yaml
+├── predictions/
+├── runtime.csv
+└── README.md
+```
+
+Use the included templates:
+
+- [community/README.md](community/README.md)
+- [community/submissions/template/metadata.yaml](community/submissions/template/metadata.yaml)
+- [docs/submitting_results.md](docs/submitting_results.md)
+
+The repository now includes `scripts/validate_submission.py` to verify:
+
+- required metadata fields
+- per-document prediction presence
+- canonical JSON schema validity for structured lanes
+- text output presence for raw OCR lanes
+- runtime coverage
+- benchmark manifest or OCR handoff generation for downstream scoring
+
+## Leaderboards
+
+Frozen publication leaderboard:
+
+- [paper_assets/tables/table_12_final_leaderboard.md](paper_assets/tables/table_12_final_leaderboard.md)
+
+Frozen provenance and coverage:
+
+- [final_benchmark_report.md](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/benchmark_v2/final_day_freeze_20260709/reports/final_benchmark_report.md)
+- [selected_lanes_provenance.md](/Computational5/daksh/_gnn_/Daksh/prescription_pipeline/benchmark_v2/final_day_freeze_20260709/reports/selected_lanes_provenance.md)
+
+Community submissions are standardized, but there is not yet an auto-updating public leaderboard service. The submission format and validator are the current bridge toward that workflow.
+
+## Documentation
+
+Documentation index:
+
+- [docs/README.md](docs/README.md)
+
+High-signal entry points:
+
+- [docs/Dataset.md](docs/Dataset.md)
+- [docs/Architecture.md](docs/Architecture.md)
+- [docs/Benchmark.md](docs/Benchmark.md)
+- [docs/Evaluation.md](docs/Evaluation.md)
+- [docs/Statistics.md](docs/Statistics.md)
+- [docs/ReproducingResults.md](docs/ReproducingResults.md)
+- [docs/FAQ.md](docs/FAQ.md)
+
+## Contributing
+
+Contribution guide:
+
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [GOVERNANCE.md](GOVERNANCE.md)
+- [ROADMAP.md](ROADMAP.md)
+
+We welcome:
+
+- bug fixes
+- documentation improvements
+- new OCR lanes
+- new direct VLM lanes
+- new hybrid pipelines
+- dataset adapters
+- evaluation audits
+- community submission tooling
+
+## Citation
+
+Please cite the benchmark using [CITATION.cff](CITATION.cff). Author names, DOI, and final paper metadata remain placeholders until camera-ready release.
+
+## License
+
+This project is released under the Apache License 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
+
+## Acknowledgements
+
+This repository was prepared for BDA 2026 submission and longer-term benchmark reuse. We thank the annotators, infrastructure maintainers, and model providers whose tools made the benchmark possible.

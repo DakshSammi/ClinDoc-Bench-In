@@ -1,0 +1,10 @@
+document_id,image_path,gt_path,prediction_path,patient_id,prescription_id,page_number,split
+p25_1,prescriptions/p25/p25_1/presc_image17172248450.jpg;prescriptions/p25/p25_1/presc_image17172248451.jpg,raw_ground_truths/p25/p25_1.json,outputs/raw_extractions/qwen25_vl_7b_v2_full/p25_1.json,p25,p25_1,2,validation
+p3,prescriptions/p3.jpeg,raw_ground_truths/p3.json,outputs/raw_extractions/qwen25_vl_7b_v2_full/p3.json,pat_03,rx_03,1,validation
+p36_1,prescriptions/p36/p36_1/presc_image16902685410.jpg;prescriptions/p36/p36_1/presc_image16902685411.jpg,raw_ground_truths/p36/p36_1.json,outputs/raw_extractions/qwen25_vl_7b_v2_full/p36_1.json,p36,p36_1,2,validation
+p45_2,"prescriptions/p45/p45_2/Adobe Scan May 15, 2026 (1)_page-0001.jpg",raw_ground_truths/p45/p45_2.json,outputs/raw_extractions/qwen25_vl_7b_v2_full/p45_2.json,p45,p45_2,1,validation
+p45_5,"prescriptions/p45/p45_5/Adobe Scan May 15, 2026 (4)_page-0001.jpg",raw_ground_truths/p45/p45_5.json,outputs/raw_extractions/qwen25_vl_7b_v2_full/p45_5.json,p45,p45_5,1,validation
+p45_6,"prescriptions/p45/p45_6/Adobe Scan May 15, 2026 (5)_page-0001.jpg;prescriptions/p45/p45_6/Adobe Scan May 15, 2026 (5)_page-0002.jpg;prescriptions/p45/p45_6/Adobe Scan May 15, 2026 (5)_page-0003.jpg",raw_ground_truths/p45/p45_6.json,outputs/raw_extractions/qwen25_vl_7b_v2_full/p45_6.json,p45,p45_6,3,validation
+p45_7,"prescriptions/p45/p45_7/Adobe Scan May 15, 2026 (6)_page-0001.jpg;prescriptions/p45/p45_7/Adobe Scan May 15, 2026 (6)_page-0002.jpg",raw_ground_truths/p45/p45_7.json,outputs/raw_extractions/qwen25_vl_7b_v2_full/p45_7.json,p45,p45_7,2,validation
+p45_8,"prescriptions/p45/p45_8/Adobe Scan May 15, 2026 (7)_page-0001.jpg",raw_ground_truths/p45/p45_8.json,outputs/raw_extractions/qwen25_vl_7b_v2_full/p45_8.json,p45,p45_8,1,validation
+p45_9,"prescriptions/p45/p45_9/Adobe Scan May 15, 2026 (8)_page-0001.jpg",raw_ground_truths/p45/p45_9.json,outputs/raw_extractions/qwen25_vl_7b_v2_full/p45_9.json,p45,p45_9,1,validation

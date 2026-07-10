@@ -1,3 +1,17 @@
+# Copyright 2026 ClinDoc-Bench-IN contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import json
 from pathlib import Path
 from typing import Dict, Any
@@ -23,9 +37,9 @@ class GTAdapter:
     def from_dict(data: Dict[str, Any]) -> CanonicalRawDoc:
         meta_data = data.get("document_metadata", {})
         doc_id = meta_data.get("document_id", "unknown")
-
+        
         entities = data.get("raw_entities", {})
-
+        
         # 1. Patient Information
         p_info = entities.get("patient_information", {})
         patient_info = PatientInformation(
@@ -37,7 +51,7 @@ class GTAdapter:
             patient_identifier=p_info.get("patient_identifier") or None,
             abha_id=p_info.get("abha_id") or None
         )
-
+        
         # 2. Encounter Information
         e_info = entities.get("encounter_information", {})
         encounter_info = EncounterInformation(
@@ -49,7 +63,7 @@ class GTAdapter:
             fees=e_info.get("fees") or None,
             room_or_queue_no=e_info.get("room_or_queue_no") or None
         )
-
+        
         # 3. Simple list string elements -> RawEntityItems
         def parse_entity_list(items) -> list:
             results = []
@@ -78,7 +92,7 @@ class GTAdapter:
         advice = parse_entity_list(entities.get("advice", []))
         allergies = parse_entity_list(entities.get("allergy_mentions", []))
         notes = parse_entity_list(entities.get("other_notes", []))
-
+        
         # 4. Medications
         medications = []
         raw_med_list = entities.get("medications", [])
@@ -92,14 +106,14 @@ class GTAdapter:
                 raw_duration = item.get("raw_duration_text") or item.get("raw_duration") or ""
                 raw_inst = item.get("raw_instruction_text") or item.get("raw_instruction") or ""
                 raw_timing = item.get("raw_timing_text") or item.get("raw_timing") or ""
-
+                
                 effective_route = raw_route
                 if raw_route and raw_route in raw_name:
                     effective_route = ""
-
+                
                 parts = [p for p in [raw_name, raw_dosage, effective_route, raw_freq, raw_duration, raw_inst, raw_timing] if p]
                 reconstructed_line = " ".join(parts) if parts else ""
-
+                
                 medications.append(RawMedicationItem(
                     raw_line_text=item.get("raw_line_text") or reconstructed_line,
                     raw_name=raw_name or None,
@@ -121,7 +135,7 @@ class GTAdapter:
                     evidence_text=item,
                     page_number=1
                 ))
-
+                
         # 5. Follow Up
         follow_up = None
         f_up = entities.get("follow_up")
@@ -134,7 +148,7 @@ class GTAdapter:
                 )
             elif isinstance(f_up, str):
                 follow_up = RawFollowUp(raw_text=f_up)
-
+                
         # 6. Metadata
         ext_meta = data.get("extraction_metadata", {})
         raw_source_type = meta_data.get("source_type")
@@ -155,7 +169,7 @@ class GTAdapter:
             uncertainty_notes=ext_meta.get("model_notes"),
             document_type=mapped_source_type
         )
-
+        
         # 7. Lab Observations
         lab_observations = []
         raw_lab_list = entities.get("lab_observations", [])
@@ -165,10 +179,10 @@ class GTAdapter:
                 result = item.get("result") or ""
                 unit = item.get("unit") or ""
                 ref_range = item.get("reference_range") or ""
-
+                
                 parts = [p for p in [test_name, result, unit, ref_range] if p]
                 reconstructed_line = " ".join(parts) if parts else ""
-
+                
                 lab_observations.append(RawLabObservationItem(
                     raw_line_text=item.get("raw_line_text") or reconstructed_line,
                     test_name=test_name or None,
@@ -187,7 +201,7 @@ class GTAdapter:
                     evidence_text=item,
                     page_number=1
                 ))
-
+                
         return CanonicalRawDoc(
             schema_version="raw_rx_v2",
             document_id=doc_id,

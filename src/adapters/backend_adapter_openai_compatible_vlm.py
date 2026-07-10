@@ -1,3 +1,17 @@
+# Copyright 2026 ClinDoc-Bench-IN contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import os
 import time
 import base64
@@ -28,13 +42,13 @@ class OpenAICompatibleVLMBackendAdapter(BaseBackendAdapter):
         resolved_base_url = base_url or os.getenv(base_url_env_var) or "http://10.10.110.37:4000/v1"
         resolved_model = model_id or os.getenv(model_env_var) or "qwen3-27b"
         resolved_api_key = api_key or os.getenv(api_key_env_var)
-
+        
         super().__init__(name="openai_compatible_vlm", model_id=resolved_model)
-
+        
         # Clean trailing slash from base_url if present
         if resolved_base_url.endswith("/"):
             resolved_base_url = resolved_base_url[:-1]
-
+            
         self.base_url = resolved_base_url
         self.api_key = resolved_api_key
         self.max_image_dim = max_image_dim
@@ -42,7 +56,7 @@ class OpenAICompatibleVLMBackendAdapter(BaseBackendAdapter):
         self.timeout = timeout
         self.stream = stream
         self.logger = logging.getLogger("OpenAICompatibleVLMBackendAdapter")
-
+        
         if not self.api_key:
             self.logger.warning(f"API key environment variable '{api_key_env_var}' is not set!")
 
@@ -70,7 +84,7 @@ class OpenAICompatibleVLMBackendAdapter(BaseBackendAdapter):
             "max_tokens": kwargs.get("max_tokens", 4096),
             "top_p": kwargs.get("top_p", 0.9)
         }
-
+        
         if not self.api_key:
             self.logger.error("API key is not configured for OpenAICompatibleVLMBackendAdapter.")
             return {
@@ -85,10 +99,10 @@ class OpenAICompatibleVLMBackendAdapter(BaseBackendAdapter):
         # Build messages payload
         messages = []
         user_content = []
-
+        
         # Text prompt
         user_content.append({"type": "text", "text": prompt})
-
+        
         # Handle images
         if image:
             images_list = image if isinstance(image, list) else [image]
@@ -101,34 +115,34 @@ class OpenAICompatibleVLMBackendAdapter(BaseBackendAdapter):
                         "url": f"data:image/jpeg;base64,{base64_str}"
                     }
                 })
-
+                
         messages.append({
             "role": "user",
             "content": user_content
         })
-
+        
         payload = {
             "model": self.model_id,
             "messages": messages,
             **decoding_params
         }
-
+        
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json"
         }
-
+        
         url = f"{self.base_url}/chat/completions"
         self.logger.info(f"Querying OpenAI-compatible VLM endpoint '{url}' with model '{self.model_id}'...")
-
+        
         payload["stream"] = self.stream
-
+        
         try:
             accumulated_content = []
             input_tokens = 0
             output_tokens = 0
             total_tokens = 0
-
+            
             async with aiohttp.ClientSession() as session:
                 async with session.post(url, json=payload, headers=headers, timeout=self.timeout) as response:
                     if response.status == 200:
@@ -180,11 +194,11 @@ class OpenAICompatibleVLMBackendAdapter(BaseBackendAdapter):
                                         total_tokens = usage.get("total_tokens", 0)
                                 except Exception:
                                     pass
-
+                                    
                         latency_ms = (time.time() - start_time) * 1000
                         content = "".join(accumulated_content)
                         self.logger.info(f"Inference complete in {latency_ms:.2f} ms with status 200")
-
+                        
                         return {
                             "content": content,
                             "processing_time_ms": latency_ms,
@@ -318,14 +332,14 @@ class OpenAICompatibleVLMBackendAdapter(BaseBackendAdapter):
         warnings = []
         coercions = []
         repaired_json = self.clean_and_repair_json(raw_content)
-
+        
         try:
             parsed_dict = json.loads(repaired_json)
         except Exception as je:
             return {"error": f"JSON parse error: {str(je)}", "valid": False}
-
+            
         parsed_dict = self.prune_placeholder_items(parsed_dict, warnings=warnings)
-
+        
         # Coercions
         if isinstance(parsed_dict, dict) and "patient_information" in parsed_dict and isinstance(parsed_dict["patient_information"], dict):
             pinfo = parsed_dict["patient_information"]
@@ -334,7 +348,7 @@ class OpenAICompatibleVLMBackendAdapter(BaseBackendAdapter):
                     old = pinfo[k]
                     pinfo[k] = str(old)
                     coercions.append(f"patient_information.{k}: coerced {type(old).__name__} to string")
-
+                    
         if isinstance(parsed_dict, dict) and "encounter_information" in parsed_dict and isinstance(parsed_dict["encounter_information"], dict):
             einfo = parsed_dict["encounter_information"]
             for k in ["date", "department", "hospital_name", "doctor_name", "visit_type", "fees", "room_or_queue_no"]:

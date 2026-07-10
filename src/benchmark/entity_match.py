@@ -1,3 +1,17 @@
+# Copyright 2026 ClinDoc-Bench-IN contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import numpy as np
 from typing import List, Dict, Any, Tuple, Optional
 from scipy.optimize import linear_sum_assignment
@@ -64,7 +78,7 @@ class EntityMatcher:
             "duration": (gt.raw_duration, pred.raw_duration, w_duration),
             "instruction": (gt.raw_instruction, pred.raw_instruction, w_instruction)
         }
-
+        
         scores = {}
         weighted_sum = 0.0
         for comp_name, (gt_v, pred_v, wt) in components.items():
@@ -74,10 +88,10 @@ class EntityMatcher:
                 comp_score = 0.0
             else:
                 comp_score = self.compute_string_similarity(gt_v, pred_v)
-
+            
             scores[comp_name] = comp_score
             weighted_sum += comp_score * wt
-
+            
         return weighted_sum, scores
 
     def compute_lab_observation_similarity(self, gt: RawLabObservationItem, pred: RawLabObservationItem) -> Tuple[float, Dict[str, Any]]:
@@ -93,7 +107,7 @@ class EntityMatcher:
             "unit": (gt.unit, pred.unit, w_unit),
             "reference_range": (gt.reference_range, pred.reference_range, w_ref)
         }
-
+        
         scores = {}
         weighted_sum = 0.0
         for comp_name, (gt_v, pred_v, wt) in components.items():
@@ -103,36 +117,36 @@ class EntityMatcher:
                 comp_score = 0.0
             else:
                 comp_score = self.compute_string_similarity(gt_v, pred_v)
-
+            
             scores[comp_name] = comp_score
             weighted_sum += comp_score * wt
-
+            
         return weighted_sum, scores
 
     def align_entities(self, gt_items: List[Any], pred_items: List[Any], category: str) -> List[EntityMatchDetail]:
         details = []
         if not gt_items and not pred_items:
             return details
-
+            
         n_gt = len(gt_items)
         n_pred = len(pred_items)
-
+        
         # 1. Build similarity and assignment matrices
         sim_matrix = np.zeros((n_gt, n_pred))
         assign_matrix = np.zeros((n_gt, n_pred))
         med_subfields_matrix = {} # cache for medications/lab subfields
-
+        
         for i in range(n_gt):
             for j in range(n_pred):
                 gt_item = gt_items[i]
                 pred_item = pred_items[j]
-
+                
                 if category == "medications":
                     # Dynamic similarity score
                     sim, subfields = self.compute_medication_similarity(gt_item, pred_item)
                     sim_matrix[i, j] = sim
                     med_subfields_matrix[(i, j)] = subfields
-
+                    
                     # Assignment based primarily on name/text similarity
                     name_sim = self.compute_string_similarity(gt_item.raw_name, pred_item.raw_name)
                     if not gt_item.raw_name and not pred_item.raw_name:
@@ -142,7 +156,7 @@ class EntityMatcher:
                     sim, subfields = self.compute_lab_observation_similarity(gt_item, pred_item)
                     sim_matrix[i, j] = sim
                     med_subfields_matrix[(i, j)] = subfields
-
+                    
                     name_sim = self.compute_string_similarity(gt_item.test_name, pred_item.test_name)
                     if not gt_item.test_name and not pred_item.test_name:
                         name_sim = self.compute_string_similarity(gt_item.raw_line_text, pred_item.raw_line_text)
@@ -153,30 +167,30 @@ class EntityMatcher:
                     pred_text = pred_item.raw_text if hasattr(pred_item, "raw_text") else str(pred_item)
                     sim_matrix[i, j] = self.compute_string_similarity(gt_text, pred_text)
                     assign_matrix[i, j] = sim_matrix[i, j]
-
+                    
         # 2. Run Hungarian Bipartite Assignment on assignment matrix (based on name similarity for medications)
         # cost = 1.0 - assignment
         cost_matrix = 1.0 - assign_matrix
         row_ind, col_ind = linear_sum_assignment(cost_matrix)
-
+        
         matched_gt = set()
         matched_pred = set()
-
+        
         # 3. Process matches
         for r, c in zip(row_ind, col_ind):
             gt_item = gt_items[r]
             pred_item = pred_items[c]
             similarity = sim_matrix[r, c]
-
+            
             gt_text = gt_item.raw_line_text if hasattr(gt_item, "raw_line_text") else (gt_item.raw_text if hasattr(gt_item, "raw_text") else str(gt_item))
             pred_text = pred_item.raw_line_text if hasattr(pred_item, "raw_line_text") else (pred_item.raw_text if hasattr(pred_item, "raw_text") else str(pred_item))
-
+            
             subfields = med_subfields_matrix.get((r, c)) if category in ["medications", "lab_observations"] else None
-
+            
             # Match thresholds
             exact = (similarity >= self.exact_threshold)
             lenient = (similarity >= self.lenient_threshold)
-
+            
             name_matches = False
             if category == "medications":
                 name_sim = self.compute_string_similarity(gt_item.raw_name, pred_item.raw_name)
@@ -188,7 +202,7 @@ class EntityMatcher:
                 if not gt_item.test_name and not pred_item.test_name:
                     name_sim = self.compute_string_similarity(gt_item.raw_line_text, pred_item.raw_line_text)
                 name_matches = (name_sim >= self.review_threshold)
-
+            
             if similarity >= self.review_threshold or (category in ["medications", "lab_observations"] and name_matches):
                 alignment_status = "TP_EXACT" if exact else "TP_LENIENT"
                 if alignment_status in ["TP_EXACT", "TP_LENIENT"]:
@@ -205,7 +219,7 @@ class EntityMatcher:
                 ))
                 matched_gt.add(r)
                 matched_pred.add(c)
-
+                
         # 4. Process unmatched Ground Truths (False Negatives)
         for r in range(n_gt):
             if r not in matched_gt:
@@ -220,7 +234,7 @@ class EntityMatcher:
                     similarity_score=0.0,
                     alignment_status="FN"
                 ))
-
+                
         # 5. Process unmatched Predictions (False Positives)
         for c in range(n_pred):
             if c not in matched_pred:
@@ -235,7 +249,7 @@ class EntityMatcher:
                     similarity_score=0.0,
                     alignment_status="FP"
                 ))
-
+                
         return details
 
     def compute_category_metrics(self, alignments: List[EntityMatchDetail]) -> CategoryMetrics:
@@ -243,7 +257,7 @@ class EntityMatcher:
         tp_lenient = sum(1 for d in alignments if d.alignment_status in ["TP_EXACT", "TP_LENIENT"])
         fp = sum(1 for d in alignments if d.alignment_status == "FP")
         fn = sum(1 for d in alignments if d.alignment_status == "FN")
-
+        
         def calculate_prf(tp, fp, fn):
             prec = tp / (tp + fp) if (tp + fp) > 0 else 0.0
             rec = tp / (tp + fn) if (tp + fn) > 0 else 0.0
@@ -252,7 +266,7 @@ class EntityMatcher:
 
         prec_ex, rec_ex, f1_ex = calculate_prf(tp_exact, fp, fn)
         prec_len, rec_len, f1_len = calculate_prf(tp_lenient, fp, fn)
-
+        
         return CategoryMetrics(
             precision_exact=prec_ex,
             recall_exact=rec_ex,

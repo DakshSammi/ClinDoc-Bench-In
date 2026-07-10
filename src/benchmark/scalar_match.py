@@ -1,3 +1,17 @@
+# Copyright 2026 ClinDoc-Bench-IN contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from typing import Dict, Any, List, Optional
 try:
     from rapidfuzz import fuzz
@@ -27,7 +41,7 @@ class ScalarMatcher:
     def match_field(self, field_name: str, gt_val: Optional[str], pred_val: Optional[str]) -> ScalarMatchDetail:
         gt_norm = TextNormaliser.normalise(gt_val)
         pred_norm = TextNormaliser.normalise(pred_val)
-
+        
         # Handling nulls
         if not gt_norm and not pred_norm:
             return ScalarMatchDetail(
@@ -38,7 +52,7 @@ class ScalarMatcher:
                 lenient_match=True,
                 similarity_score=100.0
             )
-
+            
         if not gt_norm or not pred_norm:
             return ScalarMatchDetail(
                 field_name=field_name,
@@ -48,14 +62,14 @@ class ScalarMatcher:
                 lenient_match=False,
                 similarity_score=0.0
             )
-
+            
         # exact match check
         exact = (gt_norm == pred_norm)
-
+        
         # lenient match check via rapidfuzz
         sim_score = fuzz.ratio(gt_norm, pred_norm)
         lenient = exact or (sim_score >= self.lenient_threshold)
-
+        
         return ScalarMatchDetail(
             field_name=field_name,
             gt_value=gt_val,
@@ -67,7 +81,7 @@ class ScalarMatcher:
 
     def match_docs(self, gt_doc: CanonicalRawDoc, pred_doc: CanonicalRawDoc) -> List[ScalarMatchDetail]:
         details = []
-
+        
         # Patient fields
         gt_pat = gt_doc.patient_information
         pred_pat = pred_doc.patient_information
@@ -76,7 +90,7 @@ class ScalarMatcher:
             gt_val = getattr(gt_pat, field, None)
             pred_val = getattr(pred_pat, field, None)
             details.append(self.match_field(f"patient_info.{field}", gt_val, pred_val))
-
+            
         # Encounter fields
         gt_enc = gt_doc.encounter_information
         pred_enc = pred_doc.encounter_information
@@ -85,5 +99,5 @@ class ScalarMatcher:
             gt_val = getattr(gt_enc, field, None)
             pred_val = getattr(pred_enc, field, None)
             details.append(self.match_field(f"encounter_info.{field}", gt_val, pred_val))
-
+            
         return details

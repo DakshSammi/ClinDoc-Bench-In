@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use ClinDoc-Bench-IN, please cite this benchmark and the accompanying paper."
+title: "ClinDoc-Bench-IN: [Editable Paper Title]"
+type: dataset
+authors:
+  - family-names: "Author"
+    given-names: "One"
+  - family-names: "Author"
+    given-names: "Two"
+  - family-names: "Author"
+    given-names: "Three"
+abstract: "ClinDoc-Bench-IN is a benchmark for Indian clinical prescription understanding across raw OCR, direct vision-language, and hybrid OCR-to-LLM pipelines."
+keywords:
+  - clinical document understanding
+  - prescription OCR
+  - vision-language models
+  - benchmark
+  - Indian healthcare
+license: Apache-2.0
+doi: ""
+repository-code: "https://github.com/<org>/clindoc-bench-in"
+url: "https://github.com/<org>/clindoc-bench-in"
+date-released: "2026-07-10"
+version: "1.0.0"
+conference:
+  name: "BDA 2026"
+preferred-citation:
+  type: conference-paper
+  title: "[Editable Paper Title]"
+  authors:
+    - family-names: "Author"
+      given-names: "One"
+    - family-names: "Author"
+      given-names: "Two"
+    - family-names: "Author"
+      given-names: "Three"
+  conference:
+    name: "BDA 2026"
+  doi: ""
+  year: 2026

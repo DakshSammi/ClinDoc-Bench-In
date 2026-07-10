@@ -1,5 +1,0 @@
--r base.txt
-torch
-transformers
-Pillow
-opencv-python

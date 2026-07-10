@@ -1,9 +1,0 @@
-numpy
-pandas
-pydantic
-requests
-scipy
-scikit-learn
-Pillow
-rich
-python-dotenv

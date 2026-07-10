@@ -1,0 +1,7 @@
+| component | value |
+| --- | --- |
+| CPU | To be filled before camera-ready |
+| GPU | To be filled before camera-ready |
+| RAM | To be filled before camera-ready |
+| Storage | To be filled before camera-ready |
+| Servers | Server 1 and imported Server 2 handoff |

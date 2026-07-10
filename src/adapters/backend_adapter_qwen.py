@@ -1,3 +1,17 @@
+# Copyright 2026 ClinDoc-Bench-IN contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import io
 import base64
 import time
@@ -31,7 +45,7 @@ class QwenVLBackendAdapter(BaseBackendAdapter):
             "max_tokens": kwargs.get("max_tokens", 4096),
             "top_p": kwargs.get("top_p", 0.9)
         }
-
+        
         # Build images list and resize large images to prevent OOM and slow inference
         images_list = []
         if image:
@@ -48,11 +62,11 @@ class QwenVLBackendAdapter(BaseBackendAdapter):
         # Attempt A: Local vLLM OpenAI-compatible endpoint
         try:
             self.logger.info(f"Attempting inference via local vLLM at {self.endpoint_url}")
-
+            
             # Prepare payload matching OpenAI chat completion spec
             messages = []
             user_content = [{"type": "text", "text": prompt}]
-
+            
             for img in images_list:
                 base64_str = self._encode_image(img)
                 user_content.append({
@@ -61,18 +75,18 @@ class QwenVLBackendAdapter(BaseBackendAdapter):
                         "url": f"data:image/jpeg;base64,{base64_str}"
                     }
                 })
-
+                
             messages.append({
                 "role": "user",
                 "content": user_content
             })
-
+            
             payload = {
                 "model": self.model_id, # model weight loaded in docker
                 "messages": messages,
                 **decoding_params
             }
-
+            
             async with aiohttp.ClientSession() as session:
                 async with session.post(f"{self.endpoint_url}/chat/completions", json=payload, timeout=120) as response:
                     if response.status == 200:
@@ -90,16 +104,16 @@ class QwenVLBackendAdapter(BaseBackendAdapter):
                         err_text = await response.text()
                         self.logger.warning(f"vLLM server returned error status {response.status}: {err_text}")
                         raise Exception(f"HTTP {response.status}: {err_text}")
-
+                        
         except Exception as e:
             self.logger.warning(f"Local vLLM request failed: {e}. Falling back to local transformers loading...")
-
+            
             # Attempt B: Local transformers fallback (Lazy initialized)
             try:
                 import torch
                 from transformers import AutoProcessor
                 from qwen_vl_utils import process_vision_info
-
+                
                 # Import robust Qwen model class dynamically
                 try:
                     from transformers import Qwen2_5_VLForConditionalGeneration as QwenModelClass
@@ -108,25 +122,25 @@ class QwenVLBackendAdapter(BaseBackendAdapter):
                         from transformers import Qwen2VLForConditionalGeneration as QwenModelClass
                     except ImportError:
                         from transformers import AutoModelForCausalLM as QwenModelClass
-
+                
                 loaded_and_run = False
                 force_cpu = False
                 content = ""
-
+                
                 while not loaded_and_run:
                     try:
                         if self._local_model is None:
                             self.logger.info(f"Lazy loading local HuggingFace model: {self.model_id}")
                             use_cuda = torch.cuda.is_available() and not force_cpu
-
+                            
                             self._local_processor = AutoProcessor.from_pretrained(self.model_id, trust_remote_code=True)
-
+                            
                             if use_cuda:
                                 try:
                                     self.logger.info("Attempting to load model on GPU...")
                                     self._local_model = QwenModelClass.from_pretrained(
-                                        self.model_id,
-                                        torch_dtype=torch.bfloat16,
+                                        self.model_id, 
+                                        torch_dtype=torch.bfloat16, 
                                         device_map="auto",
                                         trust_remote_code=True
                                     )
@@ -136,27 +150,27 @@ class QwenVLBackendAdapter(BaseBackendAdapter):
                                 except Exception as gpu_err:
                                     self.logger.warning(f"Failed to load model on GPU: {gpu_err}. Falling back to CPU...")
                                     use_cuda = False
-
+                                    
                             if not use_cuda:
                                 self.logger.info("Loading model on CPU...")
                                 self._local_model = QwenModelClass.from_pretrained(
-                                    self.model_id,
-                                    torch_dtype=torch.float32,
+                                    self.model_id, 
+                                    torch_dtype=torch.float32, 
                                     device_map="cpu",
                                     trust_remote_code=True
                                 )
                                 self.logger.info("Successfully loaded model on CPU.")
-
+                            
                         # Prepare messages for local processor
                         messages = []
                         user_content = []
                         for img in images_list:
                             # In qwen-vl-utils, we can pass raw PIL images
                             user_content.append({"type": "image", "image": img})
-
+                            
                         user_content.append({"type": "text", "text": prompt})
                         messages.append({"role": "user", "content": user_content})
-
+                        
                         # Preprocess inputs
                         text = self._local_processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
                         image_inputs, video_inputs = process_vision_info(messages)
@@ -168,7 +182,7 @@ class QwenVLBackendAdapter(BaseBackendAdapter):
                             return_tensors="pt"
                         )
                         inputs = inputs.to(self._local_model.device)
-
+                        
                         # Run inference
                         with torch.no_grad():
                             generated_ids = self._local_model.generate(**inputs, max_new_tokens=decoding_params["max_tokens"])
@@ -178,9 +192,9 @@ class QwenVLBackendAdapter(BaseBackendAdapter):
                             content = self._local_processor.batch_decode(
                                 generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
                             )[0]
-
+                        
                         loaded_and_run = True
-
+                        
                     except Exception as run_err:
                         if torch.cuda.is_available() and not force_cpu:
                             self.logger.warning(f"Failed during GPU model initialization or generation: {run_err}. Clearing GPU memory and forcing CPU fallback...")
@@ -194,7 +208,7 @@ class QwenVLBackendAdapter(BaseBackendAdapter):
                             force_cpu = True
                         else:
                             raise run_err
-
+                
                 processing_time_ms = (time.time() - start_time) * 1000
                 return {
                     "content": content,
@@ -203,7 +217,7 @@ class QwenVLBackendAdapter(BaseBackendAdapter):
                     "backend_name": self.name,
                     "decoding_parameters": decoding_params
                 }
-
+                
             except Exception as le:
                 self.logger.error(f"Local HuggingFace fallback loader failed: {le}")
                 # Final return with error details

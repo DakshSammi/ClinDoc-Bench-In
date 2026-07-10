@@ -1,0 +1,8 @@
+family,track,system,origin_server,publication_status,primary_metric,records,primary_score,runtime_seconds,rank
+raw_ocr,raw_ocr,qwen3_vl_raw_ocr,server1,PRIMARY TABLE,token_f1,125,0.223796,,1.0
+raw_ocr,raw_ocr,glm_ocr,server1,PRIMARY TABLE,token_f1,125,0.223192,,2.0
+raw_ocr,raw_ocr,surya,server2,PRIMARY TABLE,token_f1,125,0.2082848,,3.0
+raw_ocr,raw_ocr,doctr,server2,PRIMARY TABLE,token_f1,125,0.162648,,4.0
+raw_ocr,raw_ocr,easyocr,server2,PRIMARY TABLE,token_f1,125,0.1158927999999999,,5.0
+raw_ocr,raw_ocr,docling,server2,PRIMARY TABLE,token_f1,125,0.1140848,,6.0
+raw_ocr,raw_ocr,trocr,server2,PRIMARY TABLE,token_f1,125,0.0098967999999999,,7.0

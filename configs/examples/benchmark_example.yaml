@@ -1,0 +1,13 @@
+experiment_name: example_new_lane
+manifest: outputs/example_new_lane/manifest.csv
+output_dir: outputs/example_new_lane
+track: raw_ocr
+model:
+  name: example_ocr
+  provider: local
+  version: editable
+evaluation:
+  frozen_reference_dir: benchmark_v2/final_day_freeze_20260709/reports
+  write_mode: new_directory_only
+privacy:
+  publish_anonymized_examples_only: true

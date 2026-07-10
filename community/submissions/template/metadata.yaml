@@ -1,0 +1,8 @@
+submission_name: template_structured_submission
+track: hybrid
+model_name: example_model
+model_version: v0
+provider: local
+license: apache-2.0
+hardware: example_gpu_or_cpu
+benchmark_version: ClinDoc-Bench-IN v1.0

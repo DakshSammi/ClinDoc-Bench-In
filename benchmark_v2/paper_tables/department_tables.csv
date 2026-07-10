@@ -1,0 +1,483 @@
+family,system,department,records,primary_score
+raw_ocr,docling,,125,0.1132176
+raw_ocr,doctr,,125,0.162648
+raw_ocr,easyocr,,125,0.11589279999999999
+raw_ocr,glm_ocr,,125,0.223192
+raw_ocr,qwen3_vl_raw_ocr,,125,0.223796
+raw_ocr,trocr,,125,0.009682399999999999
+structured,docling_qwen25_14b,Dermatology,2,0.2857
+structured,docling_qwen25_14b,Dermatology / Dermatology Venereology,1,0.3143
+structured,docling_qwen25_14b,ENT,2,0.269
+structured,docling_qwen25_14b,ENT [from p54 context],1,0.3
+structured,docling_qwen25_14b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.3429
+structured,docling_qwen25_14b,Endocrinology and Metabolism,1,0.325
+structured,docling_qwen25_14b,GENERAL MEDICINE,1,
+structured,docling_qwen25_14b,GENERAL MEDICINE-II,1,0.2299
+structured,docling_qwen25_14b,General Medicine,30,0.292828
+structured,docling_qwen25_14b,General Medicine / Medicine Unit II,10,0.27731428571428574
+structured,docling_qwen25_14b,General Medicine / Medicine Unit IV,1,
+structured,docling_qwen25_14b,General Medicine Female (3C),3,0.2761
+structured,docling_qwen25_14b,General Medicine Unit I,1,0.3429
+structured,docling_qwen25_14b,General Medicine [partially visible],2,0.3295
+structured,docling_qwen25_14b,General Medicine-Unit 1,1,0.346
+structured,docling_qwen25_14b,General Medicine-Unit 3,1,0.3471
+structured,docling_qwen25_14b,General Medicine-Unit I,2,0.35429999999999995
+structured,docling_qwen25_14b,General Surgery Unit,1,0.36
+structured,docling_qwen25_14b,MEDICINE-II,7,0.2907666666666667
+structured,docling_qwen25_14b,MEDICINE-IV,1,0.3286
+structured,docling_qwen25_14b,Obstetrics & Gynaecology,1,0.3511
+structured,docling_qwen25_14b,Obstetrics & Gynecology,3,0.2906666666666667
+structured,docling_qwen25_14b,Obstetrics & Gynecology [inferred from page context],1,0.2768
+structured,docling_qwen25_14b,Obstetrics and Gynecology [partially visible],1,0.2206
+structured,docling_qwen25_14b,Radiology,2,0.41259999999999997
+structured,docling_qwen25_14b,Radiotherapy-Radiotherapy,2,0.3589
+structured,docling_qwen25_14b,SURGERY-II,2,0.3116
+structured,docling_qwen25_14b,Unknown,43,0.32627647058823533
+structured,docling_qwen3_8b,Dermatology,2,0.26255
+structured,docling_qwen3_8b,Dermatology / Dermatology Venereology,1,0.2857
+structured,docling_qwen3_8b,ENT,2,0.29115
+structured,docling_qwen3_8b,ENT [from p54 context],1,0.3036
+structured,docling_qwen3_8b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.3286
+structured,docling_qwen3_8b,Endocrinology and Metabolism,1,0.3543
+structured,docling_qwen3_8b,GENERAL MEDICINE,1,
+structured,docling_qwen3_8b,GENERAL MEDICINE-II,1,0.3143
+structured,docling_qwen3_8b,General Medicine,30,0.28312000000000004
+structured,docling_qwen3_8b,General Medicine / Medicine Unit II,10,0.26517999999999997
+structured,docling_qwen3_8b,General Medicine / Medicine Unit IV,1,0.2524
+structured,docling_qwen3_8b,General Medicine Female (3C),3,0.24
+structured,docling_qwen3_8b,General Medicine Unit I,1,0.3286
+structured,docling_qwen3_8b,General Medicine [partially visible],2,0.32499999999999996
+structured,docling_qwen3_8b,General Medicine-Unit 1,1,0.3429
+structured,docling_qwen3_8b,General Medicine-Unit 3,1,0.3264
+structured,docling_qwen3_8b,General Medicine-Unit I,2,0.35319999999999996
+structured,docling_qwen3_8b,General Surgery Unit,1,0.325
+structured,docling_qwen3_8b,MEDICINE-II,7,0.2984
+structured,docling_qwen3_8b,MEDICINE-IV,1,0.3
+structured,docling_qwen3_8b,Obstetrics & Gynaecology,1,0.3132
+structured,docling_qwen3_8b,Obstetrics & Gynecology,3,0.2897
+structured,docling_qwen3_8b,Obstetrics & Gynecology [inferred from page context],1,0.2636
+structured,docling_qwen3_8b,Obstetrics and Gynecology [partially visible],1,0.2065
+structured,docling_qwen3_8b,Radiology,2,0.3589
+structured,docling_qwen3_8b,Radiotherapy-Radiotherapy,2,0.34285
+structured,docling_qwen3_8b,SURGERY-II,2,0.3134
+structured,docling_qwen3_8b,Unknown,43,0.306145
+structured,doctr_qwen25_14b,Dermatology,2,0.3
+structured,doctr_qwen25_14b,Dermatology / Dermatology Venereology,1,0.3286
+structured,doctr_qwen25_14b,ENT,2,0.2714
+structured,doctr_qwen25_14b,ENT [from p54 context],1,0.3018
+structured,doctr_qwen25_14b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.3429
+structured,doctr_qwen25_14b,Endocrinology and Metabolism,1,0.3452
+structured,doctr_qwen25_14b,GENERAL MEDICINE,1,0.4976
+structured,doctr_qwen25_14b,GENERAL MEDICINE-II,1,0.29
+structured,doctr_qwen25_14b,General Medicine,30,0.2898086956521739
+structured,doctr_qwen25_14b,General Medicine / Medicine Unit II,10,0.2675444444444445
+structured,doctr_qwen25_14b,General Medicine / Medicine Unit IV,1,
+structured,doctr_qwen25_14b,General Medicine Female (3C),3,0.3143
+structured,doctr_qwen25_14b,General Medicine Unit I,1,0.3143
+structured,doctr_qwen25_14b,General Medicine [partially visible],2,0.31075
+structured,doctr_qwen25_14b,General Medicine-Unit 1,1,0.3714
+structured,doctr_qwen25_14b,General Medicine-Unit 3,1,0.3229
+structured,doctr_qwen25_14b,General Medicine-Unit I,2,0.36424999999999996
+structured,doctr_qwen25_14b,General Surgery Unit,1,0.3571
+structured,doctr_qwen25_14b,MEDICINE-II,7,0.32733999999999996
+structured,doctr_qwen25_14b,MEDICINE-IV,1,0.3286
+structured,doctr_qwen25_14b,Obstetrics & Gynaecology,1,0.3429
+structured,doctr_qwen25_14b,Obstetrics & Gynecology,3,0.3100333333333333
+structured,doctr_qwen25_14b,Obstetrics & Gynecology [inferred from page context],1,0.2893
+structured,doctr_qwen25_14b,Obstetrics and Gynecology [partially visible],1,0.2571
+structured,doctr_qwen25_14b,Radiology,2,0.39015
+structured,doctr_qwen25_14b,Radiotherapy-Radiotherapy,2,0.35295
+structured,doctr_qwen25_14b,SURGERY-II,2,0.3388
+structured,doctr_qwen25_14b,Unknown,43,0.32939722222222223
+structured,doctr_qwen3_8b,Dermatology,2,0.28285
+structured,doctr_qwen3_8b,Dermatology / Dermatology Venereology,1,0.3556
+structured,doctr_qwen3_8b,ENT,2,0.2875
+structured,doctr_qwen3_8b,ENT [from p54 context],1,0.3286
+structured,doctr_qwen3_8b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.3705
+structured,doctr_qwen3_8b,Endocrinology and Metabolism,1,0.3821
+structured,doctr_qwen3_8b,GENERAL MEDICINE,1,0.5659
+structured,doctr_qwen3_8b,GENERAL MEDICINE-II,1,0.3213
+structured,doctr_qwen3_8b,General Medicine,30,0.29354615384615385
+structured,doctr_qwen3_8b,General Medicine / Medicine Unit II,10,0.2576222222222222
+structured,doctr_qwen3_8b,General Medicine / Medicine Unit IV,1,0.2848
+structured,doctr_qwen3_8b,General Medicine Female (3C),3,0.29706666666666665
+structured,doctr_qwen3_8b,General Medicine Unit I,1,0.3429
+structured,doctr_qwen3_8b,General Medicine [partially visible],2,0.2833
+structured,doctr_qwen3_8b,General Medicine-Unit 1,1,0.3429
+structured,doctr_qwen3_8b,General Medicine-Unit 3,1,0.3143
+structured,doctr_qwen3_8b,General Medicine-Unit I,2,0.3628
+structured,doctr_qwen3_8b,General Surgery Unit,1,0.3571
+structured,doctr_qwen3_8b,MEDICINE-II,7,0.311975
+structured,doctr_qwen3_8b,MEDICINE-IV,1,
+structured,doctr_qwen3_8b,Obstetrics & Gynaecology,1,0.3769
+structured,doctr_qwen3_8b,Obstetrics & Gynecology,3,0.3015666666666667
+structured,doctr_qwen3_8b,Obstetrics & Gynecology [inferred from page context],1,0.2771
+structured,doctr_qwen3_8b,Obstetrics and Gynecology [partially visible],1,0.2857
+structured,doctr_qwen3_8b,Radiology,2,0.33015
+structured,doctr_qwen3_8b,Radiotherapy-Radiotherapy,2,
+structured,doctr_qwen3_8b,SURGERY-II,2,0.305
+structured,doctr_qwen3_8b,Unknown,43,0.307365
+structured,easyocr_qwen25_14b,Dermatology,2,0.26605
+structured,easyocr_qwen25_14b,Dermatology / Dermatology Venereology,1,0.2571
+structured,easyocr_qwen25_14b,ENT,2,0.29375
+structured,easyocr_qwen25_14b,ENT [from p54 context],1,0.3143
+structured,easyocr_qwen25_14b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.3286
+structured,easyocr_qwen25_14b,Endocrinology and Metabolism,1,0.2679
+structured,easyocr_qwen25_14b,GENERAL MEDICINE,1,
+structured,easyocr_qwen25_14b,GENERAL MEDICINE-II,1,
+structured,easyocr_qwen25_14b,General Medicine,30,0.28815172413793105
+structured,easyocr_qwen25_14b,General Medicine / Medicine Unit II,10,0.27994444444444444
+structured,easyocr_qwen25_14b,General Medicine / Medicine Unit IV,1,0.2571
+structured,easyocr_qwen25_14b,General Medicine Female (3C),3,0.3018
+structured,easyocr_qwen25_14b,General Medicine Unit I,1,0.3143
+structured,easyocr_qwen25_14b,General Medicine [partially visible],2,0.3295
+structured,easyocr_qwen25_14b,General Medicine-Unit 1,1,0.3286
+structured,easyocr_qwen25_14b,General Medicine-Unit 3,1,
+structured,easyocr_qwen25_14b,General Medicine-Unit I,2,0.3286
+structured,easyocr_qwen25_14b,General Surgery Unit,1,0.3446
+structured,easyocr_qwen25_14b,MEDICINE-II,7,0.296425
+structured,easyocr_qwen25_14b,MEDICINE-IV,1,
+structured,easyocr_qwen25_14b,Obstetrics & Gynaecology,1,
+structured,easyocr_qwen25_14b,Obstetrics & Gynecology,3,0.32235
+structured,easyocr_qwen25_14b,Obstetrics & Gynecology [inferred from page context],1,0.2768
+structured,easyocr_qwen25_14b,Obstetrics and Gynecology [partially visible],1,0.2446
+structured,easyocr_qwen25_14b,Radiology,2,0.2446
+structured,easyocr_qwen25_14b,Radiotherapy-Radiotherapy,2,0.3
+structured,easyocr_qwen25_14b,SURGERY-II,2,0.3
+structured,easyocr_qwen25_14b,Unknown,43,0.32142000000000004
+structured,easyocr_qwen3_8b,Dermatology,2,0.27854999999999996
+structured,easyocr_qwen3_8b,Dermatology / Dermatology Venereology,1,0.2429
+structured,easyocr_qwen3_8b,ENT,2,0.2993
+structured,easyocr_qwen3_8b,ENT [from p54 context],1,0.3286
+structured,easyocr_qwen3_8b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.3571
+structured,easyocr_qwen3_8b,Endocrinology and Metabolism,1,0.2821
+structured,easyocr_qwen3_8b,GENERAL MEDICINE,1,
+structured,easyocr_qwen3_8b,GENERAL MEDICINE-II,1,
+structured,easyocr_qwen3_8b,General Medicine,30,0.2880931034482758
+structured,easyocr_qwen3_8b,General Medicine / Medicine Unit II,10,0.28099999999999997
+structured,easyocr_qwen3_8b,General Medicine / Medicine Unit IV,1,0.2714
+structured,easyocr_qwen3_8b,General Medicine Female (3C),3,0.3429
+structured,easyocr_qwen3_8b,General Medicine Unit I,1,0.3143
+structured,easyocr_qwen3_8b,General Medicine [partially visible],2,0.33215
+structured,easyocr_qwen3_8b,General Medicine-Unit 1,1,0.3429
+structured,easyocr_qwen3_8b,General Medicine-Unit 3,1,
+structured,easyocr_qwen3_8b,General Medicine-Unit I,2,0.3286
+structured,easyocr_qwen3_8b,General Surgery Unit,1,0.3446
+structured,easyocr_qwen3_8b,MEDICINE-II,7,0.29046666666666665
+structured,easyocr_qwen3_8b,MEDICINE-IV,1,0.3143
+structured,easyocr_qwen3_8b,Obstetrics & Gynaecology,1,0.3286
+structured,easyocr_qwen3_8b,Obstetrics & Gynecology,3,0.2762
+structured,easyocr_qwen3_8b,Obstetrics & Gynecology [inferred from page context],1,0.2786
+structured,easyocr_qwen3_8b,Obstetrics and Gynecology [partially visible],1,0.1857
+structured,easyocr_qwen3_8b,Radiology,2,0.3355
+structured,easyocr_qwen3_8b,Radiotherapy-Radiotherapy,2,0.2857
+structured,easyocr_qwen3_8b,SURGERY-II,2,0.30715000000000003
+structured,easyocr_qwen3_8b,Unknown,43,0.3064825
+structured,glm_ocr_qwen25_14b,Dermatology,2,0.3113
+structured,glm_ocr_qwen25_14b,Dermatology / Dermatology Venereology,1,0.348
+structured,glm_ocr_qwen25_14b,ENT,2,0.3429
+structured,glm_ocr_qwen25_14b,ENT [from p54 context],1,0.4191
+structured,glm_ocr_qwen25_14b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.2823
+structured,glm_ocr_qwen25_14b,Endocrinology and Metabolism,1,0.3679
+structured,glm_ocr_qwen25_14b,GENERAL MEDICINE,1,0.5296
+structured,glm_ocr_qwen25_14b,GENERAL MEDICINE-II,1,
+structured,glm_ocr_qwen25_14b,General Medicine,30,0.327732
+structured,glm_ocr_qwen25_14b,General Medicine / Medicine Unit II,10,0.30145
+structured,glm_ocr_qwen25_14b,General Medicine / Medicine Unit IV,1,0.3739
+structured,glm_ocr_qwen25_14b,General Medicine Female (3C),3,0.2848
+structured,glm_ocr_qwen25_14b,General Medicine Unit I,1,0.3429
+structured,glm_ocr_qwen25_14b,General Medicine [partially visible],2,0.3096
+structured,glm_ocr_qwen25_14b,General Medicine-Unit 1,1,0.3481
+structured,glm_ocr_qwen25_14b,General Medicine-Unit 3,1,0.3143
+structured,glm_ocr_qwen25_14b,General Medicine-Unit I,2,0.3772
+structured,glm_ocr_qwen25_14b,General Surgery Unit,1,0.3157
+structured,glm_ocr_qwen25_14b,MEDICINE-II,7,
+structured,glm_ocr_qwen25_14b,MEDICINE-IV,1,0.3597
+structured,glm_ocr_qwen25_14b,Obstetrics & Gynaecology,1,0.4134
+structured,glm_ocr_qwen25_14b,Obstetrics & Gynecology,3,0.29645
+structured,glm_ocr_qwen25_14b,Obstetrics & Gynecology [inferred from page context],1,0.2818
+structured,glm_ocr_qwen25_14b,Obstetrics and Gynecology [partially visible],1,0.2857
+structured,glm_ocr_qwen25_14b,Radiology,2,0.46345000000000003
+structured,glm_ocr_qwen25_14b,Radiotherapy-Radiotherapy,2,0.3901
+structured,glm_ocr_qwen25_14b,SURGERY-II,2,
+structured,glm_ocr_qwen25_14b,Unknown,43,0.3431285714285714
+structured,glm_ocr_qwen3_8b,Dermatology,2,0.27465
+structured,glm_ocr_qwen3_8b,Dermatology / Dermatology Venereology,1,0.3368
+structured,glm_ocr_qwen3_8b,ENT,2,0.37945
+structured,glm_ocr_qwen3_8b,ENT [from p54 context],1,0.4373
+structured,glm_ocr_qwen3_8b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.3107
+structured,glm_ocr_qwen3_8b,Endocrinology and Metabolism,1,0.3937
+structured,glm_ocr_qwen3_8b,GENERAL MEDICINE,1,
+structured,glm_ocr_qwen3_8b,GENERAL MEDICINE-II,1,0.3759
+structured,glm_ocr_qwen3_8b,General Medicine,30,0.34195172413793107
+structured,glm_ocr_qwen3_8b,General Medicine / Medicine Unit II,10,0.31766666666666665
+structured,glm_ocr_qwen3_8b,General Medicine / Medicine Unit IV,1,0.342
+structured,glm_ocr_qwen3_8b,General Medicine Female (3C),3,0.2454333333333333
+structured,glm_ocr_qwen3_8b,General Medicine Unit I,1,0.306
+structured,glm_ocr_qwen3_8b,General Medicine [partially visible],2,0.312
+structured,glm_ocr_qwen3_8b,General Medicine-Unit 1,1,0.3143
+structured,glm_ocr_qwen3_8b,General Medicine-Unit 3,1,
+structured,glm_ocr_qwen3_8b,General Medicine-Unit I,2,0.35095
+structured,glm_ocr_qwen3_8b,General Surgery Unit,1,0.3337
+structured,glm_ocr_qwen3_8b,MEDICINE-II,7,0.4002857142857143
+structured,glm_ocr_qwen3_8b,MEDICINE-IV,1,
+structured,glm_ocr_qwen3_8b,Obstetrics & Gynaecology,1,0.5281
+structured,glm_ocr_qwen3_8b,Obstetrics & Gynecology,3,0.34349999999999997
+structured,glm_ocr_qwen3_8b,Obstetrics & Gynecology [inferred from page context],1,0.3286
+structured,glm_ocr_qwen3_8b,Obstetrics and Gynecology [partially visible],1,0.2071
+structured,glm_ocr_qwen3_8b,Radiology,2,0.3569
+structured,glm_ocr_qwen3_8b,Radiotherapy-Radiotherapy,2,0.37705
+structured,glm_ocr_qwen3_8b,SURGERY-II,2,0.40435
+structured,glm_ocr_qwen3_8b,Unknown,43,0.327455
+structured,internal_qwen3_27b,Dermatology,2,
+structured,internal_qwen3_27b,Dermatology / Dermatology Venereology,1,
+structured,internal_qwen3_27b,ENT,2,
+structured,internal_qwen3_27b,ENT [from p54 context],1,
+structured,internal_qwen3_27b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,
+structured,internal_qwen3_27b,Endocrinology and Metabolism,1,
+structured,internal_qwen3_27b,GENERAL MEDICINE,1,0.6464
+structured,internal_qwen3_27b,GENERAL MEDICINE-II,1,
+structured,internal_qwen3_27b,General Medicine,30,0.38617272727272733
+structured,internal_qwen3_27b,General Medicine / Medicine Unit II,10,0.34523333333333334
+structured,internal_qwen3_27b,General Medicine / Medicine Unit IV,1,
+structured,internal_qwen3_27b,General Medicine Female (3C),3,0.2629
+structured,internal_qwen3_27b,General Medicine Unit I,1,
+structured,internal_qwen3_27b,General Medicine [partially visible],2,0.3247
+structured,internal_qwen3_27b,General Medicine-Unit 1,1,
+structured,internal_qwen3_27b,General Medicine-Unit 3,1,
+structured,internal_qwen3_27b,General Medicine-Unit I,2,0.5641
+structured,internal_qwen3_27b,General Surgery Unit,1,
+structured,internal_qwen3_27b,MEDICINE-II,7,
+structured,internal_qwen3_27b,MEDICINE-IV,1,
+structured,internal_qwen3_27b,Obstetrics & Gynaecology,1,
+structured,internal_qwen3_27b,Obstetrics & Gynecology,3,
+structured,internal_qwen3_27b,Obstetrics & Gynecology [inferred from page context],1,0.2921
+structured,internal_qwen3_27b,Obstetrics and Gynecology [partially visible],1,
+structured,internal_qwen3_27b,Radiology,2,0.3286
+structured,internal_qwen3_27b,Radiotherapy-Radiotherapy,2,
+structured,internal_qwen3_27b,SURGERY-II,2,0.5113
+structured,internal_qwen3_27b,Unknown,43,0.41520434782608695
+structured,ollama_llava_13b,Dermatology,2,
+structured,ollama_llava_13b,Dermatology / Dermatology Venereology,1,
+structured,ollama_llava_13b,ENT,2,
+structured,ollama_llava_13b,ENT [from p54 context],1,
+structured,ollama_llava_13b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,
+structured,ollama_llava_13b,Endocrinology and Metabolism,1,
+structured,ollama_llava_13b,GENERAL MEDICINE,1,
+structured,ollama_llava_13b,GENERAL MEDICINE-II,1,
+structured,ollama_llava_13b,General Medicine,30,
+structured,ollama_llava_13b,General Medicine / Medicine Unit II,10,
+structured,ollama_llava_13b,General Medicine / Medicine Unit IV,1,
+structured,ollama_llava_13b,General Medicine Female (3C),3,
+structured,ollama_llava_13b,General Medicine Unit I,1,
+structured,ollama_llava_13b,General Medicine [partially visible],2,
+structured,ollama_llava_13b,General Medicine-Unit 1,1,
+structured,ollama_llava_13b,General Medicine-Unit 3,1,
+structured,ollama_llava_13b,General Medicine-Unit I,2,
+structured,ollama_llava_13b,General Surgery Unit,1,
+structured,ollama_llava_13b,MEDICINE-II,7,
+structured,ollama_llava_13b,MEDICINE-IV,1,
+structured,ollama_llava_13b,Obstetrics & Gynaecology,1,
+structured,ollama_llava_13b,Obstetrics & Gynecology,3,
+structured,ollama_llava_13b,Obstetrics & Gynecology [inferred from page context],1,
+structured,ollama_llava_13b,Obstetrics and Gynecology [partially visible],1,
+structured,ollama_llava_13b,Radiology,2,
+structured,ollama_llava_13b,Radiotherapy-Radiotherapy,2,
+structured,ollama_llava_13b,SURGERY-II,2,
+structured,ollama_llava_13b,Unknown,43,
+structured,ollama_qwen3_vl_8b,Dermatology,2,
+structured,ollama_qwen3_vl_8b,Dermatology / Dermatology Venereology,1,
+structured,ollama_qwen3_vl_8b,ENT,2,
+structured,ollama_qwen3_vl_8b,ENT [from p54 context],1,
+structured,ollama_qwen3_vl_8b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,
+structured,ollama_qwen3_vl_8b,Endocrinology and Metabolism,1,
+structured,ollama_qwen3_vl_8b,GENERAL MEDICINE,1,
+structured,ollama_qwen3_vl_8b,GENERAL MEDICINE-II,1,
+structured,ollama_qwen3_vl_8b,General Medicine,30,
+structured,ollama_qwen3_vl_8b,General Medicine / Medicine Unit II,10,
+structured,ollama_qwen3_vl_8b,General Medicine / Medicine Unit IV,1,
+structured,ollama_qwen3_vl_8b,General Medicine Female (3C),3,
+structured,ollama_qwen3_vl_8b,General Medicine Unit I,1,
+structured,ollama_qwen3_vl_8b,General Medicine [partially visible],2,
+structured,ollama_qwen3_vl_8b,General Medicine-Unit 1,1,
+structured,ollama_qwen3_vl_8b,General Medicine-Unit 3,1,
+structured,ollama_qwen3_vl_8b,General Medicine-Unit I,2,
+structured,ollama_qwen3_vl_8b,General Surgery Unit,1,
+structured,ollama_qwen3_vl_8b,MEDICINE-II,7,
+structured,ollama_qwen3_vl_8b,MEDICINE-IV,1,
+structured,ollama_qwen3_vl_8b,Obstetrics & Gynaecology,1,
+structured,ollama_qwen3_vl_8b,Obstetrics & Gynecology,3,
+structured,ollama_qwen3_vl_8b,Obstetrics & Gynecology [inferred from page context],1,
+structured,ollama_qwen3_vl_8b,Obstetrics and Gynecology [partially visible],1,
+structured,ollama_qwen3_vl_8b,Radiology,2,
+structured,ollama_qwen3_vl_8b,Radiotherapy-Radiotherapy,2,
+structured,ollama_qwen3_vl_8b,SURGERY-II,2,
+structured,ollama_qwen3_vl_8b,Unknown,43,
+structured,qwen3_vl_raw_ocr_qwen25_14b,Dermatology,2,0.32195
+structured,qwen3_vl_raw_ocr_qwen25_14b,Dermatology / Dermatology Venereology,1,0.2143
+structured,qwen3_vl_raw_ocr_qwen25_14b,ENT,2,0.3143
+structured,qwen3_vl_raw_ocr_qwen25_14b,ENT [from p54 context],1,0.3585
+structured,qwen3_vl_raw_ocr_qwen25_14b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.2857
+structured,qwen3_vl_raw_ocr_qwen25_14b,Endocrinology and Metabolism,1,0.2982
+structured,qwen3_vl_raw_ocr_qwen25_14b,GENERAL MEDICINE,1,0.5234
+structured,qwen3_vl_raw_ocr_qwen25_14b,GENERAL MEDICINE-II,1,
+structured,qwen3_vl_raw_ocr_qwen25_14b,General Medicine,30,0.324152
+structured,qwen3_vl_raw_ocr_qwen25_14b,General Medicine / Medicine Unit II,10,0.30474999999999997
+structured,qwen3_vl_raw_ocr_qwen25_14b,General Medicine / Medicine Unit IV,1,
+structured,qwen3_vl_raw_ocr_qwen25_14b,General Medicine Female (3C),3,0.30223333333333335
+structured,qwen3_vl_raw_ocr_qwen25_14b,General Medicine Unit I,1,0.3688
+structured,qwen3_vl_raw_ocr_qwen25_14b,General Medicine [partially visible],2,0.29525
+structured,qwen3_vl_raw_ocr_qwen25_14b,General Medicine-Unit 1,1,0.3429
+structured,qwen3_vl_raw_ocr_qwen25_14b,General Medicine-Unit 3,1,
+structured,qwen3_vl_raw_ocr_qwen25_14b,General Medicine-Unit I,2,0.5312
+structured,qwen3_vl_raw_ocr_qwen25_14b,General Surgery Unit,1,0.3738
+structured,qwen3_vl_raw_ocr_qwen25_14b,MEDICINE-II,7,0.38430000000000003
+structured,qwen3_vl_raw_ocr_qwen25_14b,MEDICINE-IV,1,0.3633
+structured,qwen3_vl_raw_ocr_qwen25_14b,Obstetrics & Gynaecology,1,0.3705
+structured,qwen3_vl_raw_ocr_qwen25_14b,Obstetrics & Gynecology,3,0.30696666666666667
+structured,qwen3_vl_raw_ocr_qwen25_14b,Obstetrics & Gynecology [inferred from page context],1,0.3202
+structured,qwen3_vl_raw_ocr_qwen25_14b,Obstetrics and Gynecology [partially visible],1,
+structured,qwen3_vl_raw_ocr_qwen25_14b,Radiology,2,0.3143
+structured,qwen3_vl_raw_ocr_qwen25_14b,Radiotherapy-Radiotherapy,2,0.38225
+structured,qwen3_vl_raw_ocr_qwen25_14b,SURGERY-II,2,0.38105
+structured,qwen3_vl_raw_ocr_qwen25_14b,Unknown,43,0.3511107142857143
+structured,qwen3_vl_raw_ocr_qwen3_8b,Dermatology,2,0.30735
+structured,qwen3_vl_raw_ocr_qwen3_8b,Dermatology / Dermatology Venereology,1,0.2429
+structured,qwen3_vl_raw_ocr_qwen3_8b,ENT,2,0.3385
+structured,qwen3_vl_raw_ocr_qwen3_8b,ENT [from p54 context],1,0.3356
+structured,qwen3_vl_raw_ocr_qwen3_8b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.3
+structured,qwen3_vl_raw_ocr_qwen3_8b,Endocrinology and Metabolism,1,0.3099
+structured,qwen3_vl_raw_ocr_qwen3_8b,GENERAL MEDICINE,1,0.5005
+structured,qwen3_vl_raw_ocr_qwen3_8b,GENERAL MEDICINE-II,1,0.4047
+structured,qwen3_vl_raw_ocr_qwen3_8b,General Medicine,30,0.33780344827586206
+structured,qwen3_vl_raw_ocr_qwen3_8b,General Medicine / Medicine Unit II,10,0.2984222222222222
+structured,qwen3_vl_raw_ocr_qwen3_8b,General Medicine / Medicine Unit IV,1,0.342
+structured,qwen3_vl_raw_ocr_qwen3_8b,General Medicine Female (3C),3,0.2663666666666667
+structured,qwen3_vl_raw_ocr_qwen3_8b,General Medicine Unit I,1,0.3398
+structured,qwen3_vl_raw_ocr_qwen3_8b,General Medicine [partially visible],2,0.3064
+structured,qwen3_vl_raw_ocr_qwen3_8b,General Medicine-Unit 1,1,0.4536
+structured,qwen3_vl_raw_ocr_qwen3_8b,General Medicine-Unit 3,1,0.3518
+structured,qwen3_vl_raw_ocr_qwen3_8b,General Medicine-Unit I,2,0.44415
+structured,qwen3_vl_raw_ocr_qwen3_8b,General Surgery Unit,1,0.3638
+structured,qwen3_vl_raw_ocr_qwen3_8b,MEDICINE-II,7,0.39842857142857147
+structured,qwen3_vl_raw_ocr_qwen3_8b,MEDICINE-IV,1,0.3569
+structured,qwen3_vl_raw_ocr_qwen3_8b,Obstetrics & Gynaecology,1,0.4411
+structured,qwen3_vl_raw_ocr_qwen3_8b,Obstetrics & Gynecology,3,0.3562666666666667
+structured,qwen3_vl_raw_ocr_qwen3_8b,Obstetrics & Gynecology [inferred from page context],1,0.3225
+structured,qwen3_vl_raw_ocr_qwen3_8b,Obstetrics and Gynecology [partially visible],1,0.2048
+structured,qwen3_vl_raw_ocr_qwen3_8b,Radiology,2,0.35450000000000004
+structured,qwen3_vl_raw_ocr_qwen3_8b,Radiotherapy-Radiotherapy,2,0.38925
+structured,qwen3_vl_raw_ocr_qwen3_8b,SURGERY-II,2,0.4352
+structured,qwen3_vl_raw_ocr_qwen3_8b,Unknown,43,0.3505475
+structured,surya_qwen25_14b,Dermatology,2,
+structured,surya_qwen25_14b,Dermatology / Dermatology Venereology,1,
+structured,surya_qwen25_14b,ENT,2,
+structured,surya_qwen25_14b,ENT [from p54 context],1,
+structured,surya_qwen25_14b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,
+structured,surya_qwen25_14b,Endocrinology and Metabolism,1,
+structured,surya_qwen25_14b,GENERAL MEDICINE,1,
+structured,surya_qwen25_14b,GENERAL MEDICINE-II,1,
+structured,surya_qwen25_14b,General Medicine,30,
+structured,surya_qwen25_14b,General Medicine / Medicine Unit II,10,
+structured,surya_qwen25_14b,General Medicine / Medicine Unit IV,1,
+structured,surya_qwen25_14b,General Medicine Female (3C),3,
+structured,surya_qwen25_14b,General Medicine Unit I,1,
+structured,surya_qwen25_14b,General Medicine [partially visible],2,
+structured,surya_qwen25_14b,General Medicine-Unit 1,1,
+structured,surya_qwen25_14b,General Medicine-Unit 3,1,
+structured,surya_qwen25_14b,General Medicine-Unit I,2,
+structured,surya_qwen25_14b,General Surgery Unit,1,
+structured,surya_qwen25_14b,MEDICINE-II,7,
+structured,surya_qwen25_14b,MEDICINE-IV,1,
+structured,surya_qwen25_14b,Obstetrics & Gynaecology,1,
+structured,surya_qwen25_14b,Obstetrics & Gynecology,3,
+structured,surya_qwen25_14b,Obstetrics & Gynecology [inferred from page context],1,
+structured,surya_qwen25_14b,Obstetrics and Gynecology [partially visible],1,
+structured,surya_qwen25_14b,Radiology,2,
+structured,surya_qwen25_14b,Radiotherapy-Radiotherapy,2,
+structured,surya_qwen25_14b,SURGERY-II,2,
+structured,surya_qwen25_14b,Unknown,43,
+structured,surya_qwen3_8b,Dermatology,2,
+structured,surya_qwen3_8b,Dermatology / Dermatology Venereology,1,
+structured,surya_qwen3_8b,ENT,2,
+structured,surya_qwen3_8b,ENT [from p54 context],1,
+structured,surya_qwen3_8b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,
+structured,surya_qwen3_8b,Endocrinology and Metabolism,1,
+structured,surya_qwen3_8b,GENERAL MEDICINE,1,
+structured,surya_qwen3_8b,GENERAL MEDICINE-II,1,
+structured,surya_qwen3_8b,General Medicine,30,
+structured,surya_qwen3_8b,General Medicine / Medicine Unit II,10,
+structured,surya_qwen3_8b,General Medicine / Medicine Unit IV,1,
+structured,surya_qwen3_8b,General Medicine Female (3C),3,
+structured,surya_qwen3_8b,General Medicine Unit I,1,
+structured,surya_qwen3_8b,General Medicine [partially visible],2,
+structured,surya_qwen3_8b,General Medicine-Unit 1,1,
+structured,surya_qwen3_8b,General Medicine-Unit 3,1,
+structured,surya_qwen3_8b,General Medicine-Unit I,2,
+structured,surya_qwen3_8b,General Surgery Unit,1,
+structured,surya_qwen3_8b,MEDICINE-II,7,
+structured,surya_qwen3_8b,MEDICINE-IV,1,
+structured,surya_qwen3_8b,Obstetrics & Gynaecology,1,
+structured,surya_qwen3_8b,Obstetrics & Gynecology,3,
+structured,surya_qwen3_8b,Obstetrics & Gynecology [inferred from page context],1,
+structured,surya_qwen3_8b,Obstetrics and Gynecology [partially visible],1,
+structured,surya_qwen3_8b,Radiology,2,
+structured,surya_qwen3_8b,Radiotherapy-Radiotherapy,2,
+structured,surya_qwen3_8b,SURGERY-II,2,
+structured,surya_qwen3_8b,Unknown,43,
+structured,trocr_qwen25_14b,Dermatology,2,0.2866
+structured,trocr_qwen25_14b,Dermatology / Dermatology Venereology,1,0.2143
+structured,trocr_qwen25_14b,ENT,2,0.2857
+structured,trocr_qwen25_14b,ENT [from p54 context],1,0.3018
+structured,trocr_qwen25_14b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.2571
+structured,trocr_qwen25_14b,Endocrinology and Metabolism,1,0.2536
+structured,trocr_qwen25_14b,GENERAL MEDICINE,1,0.3082
+structured,trocr_qwen25_14b,GENERAL MEDICINE-II,1,0.2778
+structured,trocr_qwen25_14b,General Medicine,30,0.27652333333333334
+structured,trocr_qwen25_14b,General Medicine / Medicine Unit II,10,0.26402000000000003
+structured,trocr_qwen25_14b,General Medicine / Medicine Unit IV,1,0.2446
+structured,trocr_qwen25_14b,General Medicine Female (3C),3,0.3018
+structured,trocr_qwen25_14b,General Medicine Unit I,1,0.3143
+structured,trocr_qwen25_14b,General Medicine [partially visible],2,0.3295
+structured,trocr_qwen25_14b,General Medicine-Unit 1,1,0.2286
+structured,trocr_qwen25_14b,General Medicine-Unit 3,1,0.2286
+structured,trocr_qwen25_14b,General Medicine-Unit I,2,0.2286
+structured,trocr_qwen25_14b,General Surgery Unit,1,0.3446
+structured,trocr_qwen25_14b,MEDICINE-II,7,0.2938714285714286
+structured,trocr_qwen25_14b,MEDICINE-IV,1,0.3
+structured,trocr_qwen25_14b,Obstetrics & Gynaecology,1,
+structured,trocr_qwen25_14b,Obstetrics & Gynecology,3,0.29583333333333334
+structured,trocr_qwen25_14b,Obstetrics & Gynecology [inferred from page context],1,0.3143
+structured,trocr_qwen25_14b,Obstetrics and Gynecology [partially visible],1,0.2714
+structured,trocr_qwen25_14b,Radiology,2,0.33035
+structured,trocr_qwen25_14b,Radiotherapy-Radiotherapy,2,0.22144999999999998
+structured,trocr_qwen25_14b,SURGERY-II,2,0.29285
+structured,trocr_qwen25_14b,Unknown,43,0.3239738095238095
+structured,trocr_qwen3_8b,Dermatology,2,0.27854999999999996
+structured,trocr_qwen3_8b,Dermatology / Dermatology Venereology,1,0.2429
+structured,trocr_qwen3_8b,ENT,2,0.2857
+structured,trocr_qwen3_8b,ENT [from p54 context],1,0.3286
+structured,trocr_qwen3_8b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.2571
+structured,trocr_qwen3_8b,Endocrinology and Metabolism,1,0.2536
+structured,trocr_qwen3_8b,GENERAL MEDICINE,1,0.2875
+structured,trocr_qwen3_8b,GENERAL MEDICINE-II,1,0.2286
+structured,trocr_qwen3_8b,General Medicine,30,0.2823
+structured,trocr_qwen3_8b,General Medicine / Medicine Unit II,10,0.2729888888888889
+structured,trocr_qwen3_8b,General Medicine / Medicine Unit IV,1,0.2571
+structured,trocr_qwen3_8b,General Medicine Female (3C),3,0.31610000000000005
+structured,trocr_qwen3_8b,General Medicine Unit I,1,0.3143
+structured,trocr_qwen3_8b,General Medicine [partially visible],2,0.35
+structured,trocr_qwen3_8b,General Medicine-Unit 1,1,0.2286
+structured,trocr_qwen3_8b,General Medicine-Unit 3,1,0.2571
+structured,trocr_qwen3_8b,General Medicine-Unit I,2,0.2286
+structured,trocr_qwen3_8b,General Surgery Unit,1,0.3446
+structured,trocr_qwen3_8b,MEDICINE-II,7,0.3081714285714286
+structured,trocr_qwen3_8b,MEDICINE-IV,1,0.3286
+structured,trocr_qwen3_8b,Obstetrics & Gynaecology,1,0.281
+structured,trocr_qwen3_8b,Obstetrics & Gynecology,3,0.3
+structured,trocr_qwen3_8b,Obstetrics & Gynecology [inferred from page context],1,0.3286
+structured,trocr_qwen3_8b,Obstetrics and Gynecology [partially visible],1,0.2857
+structured,trocr_qwen3_8b,Radiology,2,0.3358
+structured,trocr_qwen3_8b,Radiotherapy-Radiotherapy,2,0.25
+structured,trocr_qwen3_8b,SURGERY-II,2,0.30715000000000003
+structured,trocr_qwen3_8b,Unknown,43,0.3206609756097561

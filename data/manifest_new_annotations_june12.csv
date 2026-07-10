@@ -1,0 +1,13 @@
+document_id,ground_truth_json_path,source_image_paths,total_pages,source_type,notes
+p4,raw_ground_truths/p4.json,prescriptions/p4.jpeg,1,prescription,single-page ophthalmology prescription
+p5,raw_ground_truths/p5.json,prescriptions/p5.jpeg,1,prescription,single-page ophthalmology prescription
+p6,raw_ground_truths/p6.json,prescriptions/p6.jpeg,1,prescription,single-page ophthalmology prescription
+p7,raw_ground_truths/p7.json,prescriptions/p7.jpeg,1,prescription,single-page ophthalmology prescription
+p8,raw_ground_truths/p8.json,prescriptions/p8.jpeg,1,prescription,single-page ophthalmology prescription
+p9,raw_ground_truths/p9.json,prescriptions/p9.jpeg,1,prescription,single-page ophthalmology prescription
+p10,raw_ground_truths/p10.json,prescriptions/p10.jpeg,1,prescription,single-page ophthalmology prescription
+p26,raw_ground_truths/p26/p26_1.json,prescriptions/p26/p26_1/presc_image17172327130.jpg;prescriptions/p26/p26_1/presc_image17172327131.jpg,2,opd_prescription,two-page SVS OPD prescription
+p27,raw_ground_truths/p27/p27_1.json,prescriptions/p27/p27_1/presc_image17172337950.jpg;prescriptions/p27/p27_1/presc_image17172337951.jpg,2,opd_prescription,two-page SVS OPD prescription
+p28,raw_ground_truths/p28/p28_1.json,prescriptions/p28/p28_1/presc_image17172268660.jpg;prescriptions/p28/p28_1/presc_image17172268661.jpg,2,opd_prescription,two-page SVS OPD prescription
+p29,raw_ground_truths/p29/p29_1.json,prescriptions/p29/p29_1/presc_image17172364510.jpg;prescriptions/p29/p29_1/presc_image17172364511.jpg,2,opd_prescription,two-page SVS OPD prescription
+p30,raw_ground_truths/p30/p30_1.json,prescriptions/p30/p30_1/presc_image17172336260.jpg;prescriptions/p30/p30_1/presc_image17172336261.jpg,2,opd_prescription,two-page SVS OPD prescription

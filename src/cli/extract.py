@@ -1,3 +1,17 @@
+# Copyright 2026 ClinDoc-Bench-IN contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import argparse
 import csv
 import io
@@ -27,7 +41,10 @@ from src.schemas.raw_extraction import CanonicalRawDoc, Metadata
 from src.adapters.backend_adapter_qwen import QwenVLBackendAdapter
 from src.adapters.backend_adapter_openrouter import OpenRouterBackendAdapter
 from src.adapters.backend_adapter_openai_compatible_vlm import OpenAICompatibleVLMBackendAdapter
+from src.adapters.backend_adapter_hf_inference import HFInferenceBackendAdapter
+from src.adapters.backend_adapter_gemini import GeminiBackendAdapter
 from src.utils.rate_limiter import init_global_limiter, get_global_limiter
+from src.utils.provider_routing import canonical_hf_model_id, provider_for_model, is_gemini_model
 
 
 
@@ -37,6 +54,104 @@ logger = logging.getLogger("ExtractCLI")
 
 def csv_value(value: Any) -> Any:
     return "" if value is None else value
+
+def validate_completed_output(path: Path) -> tuple[bool, str]:
+    if not path.exists():
+        return False, "missing"
+    if path.stat().st_size == 0:
+        return False, "empty"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return False, f"invalid_json:{exc}"
+    try:
+        CanonicalRawDoc(**data)
+    except Exception as exc:
+        return False, f"schema_invalid:{str(exc)[:200]}"
+    return True, "valid"
+
+def atomic_write_text(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp_path = path.with_suffix(path.suffix + ".tmp")
+    with open(tmp_path, "w", encoding="utf-8") as out_f:
+        out_f.write(text)
+    os.replace(tmp_path, path)
+
+def append_jsonl(path: Path, record: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+def is_quota_or_rate_error_text(text: str) -> bool:
+    lowered = (text or "").lower()
+    markers = (
+        "429",
+        "rate limit",
+        "rate_limit",
+        "quota",
+        "resource_exhausted",
+        "too many requests",
+        "requests limit",
+        "token limit",
+        "credit",
+        "capacity exceeded",
+    )
+    return any(marker in lowered for marker in markers)
+
+def provider_exhausted_from_response(response: dict) -> bool:
+    error_text = str(response.get("error", "") or "")
+    if is_quota_or_rate_error_text(error_text):
+        return True
+
+    gemini_usage = response.get("gemini_usage") or {}
+    gemini_keys = gemini_usage.get("keys") or []
+    if gemini_keys:
+        if all(
+            (key.get("rate_limits", 0) or 0) > 0
+            or bool(key.get("temporarily_unavailable"))
+            or is_quota_or_rate_error_text(str(key.get("last_error", "") or ""))
+            for key in gemini_keys
+        ):
+            return True
+
+    hf_tokens = response.get("hf_token_usage") or []
+    if hf_tokens:
+        if all(
+            (token.get("rate_limits", 0) or 0) > 0
+            or is_quota_or_rate_error_text(str(token.get("last_error", "") or ""))
+            for token in hf_tokens
+        ):
+            return True
+
+    return False
+
+def log_provider_usage(log_path: Path, document_id: str, backend_config: dict, response: dict, status: str, error_type: str = "") -> None:
+    usage = response.get("usage") or {}
+    append_jsonl(log_path, {
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "document_id": document_id,
+        "status": status,
+        "error_type": error_type,
+        "provider": response.get("provider") or backend_config.get("backend_name"),
+        "backend_name": response.get("backend_name") or backend_config.get("backend_name"),
+        "model": response.get("model_name") or backend_config.get("model_name"),
+        "api_key_label": response.get("api_key_label") or "",
+        "retry_count": response.get("retry_count", 0),
+        "latency_ms": response.get("processing_time_ms", 0.0),
+        "input_tokens": usage.get("input_tokens", 0),
+        "output_tokens": usage.get("output_tokens", 0),
+        "total_tokens": usage.get("total_tokens", 0),
+        "gemini_usage": response.get("gemini_usage"),
+    })
+
+def update_checkpoint(checkpoint_path: Path, document_id: str, status: str, output_path: Path, detail: str = "") -> None:
+    append_jsonl(checkpoint_path, {
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "document_id": document_id,
+        "status": status,
+        "output_path": str(output_path),
+        "detail": detail,
+    })
 
 def estimate_compressed_image_size_kb(images: list[Image.Image], max_image_dim: int, jpeg_quality: int) -> float:
     total_bytes = 0
@@ -130,7 +245,7 @@ def log_openrouter_usage(
     is_empty = False
     if file_exists:
         is_empty = log_path.stat().st_size == 0
-
+        
     fieldnames = ["timestamp", "document_id", "model", "input_tokens", "output_tokens", "total_tokens", "estimated_cost", "latency_ms", "status"]
     if file_exists and not is_empty:
         try:
@@ -197,7 +312,7 @@ def log_internal_qwen3_usage(
     is_empty = False
     if file_exists:
         is_empty = log_path.stat().st_size == 0
-
+        
     fieldnames = [
         "timestamp", "document_id", "model", "num_images", "max_tokens",
         "latency_ms", "status", "error_type", "validation_status", "notes",
@@ -266,31 +381,31 @@ def clean_and_repair_json(raw_text: str) -> str:
     """
     if not raw_text:
         return ""
-
+        
     text = raw_text.strip()
-
+    
     # 1. Strip markdown fences
     if text.startswith("```"):
         # Match ```json or ``` at beginning
         text = re.sub(r"^```(?:json)?\s*", "", text)
         text = re.sub(r"\s*```$", "", text)
-
+        
     text = text.strip()
-
+    
     # 2. Locate the outermost curly braces { ... }
     start_idx = text.find("{")
     end_idx = text.rfind("}")
-
+    
     if start_idx == -1 or end_idx == -1 or start_idx > end_idx:
         return text  # Return as is, let standard json parser throw exception
-
+        
     json_block = text[start_idx:end_idx + 1]
-
+    
     # 3. Clean trailing commas (e.g. [1, 2,] -> [1, 2] or {"a": 1,} -> {"a": 1})
     # Remove trailing commas before matching closing bracket/brace
     # Avoid complex regex that could break nested JSON, use a conservative replacement:
     json_block = re.sub(r",\s*([\]}])", r"\1", json_block)
-
+    
     return json_block
 
 def prune_placeholder_items(parsed_dict: dict, warnings: Optional[list] = None) -> dict:
@@ -299,10 +414,10 @@ def prune_placeholder_items(parsed_dict: dict, warnings: Optional[list] = None) 
     """
     if not isinstance(parsed_dict, dict):
         return parsed_dict
-
+        
     if warnings is None:
         warnings = []
-
+        
     # Helper to check if a value is effectively null or a placeholder string
     def is_empty(val):
         if val is None:
@@ -350,13 +465,13 @@ def prune_placeholder_items(parsed_dict: dict, warnings: Optional[list] = None) 
                 # Check if raw_line_text or raw_name is present
                 raw_line = item.get("raw_line_text")
                 raw_name = item.get("raw_name")
-
+                
                 # If raw_line_text is empty but raw_name is present, use raw_name
                 if is_empty(raw_line) and not is_empty(raw_name):
                     item["raw_line_text"] = raw_name
                     raw_line = raw_name
                     warnings.append(f"medications[{idx}]: raw_line_text was empty; populated from raw_name")
-
+                    
                 if not is_empty(raw_line):
                     cleaned_meds.append(item)
                 else:
@@ -418,12 +533,12 @@ def prune_placeholder_items(parsed_dict: dict, warnings: Optional[list] = None) 
 def select_prompt_template(row: dict, oracle_mode: bool, project_root: Path) -> str:
     source_type = None
     speciality = None
-
+    
     if oracle_mode:
         # Load Ground Truth if available to get source_type/speciality
         doc_id = row["document_id"]
         gt_path = None
-
+        
         # 1. Try manifest_canonical.csv lookup
         manifest_canonical = project_root / "data" / "manifest_canonical.csv"
         if manifest_canonical.exists():
@@ -437,7 +552,7 @@ def select_prompt_template(row: dict, oracle_mode: bool, project_root: Path) -> 
                             break
             except Exception as e:
                 logger.warning(f"Error reading manifest_canonical.csv: {e}")
-
+                
         # 2. Heuristics fallback
         if not gt_path:
             possible_paths = [
@@ -450,7 +565,7 @@ def select_prompt_template(row: dict, oracle_mode: bool, project_root: Path) -> 
                 if p.exists():
                     gt_path = p
                     break
-
+                    
         # Load GT source_type
         if gt_path and gt_path.exists():
             try:
@@ -459,18 +574,18 @@ def select_prompt_template(row: dict, oracle_mode: bool, project_root: Path) -> 
                 source_type = gt_data.get("document_metadata", {}).get("source_type")
             except Exception as e:
                 logger.warning(f"Failed to load GT file {gt_path} for oracle prompt selection: {e}")
-
+                
         # Load speciality from manifest row
         speciality = row.get("speciality")
     else:
         # Production deployment: use manifest metadata or filename/heuristics
         speciality = row.get("speciality")
         source_type = row.get("source_type")
-
+        
         # Heuristics based on document_id and image_path
         doc_id = row.get("document_id", "").lower()
         image_path = row.get("image_path", "").lower()
-
+        
         if not source_type:
             if "lab" in doc_id or "lab" in image_path or "report" in doc_id or "report" in image_path:
                 source_type = "lab_report"
@@ -481,7 +596,7 @@ def select_prompt_template(row: dict, oracle_mode: bool, project_root: Path) -> 
                     source_type = "radiology_image"
                 else:
                     source_type = "radiology_report"
-
+                    
         if not speciality:
             if "ophthal" in doc_id or "ophthal" in image_path or "eye" in doc_id or "eye" in image_path:
                 speciality = "ophthalmology"
@@ -511,43 +626,46 @@ async def extract_document(
     dry_run: bool,
     oracle_mode: bool = False,
     raw_responses_dir: Optional[Path] = None
-) -> bool:
+) -> dict:
     doc_id = row["document_id"]
     image_paths_str = row["image_path"]
-
+    
     # Parse semicolon-separated images in exact order
     rel_paths = [p.strip() for p in image_paths_str.split(";") if p.strip()]
     abs_paths = [PROJECT_ROOT / p for p in rel_paths]
-
+    
     # Determine save path
     save_path = output_dir / f"{doc_id}.json"
-
+    
     if save_path.exists() and not overwrite:
-        logger.info(f"Document {doc_id} already successfully extracted. Skipping.")
-        return True
-
+        valid, reason = validate_completed_output(save_path)
+        if valid:
+            logger.info(f"Document {doc_id} already has a valid completed output. Skipping.")
+            return {"success": True, "provider_exhausted": False, "retryable": False, "error": ""}
+        logger.warning(f"Document {doc_id} output exists but is not valid ({reason}); reprocessing.")
+        
     if dry_run:
         logger.info(f"[DRY-RUN] Would extract document {doc_id} with images: {rel_paths}")
-        return True
-
+        return {"success": True, "provider_exhausted": False, "retryable": False, "error": ""}
+        
     logger.info(f"Extracting document {doc_id} with {len(abs_paths)} pages...")
-
+    
     # Load images
     pil_images = []
     for p in abs_paths:
         if not p.exists():
             logger.error(f"Image path does not exist: {p}")
-            return False
+            return {"success": False, "provider_exhausted": False, "retryable": False, "error": f"missing image path: {p}"}
         try:
             pil_images.append(Image.open(p).convert("RGB"))
         except Exception as e:
             logger.error(f"Failed to open image {p}: {e}")
-            return False
-
+            return {"success": False, "provider_exhausted": False, "retryable": False, "error": str(e)}
+            
     # Dynamic prompt selection
     prompt_key = select_prompt_template(row, oracle_mode, PROJECT_ROOT)
     logger.info(f"Selected prompt template: '{prompt_key}' for document '{doc_id}' (oracle_mode={oracle_mode})")
-
+    
     template = prompt_config.get(prompt_key)
     if not template:
         # Fallback to prescription template if v2 specific not found
@@ -555,17 +673,19 @@ async def extract_document(
     if not template:
         # Final fallback to raw_extraction legacy key if any
         template = prompt_config.get("raw_extraction", {})
-
+        
     raw_prompt_text = template.get("user_prompt", "")
     user_prompt = raw_prompt_text.replace("{{document_id}}", doc_id)
     system_prompt = template.get("system_prompt", "")
-
+    
     # Combined prompt with system instructions
     combined_prompt = f"{system_prompt}\n\nUser request:\n{user_prompt}"
 
-
+    
     is_openrouter = (backend_config.get("backend_name") == "openrouter")
+    is_cloud_provider = backend_config.get("backend_name") in {"hf_inference", "gemini", "gemini_rotating"}
     log_path = PROJECT_ROOT / "logs" / "openrouter_usage.csv"
+    cloud_log_path = PROJECT_ROOT / "logs" / "provider_usage.jsonl"
 
     # Execute backend adapter
     try:
@@ -588,17 +708,17 @@ async def extract_document(
             "max_tokens": max_tokens_val,
             "top_p": backend_config.get("top_p", 0.9)
         }
-
+        
         # Rate limiting for internal qwen3-27b API
         sleep_seconds_before_request = 0.0
         estimated_input_tokens = None
         estimated_output_tokens = None
         total_estimated_tokens = None
         rolling_tokens_before_request = None
-
+        
         if backend_config.get("backend_name") == "internal_qwen3_27b_vlm":
             limiter = get_global_limiter()
-
+            
             compressed_image_size_kb = estimate_compressed_image_size_kb(
                 pil_images,
                 max_image_dim=backend_config.get("max_image_dim", 1024),
@@ -615,16 +735,16 @@ async def extract_document(
             estimated_input_tokens = estimated_components["input_tokens"]
             estimated_output_tokens = estimated_components["output_budget_tokens"]
             total_estimated_tokens = estimated_components["total_tokens"]
-
+            
             # Check rate limits and wait if needed
             rolling_tokens_before_request = limiter.get_rolling_tokens()
             logger.info(f"Rate limit check before {doc_id}: {limiter.format_summary_for_log()}")
-
+            
             sleep_seconds_before_request = limiter.wait_if_needed(
                 document_id=doc_id,
                 estimated_tokens=total_estimated_tokens
             )
-
+        
         # Run async inference
         response = await adapter.run(
             prompt=combined_prompt,
@@ -647,6 +767,15 @@ async def extract_document(
                 latency_ms=0.0,
                 status="failed"
             )
+        if is_cloud_provider:
+            log_provider_usage(
+                log_path=cloud_log_path,
+                document_id=doc_id,
+                backend_config=backend_config,
+                response={"error": str(e), "processing_time_ms": 0.0},
+                status="failed",
+                error_type="exception",
+            )
         if backend_config.get("backend_name") == "internal_qwen3_27b_vlm":
             log_internal_qwen3_usage(
                 log_path=PROJECT_ROOT / "logs" / "internal_qwen3_usage.csv",
@@ -667,8 +796,13 @@ async def extract_document(
                 retry_after_rate_limit=False,
                 rate_limit_reason=None
             )
-        return False
-
+        return {
+            "success": False,
+            "provider_exhausted": is_quota_or_rate_error_text(str(e)),
+            "retryable": True,
+            "error": str(e),
+        }
+        
     if "error" in response:
         logger.error(f"Inference backend returned error for {doc_id}: {response['error']}")
         save_failed_outputs(doc_id, failed_dir, response.get("content") or "", {"backend_error": response["error"]}, is_openrouter=is_openrouter)
@@ -684,11 +818,20 @@ async def extract_document(
                 latency_ms=response.get("processing_time_ms", 0.0),
                 status="failed"
             )
+        if is_cloud_provider:
+            log_provider_usage(
+                log_path=cloud_log_path,
+                document_id=doc_id,
+                backend_config=backend_config,
+                response=response,
+                status="failed",
+                error_type="backend_error",
+            )
         if backend_config.get("backend_name") == "internal_qwen3_27b_vlm":
             # Check if error was rate-limit related
             is_rate_limit_error = "429" in str(response.get("error", "")) or "rate" in str(response.get("error", "")).lower()
             limiter = get_global_limiter() if backend_config.get("backend_name") == "internal_qwen3_27b_vlm" else None
-
+            
             log_internal_qwen3_usage(
                 log_path=PROJECT_ROOT / "logs" / "internal_qwen3_usage.csv",
                 document_id=doc_id,
@@ -708,8 +851,13 @@ async def extract_document(
                 retry_after_rate_limit=is_rate_limit_error,
                 rate_limit_reason="429_or_rate_error_in_response" if is_rate_limit_error else None
             )
-        return False
-
+        return {
+            "success": False,
+            "provider_exhausted": provider_exhausted_from_response(response),
+            "retryable": True,
+            "error": str(response.get("error", "")),
+        }
+        
     warnings = []
     coercions = []
 
@@ -719,7 +867,7 @@ async def extract_document(
     if raw_content.strip() != repaired_json.strip():
 
         warnings.append("JSON raw output required markdown or trailing comma cleanup")
-
+    
     # Parse and validate
     parsed_dict = None
     parse_error = None
@@ -728,7 +876,7 @@ async def extract_document(
     except Exception as je:
         parse_error = f"JSON parse error: {str(je)}"
         logger.error(f"Failed to parse JSON for {doc_id}: {je}")
-
+        
     if parsed_dict is None:
         save_failed_outputs(doc_id, failed_dir, raw_content, {"parse_error": parse_error, "repaired_text": repaired_json}, is_openrouter=is_openrouter)
         if is_openrouter:
@@ -743,6 +891,15 @@ async def extract_document(
                 estimated_cost=usage.get("estimated_cost", 0.0),
                 latency_ms=response.get("processing_time_ms", 0.0),
                 status="failed"
+            )
+        if is_cloud_provider:
+            log_provider_usage(
+                log_path=cloud_log_path,
+                document_id=doc_id,
+                backend_config=backend_config,
+                response=response,
+                status="failed",
+                error_type="json_parse_error",
             )
         if backend_config.get("backend_name") == "internal_qwen3_27b_vlm":
             api_prompt_tokens, api_completion_tokens, api_total_tokens, actual_usage_available = record_internal_qwen3_rate_usage(
@@ -774,11 +931,11 @@ async def extract_document(
                 retry_after_rate_limit=False,
                 rate_limit_reason=None
             )
-        return False
-
+        return {"success": False, "provider_exhausted": False, "retryable": False, "error": parse_error or "json parse error"}
+        
     # Prune empty placeholder items
     parsed_dict = prune_placeholder_items(parsed_dict, warnings=warnings)
-
+        
     # Coerce fields in patient_information and encounter_information to string if they are numeric
     if isinstance(parsed_dict, dict) and "patient_information" in parsed_dict and isinstance(parsed_dict["patient_information"], dict):
         pinfo = parsed_dict["patient_information"]
@@ -788,7 +945,7 @@ async def extract_document(
                 new_val = str(pinfo[k])
                 pinfo[k] = new_val
                 coercions.append(f"patient_information.{k}: coerced {type(old_val).__name__} ({old_val}) to string ({new_val})")
-
+                
     if isinstance(parsed_dict, dict) and "encounter_information" in parsed_dict and isinstance(parsed_dict["encounter_information"], dict):
         einfo = parsed_dict["encounter_information"]
         for k in ["date", "department", "hospital_name", "doctor_name", "visit_type", "fees", "room_or_queue_no"]:
@@ -823,11 +980,11 @@ async def extract_document(
                 for idx, rel_path in enumerate(rel_paths)
             ]
         }
-
+        
         # Merge or overwrite parsed doc metadata
         parsed_dict["document_id"] = doc_id
         parsed_dict["schema_version"] = "raw_rx_v2"
-
+        
         # Enforce page_number mapping order based on lists
         # We can add helper logic to ensure each item's page_number is checked
         def clamp_page_numbers(items_list):
@@ -839,22 +996,20 @@ async def extract_document(
                         item["page_number"] = 1
                     elif pg > len(pil_images):
                         item["page_number"] = len(pil_images)
-
+        
         for k in ["complaints_or_diagnosis", "observations", "medications", "procedures", "advice", "allergy_mentions", "other_notes", "lab_observations"]:
             if k in parsed_dict and isinstance(parsed_dict[k], list):
                 clamp_page_numbers(parsed_dict[k])
-
+                
         # Validate Pydantic
         canonical_doc = CanonicalRawDoc(**parsed_dict)
-
+        
         # Add metadata block
         canonical_doc.metadata = Metadata(**metadata_dict)
-
-        # Save successful output JSON
-        save_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(save_path, "w", encoding="utf-8") as out_f:
-            out_f.write(canonical_doc.model_dump_json(indent=2))
-
+        
+        # Save successful output JSON atomically so interrupted writes are never mistaken as complete.
+        atomic_write_text(save_path, canonical_doc.model_dump_json(indent=2))
+            
         if raw_responses_dir:
             raw_responses_dir.mkdir(parents=True, exist_ok=True)
             with open(raw_responses_dir / f"{doc_id}.txt", "w", encoding="utf-8") as rf:
@@ -873,6 +1028,14 @@ async def extract_document(
                 latency_ms=response.get("processing_time_ms", 0.0),
                 status="success"
             )
+        if is_cloud_provider:
+            log_provider_usage(
+                log_path=cloud_log_path,
+                document_id=doc_id,
+                backend_config=backend_config,
+                response=response,
+                status="success",
+            )
         if backend_config.get("backend_name") == "internal_qwen3_27b_vlm":
             api_prompt_tokens, api_completion_tokens, api_total_tokens, actual_usage_available = record_internal_qwen3_rate_usage(
                 document_id=doc_id,
@@ -881,7 +1044,7 @@ async def extract_document(
                 estimated_output_tokens=estimated_output_tokens,
                 reason="successful_extraction",
             )
-
+            
             log_internal_qwen3_usage(
                 log_path=PROJECT_ROOT / "logs" / "internal_qwen3_usage.csv",
                 document_id=doc_id,
@@ -905,8 +1068,8 @@ async def extract_document(
                 rate_limit_reason=None
             )
         logger.info(f"[SUCCESS] Document {doc_id} parsed and validated successfully.")
-        return True
-
+        return {"success": True, "provider_exhausted": False, "retryable": False, "error": ""}
+        
     except Exception as ve:
         validation_error = f"Pydantic validation error: {str(ve)}"
         logger.error(f"Validation failed for {doc_id}: {ve}")
@@ -923,6 +1086,15 @@ async def extract_document(
                 estimated_cost=usage.get("estimated_cost", 0.0),
                 latency_ms=response.get("processing_time_ms", 0.0),
                 status="failed"
+            )
+        if is_cloud_provider:
+            log_provider_usage(
+                log_path=cloud_log_path,
+                document_id=doc_id,
+                backend_config=backend_config,
+                response=response,
+                status="failed",
+                error_type="validation_error",
             )
         if backend_config.get("backend_name") == "internal_qwen3_27b_vlm":
             api_prompt_tokens, api_completion_tokens, api_total_tokens, actual_usage_available = record_internal_qwen3_rate_usage(
@@ -954,29 +1126,29 @@ async def extract_document(
                 retry_after_rate_limit=False,
                 rate_limit_reason=None
             )
-        return False
+        return {"success": False, "provider_exhausted": False, "retryable": False, "error": validation_error}
 
 
 def save_failed_outputs(doc_id: str, failed_dir: Path, raw_text: str, error_details: dict, is_openrouter: bool = False):
     failed_dir.mkdir(parents=True, exist_ok=True)
-
+    
     if is_openrouter:
         txt_path = failed_dir / "raw_response.txt"
         err_path = failed_dir / "error.json"
     else:
         txt_path = failed_dir / f"{doc_id}.txt"
         err_path = failed_dir / f"{doc_id}_error.json"
-
+        
     with open(txt_path, "w", encoding="utf-8") as f:
         f.write(raw_text)
-
+        
     with open(err_path, "w", encoding="utf-8") as f:
         json.dump({
             "document_id": doc_id,
             "timestamp": datetime.utcnow().isoformat() + "Z",
             **error_details
         }, f, indent=2)
-
+        
     logger.info(f"[FAILED] Saved error information to {failed_dir}")
 
 
@@ -1126,45 +1298,50 @@ async def async_main():
         action="store_true",
         help="Use non-streaming chat completions for endpoints that return empty streamed content"
     )
-
+    parser.add_argument(
+        "--stop-on-provider-exhausted",
+        action="store_true",
+        help="Stop the run after a cloud-provider quota/rate-exhaustion failure that persisted through adapter retries/key rotation."
+    )
+    
     args = parser.parse_args()
-
+    
     # Resolve absolute paths
     manifest_path = PROJECT_ROOT / args.manifest
     config_path = PROJECT_ROOT / args.config
     prompts_path = PROJECT_ROOT / args.prompts
-
+    
     # Read manifest
     if not manifest_path.exists():
         logger.error(f"Manifest file not found: {manifest_path}")
         sys.exit(1)
-
+        
     rows = []
     with open(manifest_path, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             rows.append(row)
-
+            
     # Restrict to document_id if specified
     if args.document_id:
         rows = [r for r in rows if r["document_id"] == args.document_id]
         if not rows:
             logger.error(f"No document with id '{args.document_id}' found in the manifest.")
             sys.exit(1)
-
+            
     # Apply limit
     if args.limit is not None:
         rows = rows[:args.limit]
-
+        
     logger.info(f"Loaded {len(rows)} documents for extraction from manifest.")
-
+    
     # Load backends configuration
     if not config_path.exists():
         logger.error(f"Backends config not found: {config_path}")
         sys.exit(1)
     with open(config_path, "r", encoding="utf-8") as f:
         backends_config = yaml.safe_load(f)
-
+        
     backend_opts = backends_config.get("backends", {}).get(args.backend)
     if not backend_opts:
         logger.error(f"Backend '{args.backend}' config not defined in backends.yaml.")
@@ -1174,12 +1351,33 @@ async def async_main():
     backend_opts["jpeg_quality"] = args.jpeg_quality
     if args.max_tokens is not None:
         backend_opts["max_tokens"] = args.max_tokens
-
+        
     if args.model:
         backend_opts["model_name"] = args.model
-
+    requested_backend = args.backend
+    requested_model = backend_opts.get("model_name", "")
+    routed_from_openrouter = False
+    if requested_backend == "openrouter":
+        routed_from_openrouter = True
+        routed_provider = provider_for_model(requested_model)
+        logger.warning(
+            "OpenRouter is disabled by policy. Routing requested model '%s' through '%s'.",
+            requested_model,
+            routed_provider,
+        )
+        backend_opts["backend_name"] = routed_provider
+        if routed_provider == "hf_inference":
+            backend_opts["model_name"] = canonical_hf_model_id(requested_model)
+        elif routed_provider == "gemini":
+            backend_opts["backend_name"] = "gemini_rotating"
+            backend_opts["model_name"] = requested_model.replace("google/", "")
+        
     # Set up paths dynamically
-    safe_model = backend_opts.get("model_name", "").replace("/", "_")
+    # Preserve legacy OpenRouter output directory names when resuming old runs, even
+    # though the actual provider is now HF/Gemini. This avoids restarting from
+    # scratch and lets valid prior outputs be skipped.
+    safe_model_source = requested_model if args.backend == "openrouter" else backend_opts.get("model_name", "")
+    safe_model = safe_model_source.replace("/", "_")
     if args.backend == "openrouter":
         manifest_name = Path(args.manifest).name.lower()
         suffix = "subset" if "subset" in manifest_name else "smoke"
@@ -1204,25 +1402,41 @@ async def async_main():
         output_dir = PROJECT_ROOT / args.output_dir
         raw_responses_dir = None
         failed_dir = PROJECT_ROOT / "outputs" / "raw_extractions_failed" / args.backend
-
+        
     # Load prompts configuration
     if not prompts_path.exists():
         logger.error(f"Prompts config not found: {prompts_path}")
         sys.exit(1)
     with open(prompts_path, "r", encoding="utf-8") as f:
         prompt_config = yaml.safe_load(f)
-
+        
     # Initialize backend adapter
-    if args.backend == "openrouter":
-        api_key = os.getenv("OPENROUTER_API_KEY")
-        if not api_key:
-            logger.error("OPENROUTER_API_KEY environment variable is not set!")
+    if backend_opts.get("backend_name") == "hf_inference":
+        hf_token = os.getenv("HF_TOKEN")
+        if not hf_token:
+            logger.error("HF_TOKEN environment variable is not set!")
             sys.exit(1)
-        adapter = OpenRouterBackendAdapter(
-            model_id=backend_opts.get("model_name"),
-            api_key=api_key,
-            max_image_dim=args.max_image_dim
+        adapter = HFInferenceBackendAdapter(
+            model_id=canonical_hf_model_id(backend_opts.get("model_name")),
+            token=None,
+            provider=backend_opts.get("provider", "auto"),
+            max_image_dim=args.max_image_dim,
+            jpeg_quality=args.jpeg_quality,
+            timeout=backend_opts.get("timeout", 300),
+            max_retries=backend_opts.get("max_retries", 5),
         )
+        backend_opts["model_name"] = adapter.model_id
+    elif backend_opts.get("backend_name") in {"gemini", "gemini_rotating", "gemini_2_flash"} or is_gemini_model(backend_opts.get("model_name")):
+        gemini_model = backend_opts.get("model_name", "gemini-2.5-flash").replace("google/", "")
+        adapter = GeminiBackendAdapter(
+            model_id=gemini_model,
+            max_retries=backend_opts.get("max_retries", 8),
+            backoff_initial=backend_opts.get("backoff_initial", 2.0),
+            backoff_max=backend_opts.get("backoff_max", 90.0),
+            rate_limit_cooldown=backend_opts.get("rate_limit_cooldown", 60.0),
+        )
+        backend_opts["backend_name"] = "gemini_rotating"
+        backend_opts["model_name"] = gemini_model
     elif args.backend == "internal_qwen3_27b_vlm":
         api_key = os.getenv("INTERNAL_QWEN3_API_KEY")
         base_url = os.getenv("INTERNAL_QWEN3_BASE_URL", "http://10.10.110.37:4000/v1")
@@ -1245,7 +1459,7 @@ async def async_main():
             model_id=backend_opts.get("model_name", "Qwen/Qwen2.5-VL-7B-Instruct")
         )
 
-
+    
     # Initialize rate limiter for internal qwen3-27b API
     if args.backend == "internal_qwen3_27b_vlm":
         init_global_limiter(
@@ -1260,33 +1474,40 @@ async def async_main():
             f"TPM={args.tpm_limit}, RPM={args.rpm_limit}, "
             f"window={args.rate_limit_window_sec}sec, buffer={args.rate_limit_buffer_sec}sec"
         )
-
+    
     # Process sequentially to avoid throttling or GPU OOM
     success_count = 0
     failure_count = 0
-
+    stopped_for_provider_exhaustion = False
+    
     output_dir.mkdir(parents=True, exist_ok=True)
     log_path = PROJECT_ROOT / "logs" / "openrouter_usage.csv"
-
+    checkpoint_path = PROJECT_ROOT / "logs" / f"checkpoint_{Path(output_dir).name}.jsonl"
+    
     for row in rows:
         doc_id = row["document_id"]
         save_path = output_dir / f"{doc_id}.json"
-
+        
         if save_path.exists() and args.resume and not args.overwrite:
-            logger.info(f"Skipping {doc_id} as resume flag is enabled and output file exists.")
-            success_count += 1
-            continue
-
+            valid, reason = validate_completed_output(save_path)
+            if valid:
+                logger.info(f"Skipping {doc_id}: resume found valid completed output.")
+                update_checkpoint(checkpoint_path, doc_id, "skipped_valid", save_path, reason)
+                success_count += 1
+                continue
+            logger.warning(f"Resume found invalid output for {doc_id} ({reason}); reprocessing.")
+            update_checkpoint(checkpoint_path, doc_id, "reprocess_invalid", save_path, reason)
+            
         # Strict Budget check before invoking API
         if args.backend == "openrouter":
             current_cumulative = get_cumulative_cost(log_path)
             if current_cumulative >= args.max_cost_usd:
                 logger.warning(f"Budget exceeded! Cumulative cost {current_cumulative:.4f} USD >= limit {args.max_cost_usd:.4f} USD. Stopping extraction.")
                 break
-
+                
         doc_failed_dir = failed_dir / doc_id if args.backend == "openrouter" else failed_dir
-
-        success = await extract_document(
+        
+        result = await extract_document(
             row=row,
             adapter=adapter,
             backend_config=backend_opts,
@@ -1298,14 +1519,23 @@ async def async_main():
             oracle_mode=args.oracle_mode,
             raw_responses_dir=raw_responses_dir
         )
+        success = bool(result.get("success"))
+        provider_exhausted = bool(result.get("provider_exhausted"))
+        retryable_failure = bool(result.get("retryable"))
+        failure_error = str(result.get("error", "") or "")
 
-        if not success and args.retry_failed_once:
+        if (
+            not success
+            and args.retry_failed_once
+            and retryable_failure
+            and not (args.stop_on_provider_exhausted and provider_exhausted)
+        ):
             logger.warning(
                 f"Document {doc_id} failed on first attempt. "
                 f"Cooling down for {args.retry_cooldown_sec:.1f} sec before one retry."
             )
             time.sleep(args.retry_cooldown_sec)
-            success = await extract_document(
+            result = await extract_document(
                 row=row,
                 adapter=adapter,
                 backend_config=backend_opts,
@@ -1317,20 +1547,39 @@ async def async_main():
                 oracle_mode=args.oracle_mode,
                 raw_responses_dir=raw_responses_dir
             )
-
+            success = bool(result.get("success"))
+            provider_exhausted = bool(result.get("provider_exhausted"))
+            retryable_failure = bool(result.get("retryable"))
+            failure_error = str(result.get("error", "") or "")
+        
         if success:
             success_count += 1
+            if not args.dry_run:
+                update_checkpoint(checkpoint_path, doc_id, "success", save_path)
         else:
             failure_count += 1
+            if not args.dry_run:
+                detail = "provider_exhausted" if provider_exhausted else failure_error[:400]
+                update_checkpoint(checkpoint_path, doc_id, "failed", save_path, detail)
+
+        if not success and args.stop_on_provider_exhausted and provider_exhausted:
+            logger.warning(
+                "Stopping extraction after provider exhaustion for document %s: %s",
+                doc_id,
+                failure_error[:400],
+            )
+            stopped_for_provider_exhaustion = True
+            break
 
         if args.inter_document_sleep_sec > 0:
             logger.info(f"Sleeping {args.inter_document_sleep_sec:.1f} sec before next document.")
             time.sleep(args.inter_document_sleep_sec)
-
+            
     logger.info(f"Extraction Stage Completed. Total Successful: {success_count}, Total Failed: {failure_count}")
+    return 3 if stopped_for_provider_exhaustion else 0
 
 def main():
-    asyncio.run(async_main())
+    raise SystemExit(asyncio.run(async_main()))
 
 if __name__ == "__main__":
     main()

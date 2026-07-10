@@ -1,0 +1,9 @@
+family,track,origin_server,publication_status,models,mean_primary_score,mean_records
+raw_ocr,raw_ocr,server1,PRIMARY TABLE,2,0.223494,125.0
+raw_ocr,raw_ocr,server2,PRIMARY TABLE,5,0.12216143999999995,125.0
+structured,direct_vlm,server1,EXCLUDED,1,,125.0
+structured,direct_vlm,server2,APPENDIX,1,0.3295631578947368,125.0
+structured,direct_vlm,server2,PRIMARY TABLE,4,0.3390868,125.0
+structured,hybrid,server1,APPENDIX,11,0.3181145346352159,125.0
+structured,hybrid,server1,EXCLUDED,1,,125.0
+structured,hybrid,server2,PRIMARY TABLE,3,0.2662242666666666,125.0

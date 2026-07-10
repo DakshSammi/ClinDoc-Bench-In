@@ -1,0 +1,172 @@
+family,track,system,department,records,primary_score
+structured,direct_vlm,google_gemini_2_5_flash,Dermatology,2,0.3247
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,Dermatology,2,0.32195
+structured,hybrid,glm_ocr_qwen25_14b,Dermatology,2,0.3113
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,Dermatology,2,0.30735
+structured,direct_vlm,hf_qwen25_vl_72b,Dermatology,2,0.302
+structured,direct_vlm,qwen3_27b,Dermatology,2,0.2796499999999999
+structured,direct_vlm,qwen3_27b,Dermatology / Dermatology Venereology,1,0.3704
+structured,direct_vlm,qwen3_vl,Dermatology / Dermatology Venereology,1,0.3704
+structured,hybrid,surya_qwen25_14b,Dermatology / Dermatology Venereology,1,0.3571
+structured,hybrid,glm_ocr_qwen25_14b,Dermatology / Dermatology Venereology,1,0.348
+structured,hybrid,glm_ocr_qwen3_8b,Dermatology / Dermatology Venereology,1,0.3368
+structured,direct_vlm,google_gemini_2_5_flash,Dermatology / Dermatology Venereology,1,0.3301
+structured,hybrid,glm_ocr_qwen3_8b,ENT,2,0.37945
+structured,direct_vlm,qwen3_27b,ENT,2,0.36235
+structured,direct_vlm,qwen3_vl,ENT,2,0.36235
+structured,direct_vlm,google_gemini_2_5_flash,ENT,2,0.3516
+structured,hybrid,glm_ocr_qwen25_14b,ENT,2,0.3429
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,ENT,2,0.3385
+structured,direct_vlm,google_gemini_2_5_flash,ENT [from p54 context],1,0.4489
+structured,hybrid,glm_ocr_qwen3_8b,ENT [from p54 context],1,0.4373
+structured,direct_vlm,hf_qwen25_vl_72b,ENT [from p54 context],1,0.4318
+structured,hybrid,glm_ocr_qwen25_14b,ENT [from p54 context],1,0.4191
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,ENT [from p54 context],1,0.3585
+structured,direct_vlm,qwen3_27b,ENT [from p54 context],1,0.3495
+structured,direct_vlm,qwen3_27b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.408
+structured,direct_vlm,qwen3_vl,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.408
+structured,direct_vlm,hf_qwen25_vl_72b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.3686
+structured,hybrid,surya_qwen25_14b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.3528
+structured,hybrid,docling_qwen25_14b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.3429
+structured,hybrid,doctr_qwen25_14b,Endocrinology And Metabolism-Endocrinology And Metabolism,1,0.3429
+structured,hybrid,glm_ocr_qwen3_8b,Endocrinology and Metabolism,1,0.3937
+structured,hybrid,glm_ocr_qwen25_14b,Endocrinology and Metabolism,1,0.3679
+structured,direct_vlm,qwen3_27b,Endocrinology and Metabolism,1,0.3599
+structured,direct_vlm,qwen3_vl,Endocrinology and Metabolism,1,0.3599
+structured,hybrid,docling_qwen3_8b,Endocrinology and Metabolism,1,0.3543
+structured,direct_vlm,qwen25_vl_7b_local,Endocrinology and Metabolism,1,0.3031
+structured,direct_vlm,qwen3_27b,GENERAL MEDICINE,1,0.5892
+structured,direct_vlm,qwen3_vl,GENERAL MEDICINE,1,0.5892
+structured,hybrid,glm_ocr_qwen3_8b,GENERAL MEDICINE,1,0.5643
+structured,direct_vlm,hf_qwen25_vl_72b,GENERAL MEDICINE,1,0.5507
+structured,hybrid,glm_ocr_qwen25_14b,GENERAL MEDICINE,1,0.5296
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,GENERAL MEDICINE,1,0.5234
+structured,direct_vlm,google_gemini_2_5_flash,GENERAL MEDICINE-II,1,0.421
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,GENERAL MEDICINE-II,1,0.4047
+structured,hybrid,glm_ocr_qwen3_8b,GENERAL MEDICINE-II,1,0.3759
+structured,direct_vlm,qwen25_vl_7b_local,GENERAL MEDICINE-II,1,0.3661
+structured,direct_vlm,qwen3_27b,GENERAL MEDICINE-II,1,0.3649
+structured,hybrid,surya_qwen25_14b,GENERAL MEDICINE-II,1,0.3616
+structured,direct_vlm,qwen3_27b,General Medicine,30,0.3390033333333333
+structured,direct_vlm,qwen3_vl,General Medicine,30,0.3390033333333333
+structured,hybrid,glm_ocr_qwen3_8b,General Medicine,30,0.3388066666666666
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,General Medicine,30,0.337803448275862
+structured,direct_vlm,google_gemini_2_5_flash,General Medicine,30,0.3286033333333333
+structured,hybrid,glm_ocr_qwen25_14b,General Medicine,30,0.327732
+structured,hybrid,glm_ocr_qwen3_8b,General Medicine / Medicine Unit II,10,0.32459
+structured,direct_vlm,qwen3_27b,General Medicine / Medicine Unit II,10,0.31939
+structured,direct_vlm,qwen3_vl,General Medicine / Medicine Unit II,10,0.31939
+structured,direct_vlm,google_gemini_2_5_flash,General Medicine / Medicine Unit II,10,0.3156
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,General Medicine / Medicine Unit II,10,0.3047499999999999
+structured,hybrid,glm_ocr_qwen25_14b,General Medicine / Medicine Unit II,10,0.30145
+structured,hybrid,surya_qwen25_14b,General Medicine / Medicine Unit IV,1,0.408
+structured,direct_vlm,qwen3_27b,General Medicine / Medicine Unit IV,1,0.3746
+structured,direct_vlm,qwen3_vl,General Medicine / Medicine Unit IV,1,0.3746
+structured,direct_vlm,google_gemini_2_5_flash,General Medicine / Medicine Unit IV,1,0.3744
+structured,hybrid,glm_ocr_qwen25_14b,General Medicine / Medicine Unit IV,1,0.3739
+structured,hybrid,glm_ocr_qwen3_8b,General Medicine / Medicine Unit IV,1,0.342
+structured,hybrid,doctr_qwen25_14b,General Medicine Female (3C),3,0.3143
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,General Medicine Female (3C),3,0.3022333333333333
+structured,hybrid,easyocr_qwen25_14b,General Medicine Female (3C),3,0.3018
+structured,direct_vlm,google_gemini_2_5_flash,General Medicine Female (3C),3,0.2657666666666667
+structured,direct_vlm,qwen3_27b,General Medicine Female (3C),3,0.2583666666666667
+structured,direct_vlm,qwen3_vl,General Medicine Female (3C),3,0.2583666666666667
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,General Medicine Unit I,1,0.3688
+structured,direct_vlm,google_gemini_2_5_flash,General Medicine Unit I,1,0.3665
+structured,hybrid,docling_qwen25_14b,General Medicine Unit I,1,0.3429
+structured,hybrid,glm_ocr_qwen25_14b,General Medicine Unit I,1,0.3429
+structured,direct_vlm,qwen3_27b,General Medicine Unit I,1,0.3143
+structured,direct_vlm,qwen3_vl,General Medicine Unit I,1,0.3143
+structured,direct_vlm,qwen3_27b,General Medicine [partially visible],2,0.3461499999999999
+structured,direct_vlm,qwen3_vl,General Medicine [partially visible],2,0.3461499999999999
+structured,hybrid,docling_qwen25_14b,General Medicine [partially visible],2,0.3295
+structured,hybrid,easyocr_qwen25_14b,General Medicine [partially visible],2,0.3295
+structured,hybrid,trocr_qwen25_14b,General Medicine [partially visible],2,0.3295
+structured,direct_vlm,google_gemini_2_5_flash,General Medicine [partially visible],2,0.3206
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,General Medicine-Unit 1,1,0.4536
+structured,hybrid,surya_qwen25_14b,General Medicine-Unit 1,1,0.3857
+structured,hybrid,doctr_qwen25_14b,General Medicine-Unit 1,1,0.3714
+structured,direct_vlm,hf_qwen25_vl_72b,General Medicine-Unit 1,1,0.3427
+structured,direct_vlm,qwen3_27b,General Medicine-Unit 1,1,0.3328
+structured,direct_vlm,qwen3_vl,General Medicine-Unit 1,1,0.3328
+structured,direct_vlm,qwen3_27b,General Medicine-Unit 3,1,0.419
+structured,direct_vlm,qwen3_vl,General Medicine-Unit 3,1,0.419
+structured,hybrid,glm_ocr_qwen3_8b,General Medicine-Unit 3,1,0.4119
+structured,direct_vlm,google_gemini_2_5_flash,General Medicine-Unit 3,1,0.4006
+structured,hybrid,surya_qwen25_14b,General Medicine-Unit 3,1,0.3714
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,General Medicine-Unit 3,1,0.3518
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,General Medicine-Unit I,2,0.5312
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,General Medicine-Unit I,2,0.44415
+structured,direct_vlm,hf_qwen25_vl_72b,General Medicine-Unit I,2,0.4156999999999999
+structured,hybrid,glm_ocr_qwen25_14b,General Medicine-Unit I,2,0.3772
+structured,direct_vlm,google_gemini_2_5_flash,General Medicine-Unit I,2,0.3519
+structured,direct_vlm,qwen3_27b,General Medicine-Unit I,2,0.3081
+structured,direct_vlm,google_gemini_2_5_flash,General Surgery Unit,1,0.3996
+structured,direct_vlm,qwen3_27b,General Surgery Unit,1,0.3794
+structured,direct_vlm,qwen3_vl,General Surgery Unit,1,0.3794
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,General Surgery Unit,1,0.3738
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,General Surgery Unit,1,0.3638
+structured,hybrid,docling_qwen25_14b,General Surgery Unit,1,0.36
+structured,direct_vlm,google_gemini_2_5_flash,MEDICINE-II,7,0.4330857142857143
+structured,direct_vlm,qwen3_27b,MEDICINE-II,7,0.4080714285714286
+structured,direct_vlm,qwen3_vl,MEDICINE-II,7,0.4080714285714286
+structured,hybrid,glm_ocr_qwen3_8b,MEDICINE-II,7,0.4002857142857143
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,MEDICINE-II,7,0.3984285714285714
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,MEDICINE-II,7,0.3843
+structured,direct_vlm,hf_qwen25_vl_72b,MEDICINE-IV,1,0.4308
+structured,direct_vlm,qwen3_27b,MEDICINE-IV,1,0.4284
+structured,direct_vlm,qwen3_vl,MEDICINE-IV,1,0.4284
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,MEDICINE-IV,1,0.3633
+structured,hybrid,glm_ocr_qwen25_14b,MEDICINE-IV,1,0.3597
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,MEDICINE-IV,1,0.3569
+structured,hybrid,glm_ocr_qwen3_8b,Obstetrics & Gynaecology,1,0.5281
+structured,direct_vlm,qwen3_27b,Obstetrics & Gynaecology,1,0.4974
+structured,direct_vlm,qwen3_vl,Obstetrics & Gynaecology,1,0.4974
+structured,direct_vlm,google_gemini_2_5_flash,Obstetrics & Gynaecology,1,0.4607
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,Obstetrics & Gynaecology,1,0.4411
+structured,hybrid,surya_qwen25_14b,Obstetrics & Gynaecology,1,0.4212
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,Obstetrics & Gynecology,3,0.3562666666666667
+structured,hybrid,glm_ocr_qwen3_8b,Obstetrics & Gynecology,3,0.3434999999999999
+structured,direct_vlm,google_gemini_2_5_flash,Obstetrics & Gynecology,3,0.3434
+structured,direct_vlm,qwen3_27b,Obstetrics & Gynecology,3,0.3381333333333333
+structured,direct_vlm,qwen3_vl,Obstetrics & Gynecology,3,0.3381333333333333
+structured,hybrid,easyocr_qwen25_14b,Obstetrics & Gynecology,3,0.3149
+structured,hybrid,glm_ocr_qwen3_8b,Obstetrics & Gynecology [inferred from page context],1,0.3286
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,Obstetrics & Gynecology [inferred from page context],1,0.3225
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,Obstetrics & Gynecology [inferred from page context],1,0.3202
+structured,direct_vlm,qwen3_27b,Obstetrics & Gynecology [inferred from page context],1,0.3193
+structured,direct_vlm,qwen3_vl,Obstetrics & Gynecology [inferred from page context],1,0.3193
+structured,direct_vlm,qwen25_vl_7b_local,Obstetrics & Gynecology [inferred from page context],1,0.2943
+structured,hybrid,glm_ocr_qwen25_14b,Obstetrics and Gynecology [partially visible],1,0.2857
+structured,hybrid,trocr_qwen25_14b,Obstetrics and Gynecology [partially visible],1,0.2714
+structured,direct_vlm,qwen25_vl_7b_local,Obstetrics and Gynecology [partially visible],1,0.2571
+structured,hybrid,doctr_qwen25_14b,Obstetrics and Gynecology [partially visible],1,0.2571
+structured,direct_vlm,google_gemini_2_5_flash,Obstetrics and Gynecology [partially visible],1,0.2406
+structured,direct_vlm,qwen3_27b,Obstetrics and Gynecology [partially visible],1,0.1851
+structured,hybrid,glm_ocr_qwen25_14b,Radiology,2,0.46345
+structured,hybrid,surya_qwen25_14b,Radiology,2,0.4392999999999999
+structured,hybrid,docling_qwen25_14b,Radiology,2,0.4125999999999999
+structured,direct_vlm,google_gemini_2_5_flash,Radiology,2,0.3785
+structured,direct_vlm,qwen3_27b,Radiology,2,0.37045
+structured,direct_vlm,qwen3_vl,Radiology,2,0.37045
+structured,hybrid,glm_ocr_qwen25_14b,Radiotherapy-Radiotherapy,2,0.3901
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,Radiotherapy-Radiotherapy,2,0.38925
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,Radiotherapy-Radiotherapy,2,0.38225
+structured,direct_vlm,qwen3_27b,Radiotherapy-Radiotherapy,2,0.3811
+structured,direct_vlm,qwen3_vl,Radiotherapy-Radiotherapy,2,0.3811
+structured,direct_vlm,google_gemini_2_5_flash,Radiotherapy-Radiotherapy,2,0.32845
+structured,direct_vlm,qwen3_27b,SURGERY-II,2,0.47265
+structured,direct_vlm,qwen3_vl,SURGERY-II,2,0.47265
+structured,direct_vlm,google_gemini_2_5_flash,SURGERY-II,2,0.44315
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,SURGERY-II,2,0.4352
+structured,hybrid,glm_ocr_qwen3_8b,SURGERY-II,2,0.40435
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,SURGERY-II,2,0.38105
+structured,direct_vlm,google_gemini_2_5_flash,Unknown,43,0.3685581395348837
+structured,direct_vlm,qwen3_27b,Unknown,43,0.3673162790697674
+structured,direct_vlm,qwen3_vl,Unknown,43,0.3673162790697674
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,Unknown,43,0.3511107142857143
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,Unknown,43,0.3505475
+structured,hybrid,glm_ocr_qwen25_14b,Unknown,43,0.3431655172413793
+raw_ocr,raw_ocr,qwen3_vl_raw_ocr,,125,0.223796
+raw_ocr,raw_ocr,glm_ocr,,125,0.223192
+raw_ocr,raw_ocr,surya,,125,0.2082848

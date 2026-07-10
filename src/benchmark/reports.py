@@ -1,3 +1,17 @@
+# Copyright 2026 ClinDoc-Bench-IN contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import csv
 import json
 from pathlib import Path
@@ -25,18 +39,18 @@ class ReportGenerator:
             "entity_exact_f1_macro", "entity_lenient_f1_macro", "hallucination_rate", "missing_entity_rate",
             "annotation_gap_rate", "experimental_overall_score", "model_name", "backend_name", "latency_ms"
         ]
-
+        
         with open(file_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(headers)
-
+            
             for r in doc_results:
                 f1_exact_list = [m.f1_exact for m in r.metrics_by_category.values()]
                 f1_lenient_list = [m.f1_lenient for m in r.metrics_by_category.values()]
-
+                
                 avg_f1_exact = sum(f1_exact_list) / len(f1_exact_list) if f1_exact_list else 0.0
                 avg_f1_lenient = sum(f1_lenient_list) / len(f1_lenient_list) if f1_lenient_list else 0.0
-
+                
                 writer.writerow([
                     r.document_id,
                     r.document_type or "unknown",
@@ -57,11 +71,11 @@ class ReportGenerator:
     def _write_per_field_scores(self, doc_results: List[DocumentBenchmarkResult]):
         file_path = self.output_dir / "per_field_scores.csv"
         headers = ["document_id", "field_name", "gt_value", "pred_value", "exact_match", "lenient_match", "similarity_score"]
-
+        
         with open(file_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(headers)
-
+            
             for r in doc_results:
                 for s in r.scalars:
                     writer.writerow([
@@ -77,11 +91,11 @@ class ReportGenerator:
     def _write_entity_alignment_details(self, doc_results: List[DocumentBenchmarkResult]):
         file_path = self.output_dir / "entity_alignment_details.csv"
         headers = ["document_id", "category", "gt_raw_text", "pred_raw_text", "exact_match", "lenient_match", "similarity_score", "alignment_status"]
-
+        
         with open(file_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(headers)
-
+            
             for r in doc_results:
                 for e in r.entity_alignments:
                     writer.writerow([
@@ -98,11 +112,11 @@ class ReportGenerator:
     def _write_error_analysis(self, doc_results: List[DocumentBenchmarkResult]):
         file_path = self.output_dir / "error_analysis.csv"
         headers = ["document_id", "category", "pred_text", "confidence", "evidence_text", "classification", "rationale", "matched_snippet"]
-
+        
         with open(file_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(headers)
-
+            
             for r in doc_results:
                 for u in r.unmatched_predictions:
                     writer.writerow([
@@ -119,11 +133,11 @@ class ReportGenerator:
     def _write_manual_review_queue(self, doc_results: List[DocumentBenchmarkResult]):
         file_path = self.output_dir / "manual_review_queue.csv"
         headers = ["document_id", "item_type", "field_or_category", "gt_text", "pred_text", "classification", "reason"]
-
+        
         with open(file_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(headers)
-
+            
             for r in doc_results:
                 # Add TP_LENIENT entity alignments (e.g. Bioflu vs Bioflu e/d) to review queue
                 for e in r.entity_alignments:
@@ -137,7 +151,7 @@ class ReportGenerator:
                             "review_partial_match",
                             f"Partial match with similarity {e.similarity_score:.1f}%."
                         ])
-
+                
                 # Add unmatched predictions classified as manual_review_required
                 for u in r.unmatched_predictions:
                     if u.classification == "manual_review_required":
@@ -158,7 +172,7 @@ class ReportGenerator:
 
     def _write_qualitative_examples_html(self, doc_results: List[DocumentBenchmarkResult]):
         file_path = self.output_dir / "qualitative_examples.html"
-
+        
         html_content = """<!DOCTYPE html>
 <html>
 <head>
@@ -296,7 +310,7 @@ class ReportGenerator:
         <h1>Pipeline Qualitative Evaluation Diff Report</h1>
         <p style="color: #9ca3af; margin-bottom: 40px;">Interactive side-by-side diff highlighting exactly how predicted variables align with ground truth annotations.</p>
 """
-
+        
         for r in doc_results:
             html_content += f"""
         <div class="card">
@@ -304,7 +318,7 @@ class ReportGenerator:
                 <span class="doc-id">Document ID: {r.document_id}</span>
                 <span class="doc-score">Headline Score: {r.experimental_overall_score*100:.1f}%</span>
             </div>
-
+            
             <div class="diff-grid" style="margin-bottom: 25px;">
                 <div class="diff-col">
                     <h3>Scalar Fields (Patient & Encounter Details)</h3>
@@ -323,7 +337,7 @@ class ReportGenerator:
                 status_class = "status-tp-exact" if s.exact_match else ("status-tp-lenient" if s.lenient_match else "status-fp")
                 badge_text = "EXACT" if s.exact_match else ("LENIENT" if s.lenient_match else "MISMATCH")
                 badge_class = "badge-tp-exact" if s.exact_match else ("badge-tp-lenient" if s.lenient_match else "badge-fp")
-
+                
                 html_content += f"""
                             <tr class="{status_class}">
                                 <td>{s.field_name}</td>
@@ -336,7 +350,7 @@ class ReportGenerator:
                         </tbody>
                     </table>
                 </div>
-
+                
                 <div class="diff-col">
                     <h3>Entity Mismatches & Error Analysis</h3>
                     <table class="meta-table">
@@ -371,7 +385,7 @@ class ReportGenerator:
                     </table>
                 </div>
             </div>
-
+            
             <div class="diff-grid">
                 <div class="diff-col" style="grid-column: span 2;">
                     <h3>All Entity Alignments (Bipartite Hungarian Mapping)</h3>
@@ -387,10 +401,10 @@ class ReportGenerator:
                         "badge-fp" if e.alignment_status == "FP" else "badge-fn"
                     )
                 )
-
+                
                 gt_disp = e.gt_raw_text or "<em>None (Prediction added this)</em>"
                 pred_disp = e.pred_raw_text or "<em>None (Prediction missed this)</em>"
-
+                
                 html_content += f"""
                     <div class="diff-item {status_class}">
                         <div style="flex: 1;">
@@ -411,7 +425,7 @@ class ReportGenerator:
             </div>
         </div>
 """
-
+            
         html_content += """
     </div>
 </body>

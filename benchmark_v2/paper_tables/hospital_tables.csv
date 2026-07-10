@@ -1,0 +1,461 @@
+family,system,hospital,records,primary_score
+raw_ocr,docling,ACCULAB,1,0.2467
+raw_ocr,docling,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.09902222222222222
+raw_ocr,docling,APEX Hospital & Research Centre,1,0.0299
+raw_ocr,docling,BABA BIHARI NETRALAYA,24,0.2141875
+raw_ocr,docling,CANWIN AAROGYA DHAM,1,0.1085
+raw_ocr,docling,Central Laboratory,1,0.1636
+raw_ocr,docling,"Central Laboratory, Sharda Hospital",2,0.13635
+raw_ocr,docling,Clinical Notes,3,0.03693333333333333
+raw_ocr,docling,Clinical Notes / Medication Reconciliation,1,0.015
+raw_ocr,docling,Clinical Notes / Prescription Page,1,0.0408
+raw_ocr,docling,GARG Diagnostic Centre,2,0.1763
+raw_ocr,docling,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.3811
+raw_ocr,docling,New Life Care Hospital,1,0.0364
+raw_ocr,docling,OPD Prescription Sheet,41,0.07929024390243902
+raw_ocr,docling,ST. STEPHEN'S HOSPITAL,2,0.1395
+raw_ocr,docling,SVS MEDICAL COLLEGE HOSPITAL,11,0.03371818181818182
+raw_ocr,docling,Sharda Hospital,14,0.10663571428571429
+raw_ocr,docling,Sharda Hospital - OPD Prescription Sheet,5,0.040659999999999995
+raw_ocr,docling,Sharda Hospital - ShardaCare Health City,1,0.1411
+raw_ocr,docling,Sharda Hospital Central Laboratory,3,0.20809999999999998
+raw_ocr,doctr,ACCULAB,1,0.3147
+raw_ocr,doctr,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.2005
+raw_ocr,doctr,APEX Hospital & Research Centre,1,0.1363
+raw_ocr,doctr,BABA BIHARI NETRALAYA,24,0.21699166666666667
+raw_ocr,doctr,CANWIN AAROGYA DHAM,1,0.0876
+raw_ocr,doctr,Central Laboratory,1,0.2049
+raw_ocr,doctr,"Central Laboratory, Sharda Hospital",2,0.1328
+raw_ocr,doctr,Clinical Notes,3,0.0872
+raw_ocr,doctr,Clinical Notes / Medication Reconciliation,1,0.0792
+raw_ocr,doctr,Clinical Notes / Prescription Page,1,0.0779
+raw_ocr,doctr,GARG Diagnostic Centre,2,0.19415
+raw_ocr,doctr,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.4549
+raw_ocr,doctr,New Life Care Hospital,1,0.0848
+raw_ocr,doctr,OPD Prescription Sheet,41,0.13965853658536587
+raw_ocr,doctr,ST. STEPHEN'S HOSPITAL,2,0.3016
+raw_ocr,doctr,SVS MEDICAL COLLEGE HOSPITAL,11,0.11562727272727273
+raw_ocr,doctr,Sharda Hospital,14,0.12753571428571428
+raw_ocr,doctr,Sharda Hospital - OPD Prescription Sheet,5,0.09986
+raw_ocr,doctr,Sharda Hospital - ShardaCare Health City,1,0.3333
+raw_ocr,doctr,Sharda Hospital Central Laboratory,3,0.2479
+raw_ocr,easyocr,ACCULAB,1,0.2515
+raw_ocr,easyocr,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.1434
+raw_ocr,easyocr,APEX Hospital & Research Centre,1,0.1031
+raw_ocr,easyocr,BABA BIHARI NETRALAYA,24,0.19146249999999998
+raw_ocr,easyocr,CANWIN AAROGYA DHAM,1,0.1045
+raw_ocr,easyocr,Central Laboratory,1,0.0077
+raw_ocr,easyocr,"Central Laboratory, Sharda Hospital",2,0.00655
+raw_ocr,easyocr,Clinical Notes,3,0.05806666666666666
+raw_ocr,easyocr,Clinical Notes / Medication Reconciliation,1,0.0609
+raw_ocr,easyocr,Clinical Notes / Prescription Page,1,0.0976
+raw_ocr,easyocr,GARG Diagnostic Centre,2,0.20085
+raw_ocr,easyocr,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.4368
+raw_ocr,easyocr,New Life Care Hospital,1,0.0534
+raw_ocr,easyocr,OPD Prescription Sheet,41,0.08049024390243903
+raw_ocr,easyocr,ST. STEPHEN'S HOSPITAL,2,0.22705
+raw_ocr,easyocr,SVS MEDICAL COLLEGE HOSPITAL,11,0.07579999999999999
+raw_ocr,easyocr,Sharda Hospital,14,0.07044285714285714
+raw_ocr,easyocr,Sharda Hospital - OPD Prescription Sheet,5,0.07476000000000001
+raw_ocr,easyocr,Sharda Hospital - ShardaCare Health City,1,0.2838
+raw_ocr,easyocr,Sharda Hospital Central Laboratory,3,0.22153333333333333
+raw_ocr,glm_ocr,ACCULAB,1,0.1923
+raw_ocr,glm_ocr,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.2063777777777778
+raw_ocr,glm_ocr,APEX Hospital & Research Centre,1,0.1371
+raw_ocr,glm_ocr,BABA BIHARI NETRALAYA,24,0.2660125
+raw_ocr,glm_ocr,CANWIN AAROGYA DHAM,1,0.1135
+raw_ocr,glm_ocr,Central Laboratory,1,0.1447
+raw_ocr,glm_ocr,"Central Laboratory, Sharda Hospital",2,0.1481
+raw_ocr,glm_ocr,Clinical Notes,3,0.1684
+raw_ocr,glm_ocr,Clinical Notes / Medication Reconciliation,1,0.2905
+raw_ocr,glm_ocr,Clinical Notes / Prescription Page,1,0.0811
+raw_ocr,glm_ocr,GARG Diagnostic Centre,2,0.39475
+raw_ocr,glm_ocr,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.529
+raw_ocr,glm_ocr,New Life Care Hospital,1,0.211
+raw_ocr,glm_ocr,OPD Prescription Sheet,41,0.21765365853658536
+raw_ocr,glm_ocr,ST. STEPHEN'S HOSPITAL,2,0.34255
+raw_ocr,glm_ocr,SVS MEDICAL COLLEGE HOSPITAL,11,0.19907272727272726
+raw_ocr,glm_ocr,Sharda Hospital,14,0.19445714285714286
+raw_ocr,glm_ocr,Sharda Hospital - OPD Prescription Sheet,5,0.14406
+raw_ocr,glm_ocr,Sharda Hospital - ShardaCare Health City,1,0.356
+raw_ocr,glm_ocr,Sharda Hospital Central Laboratory,3,0.2566
+raw_ocr,qwen3_vl_raw_ocr,ACCULAB,1,0.2229
+raw_ocr,qwen3_vl_raw_ocr,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.22984444444444443
+raw_ocr,qwen3_vl_raw_ocr,APEX Hospital & Research Centre,1,0.1985
+raw_ocr,qwen3_vl_raw_ocr,BABA BIHARI NETRALAYA,24,0.2579125
+raw_ocr,qwen3_vl_raw_ocr,CANWIN AAROGYA DHAM,1,0.127
+raw_ocr,qwen3_vl_raw_ocr,Central Laboratory,1,0.1202
+raw_ocr,qwen3_vl_raw_ocr,"Central Laboratory, Sharda Hospital",2,0.18530000000000002
+raw_ocr,qwen3_vl_raw_ocr,Clinical Notes,3,0.21373333333333333
+raw_ocr,qwen3_vl_raw_ocr,Clinical Notes / Medication Reconciliation,1,0.256
+raw_ocr,qwen3_vl_raw_ocr,Clinical Notes / Prescription Page,1,0.0726
+raw_ocr,qwen3_vl_raw_ocr,GARG Diagnostic Centre,2,0.34145000000000003
+raw_ocr,qwen3_vl_raw_ocr,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.3828
+raw_ocr,qwen3_vl_raw_ocr,New Life Care Hospital,1,0.2749
+raw_ocr,qwen3_vl_raw_ocr,OPD Prescription Sheet,41,0.20288048780487802
+raw_ocr,qwen3_vl_raw_ocr,ST. STEPHEN'S HOSPITAL,2,0.2772
+raw_ocr,qwen3_vl_raw_ocr,SVS MEDICAL COLLEGE HOSPITAL,11,0.20890000000000003
+raw_ocr,qwen3_vl_raw_ocr,Sharda Hospital,14,0.22431428571428572
+raw_ocr,qwen3_vl_raw_ocr,Sharda Hospital - OPD Prescription Sheet,5,0.1407
+raw_ocr,qwen3_vl_raw_ocr,Sharda Hospital - ShardaCare Health City,1,0.3409
+raw_ocr,qwen3_vl_raw_ocr,Sharda Hospital Central Laboratory,3,0.3370666666666667
+raw_ocr,trocr,ACCULAB,1,0.1284
+raw_ocr,trocr,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.0015777777777777778
+raw_ocr,trocr,APEX Hospital & Research Centre,1,0.0524
+raw_ocr,trocr,BABA BIHARI NETRALAYA,24,0.00022916666666666666
+raw_ocr,trocr,CANWIN AAROGYA DHAM,1,0.0
+raw_ocr,trocr,Central Laboratory,1,0.0
+raw_ocr,trocr,"Central Laboratory, Sharda Hospital",2,0.0
+raw_ocr,trocr,Clinical Notes,3,0.0
+raw_ocr,trocr,Clinical Notes / Medication Reconciliation,1,0.0038
+raw_ocr,trocr,Clinical Notes / Prescription Page,1,0.0
+raw_ocr,trocr,GARG Diagnostic Centre,2,0.1693
+raw_ocr,trocr,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.3301
+raw_ocr,trocr,New Life Care Hospital,1,0.0677
+raw_ocr,trocr,OPD Prescription Sheet,41,0.0009365853658536587
+raw_ocr,trocr,ST. STEPHEN'S HOSPITAL,2,0.0947
+raw_ocr,trocr,SVS MEDICAL COLLEGE HOSPITAL,11,0.0025181818181818183
+raw_ocr,trocr,Sharda Hospital,14,0.001007142857142857
+raw_ocr,trocr,Sharda Hospital - OPD Prescription Sheet,5,0.0
+raw_ocr,trocr,Sharda Hospital - ShardaCare Health City,1,0.0
+raw_ocr,trocr,Sharda Hospital Central Laboratory,3,0.0
+structured,docling_qwen25_14b,ACCULAB,1,0.3714
+structured,docling_qwen25_14b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.34463333333333335
+structured,docling_qwen25_14b,APEX Hospital & Research Centre,1,0.3429
+structured,docling_qwen25_14b,BABA BIHARI NETRALAYA,24,0.31103157894736844
+structured,docling_qwen25_14b,CANWIN AAROGYA DHAM,1,0.3714
+structured,docling_qwen25_14b,Central Laboratory,1,0.2829
+structured,docling_qwen25_14b,"Central Laboratory, Sharda Hospital",2,0.2727
+structured,docling_qwen25_14b,Clinical Notes,3,0.3182
+structured,docling_qwen25_14b,Clinical Notes / Medication Reconciliation,1,0.3
+structured,docling_qwen25_14b,Clinical Notes / Prescription Page,1,0.3675
+structured,docling_qwen25_14b,GARG Diagnostic Centre,2,0.3634
+structured,docling_qwen25_14b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.5395
+structured,docling_qwen25_14b,New Life Care Hospital,1,0.2976
+structured,docling_qwen25_14b,OPD Prescription Sheet,41,0.28349677419354835
+structured,docling_qwen25_14b,ST. STEPHEN'S HOSPITAL,2,0.3511
+structured,docling_qwen25_14b,SVS MEDICAL COLLEGE HOSPITAL,11,0.29263
+structured,docling_qwen25_14b,Sharda Hospital,14,0.32075
+structured,docling_qwen25_14b,Sharda Hospital - OPD Prescription Sheet,5,0.33735
+structured,docling_qwen25_14b,Sharda Hospital - ShardaCare Health City,1,0.3175
+structured,docling_qwen25_14b,Sharda Hospital Central Laboratory,3,0.30746666666666667
+structured,docling_qwen3_8b,ACCULAB,1,0.3795
+structured,docling_qwen3_8b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.33666666666666667
+structured,docling_qwen3_8b,APEX Hospital & Research Centre,1,0.3571
+structured,docling_qwen3_8b,BABA BIHARI NETRALAYA,24,0.2935590909090909
+structured,docling_qwen3_8b,CANWIN AAROGYA DHAM,1,0.3714
+structured,docling_qwen3_8b,Central Laboratory,1,0.2595
+structured,docling_qwen3_8b,"Central Laboratory, Sharda Hospital",2,0.23024999999999998
+structured,docling_qwen3_8b,Clinical Notes,3,0.33546666666666664
+structured,docling_qwen3_8b,Clinical Notes / Medication Reconciliation,1,0.3036
+structured,docling_qwen3_8b,Clinical Notes / Prescription Page,1,0.3429
+structured,docling_qwen3_8b,GARG Diagnostic Centre,2,0.34014999999999995
+structured,docling_qwen3_8b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.4464
+structured,docling_qwen3_8b,New Life Care Hospital,1,0.2541
+structured,docling_qwen3_8b,OPD Prescription Sheet,41,0.2768121951219512
+structured,docling_qwen3_8b,ST. STEPHEN'S HOSPITAL,2,0.3132
+structured,docling_qwen3_8b,SVS MEDICAL COLLEGE HOSPITAL,11,0.30271818181818183
+structured,docling_qwen3_8b,Sharda Hospital,14,0.2921923076923077
+structured,docling_qwen3_8b,Sharda Hospital - OPD Prescription Sheet,5,0.31446
+structured,docling_qwen3_8b,Sharda Hospital - ShardaCare Health City,1,0.3554
+structured,docling_qwen3_8b,Sharda Hospital Central Laboratory,3,0.24656666666666668
+structured,doctr_qwen25_14b,ACCULAB,1,0.4089
+structured,doctr_qwen25_14b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.3494888888888889
+structured,doctr_qwen25_14b,APEX Hospital & Research Centre,1,0.3571
+structured,doctr_qwen25_14b,BABA BIHARI NETRALAYA,24,0.31305555555555553
+structured,doctr_qwen25_14b,CANWIN AAROGYA DHAM,1,0.3732
+structured,doctr_qwen25_14b,Central Laboratory,1,0.3143
+structured,doctr_qwen25_14b,"Central Laboratory, Sharda Hospital",2,0.3143
+structured,doctr_qwen25_14b,Clinical Notes,3,0.3426666666666667
+structured,doctr_qwen25_14b,Clinical Notes / Medication Reconciliation,1,0.3018
+structured,doctr_qwen25_14b,Clinical Notes / Prescription Page,1,0.3857
+structured,doctr_qwen25_14b,GARG Diagnostic Centre,2,0.339
+structured,doctr_qwen25_14b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.5357
+structured,doctr_qwen25_14b,New Life Care Hospital,1,0.3286
+structured,doctr_qwen25_14b,OPD Prescription Sheet,41,0.28320645161290325
+structured,doctr_qwen25_14b,ST. STEPHEN'S HOSPITAL,2,0.42025
+structured,doctr_qwen25_14b,SVS MEDICAL COLLEGE HOSPITAL,11,0.3242625
+structured,doctr_qwen25_14b,Sharda Hospital,14,0.30116666666666664
+structured,doctr_qwen25_14b,Sharda Hospital - OPD Prescription Sheet,5,0.33786
+structured,doctr_qwen25_14b,Sharda Hospital - ShardaCare Health City,1,0.3375
+structured,doctr_qwen25_14b,Sharda Hospital Central Laboratory,3,0.30083333333333334
+structured,doctr_qwen3_8b,ACCULAB,1,0.4351
+structured,doctr_qwen3_8b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.35585714285714287
+structured,doctr_qwen3_8b,APEX Hospital & Research Centre,1,0.3796
+structured,doctr_qwen3_8b,BABA BIHARI NETRALAYA,24,0.30184347826086955
+structured,doctr_qwen3_8b,CANWIN AAROGYA DHAM,1,0.2143
+structured,doctr_qwen3_8b,Central Laboratory,1,0.2679
+structured,doctr_qwen3_8b,"Central Laboratory, Sharda Hospital",2,0.31165
+structured,doctr_qwen3_8b,Clinical Notes,3,0.3167333333333333
+structured,doctr_qwen3_8b,Clinical Notes / Medication Reconciliation,1,0.3286
+structured,doctr_qwen3_8b,Clinical Notes / Prescription Page,1,0.3857
+structured,doctr_qwen3_8b,GARG Diagnostic Centre,2,0.29965
+structured,doctr_qwen3_8b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.4746
+structured,doctr_qwen3_8b,New Life Care Hospital,1,
+structured,doctr_qwen3_8b,OPD Prescription Sheet,41,0.28109729729729727
+structured,doctr_qwen3_8b,ST. STEPHEN'S HOSPITAL,2,0.4714
+structured,doctr_qwen3_8b,SVS MEDICAL COLLEGE HOSPITAL,11,0.3123666666666666
+structured,doctr_qwen3_8b,Sharda Hospital,14,0.3006666666666667
+structured,doctr_qwen3_8b,Sharda Hospital - OPD Prescription Sheet,5,0.33771999999999996
+structured,doctr_qwen3_8b,Sharda Hospital - ShardaCare Health City,1,0.3357
+structured,doctr_qwen3_8b,Sharda Hospital Central Laboratory,3,0.21706666666666666
+structured,easyocr_qwen25_14b,ACCULAB,1,0.4148
+structured,easyocr_qwen25_14b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.3018
+structured,easyocr_qwen25_14b,APEX Hospital & Research Centre,1,
+structured,easyocr_qwen25_14b,BABA BIHARI NETRALAYA,24,0.30127894736842104
+structured,easyocr_qwen25_14b,CANWIN AAROGYA DHAM,1,0.3589
+structured,easyocr_qwen25_14b,Central Laboratory,1,0.3018
+structured,easyocr_qwen25_14b,"Central Laboratory, Sharda Hospital",2,0.3018
+structured,easyocr_qwen25_14b,Clinical Notes,3,0.3351333333333333
+structured,easyocr_qwen25_14b,Clinical Notes / Medication Reconciliation,1,0.3143
+structured,easyocr_qwen25_14b,Clinical Notes / Prescription Page,1,0.3857
+structured,easyocr_qwen25_14b,GARG Diagnostic Centre,2,0.3565
+structured,easyocr_qwen25_14b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,
+structured,easyocr_qwen25_14b,New Life Care Hospital,1,0.2875
+structured,easyocr_qwen25_14b,OPD Prescription Sheet,41,0.28486923076923076
+structured,easyocr_qwen25_14b,ST. STEPHEN'S HOSPITAL,2,
+structured,easyocr_qwen25_14b,SVS MEDICAL COLLEGE HOSPITAL,11,0.29714
+structured,easyocr_qwen25_14b,Sharda Hospital,14,0.30817500000000003
+structured,easyocr_qwen25_14b,Sharda Hospital - OPD Prescription Sheet,5,0.33786
+structured,easyocr_qwen25_14b,Sharda Hospital - ShardaCare Health City,1,
+structured,easyocr_qwen25_14b,Sharda Hospital Central Laboratory,3,0.2813333333333333
+structured,easyocr_qwen3_8b,ACCULAB,1,0.3652
+structured,easyocr_qwen3_8b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.3097
+structured,easyocr_qwen3_8b,APEX Hospital & Research Centre,1,0.3714
+structured,easyocr_qwen3_8b,BABA BIHARI NETRALAYA,24,0.2887217391304348
+structured,easyocr_qwen3_8b,CANWIN AAROGYA DHAM,1,0.2286
+structured,easyocr_qwen3_8b,Central Laboratory,1,0.3429
+structured,easyocr_qwen3_8b,"Central Laboratory, Sharda Hospital",2,0.3429
+structured,easyocr_qwen3_8b,Clinical Notes,3,0.33213333333333334
+structured,easyocr_qwen3_8b,Clinical Notes / Medication Reconciliation,1,0.3286
+structured,easyocr_qwen3_8b,Clinical Notes / Prescription Page,1,0.3857
+structured,easyocr_qwen3_8b,GARG Diagnostic Centre,2,0.2857
+structured,easyocr_qwen3_8b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.3853
+structured,easyocr_qwen3_8b,New Life Care Hospital,1,0.275
+structured,easyocr_qwen3_8b,OPD Prescription Sheet,41,0.285435
+structured,easyocr_qwen3_8b,ST. STEPHEN'S HOSPITAL,2,0.3286
+structured,easyocr_qwen3_8b,SVS MEDICAL COLLEGE HOSPITAL,11,0.29682222222222227
+structured,easyocr_qwen3_8b,Sharda Hospital,14,0.3122416666666667
+structured,easyocr_qwen3_8b,Sharda Hospital - OPD Prescription Sheet,5,0.32321999999999995
+structured,easyocr_qwen3_8b,Sharda Hospital - ShardaCare Health City,1,0.2714
+structured,easyocr_qwen3_8b,Sharda Hospital Central Laboratory,3,0.2905
+structured,glm_ocr_qwen25_14b,ACCULAB,1,0.3429
+structured,glm_ocr_qwen25_14b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.3506375
+structured,glm_ocr_qwen25_14b,APEX Hospital & Research Centre,1,0.3623
+structured,glm_ocr_qwen25_14b,BABA BIHARI NETRALAYA,24,0.3465666666666667
+structured,glm_ocr_qwen25_14b,CANWIN AAROGYA DHAM,1,0.3635
+structured,glm_ocr_qwen25_14b,Central Laboratory,1,0.2619
+structured,glm_ocr_qwen25_14b,"Central Laboratory, Sharda Hospital",2,0.29625
+structured,glm_ocr_qwen25_14b,Clinical Notes,3,0.3637666666666666
+structured,glm_ocr_qwen25_14b,Clinical Notes / Medication Reconciliation,1,0.4191
+structured,glm_ocr_qwen25_14b,Clinical Notes / Prescription Page,1,0.3766
+structured,glm_ocr_qwen25_14b,GARG Diagnostic Centre,2,0.3911
+structured,glm_ocr_qwen25_14b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.5983
+structured,glm_ocr_qwen25_14b,New Life Care Hospital,1,
+structured,glm_ocr_qwen25_14b,OPD Prescription Sheet,41,0.31444242424242425
+structured,glm_ocr_qwen25_14b,ST. STEPHEN'S HOSPITAL,2,0.4715
+structured,glm_ocr_qwen25_14b,SVS MEDICAL COLLEGE HOSPITAL,11,0.3597
+structured,glm_ocr_qwen25_14b,Sharda Hospital,14,0.325575
+structured,glm_ocr_qwen25_14b,Sharda Hospital - OPD Prescription Sheet,5,0.33433999999999997
+structured,glm_ocr_qwen25_14b,Sharda Hospital - ShardaCare Health City,1,0.3952
+structured,glm_ocr_qwen25_14b,Sharda Hospital Central Laboratory,3,0.26076666666666665
+structured,glm_ocr_qwen3_8b,ACCULAB,1,
+structured,glm_ocr_qwen3_8b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.3514375
+structured,glm_ocr_qwen3_8b,APEX Hospital & Research Centre,1,0.3739
+structured,glm_ocr_qwen3_8b,BABA BIHARI NETRALAYA,24,0.3246826086956522
+structured,glm_ocr_qwen3_8b,CANWIN AAROGYA DHAM,1,0.3589
+structured,glm_ocr_qwen3_8b,Central Laboratory,1,0.2286
+structured,glm_ocr_qwen3_8b,"Central Laboratory, Sharda Hospital",2,0.25385
+structured,glm_ocr_qwen3_8b,Clinical Notes,3,0.3879333333333333
+structured,glm_ocr_qwen3_8b,Clinical Notes / Medication Reconciliation,1,0.4373
+structured,glm_ocr_qwen3_8b,Clinical Notes / Prescription Page,1,0.3571
+structured,glm_ocr_qwen3_8b,GARG Diagnostic Centre,2,0.36305
+structured,glm_ocr_qwen3_8b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.4138
+structured,glm_ocr_qwen3_8b,New Life Care Hospital,1,0.3309
+structured,glm_ocr_qwen3_8b,OPD Prescription Sheet,41,0.3303825
+structured,glm_ocr_qwen3_8b,ST. STEPHEN'S HOSPITAL,2,0.5281
+structured,glm_ocr_qwen3_8b,SVS MEDICAL COLLEGE HOSPITAL,11,0.39866
+structured,glm_ocr_qwen3_8b,Sharda Hospital,14,0.33015833333333333
+structured,glm_ocr_qwen3_8b,Sharda Hospital - OPD Prescription Sheet,5,0.3271
+structured,glm_ocr_qwen3_8b,Sharda Hospital - ShardaCare Health City,1,0.3688
+structured,glm_ocr_qwen3_8b,Sharda Hospital Central Laboratory,3,0.2313333333333333
+structured,internal_qwen3_27b,ACCULAB,1,
+structured,internal_qwen3_27b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.5641
+structured,internal_qwen3_27b,APEX Hospital & Research Centre,1,
+structured,internal_qwen3_27b,BABA BIHARI NETRALAYA,24,0.49093846153846155
+structured,internal_qwen3_27b,CANWIN AAROGYA DHAM,1,0.3857
+structured,internal_qwen3_27b,Central Laboratory,1,0.2629
+structured,internal_qwen3_27b,"Central Laboratory, Sharda Hospital",2,
+structured,internal_qwen3_27b,Clinical Notes,3,0.455
+structured,internal_qwen3_27b,Clinical Notes / Medication Reconciliation,1,
+structured,internal_qwen3_27b,Clinical Notes / Prescription Page,1,
+structured,internal_qwen3_27b,GARG Diagnostic Centre,2,0.3923
+structured,internal_qwen3_27b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,
+structured,internal_qwen3_27b,New Life Care Hospital,1,
+structured,internal_qwen3_27b,OPD Prescription Sheet,41,0.35788571428571425
+structured,internal_qwen3_27b,ST. STEPHEN'S HOSPITAL,2,0.6464
+structured,internal_qwen3_27b,SVS MEDICAL COLLEGE HOSPITAL,11,0.5113
+structured,internal_qwen3_27b,Sharda Hospital,14,0.31335
+structured,internal_qwen3_27b,Sharda Hospital - OPD Prescription Sheet,5,
+structured,internal_qwen3_27b,Sharda Hospital - ShardaCare Health City,1,0.3625
+structured,internal_qwen3_27b,Sharda Hospital Central Laboratory,3,0.22996666666666665
+structured,ollama_llava_13b,ACCULAB,1,
+structured,ollama_llava_13b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,
+structured,ollama_llava_13b,APEX Hospital & Research Centre,1,
+structured,ollama_llava_13b,BABA BIHARI NETRALAYA,24,
+structured,ollama_llava_13b,CANWIN AAROGYA DHAM,1,
+structured,ollama_llava_13b,Central Laboratory,1,
+structured,ollama_llava_13b,"Central Laboratory, Sharda Hospital",2,
+structured,ollama_llava_13b,Clinical Notes,3,
+structured,ollama_llava_13b,Clinical Notes / Medication Reconciliation,1,
+structured,ollama_llava_13b,Clinical Notes / Prescription Page,1,
+structured,ollama_llava_13b,GARG Diagnostic Centre,2,
+structured,ollama_llava_13b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,
+structured,ollama_llava_13b,New Life Care Hospital,1,
+structured,ollama_llava_13b,OPD Prescription Sheet,41,
+structured,ollama_llava_13b,ST. STEPHEN'S HOSPITAL,2,
+structured,ollama_llava_13b,SVS MEDICAL COLLEGE HOSPITAL,11,
+structured,ollama_llava_13b,Sharda Hospital,14,
+structured,ollama_llava_13b,Sharda Hospital - OPD Prescription Sheet,5,
+structured,ollama_llava_13b,Sharda Hospital - ShardaCare Health City,1,
+structured,ollama_llava_13b,Sharda Hospital Central Laboratory,3,
+structured,ollama_qwen3_vl_8b,ACCULAB,1,
+structured,ollama_qwen3_vl_8b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,
+structured,ollama_qwen3_vl_8b,APEX Hospital & Research Centre,1,
+structured,ollama_qwen3_vl_8b,BABA BIHARI NETRALAYA,24,
+structured,ollama_qwen3_vl_8b,CANWIN AAROGYA DHAM,1,
+structured,ollama_qwen3_vl_8b,Central Laboratory,1,
+structured,ollama_qwen3_vl_8b,"Central Laboratory, Sharda Hospital",2,
+structured,ollama_qwen3_vl_8b,Clinical Notes,3,
+structured,ollama_qwen3_vl_8b,Clinical Notes / Medication Reconciliation,1,
+structured,ollama_qwen3_vl_8b,Clinical Notes / Prescription Page,1,
+structured,ollama_qwen3_vl_8b,GARG Diagnostic Centre,2,
+structured,ollama_qwen3_vl_8b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,
+structured,ollama_qwen3_vl_8b,New Life Care Hospital,1,
+structured,ollama_qwen3_vl_8b,OPD Prescription Sheet,41,
+structured,ollama_qwen3_vl_8b,ST. STEPHEN'S HOSPITAL,2,
+structured,ollama_qwen3_vl_8b,SVS MEDICAL COLLEGE HOSPITAL,11,
+structured,ollama_qwen3_vl_8b,Sharda Hospital,14,
+structured,ollama_qwen3_vl_8b,Sharda Hospital - OPD Prescription Sheet,5,
+structured,ollama_qwen3_vl_8b,Sharda Hospital - ShardaCare Health City,1,
+structured,ollama_qwen3_vl_8b,Sharda Hospital Central Laboratory,3,
+structured,qwen3_vl_raw_ocr_qwen25_14b,ACCULAB,1,
+structured,qwen3_vl_raw_ocr_qwen25_14b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.3481142857142857
+structured,qwen3_vl_raw_ocr_qwen25_14b,APEX Hospital & Research Centre,1,
+structured,qwen3_vl_raw_ocr_qwen25_14b,BABA BIHARI NETRALAYA,24,0.35118
+structured,qwen3_vl_raw_ocr_qwen25_14b,CANWIN AAROGYA DHAM,1,0.3857
+structured,qwen3_vl_raw_ocr_qwen25_14b,Central Laboratory,1,0.3357
+structured,qwen3_vl_raw_ocr_qwen25_14b,"Central Laboratory, Sharda Hospital",2,0.2855
+structured,qwen3_vl_raw_ocr_qwen25_14b,Clinical Notes,3,0.37600000000000006
+structured,qwen3_vl_raw_ocr_qwen25_14b,Clinical Notes / Medication Reconciliation,1,0.3585
+structured,qwen3_vl_raw_ocr_qwen25_14b,Clinical Notes / Prescription Page,1,0.3973
+structured,qwen3_vl_raw_ocr_qwen25_14b,GARG Diagnostic Centre,2,0.3143
+structured,qwen3_vl_raw_ocr_qwen25_14b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,
+structured,qwen3_vl_raw_ocr_qwen25_14b,New Life Care Hospital,1,
+structured,qwen3_vl_raw_ocr_qwen25_14b,OPD Prescription Sheet,41,0.30698
+structured,qwen3_vl_raw_ocr_qwen25_14b,ST. STEPHEN'S HOSPITAL,2,0.44694999999999996
+structured,qwen3_vl_raw_ocr_qwen25_14b,SVS MEDICAL COLLEGE HOSPITAL,11,0.37971666666666665
+structured,qwen3_vl_raw_ocr_qwen25_14b,Sharda Hospital,14,0.35584166666666667
+structured,qwen3_vl_raw_ocr_qwen25_14b,Sharda Hospital - OPD Prescription Sheet,5,0.3512
+structured,qwen3_vl_raw_ocr_qwen25_14b,Sharda Hospital - ShardaCare Health City,1,
+structured,qwen3_vl_raw_ocr_qwen25_14b,Sharda Hospital Central Laboratory,3,0.29333333333333333
+structured,qwen3_vl_raw_ocr_qwen3_8b,ACCULAB,1,
+structured,qwen3_vl_raw_ocr_qwen3_8b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.36944444444444446
+structured,qwen3_vl_raw_ocr_qwen3_8b,APEX Hospital & Research Centre,1,0.3751
+structured,qwen3_vl_raw_ocr_qwen3_8b,BABA BIHARI NETRALAYA,24,0.3509086956521739
+structured,qwen3_vl_raw_ocr_qwen3_8b,CANWIN AAROGYA DHAM,1,0.3857
+structured,qwen3_vl_raw_ocr_qwen3_8b,Central Laboratory,1,0.3214
+structured,qwen3_vl_raw_ocr_qwen3_8b,"Central Laboratory, Sharda Hospital",2,0.23885
+structured,qwen3_vl_raw_ocr_qwen3_8b,Clinical Notes,3,0.4109
+structured,qwen3_vl_raw_ocr_qwen3_8b,Clinical Notes / Medication Reconciliation,1,0.3356
+structured,qwen3_vl_raw_ocr_qwen3_8b,Clinical Notes / Prescription Page,1,0.367
+structured,qwen3_vl_raw_ocr_qwen3_8b,GARG Diagnostic Centre,2,0.3568
+structured,qwen3_vl_raw_ocr_qwen3_8b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.3804
+structured,qwen3_vl_raw_ocr_qwen3_8b,New Life Care Hospital,1,0.3
+structured,qwen3_vl_raw_ocr_qwen3_8b,OPD Prescription Sheet,41,0.32197317073170734
+structured,qwen3_vl_raw_ocr_qwen3_8b,ST. STEPHEN'S HOSPITAL,2,0.4708
+structured,qwen3_vl_raw_ocr_qwen3_8b,SVS MEDICAL COLLEGE HOSPITAL,11,0.39858000000000005
+structured,qwen3_vl_raw_ocr_qwen3_8b,Sharda Hospital,14,0.3390416666666667
+structured,qwen3_vl_raw_ocr_qwen3_8b,Sharda Hospital - OPD Prescription Sheet,5,0.3468
+structured,qwen3_vl_raw_ocr_qwen3_8b,Sharda Hospital - ShardaCare Health City,1,0.4293
+structured,qwen3_vl_raw_ocr_qwen3_8b,Sharda Hospital Central Laboratory,3,0.25055
+structured,surya_qwen25_14b,ACCULAB,1,
+structured,surya_qwen25_14b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,
+structured,surya_qwen25_14b,APEX Hospital & Research Centre,1,
+structured,surya_qwen25_14b,BABA BIHARI NETRALAYA,24,
+structured,surya_qwen25_14b,CANWIN AAROGYA DHAM,1,
+structured,surya_qwen25_14b,Central Laboratory,1,
+structured,surya_qwen25_14b,"Central Laboratory, Sharda Hospital",2,
+structured,surya_qwen25_14b,Clinical Notes,3,
+structured,surya_qwen25_14b,Clinical Notes / Medication Reconciliation,1,
+structured,surya_qwen25_14b,Clinical Notes / Prescription Page,1,
+structured,surya_qwen25_14b,GARG Diagnostic Centre,2,
+structured,surya_qwen25_14b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,
+structured,surya_qwen25_14b,New Life Care Hospital,1,
+structured,surya_qwen25_14b,OPD Prescription Sheet,41,
+structured,surya_qwen25_14b,ST. STEPHEN'S HOSPITAL,2,
+structured,surya_qwen25_14b,SVS MEDICAL COLLEGE HOSPITAL,11,
+structured,surya_qwen25_14b,Sharda Hospital,14,
+structured,surya_qwen25_14b,Sharda Hospital - OPD Prescription Sheet,5,
+structured,surya_qwen25_14b,Sharda Hospital - ShardaCare Health City,1,
+structured,surya_qwen25_14b,Sharda Hospital Central Laboratory,3,
+structured,surya_qwen3_8b,ACCULAB,1,
+structured,surya_qwen3_8b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,
+structured,surya_qwen3_8b,APEX Hospital & Research Centre,1,
+structured,surya_qwen3_8b,BABA BIHARI NETRALAYA,24,
+structured,surya_qwen3_8b,CANWIN AAROGYA DHAM,1,
+structured,surya_qwen3_8b,Central Laboratory,1,
+structured,surya_qwen3_8b,"Central Laboratory, Sharda Hospital",2,
+structured,surya_qwen3_8b,Clinical Notes,3,
+structured,surya_qwen3_8b,Clinical Notes / Medication Reconciliation,1,
+structured,surya_qwen3_8b,Clinical Notes / Prescription Page,1,
+structured,surya_qwen3_8b,GARG Diagnostic Centre,2,
+structured,surya_qwen3_8b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,
+structured,surya_qwen3_8b,New Life Care Hospital,1,
+structured,surya_qwen3_8b,OPD Prescription Sheet,41,
+structured,surya_qwen3_8b,ST. STEPHEN'S HOSPITAL,2,
+structured,surya_qwen3_8b,SVS MEDICAL COLLEGE HOSPITAL,11,
+structured,surya_qwen3_8b,Sharda Hospital,14,
+structured,surya_qwen3_8b,Sharda Hospital - OPD Prescription Sheet,5,
+structured,surya_qwen3_8b,Sharda Hospital - ShardaCare Health City,1,
+structured,surya_qwen3_8b,Sharda Hospital Central Laboratory,3,
+structured,trocr_qwen25_14b,ACCULAB,1,0.3281
+structured,trocr_qwen25_14b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.23136666666666666
+structured,trocr_qwen25_14b,APEX Hospital & Research Centre,1,0.3429
+structured,trocr_qwen25_14b,BABA BIHARI NETRALAYA,24,0.30777916666666666
+structured,trocr_qwen25_14b,CANWIN AAROGYA DHAM,1,0.3589
+structured,trocr_qwen25_14b,Central Laboratory,1,0.3018
+structured,trocr_qwen25_14b,"Central Laboratory, Sharda Hospital",2,0.3018
+structured,trocr_qwen25_14b,Clinical Notes,3,0.3476333333333333
+structured,trocr_qwen25_14b,Clinical Notes / Medication Reconciliation,1,0.3018
+structured,trocr_qwen25_14b,Clinical Notes / Prescription Page,1,0.3732
+structured,trocr_qwen25_14b,GARG Diagnostic Centre,2,0.30679999999999996
+structured,trocr_qwen25_14b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.3893
+structured,trocr_qwen25_14b,New Life Care Hospital,1,
+structured,trocr_qwen25_14b,OPD Prescription Sheet,41,0.2762195121951219
+structured,trocr_qwen25_14b,ST. STEPHEN'S HOSPITAL,2,0.3082
+structured,trocr_qwen25_14b,SVS MEDICAL COLLEGE HOSPITAL,11,0.2927818181818182
+structured,trocr_qwen25_14b,Sharda Hospital,14,0.3005
+structured,trocr_qwen25_14b,Sharda Hospital - OPD Prescription Sheet,5,0.34321999999999997
+structured,trocr_qwen25_14b,Sharda Hospital - ShardaCare Health City,1,0.3143
+structured,trocr_qwen25_14b,Sharda Hospital Central Laboratory,3,0.3286
+structured,trocr_qwen3_8b,ACCULAB,1,0.304
+structured,trocr_qwen3_8b,ALL INDIA INSTITUTE OF MEDICAL SCIENCES BHOPAL,9,0.24405555555555555
+structured,trocr_qwen3_8b,APEX Hospital & Research Centre,1,0.2986
+structured,trocr_qwen3_8b,BABA BIHARI NETRALAYA,24,0.3062086956521739
+structured,trocr_qwen3_8b,CANWIN AAROGYA DHAM,1,0.2714
+structured,trocr_qwen3_8b,Central Laboratory,1,
+structured,trocr_qwen3_8b,"Central Laboratory, Sharda Hospital",2,0.31610000000000005
+structured,trocr_qwen3_8b,Clinical Notes,3,0.36190000000000005
+structured,trocr_qwen3_8b,Clinical Notes / Medication Reconciliation,1,0.3286
+structured,trocr_qwen3_8b,Clinical Notes / Prescription Page,1,0.3857
+structured,trocr_qwen3_8b,GARG Diagnostic Centre,2,0.2857
+structured,trocr_qwen3_8b,"MAX HOSPITAL - SUSHANT LOK, GURGAON",1,0.3859
+structured,trocr_qwen3_8b,New Life Care Hospital,1,0.3
+structured,trocr_qwen3_8b,OPD Prescription Sheet,41,0.2854102564102564
+structured,trocr_qwen3_8b,ST. STEPHEN'S HOSPITAL,2,0.28425
+structured,trocr_qwen3_8b,SVS MEDICAL COLLEGE HOSPITAL,11,0.3026090909090909
+structured,trocr_qwen3_8b,Sharda Hospital,14,0.3020285714285714
+structured,trocr_qwen3_8b,Sharda Hospital - OPD Prescription Sheet,5,0.3375
+structured,trocr_qwen3_8b,Sharda Hospital - ShardaCare Health City,1,0.3286
+structured,trocr_qwen3_8b,Sharda Hospital Central Laboratory,3,0.3286
