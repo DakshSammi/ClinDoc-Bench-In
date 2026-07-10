@@ -17,6 +17,7 @@ Public examples:
 
 - [example_ground_truth_canonical.json](examples/example_ground_truth_canonical.json)
 - [example_model_prediction_canonical.json](examples/example_model_prediction_canonical.json)
+- [community ground-truth template](../community/ground_truth_template/README.md)
 
 ## Why Canonical JSON Exists
 

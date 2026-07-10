@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Prepare PPT-aligned Stage 1B Server 1 reports and imported handoff CSV."""
+"""Prepare PPT-aligned Stage 1B Final release reports and imported handoff CSV."""
 
 from __future__ import annotations
 
@@ -87,9 +87,9 @@ def import_server2_handoff() -> dict[str, Any]:
     if not source.exists():
         write_text(
             missing_report,
-            """# Stage 1B Server 2 Handoff Missing
+            """# Stage 1B Final release Handoff Missing
 
-Please copy this file from Server 2:
+Please copy this file from Final release:
 
 `/mnt/mnfas_Varahi/Daksh/exports/stage1b_server2_ocr_handoff_for_server1_20260619_1150.tar.gz`
 """,
@@ -145,7 +145,7 @@ Please copy this file from Server 2:
     write_csv(DATA / "stage1b_server2_ocr_handoff_imported.csv", rows_out, fields)
     write_text(
         REPORTS / "stage1b_server1_handoff_import_summary.md",
-        f"""# Stage 1B Server 2 Handoff Import Summary
+        f"""# Stage 1B Final release Handoff Import Summary
 
 Generated: {now()}
 
@@ -371,7 +371,7 @@ def write_ppt_metrics(import_status: dict[str, Any]) -> None:
         )
     write_text(
         REPORTS / "stage1b_server1_ppt_aligned_summary.md",
-        f"""# Stage 1B Server 1 PPT-Aligned Summary
+        f"""# Stage 1B Final release PPT-Aligned Summary
 
 Generated: {now()}
 
@@ -382,7 +382,7 @@ Overall extraction score uses `configs/benchmark_defaults.yaml` weights:
 
 Annotation-gap rate is left blank where the current Stage 1B compatibility metrics did not persist that field.
 
-Server 2 handoff import: available={import_status.get('available')}, rows={import_status.get('rows')}, available_rows={import_status.get('available_rows')}, engines={import_status.get('engines')}.
+Final release handoff import: available={import_status.get('available')}, rows={import_status.get('rows')}, available_rows={import_status.get('available_rows')}, engines={import_status.get('engines')}.
 
 {chr(10).join(table_lines)}
 """,

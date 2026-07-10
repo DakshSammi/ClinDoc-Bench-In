@@ -11,7 +11,7 @@ This guide describes the public annotation conventions used by ClinDoc-Bench-IN.
 ## File Conventions
 
 - source images live under `prescriptions/`
-- ground truth JSON lives under `raw_ground_truths/` or `benchmark_v2/normalized_ground_truths/`
+- ground truth JSON lives under `raw_ground_truths/` or `benchmark/ground_truths/`
 - structured predictions should be named `<document_id>.json`
 - raw OCR predictions should be named `<document_id>.txt`
 

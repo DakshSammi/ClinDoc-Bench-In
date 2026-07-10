@@ -1,0 +1,91 @@
+patient_id,documents,pages,document_ids,departments
+p1,1,1,p1,Unknown
+p2,1,1,p2,Unknown
+p3,1,1,p3,Unknown
+p4,1,1,p4,Unknown
+p5,1,1,p5,Unknown
+p6,1,1,p6,Unknown
+p7,1,1,p7,Unknown
+p8,1,1,p8,Unknown
+p9,1,1,p9,Unknown
+p10,1,1,p10,Unknown
+p11,1,1,p11,Unknown
+p12,1,1,p12,Unknown
+p13,1,1,p13,Unknown
+p14,1,1,p14,Unknown
+p15,1,1,p15,Unknown
+p16,1,1,p16,Unknown
+p17,1,1,p17,Unknown
+p18,1,1,p18,Unknown
+p19,1,1,p19,Unknown
+p20,1,1,p20,Unknown
+p21,1,1,p21,Unknown
+p22,1,1,p22,Unknown
+p23,1,1,p23,Unknown
+p24,1,1,p24,Unknown
+p25,1,2,p25_1,MEDICINE-II
+p26,1,2,p26,MEDICINE-II
+p27,1,2,p27,MEDICINE-IV
+p28,1,2,p28,MEDICINE-II
+p29,1,2,p29,MEDICINE-II
+p30,1,2,p30,GENERAL MEDICINE-II
+p31,1,2,p31_1,SURGERY-II
+p32,1,2,p32_1,SURGERY-II
+p33,1,2,p33_1,MEDICINE-II
+p34,1,2,p34_1,MEDICINE-II
+p35,1,2,p35_1,MEDICINE-II
+p36,1,2,p36_1,Endocrinology and Metabolism
+p37,1,2,p37_1,Dermatology / Dermatology Venereology
+p38,1,1,p38_1,General Medicine-Unit I
+p39,1,1,p39_1,General Medicine-Unit I
+p40,1,2,p40_1,Radiotherapy-Radiotherapy
+p41,1,1,p41_1,General Medicine-Unit 1
+p42,1,2,p42_1,Endocrinology And Metabolism-Endocrinology And Metabolism
+p43,1,2,p43_1,General Medicine-Unit 3
+p44,1,1,p44_1,Radiotherapy-Radiotherapy
+p45,9,18,p45_1;p45_2;p45_3;p45_4;p45_5;p45_6;p45_7;p45_8;p45_9,GENERAL MEDICINE;Obstetrics & Gynaecology;Radiology;Unknown
+p46,1,1,p46,General Medicine
+p47,1,1,p47,General Medicine
+p48,1,1,p48,General Medicine
+p49,1,1,p49,General Medicine
+p50,1,1,p50,General Medicine
+p51,1,1,p51,General Medicine
+p52,4,4,p52_1;p52_2;p52_3;p52_4,General Medicine
+p53,9,9,p53_1;p53_2;p53_3;p53_4;p53_5;p53_6;p53_7;p53_8;p53_9,General Medicine;Obstetrics & Gynecology;Obstetrics & Gynecology [inferred from page context];Obstetrics and Gynecology [partially visible];Unknown
+p54,5,5,p54_1;p54_2;p54_3;p54_4;p54_5,Dermatology;ENT;ENT [from p54 context];General Medicine
+p55,1,1,p55,General Medicine
+p56,1,1,p56,General Medicine
+p57,1,1,p57,Unknown
+p58,1,1,p58,General Medicine [partially visible]
+p59,4,4,p59_1;p59_2;p59_3;p59_4,General Medicine;Unknown
+p60,1,1,p60,General Medicine
+p61,1,1,p61,General Medicine
+p62,1,1,p62,General Medicine
+p63,1,1,p63,General Medicine
+p64,1,1,p64,General Medicine
+p65,1,1,p65,General Medicine
+p66,1,1,p66,General Medicine [partially visible]
+p67,1,1,p67,General Medicine
+p68,1,1,p68,General Medicine
+p69,1,1,p69,General Medicine / Medicine Unit II
+p70,1,1,p70,General Medicine
+p71,1,1,p71,ENT
+p72,1,1,p72,General Medicine
+p73,5,5,p73_1;p73_2;p73_3;p73_4;p73_5,General Medicine Female (3C);General Medicine Unit I;Unknown
+p74,1,1,p74,General Medicine
+p75,1,1,p75,General Medicine / Medicine Unit II
+p76,3,3,p76_1;p76_2;p76_3,General Surgery Unit;Unknown
+p77,1,1,p77,General Medicine / Medicine Unit II
+p78,1,1,p78,General Medicine / Medicine Unit II
+p79,2,2,p79_1;p79_2,General Medicine;Obstetrics & Gynecology
+p80,1,1,p80,General Medicine / Medicine Unit II
+p81,1,1,p81,General Medicine / Medicine Unit IV
+p82,1,1,p82,General Medicine / Medicine Unit II
+p83,1,1,p83,General Medicine / Medicine Unit II
+p84,1,1,p84,Unknown
+p85,1,1,p85,General Medicine / Medicine Unit II
+p86,1,1,p86,Unknown
+p87,2,2,p87_1;p87_2,Unknown
+p88,2,2,p88_1;p88_2,Unknown
+p89,1,1,p89,General Medicine / Medicine Unit II
+p90,1,1,p90,General Medicine / Medicine Unit II

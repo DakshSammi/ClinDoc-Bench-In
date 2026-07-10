@@ -13,7 +13,7 @@ This command reads frozen CSVs and writes figures, tables, anonymized examples, 
 ## Verify Freeze
 
 ```bash
-test -f benchmark_v2/final_day_freeze_20260709/reports/final_model_registry.csv
+test -f benchmark/final/reports/final_model_registry.csv
 ```
 
 ## Compare a New Model

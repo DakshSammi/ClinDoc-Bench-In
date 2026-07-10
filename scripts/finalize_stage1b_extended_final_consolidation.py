@@ -205,7 +205,7 @@ def raw_qwen25_row() -> dict[str, Any]:
         "text_similarity": "",
         "runtime": fmt(summary["runtime"], digits=1),
         "label": "coverage_only_imported_status",
-        "notes": "5 no_images cases are data-availability gaps, not model failures; OCR quality metrics were not included in the imported Server 2 package.",
+        "notes": "5 no_images cases are data-availability gaps, not model failures; OCR quality metrics were not included in the imported Final release package.",
     }
 
 
@@ -244,7 +244,7 @@ def structured_row_from_ppt(
 
 
 def internal_qwen3_row() -> dict[str, Any]:
-    recovered_rows = read_csv(CLEAN_REPO / "paper_assets" / "tables" / "server2" / "stage1b_server2_ppt_aligned_metrics.csv")
+    recovered_rows = read_csv(CLEAN_REPO / "paper_assets" / "tables" / "final" / "stage1b_server2_ppt_aligned_metrics.csv")
     recovered = recovered_rows[0]
     return {
         "section": "structured_direct",
@@ -266,7 +266,7 @@ def internal_qwen3_row() -> dict[str, Any]:
         "text_similarity": "",
         "runtime": "",
         "label": "recovered_plus_coverage_with_frozen_scored_fields",
-        "notes": "Coverage and schema-validity are from stage1b_extended_qwen3_27b_merged_plus_metrics.csv (53/53 after p45_2 retry). Scored extraction fields remain the latest imported recovered values from paper_assets/tables/server2/stage1b_server2_ppt_aligned_metrics.csv because the recovered-plus import did not include a fresh CanonicalRawDoc recomputation.",
+        "notes": "Coverage and schema-validity are from stage1b_extended_qwen3_27b_merged_plus_metrics.csv (53/53 after p45_2 retry). Scored extraction fields remain the latest imported recovered values from paper_assets/tables/final/stage1b_server2_ppt_aligned_metrics.csv because the recovered-plus import did not include a fresh CanonicalRawDoc recomputation.",
     }
 
 
@@ -294,7 +294,7 @@ def qwen25_structured_row() -> dict[str, Any]:
         "text_similarity": "",
         "runtime": fmt(summary["runtime"], digits=1),
         "label": "coverage_only_imported_status",
-        "notes": "6 no_images cases are data-availability gaps, not model failures; the imported Server 2 package included success/runtime status but not a per-document canonical benchmark export for scalar/entity metrics.",
+        "notes": "6 no_images cases are data-availability gaps, not model failures; the imported Final release package included success/runtime status but not a per-document canonical benchmark export for scalar/entity metrics.",
     }
 
 
@@ -338,44 +338,44 @@ def build_combined_rows() -> list[dict[str, Any]]:
             "GLM-OCR",
             REPORTS / "stage1b_raw_ocr_benchmark_glm_ocr" / "summary_metrics.json",
             "full_53_best_server1_raw_ocr",
-            "Accepted Server 1 full benchmark raw OCR baseline.",
+            "Accepted Final release full benchmark raw OCR baseline.",
         ),
         raw_row_from_summary(
             "docTR",
             REPORTS / "stage1b_raw_ocr_benchmark_doctr" / "summary_metrics.json",
             "full_53_server2_handoff_rebenchmarked",
-            "Server 2 OCR handoff re-benchmarked locally with the Stage 1B raw OCR evaluator.",
+            "Final release OCR handoff re-benchmarked locally with the Stage 1B raw OCR evaluator.",
         ),
         raw_row_from_summary(
             "TrOCR",
             REPORTS / "stage1b_raw_ocr_benchmark_trocr" / "summary_metrics.json",
             "full_53_server2_handoff_rebenchmarked",
-            "Server 2 OCR handoff re-benchmarked locally with the Stage 1B raw OCR evaluator.",
+            "Final release OCR handoff re-benchmarked locally with the Stage 1B raw OCR evaluator.",
         ),
         raw_row_from_summary(
             "Docling",
             REPORTS / "stage1b_extended_raw_ocr_benchmark_docling" / "summary_metrics.json",
             "full_53_server2_handoff_rebenchmarked",
-            "Extended final pass using the imported Server 2 OCR handoff.",
+            "Extended final pass using the imported Final release OCR handoff.",
         ),
         raw_row_from_summary(
             "Surya",
             REPORTS / "stage1b_extended_raw_ocr_benchmark_surya" / "summary_metrics.json",
             "full_53_server2_handoff_rebenchmarked",
-            "Extended final pass using the imported Server 2 OCR handoff.",
+            "Extended final pass using the imported Final release OCR handoff.",
         ),
         raw_row_from_summary(
             "EasyOCR",
             REPORTS / "stage1b_extended_raw_ocr_benchmark_easyocr" / "summary_metrics.json",
             "full_53_server2_handoff_rebenchmarked",
-            "Extended final pass using the imported Server 2 OCR handoff.",
+            "Extended final pass using the imported Final release OCR handoff.",
         ),
         raw_qwen25_row(),
         raw_row_from_summary(
             "Marker",
             REPORTS / "stage1b_extended_raw_ocr_benchmark_marker" / "summary_metrics.json",
             "partial_interim_only",
-            "Only 19 usable Server 2 marker rows were imported; keep separate from full-53 comparisons.",
+            "Only 19 usable Final release marker rows were imported; keep separate from full-53 comparisons.",
             coverage="19/53",
         ),
         internal_qwen3_row(),
@@ -383,7 +383,7 @@ def build_combined_rows() -> list[dict[str, Any]]:
             ppt_rows,
             "qwen3-vl:8b-instruct",
             "full_53_local_direct_vlm",
-            "Accepted Server 1 local direct structured baseline.",
+            "Accepted Final release local direct structured baseline.",
         ),
         structured_row_from_ppt(
             ppt_rows,
@@ -395,17 +395,17 @@ def build_combined_rows() -> list[dict[str, Any]]:
         pipeline_row_from_summary(
             REPORTS / "stage1b_server1_glm_ocr_qwen3_structured_summary.json",
             "full_53_best_hybrid_pipeline",
-            "Accepted Server 1 OCR-to-JSON pipeline.",
+            "Accepted Final release OCR-to-JSON pipeline.",
         ),
         pipeline_row_from_summary(
             REPORTS / "stage1b_server1_doctr_qwen3_structured_summary.json",
             "full_53_hybrid_pipeline",
-            "Imported Server 2 OCR handoff evaluated locally with the canonical structured benchmark helper.",
+            "Imported Final release OCR handoff evaluated locally with the canonical structured benchmark helper.",
         ),
         pipeline_row_from_summary(
             REPORTS / "stage1b_server1_trocr_qwen3_structured_summary.json",
             "full_53_hybrid_pipeline_low_quality",
-            "Imported Server 2 OCR handoff evaluated locally with the canonical structured benchmark helper.",
+            "Imported Final release OCR handoff evaluated locally with the canonical structured benchmark helper.",
         ),
         pipeline_row_from_summary(
             REPORTS / "stage1b_extended_easyocr_qwen3_summary.json",
@@ -698,7 +698,7 @@ def write_stats() -> None:
         "## Excluded from primary paired tests",
         "- Marker raw OCR and Marker + qwen3 partial: partial/interim coverage only.",
         "- Qwen2.5-VL raw OCR and structured rows: imported package provides coverage/runtime status but not per-document benchmark scores needed for paired testing.",
-        "- Internal Qwen3-27B recovered-plus: aggregate row imported, but no per-document compatible metric table is available on Server 1 for paired tests.",
+        "- Internal Qwen3-27B recovered-plus: aggregate row imported, but no per-document compatible metric table is available on Final release for paired tests.",
         "",
         "## Methods",
         "- Paired bootstrap 95% confidence intervals for system-level means.",
@@ -791,7 +791,7 @@ def write_tables_and_reports(rows: list[dict[str, Any]]) -> None:
                 "",
                 md_table([raw_rows[-1]], raw_columns),
                 "",
-                "Qwen2.5-VL raw OCR is included as a coverage/runtime row only because the imported Server 2 package did not include per-document OCR benchmark scores. Marker remains partial/interim and is excluded from full-53 statistical comparisons.",
+                "Qwen2.5-VL raw OCR is included as a coverage/runtime row only because the imported Final release package did not include per-document OCR benchmark scores. Marker remains partial/interim and is excluded from full-53 statistical comparisons.",
             ]
         ),
     )
@@ -806,7 +806,7 @@ def write_tables_and_reports(rows: list[dict[str, Any]]) -> None:
                 "",
                 md_table(direct_rows, structured_columns),
                 "",
-                "Qwen2.5-VL structured is included with coverage and runtime because the imported package did not include the per-document canonical score export needed to recompute scalar/entity metrics on Server 1. Internal Qwen3-27B recovered-plus uses 53/53 coverage from the latest import and carries forward the latest imported scored fields from the earlier recovered row.",
+                "Qwen2.5-VL structured is included with coverage and runtime because the imported package did not include the per-document canonical score export needed to recompute scalar/entity metrics on Final release. Internal Qwen3-27B recovered-plus uses 53/53 coverage from the latest import and carries forward the latest imported scored fields from the earlier recovered row.",
             ]
         ),
     )
@@ -847,7 +847,7 @@ def write_tables_and_reports(rows: list[dict[str, Any]]) -> None:
         "- Several low-recall systems report 0.0 hallucination because they mostly omit entities rather than invent them.",
         "- The worst missing-entity rates are Marker + qwen3 partial (1.0000), EasyOCR + qwen3 (0.9993), Surya + qwen3 (0.9993), Docling + qwen3 (0.9993), and TrOCR + qwen3 (0.9992).",
         "- Qwen2.5-VL no_images failures are treated as data-availability gaps, not model-performance failures.",
-        "- Qwen2.5-VL is shown in paper-facing tables with coverage, but it is excluded from primary full-53 paired tests because the imported Server 2 package lacks per-document benchmark scores on Server 1.",
+        "- Qwen2.5-VL is shown in paper-facing tables with coverage, but it is excluded from primary full-53 paired tests because the imported Final release package lacks per-document benchmark scores on Final release.",
         "- Internal Qwen3-27B recovered-plus scored fields were not recomputed after the p45_2 retry in the imported package; that row is explicitly labelled as a combined-source consolidation.",
     ]
     write_text(COMBINED / "stage1b_extended_combined_ranking_summary.md", "\n".join(ranking_lines))
@@ -872,7 +872,7 @@ def write_tables_and_reports(rows: list[dict[str, Any]]) -> None:
         "",
         f"Generated: {now()}",
         "",
-        "## Server 1 background hybrid run",
+        "## Final release background hybrid run",
         "- PID 18576 is no longer running.",
         "- extended_full_run.log shows EasyOCR Full, Surya Full, Docling Full, and Marker Partial lanes were launched.",
         "- Consolidated completed outputs:",
@@ -899,13 +899,13 @@ def write_tables_and_reports(rows: list[dict[str, Any]]) -> None:
         "## Qwen2.5-VL caveat",
         "- Structured coverage: 47/53 successful; 6 no_images cases treated as data-availability gaps.",
         "- Raw OCR coverage: 48/53 successful; 5 no_images cases treated as data-availability gaps.",
-        "- Imported Server 2 package provides coverage/runtime status but not the per-document benchmark exports required for primary paired statistics on Server 1.",
+        "- Imported Final release package provides coverage/runtime status but not the per-document benchmark exports required for primary paired statistics on Final release.",
         "",
         "## Internal Qwen3 recovered-plus caveat",
         "- stage1b_extended_qwen3_27b_merged_plus_metrics.csv upgrades schema-valid coverage to 53/53 after the p45_2 retry.",
         "- The imported recovered-plus package does not include a fresh CanonicalRawDoc recomputation, so overall/scalar/entity fields in the final table are carried forward from the latest imported recovered row (52/53) and labelled accordingly.",
         "",
-        "## Imported Server 2 verification",
+        "## Imported Final release verification",
         *imported_status,
         "",
         "## Included in primary full-53 statistical tests",
@@ -913,7 +913,7 @@ def write_tables_and_reports(rows: list[dict[str, Any]]) -> None:
         "- Raw OCR: GLM-OCR, docTR, TrOCR, EasyOCR, Surya, Docling.",
         "",
         "## Excluded from primary full-53 statistical tests",
-        "- Internal Qwen3 recovered-plus: aggregate import only, no per-document compatible score table on Server 1.",
+        "- Internal Qwen3 recovered-plus: aggregate import only, no per-document compatible score table on Final release.",
         "- Qwen2.5-VL raw and structured rows: coverage/runtime imported, but no per-document score tables available locally.",
         "- Marker raw and Marker + qwen3: partial/interim only.",
     ]

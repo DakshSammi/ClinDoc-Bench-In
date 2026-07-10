@@ -8,7 +8,7 @@ Documents include heterogeneous prescription and clinical record layouts from In
 
 The canonical benchmark manifest is:
 
-`benchmark_v2/data/benchmark_manifest_v2.csv`
+`benchmark/data/benchmark_manifest.csv`
 
 Important fields include:
 

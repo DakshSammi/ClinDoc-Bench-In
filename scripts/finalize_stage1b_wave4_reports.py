@@ -228,7 +228,7 @@ def main() -> None:
     ]
     write_text(
         REPORTS / "stage1b_server1_ppt_aligned_summary.md",
-        f"# Stage 1B Server 1 PPT-Aligned Summary\n\nGenerated: {now()}\n\n"
+        f"# Stage 1B Final release PPT-Aligned Summary\n\nGenerated: {now()}\n\n"
         "OCR-only rows use OCR/token F1 and text similarity. Structured rows use schema parse success, scalar exact/lenient, entity exact/lenient F1, hallucination, missing entity, annotation gap when available, and the configured overall extraction score. CER/WER remain supplementary.\n\n"
         + table(rows, main_columns),
     )
@@ -240,7 +240,7 @@ def main() -> None:
     structured_columns = [("system", "System"), ("records_attempted", "N"), ("records_schema_valid", "Valid"), ("schema_parse_success", "Schema"), ("scalar_exact_accuracy", "Scalar exact"), ("scalar_lenient_accuracy", "Scalar lenient"), ("entity_exact_f1", "Entity exact F1"), ("entity_lenient_f1", "Entity lenient F1"), ("hallucination_rate", "Hallucination"), ("missing_entity_rate", "Missing"), ("annotation_gap_rate", "Annotation gap"), ("overall_extraction_score", "Overall"), ("runtime", "Runtime s")]
     write_text(
         REPORTS / "stage1b_final_paper_table_server1_side.md",
-        f"# Stage 1B Final Paper Table: Server 1 Side\n\nGenerated: {now()}\n\n"
+        f"# Stage 1B Final Paper Table: Final release Side\n\nGenerated: {now()}\n\n"
         "## Raw OCR Baselines\n\n" + table(raw_rows, raw_columns)
         + "\n\n## Direct VLM Structured Extraction\n\n" + table(direct_rows, structured_columns)
         + "\n\n## OCR-to-JSON Structured Pipelines\n\n" + table(pipeline_rows, structured_columns)
@@ -249,7 +249,7 @@ def main() -> None:
 
     write_text(
         REPORTS / "stage1b_server1_paper_results_snapshot.md",
-        f"# Stage 1B Server 1 Paper Results Snapshot\n\nGenerated: {now()}\n\n"
+        f"# Stage 1B Final release Paper Results Snapshot\n\nGenerated: {now()}\n\n"
         "- Strongest direct structured baseline: Qwen3-VL, 48/53 valid, overall 0.3549.\n"
         "- Strongest OCR-to-JSON pipeline: GLM-OCR + qwen3, 50/53 valid, overall 0.3628.\n"
         "- docTR + qwen3: 49/53 valid, overall 0.3296.\n"
@@ -260,19 +260,19 @@ def main() -> None:
 
     write_text(
         REPORTS / "stage1b_server1_doctr_qwen3_progress.md",
-        f"# Stage 1B Server 1 docTR + qwen3 Progress\n\nGenerated: {now()}\n\n- Completed: 53/53\n- Schema-valid: 49\n- Failed: 4\n- Status: complete and benchmarked\n",
+        f"# Stage 1B Final release docTR + qwen3 Progress\n\nGenerated: {now()}\n\n- Completed: 53/53\n- Schema-valid: 49\n- Failed: 4\n- Status: complete and benchmarked\n",
     )
     write_text(
         REPORTS / "stage1b_server1_trocr_qwen3_progress.md",
-        f"# Stage 1B Server 1 TrOCR + qwen3 Progress\n\nGenerated: {now()}\n\n- Completed: 53/53\n- Schema-valid: 48\n- Failed: 5\n- Status: complete and benchmarked\n",
+        f"# Stage 1B Final release TrOCR + qwen3 Progress\n\nGenerated: {now()}\n\n- Completed: 53/53\n- Schema-valid: 48\n- Failed: 5\n- Status: complete and benchmarked\n",
     )
     write_text(
         REPORTS / "stage1b_server1_server2ocr_qwen3_status.md",
-        f"# Stage 1B Server 1 Imported Server 2 OCR + qwen3 Status\n\nGenerated: {now()}\n\n- docTR + qwen3: complete, 49/53 schema-valid.\n- TrOCR + qwen3: complete, 48/53 schema-valid.\n- Completed output root: `/Computational5/daksh/_gnn_/benchmark_outputs/stage1b_server2_doctr_trocr_qwen3_canonical_full_20260619_125803`\n",
+        f"# Stage 1B Final release Imported Final release OCR + qwen3 Status\n\nGenerated: {now()}\n\n- docTR + qwen3: complete, 49/53 schema-valid.\n- TrOCR + qwen3: complete, 48/53 schema-valid.\n- Completed output root: `/Computational5/daksh/_gnn_/benchmark_outputs/stage1b_server2_doctr_trocr_qwen3_canonical_full_20260619_125803`\n",
     )
     write_text(
         REPORTS / "stage1b_server1_docling_surya_qwen3_smoke_status.md",
-        f"# Stage 1B Server 1 Docling/Surya qwen3 Smoke Status\n\nGenerated: {now()}\n\n- Smoke launch attempted after docTR/TrOCR completion.\n- Managed environment blocked the local Ollama request before the runner wrote progress; the escalated command was terminated after exceeding its watchdog window.\n- Docling smoke result: not produced.\n- Surya has only 3/5 requested smoke documents in the imported handoff (`p4`, `p20`, `p25_1`); `p38_1` and `p42_1` are absent.\n- No Docling or Surya full OCR-to-JSON lane was launched.\n",
+        f"# Stage 1B Final release Docling/Surya qwen3 Smoke Status\n\nGenerated: {now()}\n\n- Smoke launch attempted after docTR/TrOCR completion.\n- Managed environment blocked the local Ollama request before the runner wrote progress; the escalated command was terminated after exceeding its watchdog window.\n- Docling smoke result: not produced.\n- Surya has only 3/5 requested smoke documents in the imported handoff (`p4`, `p20`, `p25_1`); `p38_1` and `p42_1` are absent.\n- No Docling or Surya full OCR-to-JSON lane was launched.\n",
     )
     print("Wrote Wave 4 final reports")
 

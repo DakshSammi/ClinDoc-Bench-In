@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Server 1 Stage 1A audit and local smoke runner.
+"""Final release Stage 1A audit and local smoke runner.
 
-This script is intentionally scoped to Server 1:
+This script is intentionally scoped to Final release:
 - conda/environment audit
 - manifest verification
 - external API dry-run/key checks only
@@ -266,7 +266,7 @@ def audit_environments() -> None:
     write_json(REPORTS_DIR / "stage1a_server1_environment_inventory.json", inventory)
 
     md = [
-        "# Stage 1A Server 1 Environment Audit",
+        "# Stage 1A Final release Environment Audit",
         "",
         f"Generated: {now()}",
         "",
@@ -314,7 +314,7 @@ def manifest_check() -> None:
     p42 = next((r for r in rows if r["document_id"] == "p42_1"), {})
     ordering_issues = [r["document_id"] for r in rows if int(r.get("num_source_images") or 0) != len([p for p in r["source_images_ordered"].split(";") if p])]
     md = [
-        "# Stage 1A Server 1 Manifest Check",
+        "# Stage 1A Final release Manifest Check",
         "",
         f"Generated: {now()}",
         "",
@@ -582,7 +582,7 @@ def run_smoke() -> Path:
         ocr_path = find_ocr_text(doc["document_id"])
         if not ocr_path:
             for backend in ["ollama_qwen25_14b_ocr_to_json", "ollama_qwen3_8b_ocr_to_json"]:
-                failures.append({"backend": backend, "document_id": doc["document_id"], "error": "OCR text not available; skipped per Server 1 instruction"})
+                failures.append({"backend": backend, "document_id": doc["document_id"], "error": "OCR text not available; skipped per Final release instruction"})
             continue
         ocr_text = ocr_path.read_text(encoding="utf-8", errors="ignore")
         prompt_base, _ = read_prompt("ocr_to_json_structuring_prompt.txt")
@@ -644,16 +644,16 @@ def failure_row(log: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def render_failure_log(failures: List[Dict[str, Any]]) -> str:
-    lines = ["# Stage 1A Server 1 Failure Log", "", f"Generated: {now()}", ""]
+    lines = ["# Stage 1A Final release Failure Log", "", f"Generated: {now()}", ""]
     if not failures:
-        lines.append("No Server 1 smoke failures recorded.")
+        lines.append("No Final release smoke failures recorded.")
     else:
         lines.extend([f"- `{f.get('backend')}` `{f.get('document_id')}`: {f.get('error')}" for f in failures])
     return "\n".join(lines) + "\n"
 
 
 def render_runtime_report(rows: List[Dict[str, Any]]) -> str:
-    lines = ["# Stage 1A Server 1 Cost/Runtime Report", "", f"Generated: {now()}", "", "No external paid calls were made by this Server 1 run.", ""]
+    lines = ["# Stage 1A Final release Cost/Runtime Report", "", f"Generated: {now()}", "", "No external paid calls were made by this Final release run.", ""]
     for r in rows:
         lines.append(f"- `{r['backend']}` `{r['document_id']}` `{r['track']}`: {r['runtime_seconds']}s, {r['status']}, GPU before/after `{r['gpu_memory_before']}` -> `{r['gpu_memory_after']}`")
     return "\n".join(lines) + "\n"
@@ -685,7 +685,7 @@ def write_model_availability(metrics: List[Dict[str, Any]]) -> None:
 
 
 def write_adapter_status(metrics: List[Dict[str, Any]], failures: List[Dict[str, Any]]) -> None:
-    lines = ["# Stage 1A Server 1 Adapter Status", "", f"Generated: {now()}", ""]
+    lines = ["# Stage 1A Final release Adapter Status", "", f"Generated: {now()}", ""]
     for backend in sorted({m["backend"] for m in metrics} | {f.get("backend", "") for f in failures}):
         if not backend:
             continue
@@ -696,13 +696,13 @@ def write_adapter_status(metrics: List[Dict[str, Any]], failures: List[Dict[str,
             lines.append(f"- `{backend}`: {passed}/{len(subset)} smoke outputs parsed as JSON.")
         for f in failed:
             lines.append(f"- `{backend}` failure on `{f.get('document_id')}`: {f.get('error')}")
-    lines.extend(["", "External API adapters are dry-run/key-check only in this Server 1 pass; no paid external calls were made."])
+    lines.extend(["", "External API adapters are dry-run/key-check only in this Final release pass; no paid external calls were made."])
     write_text(REPORTS_DIR / "stage1a_server1_adapter_status.md", "\n".join(lines) + "\n")
 
 
 def write_smoke_summary(run_dir: Path, docs: List[Dict[str, str]], metrics: List[Dict[str, Any]], failures: List[Dict[str, Any]]) -> None:
     lines = [
-        "# Stage 1A Server 1 Smoke Summary",
+        "# Stage 1A Final release Smoke Summary",
         "",
         f"Generated: {now()}",
         "",
@@ -711,7 +711,7 @@ def write_smoke_summary(run_dir: Path, docs: List[Dict[str, str]], metrics: List
         f"- Documents: {', '.join(d['document_id'] for d in docs)}",
         f"- Smoke metric rows: {len(metrics)}",
         f"- Failures recorded: {len(failures)}",
-        "- External paid calls made by this Server 1 run: none.",
+        "- External paid calls made by this Final release run: none.",
         "",
         "## Results",
         "",
@@ -761,14 +761,14 @@ def external_api_dry_run_report() -> None:
         })
     fields = ["api", "key_present", "sdk_client_installed", "sdk_client_version", "dry_run_adapter_implemented", "paid_call_made", "estimated_smoke_cost", "recommended_decision"]
     write_csv(REPORTS_DIR / "stage1a_server1_external_api_key_matrix.csv", rows, fields)
-    md = ["# Stage 1A Server 1 External API Adapter Status", "", f"Generated: {now()}", "", "No paid external API calls were made by this Server 1 dry-run pass.", ""]
+    md = ["# Stage 1A Final release External API Adapter Status", "", f"Generated: {now()}", "", "No paid external API calls were made by this Final release dry-run pass.", ""]
     for row in rows:
         md.append(f"- `{row['api']}`: key_present={row['key_present']}, sdk/client={row['sdk_client_installed']} {row['sdk_client_version']}, dry_run={row['dry_run_adapter_implemented']}, decision={row['recommended_decision']}.")
     write_text(REPORTS_DIR / "stage1a_server1_external_api_adapter_status.md", "\n".join(md) + "\n")
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Stage 1A Server 1 audit/smoke runner")
+    parser = argparse.ArgumentParser(description="Stage 1A Final release audit/smoke runner")
     parser.add_argument("command", choices=["audit", "manifest-check", "external-dry-run", "smoke", "all"])
     args = parser.parse_args()
     if args.command in {"audit", "all"}:
@@ -779,7 +779,7 @@ def main() -> None:
         external_api_dry_run_report()
     if args.command in {"smoke", "all"}:
         run_dir = run_smoke()
-        print(f"server1 smoke outputs: {run_dir}")
+        print(f"final smoke outputs: {run_dir}")
 
 
 if __name__ == "__main__":

@@ -1,8 +1,8 @@
 # Architecture
 
-ClinDoc-Bench-IN separates data preparation, model inference, normalization, evaluation, statistics, and publication assets.
+ClinDoc-Bench-IN separates data preparation, model inference, evaluation, statistics, and publication assets.
 
-The frozen benchmark lives under `benchmark_v2/final_day_freeze_20260709/` and is read-only. New experiments should write elsewhere and then be compared against the frozen reports.
+The frozen benchmark lives under `benchmark/final/` and is read-only. New experiments should write elsewhere and then be compared against the frozen reports.
 
 ## System Flow
 
@@ -26,5 +26,5 @@ flowchart TD
 - The manifest is the contract between data, predictions, and evaluation.
 - Each lane is evaluated independently before aggregation.
 - Canonical JSON is validated before structured scoring.
-- Provenance records preserve origin server, output directory, timestamp, coverage, and publication status.
+- Provenance records preserve artifact location, timestamp, coverage, and publication status.
 - Publication assets are regenerated from frozen CSVs, not from live model calls.

@@ -292,7 +292,7 @@ def main() -> None:
     parser.add_argument("--submission-dir", required=True, help="Directory containing metadata.yaml, predictions/, runtime.csv, and README.md.")
     parser.add_argument(
         "--manifest",
-        default="benchmark_v2/data/benchmark_manifest_v2.csv",
+        default="benchmark/data/benchmark_manifest.csv",
         help="Benchmark manifest used to determine the expected document set.",
     )
     parser.add_argument(

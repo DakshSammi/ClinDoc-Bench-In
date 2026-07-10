@@ -1,9 +1,9 @@
-| family | track | system | origin_server | publication_status | primary_metric | records | primary_score | runtime_seconds | rank |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| raw_ocr | raw_ocr | qwen3_vl_raw_ocr | server1 | PRIMARY TABLE | token_f1 | 125 | 0.2238 |  | 1.0000 |
-| raw_ocr | raw_ocr | glm_ocr | server1 | PRIMARY TABLE | token_f1 | 125 | 0.2232 |  | 2.0000 |
-| raw_ocr | raw_ocr | surya | server2 | PRIMARY TABLE | token_f1 | 125 | 0.2083 |  | 3.0000 |
-| raw_ocr | raw_ocr | doctr | server2 | PRIMARY TABLE | token_f1 | 125 | 0.1626 |  | 4.0000 |
-| raw_ocr | raw_ocr | easyocr | server2 | PRIMARY TABLE | token_f1 | 125 | 0.1159 |  | 5.0000 |
-| raw_ocr | raw_ocr | docling | server2 | PRIMARY TABLE | token_f1 | 125 | 0.1141 |  | 6.0000 |
-| raw_ocr | raw_ocr | trocr | server2 | PRIMARY TABLE | token_f1 | 125 | 0.0099 |  | 7.0000 |
+| family | track | system | publication_status | primary_metric | records | primary_score | runtime_seconds | rank |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| raw_ocr | raw_ocr | qwen3_vl_raw_ocr | PRIMARY TABLE | token_f1 | 125 | 0.2238 |  | 1.0000 |
+| raw_ocr | raw_ocr | glm_ocr | PRIMARY TABLE | token_f1 | 125 | 0.2232 |  | 2.0000 |
+| raw_ocr | raw_ocr | surya | PRIMARY TABLE | token_f1 | 125 | 0.2083 |  | 3.0000 |
+| raw_ocr | raw_ocr | doctr | PRIMARY TABLE | token_f1 | 125 | 0.1626 |  | 4.0000 |
+| raw_ocr | raw_ocr | easyocr | PRIMARY TABLE | token_f1 | 125 | 0.1159 |  | 5.0000 |
+| raw_ocr | raw_ocr | docling | PRIMARY TABLE | token_f1 | 125 | 0.1141 |  | 6.0000 |
+| raw_ocr | raw_ocr | trocr | PRIMARY TABLE | token_f1 | 125 | 0.0099 |  | 7.0000 |

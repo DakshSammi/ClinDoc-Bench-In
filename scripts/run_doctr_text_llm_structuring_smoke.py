@@ -152,7 +152,7 @@ def append_usage(row: dict[str, Any]) -> None:
                 for existing_row in existing_rows:
                     if "backend_name" not in existing_row or existing_row.get("backend_name") is None:
                         model = existing_row.get("model", "")
-                        existing_row["backend_name"] = "internal_qwen3_27b_text_only" if model == "qwen3-27b" else ""
+                        existing_row["backend_name"] = "qwen3_27b_text_only" if model == "qwen3-27b" else ""
                     writer.writerow({name: existing_row.get(name, "") for name in fieldnames})
             exists = True
     with USAGE_LOG.open("a", newline="", encoding="utf-8") as f:
@@ -377,7 +377,7 @@ def parse_and_validate(
 
 
 def write_manifest(valid_docs: list[str]) -> None:
-    source_manifest = PROJECT_ROOT / "data/manifest_internal_qwen3_27b_full.csv"
+    source_manifest = PROJECT_ROOT / "data/manifest_qwen3_27b_full.csv"
     with source_manifest.open("r", encoding="utf-8", newline="") as f:
         rows = list(csv.DictReader(f))
         fieldnames = list(rows[0].keys())
@@ -545,10 +545,10 @@ def run(args: argparse.Namespace) -> int:
     RAW_DIR.mkdir(parents=True, exist_ok=True)
 
     if args.backend == "internal":
-        api_key = os.getenv("INTERNAL_QWEN3_API_KEY")
-        base_url = os.getenv("INTERNAL_QWEN3_BASE_URL", "http://10.10.110.37:4000/v1")
-        model = os.getenv("INTERNAL_QWEN3_MODEL", "qwen3-27b")
-        backend_name = "internal_qwen3_27b_text_only"
+        api_key = os.getenv("QWEN3_27B_API_KEY")
+        base_url = os.getenv("QWEN3_27B_BASE_URL", "http://10.10.110.37:4000/v1")
+        model = os.getenv("QWEN3_27B_MODEL", "qwen3-27b")
+        backend_name = "qwen3_27b_text_only"
     else:
         api_key = args.api_key or os.getenv("LOCAL_QWEN3_MOE_API_KEY") or None
         base_url = args.model_base_url
@@ -559,15 +559,15 @@ def run(args: argparse.Namespace) -> int:
         results = [
             {
                 "document_id": doc_id,
-                "backend_name": "internal_qwen3_27b_text_only",
+                "backend_name": "qwen3_27b_text_only",
                 "attempted": "no",
                 "validation_status": "not_attempted",
-                "error": "INTERNAL_QWEN3_API_KEY is not set",
+                "error": "QWEN3_27B_API_KEY is not set",
             }
             for doc_id in SMOKE_DOCS
         ]
         write_status_report(results)
-        print("INTERNAL_QWEN3_API_KEY is not set")
+        print("QWEN3_27B_API_KEY is not set")
         return 2
     init_global_limiter(tpm_limit=args.tpm_limit, rpm_limit=args.rpm_limit, window_seconds=60, buffer_seconds=15, max_retries_rate_limit=1)
 

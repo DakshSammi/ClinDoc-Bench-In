@@ -2,7 +2,7 @@
 
 ## GitHub Release
 
-- [ ] Confirm `benchmark_v2/final_day_freeze_20260709/reports/FINAL_BENCHMARK_FROZEN.txt` exists.
+- [ ] Confirm `benchmark/final/reports/final_model_registry.csv` exists.
 - [ ] Confirm no benchmark outputs were modified after the freeze.
 - [ ] Replace placeholder authors in `CITATION.cff`.
 - [ ] Replace repository URLs in `CITATION.cff`.

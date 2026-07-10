@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Stage 1B Server 1 GLM-OCR raw OCR runner.
+"""Stage 1B Final release GLM-OCR raw OCR runner.
 
 Runs local Ollama `glm-ocr:latest` for Track 1 raw OCR/document recognition.
 Supports 3-document smoke and full manifest runs with resume/checkpoints.
@@ -421,7 +421,7 @@ class Runner:
         }
         write_json_atomic(REPORTS_DIR / "stage1b_server1_glm_ocr_progress.json", progress)
         lines = [
-            "# Stage 1B Server 1 GLM-OCR Progress",
+            "# Stage 1B Final release GLM-OCR Progress",
             "",
             f"Generated: {progress['generated']}",
             "",
@@ -445,7 +445,7 @@ class Runner:
     def write_12h_summary(self) -> None:
         counts = self.counts()
         lines = [
-            "# Stage 1B Server 1 GLM-OCR 12h Summary",
+            "# Stage 1B Final release GLM-OCR 12h Summary",
             "",
             f"Generated: {now()}",
             "",
@@ -513,7 +513,7 @@ def aggregate(metrics: List[Dict[str, Any]], key: str) -> List[Dict[str, Any]]:
 
 
 def render_failure_log(output_root: Path) -> str:
-    lines = ["# Stage 1B Server 1 GLM-OCR Failure Log", "", f"Generated: {now()}", ""]
+    lines = ["# Stage 1B Final release GLM-OCR Failure Log", "", f"Generated: {now()}", ""]
     path = output_root / "checkpoints" / "failures.jsonl"
     failures = [json.loads(line) for line in path.read_text().splitlines() if line.strip()] if path.exists() else []
     lines.extend([f"- `{f.get('document_id')}`: {f.get('error')}" for f in failures] or ["No failures recorded."])
@@ -521,7 +521,7 @@ def render_failure_log(output_root: Path) -> str:
 
 
 def render_runtime_report(output_root: Path) -> str:
-    lines = ["# Stage 1B Server 1 GLM-OCR Runtime Report", "", f"Generated: {now()}", "", "No paid external API calls were made.", ""]
+    lines = ["# Stage 1B Final release GLM-OCR Runtime Report", "", f"Generated: {now()}", "", "No paid external API calls were made.", ""]
     for p in sorted((output_root / "logs" / OUTPUT_BACKEND).glob("*.json"), key=sort_key):
         log = json.loads(p.read_text())
         lines.append(f"- `{log.get('document_id')}`: {log.get('runtime_seconds')}s, status={log.get('status')}, chars={log.get('output_character_count')}")
@@ -530,7 +530,7 @@ def render_runtime_report(output_root: Path) -> str:
 
 def render_summary(metrics: List[Dict[str, Any]], output_root: Path) -> str:
     return "\n".join([
-        "# Stage 1B Server 1 GLM-OCR Summary",
+        "# Stage 1B Final release GLM-OCR Summary",
         "",
         f"Generated: {now()}",
         "",
@@ -561,7 +561,7 @@ def update_availability(info: Dict[str, Any], status: str) -> None:
 
 def write_availability_report(info: Dict[str, Any]) -> None:
     lines = [
-        "# Stage 1B Server 1 GLM-OCR Availability",
+        "# Stage 1B Final release GLM-OCR Availability",
         "",
         f"Generated: {now()}",
         "",
@@ -593,7 +593,7 @@ def write_smoke_reports(metrics: List[Dict[str, Any]], output_root: Path, info: 
         status = "failed_smoke"
     write_csv(REPORTS_DIR / "stage1b_server1_glm_ocr_smoke_metrics.csv", metrics, metric_fields())
     lines = [
-        "# Stage 1B Server 1 GLM-OCR Smoke Summary",
+        "# Stage 1B Final release GLM-OCR Smoke Summary",
         "",
         f"Generated: {now()}",
         "",
@@ -605,7 +605,7 @@ def write_smoke_reports(metrics: List[Dict[str, Any]], output_root: Path, info: 
         f"- Image input catastrophic failure: {str(catastrophic).lower()}",
     ]
     write_text(REPORTS_DIR / "stage1b_server1_glm_ocr_smoke_summary.md", "\n".join(lines) + "\n")
-    failure_lines = ["# Stage 1B Server 1 GLM-OCR Failure Log", "", f"Generated: {now()}", ""]
+    failure_lines = ["# Stage 1B Final release GLM-OCR Failure Log", "", f"Generated: {now()}", ""]
     failures = [m for m in metrics if m.get("status") != "success"]
     failure_lines.extend([f"- `{m['document_id']}`: status={m.get('status')}" for m in failures] or ["No smoke failures recorded."])
     write_text(REPORTS_DIR / "stage1b_server1_glm_ocr_failure_log.md", "\n".join(failure_lines) + "\n")

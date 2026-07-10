@@ -238,7 +238,7 @@ def write_llava_reports(generated: str) -> dict[str, object]:
 
     write_text(
         REPORTS / "stage1b_server1_llava_final_status.md",
-        f"""# Stage 1B Server 1 LLaVA Final Status
+        f"""# Stage 1B Final release LLaVA Final Status
 
 Generated: {generated}
 
@@ -258,7 +258,7 @@ Decision: LLaVA is retained as a diagnostic baseline only; it is not recommended
     )
     write_text(
         REPORTS / "stage1b_server1_llava_summary.md",
-        f"""# Stage 1B Server 1 LLaVA Summary
+        f"""# Stage 1B Final release LLaVA Summary
 
 Generated: {generated}
 
@@ -278,7 +278,7 @@ See `stage1b_server1_llava_metrics.csv`, `stage1b_server1_llava_failure_log.md`,
     )
     write_text(
         REPORTS / "stage1b_server1_llava_failure_log.md",
-        f"""# Stage 1B Server 1 LLaVA Failure Log
+        f"""# Stage 1B Final release LLaVA Failure Log
 
 Generated: {generated}
 
@@ -409,7 +409,7 @@ def write_coverage_and_snapshot(
             "primary_value": "pending",
             "secondary_metric": "not_available",
             "secondary_value": "pending",
-            "notes": "Server 2 handoff CSV and raw OCR files are not accessible from this host",
+            "notes": "Final release handoff CSV and raw OCR files are not accessible from this host",
         },
     ]
     fieldnames = [
@@ -434,7 +434,7 @@ def write_coverage_and_snapshot(
     ocr_json_state = "live" if session_running else "stopped after schema-invalid qwen2.5 outputs"
     write_text(
         REPORTS / "stage1b_server1_paper_results_snapshot.md",
-        f"""# Stage 1B Server 1 Paper Results Snapshot
+        f"""# Stage 1B Final release Paper Results Snapshot
 
 Generated: {generated}
 
@@ -450,7 +450,7 @@ Generated: {generated}
 - Session name: `{session_name}`; PID recorded by runner: `{pid}`.
 - Current OCR-to-JSON item: `{current}`.
 - OCR-to-JSON output root: `{output_root}`.
-- Server 2 OCR handoff files are still not accessible on this host; see `stage1b_server1_waiting_for_server2_handoff_transfer.md`.
+- Final release OCR handoff files are still not accessible on this host; see `stage1b_server1_waiting_for_server2_handoff_transfer.md`.
 
 ## Interpretation
 
@@ -474,7 +474,7 @@ Generated: {generated}
     qwen3 = lanes.get("ocr_glm_ocr_qwen3_8b", {}) if isinstance(lanes, dict) else {}
     write_text(
         REPORTS / "stage1b_server1_ocr_to_json_glm_ocr_status.md",
-        f"""# Stage 1B Server 1 GLM-OCR OCR-to-JSON Status
+        f"""# Stage 1B Final release GLM-OCR OCR-to-JSON Status
 
 Generated: {generated}
 
@@ -541,7 +541,7 @@ def write_wave3_progress(
             )
     write_text(
         REPORTS / "stage1b_server1_wave3_progress.md",
-        f"""# Stage 1B Server 1 Wave 3 Progress
+        f"""# Stage 1B Final release Wave 3 Progress
 
 Generated: {generated}
 
@@ -564,7 +564,7 @@ Generated: {generated}
 
 ## Waiting
 
-- Server 2 OCR handoff transfer is not accessible from this host.
+- Final release OCR handoff transfer is not accessible from this host.
 """,
     )
 

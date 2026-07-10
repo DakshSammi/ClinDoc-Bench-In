@@ -6,7 +6,7 @@ This repository serves both as a frozen benchmark artifact and as a living bench
 
 ## Frozen Benchmark Policy
 
-- `benchmark_v2/final_day_freeze_20260709/` is read-only.
+- `benchmark/final/` is read-only.
 - Paper tables, rankings, provenance, and statistics for the frozen release are not edited in place.
 - Corrections to frozen-release documentation are allowed only if they do not alter benchmark outcomes.
 

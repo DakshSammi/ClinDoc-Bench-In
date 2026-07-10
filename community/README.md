@@ -11,6 +11,7 @@ community/submissions/<submission_name>/
 Start from:
 
 - [community/submissions/template](submissions/template)
+- [community/ground_truth_template](ground_truth_template)
 - [docs/submitting_results.md](../docs/submitting_results.md)
 
 Validate a submission with:

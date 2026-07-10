@@ -325,7 +325,7 @@ def main() -> None:
     write_text(out_dir / "qualitative_examples.md", qualitative(rows))
     summary_slug = re.sub(r"[^a-z0-9]+", "_", args.engine.lower()).strip("_")
     write_text(PROJECT_ROOT / "reports" / f"stage1b_server1_{summary_slug}_raw_ocr_benchmark_summary.md", "\n".join([
-        f"# Stage 1B Server 1 {args.engine} Raw OCR Benchmark Summary",
+        f"# Stage 1B Final release {args.engine} Raw OCR Benchmark Summary",
         "",
         f"- Records: {summary['records']}",
         f"- Non-empty output rate: {summary['non_empty_output_rate']}",

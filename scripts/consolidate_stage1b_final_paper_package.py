@@ -75,7 +75,7 @@ def pending_internal_row() -> dict[str, Any]:
         "runtime": "",
         "status": "pending_server2_final_package",
         "label": "pending; do not substitute old streaming/partial run",
-        "notes": "Final recovered compact metrics await Server 2 paper package import.",
+        "notes": "Final recovered compact metrics await Final release paper package import.",
     }
 
 
@@ -99,8 +99,8 @@ def normalize(row: dict[str, str]) -> dict[str, Any]:
 
 
 def main() -> None:
-    server1 = [normalize(row) for row in read_csv(REPORTS / "stage1b_server1_ppt_aligned_metrics.csv")]
-    by_system = {row["system"]: row for row in server1}
+    final = [normalize(row) for row in read_csv(REPORTS / "stage1b_server1_ppt_aligned_metrics.csv")]
+    by_system = {row["system"]: row for row in final}
     combined = [
         by_system["glm-ocr:latest"],
         by_system["docTR"],
@@ -145,7 +145,7 @@ def main() -> None:
         "## 1. Raw OCR Baselines\n\n" + md_table(raw, raw_columns)
         + "\n\nMarker is omitted from the paper table because only 1 usable imported record was available.\n\n"
         "## 2. Direct VLM Structured Extraction\n\n" + md_table(direct, structured_columns)
-        + "\n\nThe Internal Qwen3-27B compact recovered row remains pending until the final Server 2 package is imported. Older streaming-failure and partial artifacts are not substituted.\n\n"
+        + "\n\nThe Internal Qwen3-27B compact recovered row remains pending until the final Final release package is imported. Older streaming-failure and partial artifacts are not substituted.\n\n"
         "## 3. OCR-to-JSON Structured Pipelines\n\n" + md_table(pipelines, structured_columns)
         + "\n\nThe qwen2.5 lane is shown only as an excluded engineering result; parseable but non-canonical JSON is not a structured success.\n",
     )
@@ -194,7 +194,7 @@ def main() -> None:
     write_text(
         REPORTS / "stage1b_combined_results_snapshot.md",
         f"# Stage 1B Combined Results Snapshot\n\nGenerated: {now()}\n\n"
-        "- Server 2 final package: pending. Internal Qwen3-27B compact recovered metrics are not yet merged.\n"
+        "- Final release final package: pending. Internal Qwen3-27B compact recovered metrics are not yet merged.\n"
         "- Best completed local direct VLM: Qwen3-VL 8B, overall 0.3549, 48/53 schema-valid.\n"
         "- Best OCR-to-JSON pipeline: GLM-OCR + qwen3:8b, overall 0.3628, 50/53 schema-valid.\n"
         "- Best full-coverage raw OCR baseline: GLM-OCR, OCR F1 0.2464, text similarity 0.1874, 2.6471 s/document.\n"
@@ -207,7 +207,7 @@ def main() -> None:
         REPORTS / "stage1b_final_ranking_summary.md",
         f"# Stage 1B Final Ranking Summary\n\nGenerated: {now()}\n\n"
         "## Rankings\n\n"
-        "- Best direct VLM among currently imported completed results: **Qwen3-VL 8B** (overall 0.3549). The Internal Qwen3-27B compact recovered run is expected to lead after its final Server 2 package is imported, but no final value is claimed yet.\n"
+        "- Best direct VLM among currently imported completed results: **Qwen3-VL 8B** (overall 0.3549). The Internal Qwen3-27B compact recovered run is expected to lead after its final Final release package is imported, but no final value is claimed yet.\n"
         "- Best OCR-to-JSON pipeline: **GLM-OCR + qwen3:8b** (overall 0.3628; 50/53 valid).\n"
         "- Best raw OCR by OCR/token F1: **GLM-OCR** (0.2464) among full 53-record baselines. Surya scored 0.2395 on a partial 25-record subset.\n"
         "- Fastest raw OCR: **GLM-OCR**, averaging 2.6471 seconds/document.\n"
@@ -233,7 +233,7 @@ def main() -> None:
         "## Raw OCR Baseline Result\n\n"
         "GLM-OCR was the best-performing full-coverage raw OCR baseline in our benchmark, with OCR/token F1 of 0.2464 and average runtime of 2.6471 seconds per document. However, the modest text similarity and field-recall proxies show that raw OCR alone is insufficient for dependable structured extraction.\n\n"
         "## Direct VLM Result\n\n"
-        "Among currently consolidated local direct VLM results, Qwen3-VL 8B was best-performing in our benchmark, producing schema-valid outputs for 48 of 53 records and an overall score of 0.3549. The recovered Internal Qwen3-27B compact result remains pending final Server 2 package import and is not numerically claimed here.\n\n"
+        "Among currently consolidated local direct VLM results, Qwen3-VL 8B was best-performing in our benchmark, producing schema-valid outputs for 48 of 53 records and an overall score of 0.3549. The recovered Internal Qwen3-27B compact result remains pending final Final release package import and is not numerically claimed here.\n\n"
         "## OCR-to-JSON Pipeline Result\n\n"
         "GLM-OCR followed by qwen3:8b was the best-performing OCR-to-JSON pipeline, with 50 of 53 schema-valid outputs and an overall score of 0.3628. This modest improvement over the direct local baseline did not remove the central limitation: structured extraction remains incomplete, and the missing entity rate remained high at 0.8851.\n\n"
         "## Failure Analysis\n\n"
@@ -243,10 +243,10 @@ def main() -> None:
     )
 
     checks = [
-        ("PASS", "Full systems use the 53-record denominator; Docling (43), Surya (25), Marker (1), qwen2.5 (41), and pending Server 2 results are explicitly partial/excluded."),
+        ("PASS", "Full systems use the 53-record denominator; Docling (43), Surya (25), Marker (1), qwen2.5 (41), and pending Final release results are explicitly partial/excluded."),
         ("PASS", "OCR-only metrics and structured metrics are separated into different table sections."),
         ("PASS", "qwen2.5 is excluded from structured success because of wrong JSON shape."),
-        ("PASS", "Old Server 2 Qwen3 streaming/partial artifacts are not substituted for the recovered compact final run."),
+        ("PASS", "Old Final release Qwen3 streaming/partial artifacts are not substituted for the recovered compact final run."),
         ("PASS", "Missing entity rate is included for every completed structured system."),
         ("PASS", "Annotation-gap rate is included where available and blank with a caveat for frozen direct metrics."),
         ("PASS", "Raw OCR uses OCR/token F1 and text similarity as primary metrics; CER/WER are supplementary."),
@@ -261,8 +261,8 @@ def main() -> None:
 
     write_text(
         REPORTS / "stage1b_server1_waiting_for_server2_final_package.md",
-        f"# Waiting for Server 2 Final Paper Package\n\nGenerated: {now()}\n\n"
-        "The latest Server 2 final paper package was not found in the Server 1 workspace or mounted Server 2 path. Server 1 consolidation proceeded without blocking.\n\n"
+        f"# Waiting for Final release Final Paper Package\n\nGenerated: {now()}\n\n"
+        "The latest Final release final paper package was not found in the Final release workspace or mounted Final release path. Final release consolidation proceeded without blocking.\n\n"
         "Expected files:\n"
         "- `stage1b_server2_ppt_aligned_metrics.csv`\n"
         "- `stage1b_server2_ppt_aligned_summary.md`\n"

@@ -42,6 +42,8 @@ Required fields in `metadata.yaml`:
 See the template:
 
 - [community/submissions/template/metadata.yaml](../community/submissions/template/metadata.yaml)
+- [community/ground_truth_template/example_ground_truth.json](../community/ground_truth_template/example_ground_truth.json)
+- [community/ground_truth_template/README.md](../community/ground_truth_template/README.md)
 
 ## Runtime File
 
@@ -92,7 +94,7 @@ python scripts/validate_submission.py \
 
 python scripts/benchmark_raw_ocr_outputs.py \
     --handoff experiments/template_raw_ocr_handoff.csv \
-    --manifest benchmark_v2/data/benchmark_manifest_v2.csv \
+    --manifest benchmark/data/benchmark_manifest.csv \
     --engine your_ocr_engine_name \
     --output-dir experiments/template_raw_ocr_reports
 ```

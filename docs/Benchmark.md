@@ -12,6 +12,6 @@ The frozen benchmark compares model lanes across three tracks:
 
 Final outputs are under:
 
-`benchmark_v2/final_day_freeze_20260709/reports/`
+`benchmark/final/reports/`
 
 Do not rerun, overwrite, or regenerate frozen results. New research lanes should write to separate experiment directories.

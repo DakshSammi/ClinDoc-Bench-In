@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Server 1 Stage 1A Ollama OCR addendum.
+"""Final release Stage 1A Ollama OCR addendum.
 
 This addendum audits pullable Ollama OCR/document models without pulling them.
 If glm-ocr is already installed it can run the approved three-document smoke;
@@ -408,11 +408,11 @@ def append_smoke_metrics(rows: List[Dict[str, Any]]) -> None:
 
 def write_roster(glm_decision: str) -> None:
     lines = [
-        "# Stage 1A Server 1 Recommended Full Run Roster",
+        "# Stage 1A Final release Recommended Full Run Roster",
         "",
         f"Generated: {now()}",
         "",
-        "Recommended for Stage 1B based on Server 1 smoke so far:",
+        "Recommended for Stage 1B based on Final release smoke so far:",
         "- `ollama_qwen3_vl_8b_raw_structured`: ready_for_full_run.",
         "- `ollama_qwen25_14b_ocr_to_json`: smoke_passed_but_low_quality until schema prompt is tightened.",
         "- `ollama_qwen3_8b_semantic_inference`: ready_for semantic-only add-on smoke scope.",
@@ -430,7 +430,7 @@ def write_roster(glm_decision: str) -> None:
 
 def write_report(run_dir: Path, ollama_list: str, show_results: Dict[str, Dict[str, Any]], metric_rows: List[Dict[str, Any]], glm_installed: bool, glm_decision: str) -> None:
     lines = [
-        "# Stage 1A Server 1 Ollama OCR Addendum",
+        "# Stage 1A Final release Ollama OCR Addendum",
         "",
         f"Generated: {now()}",
         "",
@@ -495,7 +495,7 @@ def write_report(run_dir: Path, ollama_list: str, show_results: Dict[str, Dict[s
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Server 1 Ollama OCR addendum")
+    parser = argparse.ArgumentParser(description="Final release Ollama OCR addendum")
     parser.add_argument("--run-if-installed", action="store_true", help="Run glm-ocr smoke only if already installed")
     args = parser.parse_args()
 

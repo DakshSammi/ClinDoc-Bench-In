@@ -1,16 +1,16 @@
-family,track,system,origin_server,publication_status,primary_metric,records,primary_score,runtime_seconds,rank
-structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,server1,APPENDIX,overall_extraction_score,125,0.3457672268907563,17.252423999999998,4.0
-structured,hybrid,glm_ocr_qwen3_8b,server1,APPENDIX,overall_extraction_score,125,0.3405934959349593,16.055,5.0
-structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,server1,APPENDIX,overall_extraction_score,125,0.3370273684210526,14.17716,6.0
-structured,hybrid,glm_ocr_qwen25_14b,server1,APPENDIX,overall_extraction_score,125,0.3362402173913043,13.948696,7.0
-structured,hybrid,surya_qwen25_14b,server1,APPENDIX,overall_extraction_score,125,0.3270392156862745,21.048896,9.0
-structured,hybrid,doctr_qwen25_14b,server1,APPENDIX,overall_extraction_score,125,0.3153518518518518,13.782392,10.0
-structured,hybrid,docling_qwen25_14b,server1,APPENDIX,overall_extraction_score,125,0.310682075471698,12.388408,11.0
-structured,hybrid,easyocr_qwen25_14b,server1,APPENDIX,overall_extraction_score,125,0.2999732142857143,13.456936,12.0
-structured,hybrid,docling_qwen3_8b,server1,APPENDIX,overall_extraction_score,125,0.2972330645161291,13.848536,13.0
-structured,hybrid,surya_qwen3_8b,server1,APPENDIX,overall_extraction_score,125,0.2950666666666666,,14.0
-structured,hybrid,trocr_qwen25_14b,server1,APPENDIX,overall_extraction_score,125,0.2942854838709677,8.731176,15.0
-structured,hybrid,doctr_qwen3_8b,server2,PRIMARY TABLE,overall_extraction_score,125,0.2720079999999999,,17.0
-structured,hybrid,easyocr_qwen3_8b,server2,PRIMARY TABLE,overall_extraction_score,125,0.2694488,,18.0
-structured,hybrid,trocr_qwen3_8b,server2,PRIMARY TABLE,overall_extraction_score,125,0.257216,,19.0
-structured,hybrid,ollama_qwen3_vl_8b,server1,EXCLUDED,overall_extraction_score,125,,16.480984,
+family,track,system,publication_status,primary_metric,records,primary_score,runtime_seconds,rank
+structured,hybrid,qwen3_vl_raw_ocr_qwen3_8b,APPENDIX,overall_extraction_score,125,0.3457672268907563,17.252423999999998,4.0
+structured,hybrid,glm_ocr_qwen3_8b,APPENDIX,overall_extraction_score,125,0.3405934959349593,16.055,5.0
+structured,hybrid,qwen3_vl_raw_ocr_qwen25_14b,APPENDIX,overall_extraction_score,125,0.3370273684210526,14.17716,6.0
+structured,hybrid,glm_ocr_qwen25_14b,APPENDIX,overall_extraction_score,125,0.3362402173913043,13.948696,7.0
+structured,hybrid,surya_qwen25_14b,APPENDIX,overall_extraction_score,125,0.3270392156862745,21.048896,9.0
+structured,hybrid,doctr_qwen25_14b,APPENDIX,overall_extraction_score,125,0.3153518518518518,13.782392,10.0
+structured,hybrid,docling_qwen25_14b,APPENDIX,overall_extraction_score,125,0.310682075471698,12.388408,11.0
+structured,hybrid,easyocr_qwen25_14b,APPENDIX,overall_extraction_score,125,0.2999732142857143,13.456936,12.0
+structured,hybrid,docling_qwen3_8b,APPENDIX,overall_extraction_score,125,0.2972330645161291,13.848536,13.0
+structured,hybrid,surya_qwen3_8b,APPENDIX,overall_extraction_score,125,0.2950666666666666,,14.0
+structured,hybrid,trocr_qwen25_14b,APPENDIX,overall_extraction_score,125,0.2942854838709677,8.731176,15.0
+structured,hybrid,doctr_qwen3_8b,PRIMARY TABLE,overall_extraction_score,125,0.2720079999999999,,17.0
+structured,hybrid,easyocr_qwen3_8b,PRIMARY TABLE,overall_extraction_score,125,0.2694488,,18.0
+structured,hybrid,trocr_qwen3_8b,PRIMARY TABLE,overall_extraction_score,125,0.257216,,19.0
+structured,hybrid,ollama_qwen3_vl_8b,EXCLUDED,overall_extraction_score,125,,16.480984,

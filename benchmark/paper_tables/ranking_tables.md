@@ -1,0 +1,25 @@
+| family     | system                      | primary_metric           |   records |   primary_score |   rank |
+|:-----------|:----------------------------|:-------------------------|----------:|----------------:|-------:|
+| raw_ocr    | qwen3_vl_raw_ocr            | token_f1                 |       125 |       0.223796  |      1 |
+| raw_ocr    | glm_ocr                     | token_f1                 |       125 |       0.223192  |      2 |
+| raw_ocr    | doctr                       | token_f1                 |       125 |       0.162648  |      3 |
+| raw_ocr    | easyocr                     | token_f1                 |       125 |       0.115893  |      4 |
+| raw_ocr    | docling                     | token_f1                 |       125 |       0.113218  |      5 |
+| raw_ocr    | trocr                       | token_f1                 |       125 |       0.0096824 |      6 |
+| structured | qwen3_27b          | overall_extraction_score |       125 |       0.403714  |      1 |
+| structured | qwen3_vl_raw_ocr_qwen3_8b   | overall_extraction_score |       125 |       0.345767  |      2 |
+| structured | glm_ocr_qwen3_8b            | overall_extraction_score |       125 |       0.338184  |      3 |
+| structured | qwen3_vl_raw_ocr_qwen25_14b | overall_extraction_score |       125 |       0.337027  |      4 |
+| structured | glm_ocr_qwen25_14b          | overall_extraction_score |       125 |       0.336153  |      5 |
+| structured | doctr_qwen25_14b            | overall_extraction_score |       125 |       0.316131  |      6 |
+| structured | docling_qwen25_14b          | overall_extraction_score |       125 |       0.310426  |      7 |
+| structured | doctr_qwen3_8b              | overall_extraction_score |       125 |       0.305392  |      8 |
+| structured | easyocr_qwen25_14b          | overall_extraction_score |       125 |       0.301442  |      9 |
+| structured | easyocr_qwen3_8b            | overall_extraction_score |       125 |       0.298977  |     10 |
+| structured | trocr_qwen3_8b              | overall_extraction_score |       125 |       0.29813   |     11 |
+| structured | docling_qwen3_8b            | overall_extraction_score |       125 |       0.295936  |     12 |
+| structured | trocr_qwen25_14b            | overall_extraction_score |       125 |       0.294326  |     13 |
+| structured | ollama_llava_13b            | overall_extraction_score |       125 |     nan         |    nan |
+| structured | ollama_qwen3_vl_8b          | overall_extraction_score |       125 |     nan         |    nan |
+| structured | surya_qwen25_14b            | overall_extraction_score |       125 |     nan         |    nan |
+| structured | surya_qwen3_8b              | overall_extraction_score |       125 |     nan         |    nan |

@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Stage 1B Server 1 OCR-to-JSON waiting lane.
+"""Stage 1B Final release OCR-to-JSON waiting lane.
 
-This script intentionally does not run unless a Server 2 OCR handoff CSV is
+This script intentionally does not run unless a Final release OCR handoff CSV is
 provided. It exists to document the approved future lanes and prevent accidental
 launches before OCR text is available.
 """
@@ -35,7 +35,7 @@ APPROVED_TEXT_BACKENDS = {
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Prepare/validate OCR-to-JSON handoff lane")
-    parser.add_argument("--handoff-csv", required=True, help="Server 2 OCR handoff CSV with document_id and ocr_text_path columns")
+    parser.add_argument("--handoff-csv", required=True, help="Final release OCR handoff CSV with document_id and ocr_text_path columns")
     parser.add_argument("--backend", choices=sorted(APPROVED_TEXT_BACKENDS), required=True)
     parser.add_argument("--dry-run", action="store_true", help="Only validate handoff shape; do not call Ollama")
     args = parser.parse_args()
@@ -52,7 +52,7 @@ def main() -> None:
     if args.dry_run:
         print(f"handoff ok: {len(rows)} rows for {args.backend} ({APPROVED_TEXT_BACKENDS[args.backend]})")
         return
-    raise SystemExit("Execution is intentionally disabled until Server 2 handoff is approved for launch.")
+    raise SystemExit("Execution is intentionally disabled until Final release handoff is approved for launch.")
 
 
 if __name__ == "__main__":

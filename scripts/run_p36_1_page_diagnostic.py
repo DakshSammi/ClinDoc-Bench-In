@@ -65,19 +65,19 @@ def record_usage(document_id, response, estimated_input_tokens, estimated_output
 
 
 async def main():
-    out_dir = PROJECT_ROOT / "outputs/ocr_transcriptions/internal_qwen3_27b_p36_1_pages"
-    raw_dir = PROJECT_ROOT / "outputs/raw_responses/internal_qwen3_27b_p36_1_pages"
+    out_dir = PROJECT_ROOT / "outputs/ocr_transcriptions/qwen3_27b_p36_1_pages"
+    raw_dir = PROJECT_ROOT / "outputs/raw_responses/qwen3_27b_p36_1_pages"
     out_dir.mkdir(parents=True, exist_ok=True)
     raw_dir.mkdir(parents=True, exist_ok=True)
 
-    api_key = os.getenv("INTERNAL_QWEN3_API_KEY")
+    api_key = os.getenv("QWEN3_27B_API_KEY")
     if not api_key:
-        raise SystemExit("INTERNAL_QWEN3_API_KEY is not set")
+        raise SystemExit("QWEN3_27B_API_KEY is not set")
 
     adapter = OpenAICompatibleVLMBackendAdapter(
-        base_url=os.getenv("INTERNAL_QWEN3_BASE_URL", "http://10.10.110.37:4000/v1"),
+        base_url=os.getenv("QWEN3_27B_BASE_URL", "http://10.10.110.37:4000/v1"),
         api_key=api_key,
-        model_id=os.getenv("INTERNAL_QWEN3_MODEL", "qwen3-27b"),
+        model_id=os.getenv("QWEN3_27B_MODEL", "qwen3-27b"),
         max_image_dim=1024,
         jpeg_quality=85,
         timeout=900,
@@ -144,7 +144,7 @@ async def main():
         log_internal_qwen3_usage(
             log_path=PROJECT_ROOT / "logs/internal_qwen3_usage.csv",
             document_id=doc_id,
-            model=os.getenv("INTERNAL_QWEN3_MODEL", "qwen3-27b"),
+            model=os.getenv("QWEN3_27B_MODEL", "qwen3-27b"),
             num_images=1,
             max_tokens=8000,
             latency_ms=latency_ms,

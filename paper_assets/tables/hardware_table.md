@@ -4,4 +4,4 @@
 | GPU | To be filled before camera-ready |
 | RAM | To be filled before camera-ready |
 | Storage | To be filled before camera-ready |
-| Servers | Server 1 and imported Server 2 handoff |
+| Servers | Final release and imported Final release handoff |

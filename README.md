@@ -1,5 +1,7 @@
 # ClinDoc-Bench-IN
 
+Open benchmark for Indian prescription OCR, direct vision-language extraction, and hybrid OCR-to-LLM pipelines. It ships frozen publication results, reusable evaluation code, and a community-ready submission format.
+
 [![Dataset](https://img.shields.io/badge/Dataset-90%20patients%20%7C%20125%20documents%20%7C%20150%20images-2f6f6d)](#dataset)
 [![Benchmark](https://img.shields.io/badge/Benchmark-OCR%20%7C%20Direct%20VLM%20%7C%20Hybrid-44546a)](#benchmark-tracks)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776ab)](#installation)
@@ -9,7 +11,7 @@
 
 ClinDoc-Bench-IN is both a frozen paper benchmark and an open repository for benchmarking new OCR, VLM, and hybrid extraction systems against the same evaluation logic.
 
-The frozen benchmark under `benchmark_v2/final_day_freeze_20260709/` is read-only. New experiments, community submissions, and future benchmark revisions must live outside that directory.
+The frozen benchmark under `benchmark/final/` is read-only. New experiments, community submissions, and future benchmark revisions must live outside that directory.
 
 ## Overview
 
@@ -31,7 +33,7 @@ ClinDoc-Bench-IN has three working modes:
 Recommended working areas:
 
 ```text
-benchmark_v2/final_day_freeze_20260709/   # frozen publication benchmark
+benchmark/final/   # frozen publication benchmark
 experiments/                              # new local experiments
 community/submissions/                    # community-formatted submissions
 paper_assets/                             # regenerated publication assets from frozen CSVs
@@ -86,12 +88,12 @@ python scripts/validate_submission.py \
 
 The canonical frozen benchmark is stored under:
 
-- [benchmark_v2/final_day_freeze_20260709/reports/](https://github.com/DakshSammi/ClinDoc-Bench-In/tree/main/benchmark_v2/final_day_freeze_20260709/reports)
-- [final_benchmark_report.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark_v2/final_day_freeze_20260709/reports/final_benchmark_report.md)
-- [final_model_registry.csv](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark_v2/final_day_freeze_20260709/reports/final_model_registry.csv)
-- [selected_lanes_provenance.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark_v2/final_day_freeze_20260709/reports/selected_lanes_provenance.md)
+- [benchmark/final/reports/](https://github.com/DakshSammi/ClinDoc-Bench-In/tree/main/benchmark/final/reports)
+- [final_benchmark_report.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark/final/reports/final_benchmark_report.md)
+- [final_model_registry.csv](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark/final/reports/final_model_registry.csv)
+- [selected_lanes_provenance.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark/final/reports/selected_lanes_provenance.md)
 
-Do not rerun, overwrite, or edit anything under `benchmark_v2/final_day_freeze_20260709/`.
+Do not rerun, overwrite, or edit anything under `benchmark/final/`.
 
 ## Dataset
 
@@ -200,7 +202,7 @@ python scripts/validate_submission.py \
 
 python scripts/benchmark_raw_ocr_outputs.py \
     --handoff experiments/template_raw_ocr_handoff.csv \
-    --manifest benchmark_v2/data/benchmark_manifest_v2.csv \
+    --manifest benchmark/data/benchmark_manifest.csv \
     --engine your_ocr_engine_name \
     --output-dir experiments/template_raw_ocr_reports
 ```
@@ -257,41 +259,41 @@ Frozen publication leaderboard:
 
 - [paper_assets/tables/table_12_final_leaderboard.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/paper_assets/tables/table_12_final_leaderboard.md)
 
-| family | track | system | origin_server | publication_status | records | primary_score | runtime_seconds | rank |
+| family | track | system | provenance | publication_status | records | primary_score | runtime_seconds | rank |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| raw_ocr | raw_ocr | qwen3_vl_raw_ocr | server1 | PRIMARY TABLE | 125 | 0.2238 |  | 1.0000 |
-| raw_ocr | raw_ocr | glm_ocr | server1 | PRIMARY TABLE | 125 | 0.2232 |  | 2.0000 |
-| raw_ocr | raw_ocr | surya | server2 | PRIMARY TABLE | 125 | 0.2083 |  | 3.0000 |
-| raw_ocr | raw_ocr | doctr | server2 | PRIMARY TABLE | 125 | 0.1626 |  | 4.0000 |
-| raw_ocr | raw_ocr | easyocr | server2 | PRIMARY TABLE | 125 | 0.1159 |  | 5.0000 |
-| raw_ocr | raw_ocr | docling | server2 | PRIMARY TABLE | 125 | 0.1141 |  | 6.0000 |
-| raw_ocr | raw_ocr | trocr | server2 | PRIMARY TABLE | 125 | 0.0099 |  | 7.0000 |
-| structured | direct_vlm | qwen3_27b | server2 | PRIMARY TABLE | 125 | 0.3563 |  | 1.0000 |
-| structured | direct_vlm | qwen3_vl | server2 | PRIMARY TABLE | 125 | 0.3563 |  | 1.0000 |
-| structured | direct_vlm | google_gemini_2_5_flash | server2 | PRIMARY TABLE | 125 | 0.3531 |  | 3.0000 |
-| structured | hybrid | qwen3_vl_raw_ocr_qwen3_8b | server1 | APPENDIX | 125 | 0.3458 | 17.2524 | 4.0000 |
-| structured | hybrid | glm_ocr_qwen3_8b | server1 | APPENDIX | 125 | 0.3406 | 16.0550 | 5.0000 |
-| structured | hybrid | qwen3_vl_raw_ocr_qwen25_14b | server1 | APPENDIX | 125 | 0.3370 | 14.1772 | 6.0000 |
-| structured | hybrid | glm_ocr_qwen25_14b | server1 | APPENDIX | 125 | 0.3362 | 13.9487 | 7.0000 |
-| structured | direct_vlm | hf_qwen25_vl_72b | server2 | APPENDIX | 125 | 0.3296 |  | 8.0000 |
-| structured | hybrid | surya_qwen25_14b | server1 | APPENDIX | 125 | 0.3270 | 21.0489 | 9.0000 |
-| structured | hybrid | doctr_qwen25_14b | server1 | APPENDIX | 125 | 0.3154 | 13.7824 | 10.0000 |
-| structured | hybrid | docling_qwen25_14b | server1 | APPENDIX | 125 | 0.3107 | 12.3884 | 11.0000 |
-| structured | hybrid | easyocr_qwen25_14b | server1 | APPENDIX | 125 | 0.3000 | 13.4569 | 12.0000 |
-| structured | hybrid | docling_qwen3_8b | server1 | APPENDIX | 125 | 0.2972 | 13.8485 | 13.0000 |
-| structured | hybrid | surya_qwen3_8b | server1 | APPENDIX | 125 | 0.2951 |  | 14.0000 |
-| structured | hybrid | trocr_qwen25_14b | server1 | APPENDIX | 125 | 0.2943 | 8.7312 | 15.0000 |
-| structured | direct_vlm | qwen25_vl_7b_local | server2 | PRIMARY TABLE | 125 | 0.2907 |  | 16.0000 |
-| structured | hybrid | doctr_qwen3_8b | server2 | PRIMARY TABLE | 125 | 0.2720 |  | 17.0000 |
-| structured | hybrid | easyocr_qwen3_8b | server2 | PRIMARY TABLE | 125 | 0.2694 |  | 18.0000 |
-| structured | hybrid | trocr_qwen3_8b | server2 | PRIMARY TABLE | 125 | 0.2572 |  | 19.0000 |
-| structured | direct_vlm | ollama_llava_13b | server1 | EXCLUDED | 125 |  | 6.3045 |  |
-| structured | hybrid | ollama_qwen3_vl_8b | server1 | EXCLUDED | 125 |  | 16.4810 |  |
+| raw_ocr | raw_ocr | qwen3_vl_raw_ocr | final | PRIMARY TABLE | 125 | 0.2238 |  | 1.0000 |
+| raw_ocr | raw_ocr | glm_ocr | final | PRIMARY TABLE | 125 | 0.2232 |  | 2.0000 |
+| raw_ocr | raw_ocr | surya | final | PRIMARY TABLE | 125 | 0.2083 |  | 3.0000 |
+| raw_ocr | raw_ocr | doctr | final | PRIMARY TABLE | 125 | 0.1626 |  | 4.0000 |
+| raw_ocr | raw_ocr | easyocr | final | PRIMARY TABLE | 125 | 0.1159 |  | 5.0000 |
+| raw_ocr | raw_ocr | docling | final | PRIMARY TABLE | 125 | 0.1141 |  | 6.0000 |
+| raw_ocr | raw_ocr | trocr | final | PRIMARY TABLE | 125 | 0.0099 |  | 7.0000 |
+| structured | direct_vlm | qwen3_27b | final | PRIMARY TABLE | 125 | 0.3563 |  | 1.0000 |
+| structured | direct_vlm | qwen3_vl | final | PRIMARY TABLE | 125 | 0.3563 |  | 1.0000 |
+| structured | direct_vlm | google_gemini_2_5_flash | final | PRIMARY TABLE | 125 | 0.3531 |  | 3.0000 |
+| structured | hybrid | qwen3_vl_raw_ocr_qwen3_8b | final | APPENDIX | 125 | 0.3458 | 17.2524 | 4.0000 |
+| structured | hybrid | glm_ocr_qwen3_8b | final | APPENDIX | 125 | 0.3406 | 16.0550 | 5.0000 |
+| structured | hybrid | qwen3_vl_raw_ocr_qwen25_14b | final | APPENDIX | 125 | 0.3370 | 14.1772 | 6.0000 |
+| structured | hybrid | glm_ocr_qwen25_14b | final | APPENDIX | 125 | 0.3362 | 13.9487 | 7.0000 |
+| structured | direct_vlm | hf_qwen25_vl_72b | final | APPENDIX | 125 | 0.3296 |  | 8.0000 |
+| structured | hybrid | surya_qwen25_14b | final | APPENDIX | 125 | 0.3270 | 21.0489 | 9.0000 |
+| structured | hybrid | doctr_qwen25_14b | final | APPENDIX | 125 | 0.3154 | 13.7824 | 10.0000 |
+| structured | hybrid | docling_qwen25_14b | final | APPENDIX | 125 | 0.3107 | 12.3884 | 11.0000 |
+| structured | hybrid | easyocr_qwen25_14b | final | APPENDIX | 125 | 0.3000 | 13.4569 | 12.0000 |
+| structured | hybrid | docling_qwen3_8b | final | APPENDIX | 125 | 0.2972 | 13.8485 | 13.0000 |
+| structured | hybrid | surya_qwen3_8b | final | APPENDIX | 125 | 0.2951 |  | 14.0000 |
+| structured | hybrid | trocr_qwen25_14b | final | APPENDIX | 125 | 0.2943 | 8.7312 | 15.0000 |
+| structured | direct_vlm | qwen25_vl_7b_local | final | PRIMARY TABLE | 125 | 0.2907 |  | 16.0000 |
+| structured | hybrid | doctr_qwen3_8b | final | PRIMARY TABLE | 125 | 0.2720 |  | 17.0000 |
+| structured | hybrid | easyocr_qwen3_8b | final | PRIMARY TABLE | 125 | 0.2694 |  | 18.0000 |
+| structured | hybrid | trocr_qwen3_8b | final | PRIMARY TABLE | 125 | 0.2572 |  | 19.0000 |
+| structured | direct_vlm | ollama_llava_13b | final | EXCLUDED | 125 |  | 6.3045 |  |
+| structured | hybrid | ollama_qwen3_vl_8b | final | EXCLUDED | 125 |  | 16.4810 |  |
 
 Frozen provenance and coverage:
 
-- [final_benchmark_report.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark_v2/final_day_freeze_20260709/reports/final_benchmark_report.md)
-- [selected_lanes_provenance.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark_v2/final_day_freeze_20260709/reports/selected_lanes_provenance.md)
+- [final_benchmark_report.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark/final/reports/final_benchmark_report.md)
+- [selected_lanes_provenance.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark/final/reports/selected_lanes_provenance.md)
 
 Community submissions are standardized, but there is not yet an auto-updating public leaderboard service. The submission format and validator are the current bridge toward that workflow.
 

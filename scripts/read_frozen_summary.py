@@ -20,7 +20,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-REPORTS = ROOT / "benchmark_v2" / "final_day_freeze_20260709" / "reports"
+REPORTS = ROOT / "benchmark" / "final" / "reports"
 
 
 def display_text(value: str) -> str:
@@ -30,7 +30,7 @@ def display_text(value: str) -> str:
 
 
 def main() -> None:
-    marker = REPORTS / "FINAL_BENCHMARK_FROZEN.txt"
+    marker = REPORTS / "final_model_registry.csv"
     registry = REPORTS / "final_model_registry.csv"
     leaderboard = REPORTS / "overall_benchmark_tables.csv"
 

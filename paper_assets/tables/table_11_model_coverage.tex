@@ -2,33 +2,33 @@
 \toprule
 model & track & origin\_server & coverage & publication\_status & reason\_if\_excluded & statistics\_used \\
 \midrule
-glm\_ocr & raw\_ocr & server1 & 125/125 & PRIMARY TABLE & NaN & wilcoxon;friedman;bootstrap\_ci;holm \\
-doctr & raw\_ocr & server2 & 125/125 & PRIMARY TABLE & NaN & wilcoxon;friedman;bootstrap\_ci;holm \\
-easyocr & raw\_ocr & server2 & 125/125 & PRIMARY TABLE & NaN & wilcoxon;friedman;bootstrap\_ci;holm \\
-trocr & raw\_ocr & server2 & 125/125 & PRIMARY TABLE & NaN & wilcoxon;friedman;bootstrap\_ci;holm \\
-surya & raw\_ocr & server2 & 125/125 & PRIMARY TABLE & NaN & wilcoxon;friedman;bootstrap\_ci;holm \\
-docling & raw\_ocr & server2 & 125/125 & PRIMARY TABLE & NaN & wilcoxon;friedman;bootstrap\_ci;holm \\
-qwen3\_vl\_raw\_ocr & raw\_ocr & server1 & 125/125 & PRIMARY TABLE & NaN & wilcoxon;friedman;bootstrap\_ci;holm \\
-qwen3\_vl & direct\_vlm & server2 & 125/125 & PRIMARY TABLE & NaN & wilcoxon;mcnemar;friedman;bootstrap\_ci;holm \\
-google\_gemini\_2\_5\_flash & direct\_vlm & server2 & 125/125 & PRIMARY TABLE & NaN & wilcoxon;mcnemar;friedman;bootstrap\_ci;holm \\
-hf\_qwen25\_vl\_72b & direct\_vlm & server2 & 76/125 & APPENDIX & partial imported lane & descriptive\_only \\
-qwen3\_27b & direct\_vlm & server2 & 125/125 & PRIMARY TABLE & NaN & wilcoxon;mcnemar;friedman;bootstrap\_ci;holm \\
-qwen25\_vl\_7b\_local & direct\_vlm & server2 & 125/125 & PRIMARY TABLE & NaN & wilcoxon;mcnemar;friedman;bootstrap\_ci;holm \\
-ollama\_llava\_13b & direct\_vlm & server1 & 0/125 & EXCLUDED & local lane missing & NaN \\
-ollama\_qwen3\_vl\_8b & hybrid & server1 & 0/125 & EXCLUDED & local lane missing & NaN \\
-glm\_ocr\_qwen3\_8b & hybrid & server1 & 123/125 & APPENDIX & local lane incomplete & descriptive\_only \\
-doctr\_qwen3\_8b & hybrid & server2 & 125/125 & PRIMARY TABLE & NaN & wilcoxon;mcnemar;friedman;bootstrap\_ci;holm \\
-easyocr\_qwen3\_8b & hybrid & server2 & 125/125 & PRIMARY TABLE & NaN & wilcoxon;mcnemar;friedman;bootstrap\_ci;holm \\
-trocr\_qwen3\_8b & hybrid & server2 & 125/125 & PRIMARY TABLE & NaN & wilcoxon;mcnemar;friedman;bootstrap\_ci;holm \\
-surya\_qwen3\_8b & hybrid & server1 & 117/125 & APPENDIX & local lane incomplete & descriptive\_only \\
-docling\_qwen3\_8b & hybrid & server1 & 124/125 & APPENDIX & local lane incomplete & descriptive\_only \\
-qwen3\_vl\_raw\_ocr\_qwen3\_8b & hybrid & server1 & 119/125 & APPENDIX & local lane incomplete & descriptive\_only \\
-glm\_ocr\_qwen25\_14b & hybrid & server1 & 92/125 & APPENDIX & local lane incomplete & descriptive\_only \\
-doctr\_qwen25\_14b & hybrid & server1 & 108/125 & APPENDIX & local lane incomplete & descriptive\_only \\
-easyocr\_qwen25\_14b & hybrid & server1 & 112/125 & APPENDIX & local lane incomplete & descriptive\_only \\
-trocr\_qwen25\_14b & hybrid & server1 & 124/125 & APPENDIX & local lane incomplete & descriptive\_only \\
-surya\_qwen25\_14b & hybrid & server1 & 102/125 & APPENDIX & local lane incomplete & descriptive\_only \\
-docling\_qwen25\_14b & hybrid & server1 & 106/125 & APPENDIX & local lane incomplete & descriptive\_only \\
-qwen3\_vl\_raw\_ocr\_qwen25\_14b & hybrid & server1 & 95/125 & APPENDIX & local lane incomplete & descriptive\_only \\
+glm\_ocr & raw\_ocr & final & 125/125 & PRIMARY TABLE & NaN & wilcoxon;friedman;bootstrap\_ci;holm \\
+doctr & raw\_ocr & final & 125/125 & PRIMARY TABLE & NaN & wilcoxon;friedman;bootstrap\_ci;holm \\
+easyocr & raw\_ocr & final & 125/125 & PRIMARY TABLE & NaN & wilcoxon;friedman;bootstrap\_ci;holm \\
+trocr & raw\_ocr & final & 125/125 & PRIMARY TABLE & NaN & wilcoxon;friedman;bootstrap\_ci;holm \\
+surya & raw\_ocr & final & 125/125 & PRIMARY TABLE & NaN & wilcoxon;friedman;bootstrap\_ci;holm \\
+docling & raw\_ocr & final & 125/125 & PRIMARY TABLE & NaN & wilcoxon;friedman;bootstrap\_ci;holm \\
+qwen3\_vl\_raw\_ocr & raw\_ocr & final & 125/125 & PRIMARY TABLE & NaN & wilcoxon;friedman;bootstrap\_ci;holm \\
+qwen3\_vl & direct\_vlm & final & 125/125 & PRIMARY TABLE & NaN & wilcoxon;mcnemar;friedman;bootstrap\_ci;holm \\
+google\_gemini\_2\_5\_flash & direct\_vlm & final & 125/125 & PRIMARY TABLE & NaN & wilcoxon;mcnemar;friedman;bootstrap\_ci;holm \\
+hf\_qwen25\_vl\_72b & direct\_vlm & final & 76/125 & APPENDIX & partial imported lane & descriptive\_only \\
+qwen3\_27b & direct\_vlm & final & 125/125 & PRIMARY TABLE & NaN & wilcoxon;mcnemar;friedman;bootstrap\_ci;holm \\
+qwen25\_vl\_7b\_local & direct\_vlm & final & 125/125 & PRIMARY TABLE & NaN & wilcoxon;mcnemar;friedman;bootstrap\_ci;holm \\
+ollama\_llava\_13b & direct\_vlm & final & 0/125 & EXCLUDED & local lane missing & NaN \\
+ollama\_qwen3\_vl\_8b & hybrid & final & 0/125 & EXCLUDED & local lane missing & NaN \\
+glm\_ocr\_qwen3\_8b & hybrid & final & 123/125 & APPENDIX & local lane incomplete & descriptive\_only \\
+doctr\_qwen3\_8b & hybrid & final & 125/125 & PRIMARY TABLE & NaN & wilcoxon;mcnemar;friedman;bootstrap\_ci;holm \\
+easyocr\_qwen3\_8b & hybrid & final & 125/125 & PRIMARY TABLE & NaN & wilcoxon;mcnemar;friedman;bootstrap\_ci;holm \\
+trocr\_qwen3\_8b & hybrid & final & 125/125 & PRIMARY TABLE & NaN & wilcoxon;mcnemar;friedman;bootstrap\_ci;holm \\
+surya\_qwen3\_8b & hybrid & final & 117/125 & APPENDIX & local lane incomplete & descriptive\_only \\
+docling\_qwen3\_8b & hybrid & final & 124/125 & APPENDIX & local lane incomplete & descriptive\_only \\
+qwen3\_vl\_raw\_ocr\_qwen3\_8b & hybrid & final & 119/125 & APPENDIX & local lane incomplete & descriptive\_only \\
+glm\_ocr\_qwen25\_14b & hybrid & final & 92/125 & APPENDIX & local lane incomplete & descriptive\_only \\
+doctr\_qwen25\_14b & hybrid & final & 108/125 & APPENDIX & local lane incomplete & descriptive\_only \\
+easyocr\_qwen25\_14b & hybrid & final & 112/125 & APPENDIX & local lane incomplete & descriptive\_only \\
+trocr\_qwen25\_14b & hybrid & final & 124/125 & APPENDIX & local lane incomplete & descriptive\_only \\
+surya\_qwen25\_14b & hybrid & final & 102/125 & APPENDIX & local lane incomplete & descriptive\_only \\
+docling\_qwen25\_14b & hybrid & final & 106/125 & APPENDIX & local lane incomplete & descriptive\_only \\
+qwen3\_vl\_raw\_ocr\_qwen25\_14b & hybrid & final & 95/125 & APPENDIX & local lane incomplete & descriptive\_only \\
 \bottomrule
 \end{tabular}

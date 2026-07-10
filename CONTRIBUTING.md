@@ -4,7 +4,7 @@ Thank you for helping improve ClinDoc-Bench-IN.
 
 ## Ground Rules
 
-- Do not modify frozen benchmark outputs under `benchmark_v2/final_day_freeze_20260709/`.
+- Do not modify frozen benchmark outputs under `benchmark/final/`.
 - New experiments must write to a new output directory.
 - Do not commit secrets, raw patient identifiers, or unanonymized example images.
 - Keep model provenance explicit: provider, model name, version/date, runtime, and failure handling.

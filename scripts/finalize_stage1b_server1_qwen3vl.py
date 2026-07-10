@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Finalize/deduplicate Stage 1B Server 1 qwen3-vl outputs.
+"""Finalize/deduplicate Stage 1B Final release qwen3-vl outputs.
 
 Performs local JSON repair on failed raw responses where possible, writes unique
 status and final metrics/reports. No model calls are made by this script.
@@ -222,14 +222,14 @@ def main() -> None:
     metrics = compute_metrics(root, manifest)
     failed = [m for m in metrics if str(m.get("schema_validity")) != "1"]
     write_text(REPORTS_DIR / "stage1b_server1_qwen3vl_failure_log_final.md", "\n".join([
-        "# Stage 1B Server 1 Qwen3-VL Final Failure Log",
+        "# Stage 1B Final release Qwen3-VL Final Failure Log",
         "",
         f"- Remaining failures: {len(failed)}",
         *[f"- `{m['document_id']}`: {m.get('notes') or m.get('status')}" for m in failed],
         "",
     ]))
     write_text(REPORTS_DIR / "stage1b_server1_qwen3vl_final_status.md", "\n".join([
-        "# Stage 1B Server 1 Qwen3-VL Final Status",
+        "# Stage 1B Final release Qwen3-VL Final Status",
         "",
         f"- Output root: `{root}`",
         f"- Unique records: {len(statuses)}",
@@ -240,7 +240,7 @@ def main() -> None:
         "",
     ]))
     write_text(REPORTS_DIR / "stage1b_server1_qwen3vl_summary_final.md", "\n".join([
-        "# Stage 1B Server 1 Qwen3-VL Final Summary",
+        "# Stage 1B Final release Qwen3-VL Final Summary",
         "",
         f"- Output root: `{root}`",
         f"- Total records: {len(metrics)}",

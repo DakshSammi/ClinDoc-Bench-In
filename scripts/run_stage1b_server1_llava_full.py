@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Stage 1B Server 1 low-priority LLaVA diagnostic runner."""
+"""Stage 1B Final release low-priority LLaVA diagnostic runner."""
 
 from __future__ import annotations
 
@@ -84,7 +84,7 @@ class LLaVARunner(base.Runner):
         }
         base.write_json_atomic(REPORTS_DIR / "stage1b_server1_llava_progress.json", progress)
         lines = [
-            "# Stage 1B Server 1 LLaVA Progress",
+            "# Stage 1B Final release LLaVA Progress",
             "",
             f"Generated: {progress['generated']}",
             "",
@@ -123,7 +123,7 @@ class LLaVARunner(base.Runner):
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Stage 1B Server 1 LLaVA diagnostic runner")
+    parser = argparse.ArgumentParser(description="Stage 1B Final release LLaVA diagnostic runner")
     parser.add_argument("--manifest", required=True)
     parser.add_argument("--backend", required=True)
     parser.add_argument("--model", required=True)

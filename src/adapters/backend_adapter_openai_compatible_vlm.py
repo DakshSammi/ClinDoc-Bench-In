@@ -35,9 +35,9 @@ class OpenAICompatibleVLMBackendAdapter(BaseBackendAdapter):
         jpeg_quality: int = 85,
         timeout: int = 300,
         stream: bool = True,
-        api_key_env_var: str = "INTERNAL_QWEN3_API_KEY",
-        base_url_env_var: str = "INTERNAL_QWEN3_BASE_URL",
-        model_env_var: str = "INTERNAL_QWEN3_MODEL"
+        api_key_env_var: str = "QWEN3_27B_API_KEY",
+        base_url_env_var: str = "QWEN3_27B_BASE_URL",
+        model_env_var: str = "QWEN3_27B_MODEL"
     ):
         resolved_base_url = base_url or os.getenv(base_url_env_var) or "http://10.10.110.37:4000/v1"
         resolved_model = model_id or os.getenv(model_env_var) or "qwen3-27b"

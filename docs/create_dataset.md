@@ -75,7 +75,7 @@ Recommended extra columns:
 
 Use the frozen benchmark manifest as the best reference for document-level metadata:
 
-- [benchmark_v2/data/benchmark_manifest_v2.csv](../benchmark_v2/data/benchmark_manifest_v2.csv)
+- [benchmark/data/benchmark_manifest.csv](../benchmark/data/benchmark_manifest.csv)
 
 ## Validation
 

@@ -7,7 +7,7 @@ model:
   provider: local
   version: editable
 evaluation:
-  frozen_reference_dir: benchmark_v2/final_day_freeze_20260709/reports
+  frozen_reference_dir: benchmark/final/reports
   write_mode: new_directory_only
 privacy:
   publish_anonymized_examples_only: true

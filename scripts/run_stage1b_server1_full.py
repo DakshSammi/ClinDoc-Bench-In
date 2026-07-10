@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Stage 1B Server 1 full local Ollama VLM runner.
+"""Stage 1B Final release full local Ollama VLM runner.
 
 Approved scope: full raw structured extraction using qwen3-vl:8b-instruct only.
 This runner is resume-safe, single-worker, and writes progress/checkpoints as it
@@ -419,7 +419,7 @@ class Runner:
         }
         write_json_atomic(REPORTS_DIR / "stage1b_server1_progress.json", progress)
         lines = [
-            "# Stage 1B Server 1 Progress",
+            "# Stage 1B Final release Progress",
             "",
             f"Generated: {progress['generated']}",
             "",
@@ -447,7 +447,7 @@ class Runner:
     def write_interim_summary(self) -> None:
         counts = self.status_counts()
         lines = [
-            "# Stage 1B Server 1 12h Interim Summary",
+            "# Stage 1B Final release 12h Interim Summary",
             "",
             f"Generated: {now()}",
             "",
@@ -606,7 +606,7 @@ def aggregate_page_metrics(metrics: List[Dict[str, Any]]) -> List[Dict[str, Any]
 
 
 def render_failure_log(output_root: Path) -> str:
-    lines = ["# Stage 1B Server 1 Qwen3-VL Failure Log", "", f"Generated: {now()}", ""]
+    lines = ["# Stage 1B Final release Qwen3-VL Failure Log", "", f"Generated: {now()}", ""]
     failures = []
     failure_file = output_root / "checkpoints" / "failures.jsonl"
     if failure_file.exists():
@@ -619,7 +619,7 @@ def render_failure_log(output_root: Path) -> str:
 
 
 def render_runtime_report(output_root: Path) -> str:
-    lines = ["# Stage 1B Server 1 Qwen3-VL Cost/Runtime Report", "", f"Generated: {now()}", "", "No paid external API calls were made.", ""]
+    lines = ["# Stage 1B Final release Qwen3-VL Cost/Runtime Report", "", f"Generated: {now()}", "", "No paid external API calls were made.", ""]
     for log_path in sorted((output_root / "logs" / OUTPUT_BACKEND).glob("*.json"), key=sort_key):
         log = json.loads(log_path.read_text(encoding="utf-8"))
         lines.append(f"- `{log.get('document_id')}`: {log.get('runtime_seconds')}s, status={log.get('status')}, usage={json.dumps(log.get('token_usage'), ensure_ascii=False)}")
@@ -631,7 +631,7 @@ def render_summary(metrics: List[Dict[str, Any]], output_root: Path) -> str:
     completed = sum(1 for r in metrics if r["status"] == "success")
     failed = sum(1 for r in metrics if r["status"] == "failed")
     lines = [
-        "# Stage 1B Server 1 Qwen3-VL Summary",
+        "# Stage 1B Final release Qwen3-VL Summary",
         "",
         f"Generated: {now()}",
         "",
@@ -652,7 +652,7 @@ def render_summary(metrics: List[Dict[str, Any]], output_root: Path) -> str:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Stage 1B Server 1 full Qwen3-VL runner")
+    parser = argparse.ArgumentParser(description="Stage 1B Final release full Qwen3-VL runner")
     parser.add_argument("--manifest", required=True)
     parser.add_argument("--backend", required=True)
     parser.add_argument("--model", required=True)

@@ -33,8 +33,8 @@ from PIL import Image, ImageDraw
 
 
 ROOT = Path(__file__).resolve().parents[1]
-REPORTS = ROOT / "benchmark_v2" / "final_day_freeze_20260709" / "reports"
-MANIFEST = ROOT / "benchmark_v2" / "data" / "benchmark_manifest_v2.csv"
+REPORTS = ROOT / "benchmark" / "final" / "reports"
+MANIFEST = ROOT / "benchmark" / "data" / "benchmark_manifest_v2.csv"
 FIGURES = ROOT / "paper_assets" / "figures"
 TABLES = ROOT / "paper_assets" / "tables"
 APPENDIX = ROOT / "paper_assets" / "appendix"
@@ -272,7 +272,7 @@ def generate_tables() -> None:
     save_table(stats.sort_values(["test", "p_holm"], na_position="last").head(80), "table_07_statistical_significance")
     save_table(ci.sort_values(["family", "mean"], ascending=[True, False]), "table_08_bootstrap_confidence_intervals")
     ablation = (
-        overall.groupby(["family", "track", "origin_server", "publication_status"], dropna=False)
+        overall.groupby(["family", "track", "provenance", "publication_status"], dropna=False)
         .agg(models=("system", "nunique"), mean_primary_score=("primary_score", "mean"), mean_records=("records", "mean"))
         .reset_index()
     )
@@ -287,7 +287,7 @@ def generate_tables() -> None:
     )
     save_table(error_categories, "table_10_error_categories")
     save_table(
-        registry[["model", "track", "origin_server", "coverage", "publication_status", "reason_if_excluded", "statistics_used"]],
+        registry[["model", "track", "provenance", "coverage", "publication_status", "reason_if_excluded", "statistics_used"]],
         "table_11_model_coverage",
     )
     save_table(overall.sort_values(["family", "rank"]), "table_12_final_leaderboard")
@@ -703,25 +703,25 @@ def generate_appendix() -> None:
 
 ClinDoc-Bench-IN contains frozen benchmark reports, reproducible evaluation scripts, publication figure/table generation scripts, and anonymized example assets.
 
-The final frozen benchmark marker is `benchmark_v2/final_day_freeze_20260709/reports/FINAL_BENCHMARK_FROZEN.txt`.
+The final frozen benchmark marker is `benchmark/final/reports/final_model_registry.csv`.
 """
     (APPENDIX / "Artifact_Description.md").write_text(artifact, encoding="utf-8")
     checklist = """# Reproducibility Checklist
 
 - Frozen benchmark marker present.
 - Final model registry present.
-- Server 1 and Server 2 provenance recorded.
+- Final release and Final release provenance recorded.
 - Statistics computed on 125 documents.
 - Figures and tables generated from frozen CSVs.
 - Public examples anonymized using opaque boxes.
 - Environment variables documented in `.env.example`.
 """
     (APPENDIX / "Reproducibility_Checklist.md").write_text(checklist, encoding="utf-8")
-    save_table(pd.DataFrame([{"component": "CPU", "value": "To be filled before camera-ready"}, {"component": "GPU", "value": "To be filled before camera-ready"}, {"component": "RAM", "value": "To be filled before camera-ready"}, {"component": "Storage", "value": "To be filled before camera-ready"}, {"component": "Servers", "value": "Server 1 and imported Server 2 handoff"}]), "hardware_table")
+    save_table(pd.DataFrame([{"component": "CPU", "value": "To be filled before camera-ready"}, {"component": "GPU", "value": "To be filled before camera-ready"}, {"component": "RAM", "value": "To be filled before camera-ready"}, {"component": "Storage", "value": "To be filled before camera-ready"}, {"component": "Servers", "value": "Final release and imported Final release handoff"}]), "hardware_table")
     save_table(pd.DataFrame([{"package": "python", "version": "3.11+"}, {"package": "pandas", "version": "2.2.3"}, {"package": "numpy", "version": "1.26.4"}, {"package": "scipy", "version": "1.14.1"}, {"package": "matplotlib", "version": "3.9.3"}, {"package": "pydantic", "version": "2.10.4"}]), "software_versions")
-    save_table(read_csv("final_model_registry.csv")[["model", "track", "origin_server", "coverage", "timestamp", "output_directory"]], "model_versions")
+    save_table(read_csv("final_model_registry.csv")[["model", "track", "provenance", "coverage", "timestamp", "output_directory"]], "model_versions")
     save_table(pd.DataFrame([{"provider": "Hugging Face", "api": "Inference API", "version": "provider-managed"}, {"provider": "Google Gemini", "api": "google-genai", "version": "1.25.0"}, {"provider": "Ollama", "api": "local HTTP API", "version": "local installation"}, {"provider": "Qwen3 endpoint", "api": "OpenAI-compatible HTTP API", "version": "local deployment"}]), "api_versions")
-    save_table(pd.DataFrame([{"variable": "HF_TOKEN / HF_TOKEN_2", "purpose": "Hugging Face Inference API"}, {"variable": "GOOGLE_API_KEY(_2/_3/_4)", "purpose": "Gemini key rotation"}, {"variable": "OLLAMA_HOST", "purpose": "Local Ollama endpoint"}, {"variable": "INTERNAL_QWEN3_*", "purpose": "Qwen3 endpoint"}]), "environment_details")
+    save_table(pd.DataFrame([{"variable": "HF_TOKEN / HF_TOKEN_2", "purpose": "Hugging Face Inference API"}, {"variable": "GOOGLE_API_KEY(_2/_3/_4)", "purpose": "Gemini key rotation"}, {"variable": "OLLAMA_HOST", "purpose": "Local Ollama endpoint"}, {"variable": "QWEN3_27B_*", "purpose": "Qwen3 endpoint"}]), "environment_details")
     with PdfPages(APPENDIX / "Supplementary.pdf") as pdf:
         for title, body in [("Supplementary Material Outline", appendix_outline), ("Artifact Description", artifact), ("Reproducibility Checklist", checklist)]:
             fig, ax = plt.subplots(figsize=(8.5, 11))

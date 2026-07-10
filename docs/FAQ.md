@@ -6,11 +6,11 @@ No. The final benchmark is frozen for paper submission. New work should be run a
 
 ## Where are the final results?
 
-`benchmark_v2/final_day_freeze_20260709/reports/`
+`benchmark/final/reports/`
 
-## Does the final benchmark include Server 2?
+## Does the final benchmark include all selected lanes?
 
-Yes. The final model registry and selected-lane provenance include imported Server 2 lanes.
+Yes. The final model registry and selected-lane provenance reflect the complete final integrated benchmark release.
 
 ## Are raw clinical examples public?
 

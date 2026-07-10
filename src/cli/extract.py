@@ -690,7 +690,7 @@ async def extract_document(
     # Execute backend adapter
     try:
         # Determine max_tokens override dynamically based on document name
-        if backend_config.get("backend_name") == "internal_qwen3_27b_vlm":
+        if backend_config.get("backend_name") == "qwen3_27b_vlm":
             max_tokens_val = backend_config.get("max_tokens", 100000)
         else:
             max_tokens_val = backend_config.get("max_tokens", 4096)
@@ -716,7 +716,7 @@ async def extract_document(
         total_estimated_tokens = None
         rolling_tokens_before_request = None
         
-        if backend_config.get("backend_name") == "internal_qwen3_27b_vlm":
+        if backend_config.get("backend_name") == "qwen3_27b_vlm":
             limiter = get_global_limiter()
             
             compressed_image_size_kb = estimate_compressed_image_size_kb(
@@ -776,7 +776,7 @@ async def extract_document(
                 status="failed",
                 error_type="exception",
             )
-        if backend_config.get("backend_name") == "internal_qwen3_27b_vlm":
+        if backend_config.get("backend_name") == "qwen3_27b_vlm":
             log_internal_qwen3_usage(
                 log_path=PROJECT_ROOT / "logs" / "internal_qwen3_usage.csv",
                 document_id=doc_id,
@@ -827,10 +827,10 @@ async def extract_document(
                 status="failed",
                 error_type="backend_error",
             )
-        if backend_config.get("backend_name") == "internal_qwen3_27b_vlm":
+        if backend_config.get("backend_name") == "qwen3_27b_vlm":
             # Check if error was rate-limit related
             is_rate_limit_error = "429" in str(response.get("error", "")) or "rate" in str(response.get("error", "")).lower()
-            limiter = get_global_limiter() if backend_config.get("backend_name") == "internal_qwen3_27b_vlm" else None
+            limiter = get_global_limiter() if backend_config.get("backend_name") == "qwen3_27b_vlm" else None
             
             log_internal_qwen3_usage(
                 log_path=PROJECT_ROOT / "logs" / "internal_qwen3_usage.csv",
@@ -901,7 +901,7 @@ async def extract_document(
                 status="failed",
                 error_type="json_parse_error",
             )
-        if backend_config.get("backend_name") == "internal_qwen3_27b_vlm":
+        if backend_config.get("backend_name") == "qwen3_27b_vlm":
             api_prompt_tokens, api_completion_tokens, api_total_tokens, actual_usage_available = record_internal_qwen3_rate_usage(
                 document_id=doc_id,
                 response=response,
@@ -1036,7 +1036,7 @@ async def extract_document(
                 response=response,
                 status="success",
             )
-        if backend_config.get("backend_name") == "internal_qwen3_27b_vlm":
+        if backend_config.get("backend_name") == "qwen3_27b_vlm":
             api_prompt_tokens, api_completion_tokens, api_total_tokens, actual_usage_available = record_internal_qwen3_rate_usage(
                 document_id=doc_id,
                 response=response,
@@ -1096,7 +1096,7 @@ async def extract_document(
                 status="failed",
                 error_type="validation_error",
             )
-        if backend_config.get("backend_name") == "internal_qwen3_27b_vlm":
+        if backend_config.get("backend_name") == "qwen3_27b_vlm":
             api_prompt_tokens, api_completion_tokens, api_total_tokens, actual_usage_available = record_internal_qwen3_rate_usage(
                 document_id=doc_id,
                 response=response,
@@ -1388,9 +1388,9 @@ async def async_main():
             output_dir = PROJECT_ROOT / "outputs" / "raw_extractions" / "openrouter" / f"{safe_model}_prompt_v2_{suffix}"
             raw_responses_dir = PROJECT_ROOT / "outputs" / "raw_responses" / "openrouter" / f"{safe_model}_prompt_v2_{suffix}"
         failed_dir = PROJECT_ROOT / "outputs" / "raw_extractions_failed" / "openrouter" / safe_model
-    elif args.backend == "internal_qwen3_27b_vlm":
+    elif args.backend == "qwen3_27b_vlm":
         if not args.output_dir:
-            logger.error("--output-dir is required when backend is 'internal_qwen3_27b_vlm'")
+            logger.error("--output-dir is required when backend is 'qwen3_27b_vlm'")
             sys.exit(1)
         output_dir = PROJECT_ROOT / args.output_dir
         raw_responses_dir = PROJECT_ROOT / "outputs" / "raw_responses" / Path(args.output_dir).name
@@ -1437,12 +1437,12 @@ async def async_main():
         )
         backend_opts["backend_name"] = "gemini_rotating"
         backend_opts["model_name"] = gemini_model
-    elif args.backend == "internal_qwen3_27b_vlm":
-        api_key = os.getenv("INTERNAL_QWEN3_API_KEY")
-        base_url = os.getenv("INTERNAL_QWEN3_BASE_URL", "http://10.10.110.37:4000/v1")
-        model = os.getenv("INTERNAL_QWEN3_MODEL", "qwen3-27b")
+    elif args.backend == "qwen3_27b_vlm":
+        api_key = os.getenv("QWEN3_27B_API_KEY")
+        base_url = os.getenv("QWEN3_27B_BASE_URL", "http://10.10.110.37:4000/v1")
+        model = os.getenv("QWEN3_27B_MODEL", "qwen3-27b")
         if not api_key:
-            logger.error("INTERNAL_QWEN3_API_KEY environment variable is not set!")
+            logger.error("QWEN3_27B_API_KEY environment variable is not set!")
             sys.exit(1)
         adapter = OpenAICompatibleVLMBackendAdapter(
             base_url=base_url,
@@ -1461,7 +1461,7 @@ async def async_main():
 
     
     # Initialize rate limiter for internal qwen3-27b API
-    if args.backend == "internal_qwen3_27b_vlm":
+    if args.backend == "qwen3_27b_vlm":
         init_global_limiter(
             tpm_limit=args.tpm_limit,
             rpm_limit=args.rpm_limit,

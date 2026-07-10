@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Approved Server 1 GLM-OCR smoke recorder/runner.
+"""Approved Final release GLM-OCR smoke recorder/runner.
 
 This runner is safe to execute after `ollama pull glm-ocr:latest` approval.
 If the model is not installed, it records a failed-smoke artifact with the
@@ -398,7 +398,7 @@ def update_metrics(rows: List[Dict[str, Any]]) -> None:
 
 
 def update_failure_log(decision: str, pull: Dict[str, Any], rows: List[Dict[str, Any]]) -> None:
-    lines = ["# Stage 1A Server 1 Failure Log", "", f"Generated: {now()}", ""]
+    lines = ["# Stage 1A Final release Failure Log", "", f"Generated: {now()}", ""]
     old_path = REPORTS_DIR / "stage1a_server1_failure_log.md"
     if old_path.exists():
         old = old_path.read_text(encoding="utf-8").splitlines()
@@ -413,11 +413,11 @@ def update_failure_log(decision: str, pull: Dict[str, Any], rows: List[Dict[str,
 
 def update_roster(decision: str) -> None:
     lines = [
-        "# Stage 1A Server 1 Recommended Full Run Roster",
+        "# Stage 1A Final release Recommended Full Run Roster",
         "",
         f"Generated: {now()}",
         "",
-        "Recommended for Stage 1B based on Server 1 smoke so far:",
+        "Recommended for Stage 1B based on Final release smoke so far:",
         "- `ollama_qwen3_vl_8b_raw_structured`: ready_for_full_run.",
         "- `ollama_qwen25_14b_ocr_to_json`: smoke_passed_but_low_quality until schema prompt is tightened.",
         "- `ollama_qwen3_8b_semantic_inference`: ready for semantic-only add-on smoke scope.",
@@ -435,7 +435,7 @@ def update_roster(decision: str) -> None:
 
 def write_summary(run_dir: Path, rows: List[Dict[str, Any]], decision: str, pull: Dict[str, Any], show: Dict[str, Any], ollama_version: str, ollama_list: str) -> None:
     lines = [
-        "# Stage 1A Server 1 GLM-OCR Smoke Summary",
+        "# Stage 1A Final release GLM-OCR Smoke Summary",
         "",
         f"Generated: {now()}",
         "",

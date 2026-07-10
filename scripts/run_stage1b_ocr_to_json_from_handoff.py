@@ -227,7 +227,7 @@ class Runner:
         counts = self.counts()
         progress = {"generated": now(), "output_root": str(self.output_root), "pid": self.pid, "current": self.current, "lanes": counts}
         write_json(REPORTS_DIR / "stage1b_server1_ocr_to_json_glm_ocr_progress.json", progress)
-        lines = ["# Stage 1B Server 1 OCR-to-JSON GLM-OCR Progress", "", f"Generated: {progress['generated']}", "", f"- Output root: `{self.output_root}`", f"- PID: `{self.pid}`", f"- Current: `{self.current}`", ""]
+        lines = ["# Stage 1B Final release OCR-to-JSON GLM-OCR Progress", "", f"Generated: {progress['generated']}", "", f"- Output root: `{self.output_root}`", f"- PID: `{self.pid}`", f"- Current: `{self.current}`", ""]
         for lane, c in counts.items():
             lines.append(f"- `{lane}`: completed={c['completed']} failed={c['failed']} total={c['total']}")
         write_text(REPORTS_DIR / "stage1b_server1_ocr_to_json_glm_ocr_progress.md", "\n".join(lines) + "\n")
@@ -280,7 +280,7 @@ class Runner:
         fields = sorted({k for r in all_rows for k in r.keys()})
         write_csv(REPORTS_DIR / "stage1b_server1_ocr_to_json_glm_ocr_metrics.csv", all_rows, fields)
         write_text(REPORTS_DIR / "stage1b_server1_ocr_to_json_glm_ocr_failure_log.md", "\n".join(["# OCR-to-JSON GLM-OCR Failure Log", "", *[f"- `{f.get('pipeline')}` `{f.get('document_id')}`: {f.get('notes') or f.get('status')}" for f in failures]]) + "\n")
-        summary_lines = ["# Stage 1B Server 1 OCR-to-JSON GLM-OCR Summary", "", f"- Output root: `{self.output_root}`", ""]
+        summary_lines = ["# Stage 1B Final release OCR-to-JSON GLM-OCR Summary", "", f"- Output root: `{self.output_root}`", ""]
         for lane, _ in self.lanes:
             rows = [r for r in all_rows if r.get("pipeline") == lane]
             valid = sum(1 for r in rows if str(r.get("schema_validity")) == "1")
