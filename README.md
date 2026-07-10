@@ -1,6 +1,6 @@
 # ClinDoc-Bench-IN
 
-Open benchmark for Indian prescription OCR, direct vision-language extraction, and hybrid OCR-to-LLM pipelines. It ships frozen publication results, reusable evaluation code, and a community-ready submission format.
+Open benchmark for prescription OCR, direct vision-language extraction, and hybrid OCR-to-LLM pipelines. It ships frozen publication results, reusable evaluation code, and a community-ready submission format.
 
 [![Dataset](https://img.shields.io/badge/Dataset-90%20patients%20%7C%20125%20documents%20%7C%20150%20images-2f6f6d)](#dataset)
 [![Benchmark](https://img.shields.io/badge/Benchmark-OCR%20%7C%20Direct%20VLM%20%7C%20Hybrid-44546a)](#benchmark-tracks)
