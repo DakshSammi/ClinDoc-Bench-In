@@ -3,7 +3,7 @@
 [![Dataset](https://img.shields.io/badge/Dataset-90%20patients%20%7C%20125%20documents%20%7C%20150%20images-2f6f6d)](#dataset)
 [![Benchmark](https://img.shields.io/badge/Benchmark-OCR%20%7C%20Direct%20VLM%20%7C%20Hybrid-44546a)](#benchmark-tracks)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776ab)](#installation)
-[![License](https://img.shields.io/badge/License-Apache--2.0-green)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache--2.0-green)](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/LICENSE)
 [![Frozen Benchmark](https://img.shields.io/badge/Frozen-v1.0%20read--only-orange)](#frozen-benchmark)
 [![BDA 2026](https://img.shields.io/badge/BDA%202026-Submitted-purple)](#citation)
 
@@ -86,10 +86,10 @@ python scripts/validate_submission.py \
 
 The canonical frozen benchmark is stored under:
 
-- [benchmark_v2/final_day_freeze_20260709/reports/](benchmark_v2/final_day_freeze_20260709/reports/)
-- [final_benchmark_report.md](benchmark_v2/final_day_freeze_20260709/reports/final_benchmark_report.md)
-- [final_model_registry.csv](benchmark_v2/final_day_freeze_20260709/reports/final_model_registry.csv)
-- [selected_lanes_provenance.md](benchmark_v2/final_day_freeze_20260709/reports/selected_lanes_provenance.md)
+- [benchmark_v2/final_day_freeze_20260709/reports/](https://github.com/DakshSammi/ClinDoc-Bench-In/tree/main/benchmark_v2/final_day_freeze_20260709/reports)
+- [final_benchmark_report.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark_v2/final_day_freeze_20260709/reports/final_benchmark_report.md)
+- [final_model_registry.csv](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark_v2/final_day_freeze_20260709/reports/final_model_registry.csv)
+- [selected_lanes_provenance.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark_v2/final_day_freeze_20260709/reports/selected_lanes_provenance.md)
 
 Do not rerun, overwrite, or edit anything under `benchmark_v2/final_day_freeze_20260709/`.
 
@@ -107,9 +107,9 @@ Benchmark-owned ground truth is stored as canonical JSON linked by manifest rows
 
 For a fuller dataset overview, see:
 
-- [DATASET_CARD.md](DATASET_CARD.md)
-- [docs/Dataset.md](docs/Dataset.md)
-- [docs/create_dataset.md](docs/create_dataset.md)
+- [DATASET_CARD.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/DATASET_CARD.md)
+- [docs/Dataset.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/Dataset.md)
+- [docs/create_dataset.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/create_dataset.md)
 
 ## Benchmark Tracks
 
@@ -123,29 +123,29 @@ Raw OCR scoring focuses on transcription fidelity. Structured scoring focuses on
 
 More detail:
 
-- [docs/Benchmark.md](docs/Benchmark.md)
-- [docs/Evaluation.md](docs/Evaluation.md)
-- [docs/OCRModels.md](docs/OCRModels.md)
-- [docs/DirectVLMs.md](docs/DirectVLMs.md)
-- [docs/HybridPipelines.md](docs/HybridPipelines.md)
+- [docs/Benchmark.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/Benchmark.md)
+- [docs/Evaluation.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/Evaluation.md)
+- [docs/OCRModels.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/OCRModels.md)
+- [docs/DirectVLMs.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/DirectVLMs.md)
+- [docs/HybridPipelines.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/HybridPipelines.md)
 
 ## Canonical JSON
 
-Structured outputs are benchmarked in a canonical JSON format defined by [`CanonicalRawDoc`](src/schemas/raw_extraction.py).
+Structured outputs are benchmarked in a canonical JSON format defined by [`CanonicalRawDoc`](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/src/schemas/raw_extraction.py).
 
 This schema is the contract between model outputs and evaluation. It exists so that OCR, direct VLM, and hybrid pipelines can be compared using one shared representation.
 
 - Benchmark ground truth: evaluator-owned reference annotations in canonical JSON.
 - Model prediction: your system's output JSON for the same document, using the same schema.
 - Public examples:
-  - [docs/examples/example_ground_truth_canonical.json](docs/examples/example_ground_truth_canonical.json)
-  - [docs/examples/example_model_prediction_canonical.json](docs/examples/example_model_prediction_canonical.json)
+  - [docs/examples/example_ground_truth_canonical.json](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/examples/example_ground_truth_canonical.json)
+  - [docs/examples/example_model_prediction_canonical.json](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/examples/example_model_prediction_canonical.json)
 
 Start here:
 
-- [docs/schema.md](docs/schema.md)
-- [docs/annotation_guide.md](docs/annotation_guide.md)
-- [docs/GroundTruth.md](docs/GroundTruth.md)
+- [docs/schema.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/schema.md)
+- [docs/annotation_guide.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/annotation_guide.md)
+- [docs/GroundTruth.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/GroundTruth.md)
 
 ## Benchmark Your Model
 
@@ -220,9 +220,9 @@ Your dataset should preserve the same canonical JSON semantics even if document 
 
 Start here:
 
-- [docs/create_dataset.md](docs/create_dataset.md)
-- [docs/schema.md](docs/schema.md)
-- [docs/annotation_guide.md](docs/annotation_guide.md)
+- [docs/create_dataset.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/create_dataset.md)
+- [docs/schema.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/schema.md)
+- [docs/annotation_guide.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/annotation_guide.md)
 
 ## Community Submissions
 
@@ -238,9 +238,9 @@ community/submissions/<submission_name>/
 
 Use the included templates:
 
-- [community/README.md](community/README.md)
-- [community/submissions/template/metadata.yaml](community/submissions/template/metadata.yaml)
-- [docs/submitting_results.md](docs/submitting_results.md)
+- [community/README.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/community/README.md)
+- [community/submissions/template/metadata.yaml](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/community/submissions/template/metadata.yaml)
+- [docs/submitting_results.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/submitting_results.md)
 
 The repository now includes `scripts/validate_submission.py` to verify:
 
@@ -255,7 +255,7 @@ The repository now includes `scripts/validate_submission.py` to verify:
 
 Frozen publication leaderboard:
 
-- [paper_assets/tables/table_12_final_leaderboard.md](paper_assets/tables/table_12_final_leaderboard.md)
+- [paper_assets/tables/table_12_final_leaderboard.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/paper_assets/tables/table_12_final_leaderboard.md)
 
 | family | track | system | origin_server | publication_status | records | primary_score | runtime_seconds | rank |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -290,8 +290,8 @@ Frozen publication leaderboard:
 
 Frozen provenance and coverage:
 
-- [final_benchmark_report.md](benchmark_v2/final_day_freeze_20260709/reports/final_benchmark_report.md)
-- [selected_lanes_provenance.md](benchmark_v2/final_day_freeze_20260709/reports/selected_lanes_provenance.md)
+- [final_benchmark_report.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark_v2/final_day_freeze_20260709/reports/final_benchmark_report.md)
+- [selected_lanes_provenance.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/benchmark_v2/final_day_freeze_20260709/reports/selected_lanes_provenance.md)
 
 Community submissions are standardized, but there is not yet an auto-updating public leaderboard service. The submission format and validator are the current bridge toward that workflow.
 
@@ -299,25 +299,25 @@ Community submissions are standardized, but there is not yet an auto-updating pu
 
 Documentation index:
 
-- [docs/README.md](docs/README.md)
+- [docs/README.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/README.md)
 
 High-signal entry points:
 
-- [docs/Dataset.md](docs/Dataset.md)
-- [docs/Architecture.md](docs/Architecture.md)
-- [docs/Benchmark.md](docs/Benchmark.md)
-- [docs/Evaluation.md](docs/Evaluation.md)
-- [docs/Statistics.md](docs/Statistics.md)
-- [docs/ReproducingResults.md](docs/ReproducingResults.md)
-- [docs/FAQ.md](docs/FAQ.md)
+- [docs/Dataset.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/Dataset.md)
+- [docs/Architecture.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/Architecture.md)
+- [docs/Benchmark.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/Benchmark.md)
+- [docs/Evaluation.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/Evaluation.md)
+- [docs/Statistics.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/Statistics.md)
+- [docs/ReproducingResults.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/ReproducingResults.md)
+- [docs/FAQ.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/docs/FAQ.md)
 
 ## Contributing
 
 Contribution guide:
 
-- [CONTRIBUTING.md](CONTRIBUTING.md)
-- [GOVERNANCE.md](GOVERNANCE.md)
-- [ROADMAP.md](ROADMAP.md)
+- [CONTRIBUTING.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/CONTRIBUTING.md)
+- [GOVERNANCE.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/GOVERNANCE.md)
+- [ROADMAP.md](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/ROADMAP.md)
 
 We welcome:
 
@@ -332,11 +332,11 @@ We welcome:
 
 ## Citation
 
-Please cite the benchmark using [CITATION.cff](CITATION.cff). Author names, DOI, and final paper metadata remain placeholders until camera-ready release.
+Please cite the benchmark using [CITATION.cff](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/CITATION.cff). Author names, DOI, and final paper metadata remain placeholders until camera-ready release.
 
 ## License
 
-This project is released under the Apache License 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
+This project is released under the Apache License 2.0. See [LICENSE](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/LICENSE) and [NOTICE](https://github.com/DakshSammi/ClinDoc-Bench-In/blob/main/NOTICE).
 
 ## Acknowledgements
 
