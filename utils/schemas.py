@@ -49,20 +49,3 @@ class NormalizedItem(BaseModel):
     expansion: Optional[str] = None
     semantic_confidence: float
     reasoning: Optional[str] = None
-
-class SemanticOutput(BaseModel):
-    metadata: Metadata
-    normalized_items: List[NormalizedItem]
-    summary: Optional[str] = None
-
-class OntologyMapping(BaseModel):
-    normalized_item: NormalizedItem
-    mapped_id: str # e.g., SNOMED:123
-    ontology_name: str # SNOMED, RxNorm, etc.
-    mapped_label: str
-    similarity_score: float
-    provenance_url: Optional[str] = None
-
-class OntologyOutput(BaseModel):
-    metadata: Metadata
-    mappings: List[OntologyMapping]
