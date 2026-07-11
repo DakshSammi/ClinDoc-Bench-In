@@ -6,7 +6,7 @@ The current public release line is supported for security fixes.
 
 ## Reporting a Vulnerability
 
-Please report vulnerabilities privately to `<security-contact@example.com>`.
+Please report vulnerabilities privately to `daksh21459@iiitd.ac.in`.
 
 Do not open public issues containing secrets, raw clinical data, API keys, patient identifiers, or exploit details.
 
