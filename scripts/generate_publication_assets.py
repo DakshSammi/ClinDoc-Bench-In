@@ -548,12 +548,6 @@ def figure_09(captions: list[str]) -> None:
         "Surya -> Qwen2.5-14B remains\ncompetitive, but moves beyond\n21 s/document.",
         (16.25, 0.3090),
     )
-    callout(
-        "trocr_qwen25_14b",
-        "Fastest plotted lane:\n8.7 s/document, with lower\nstructured extraction score.",
-        (10.25, 0.2963),
-    )
-
     ax.text(
         0.03,
         0.07,
@@ -575,16 +569,7 @@ def figure_09(captions: list[str]) -> None:
         rotation=90,
     )
 
-    ax.set_title("Runtime vs Accuracy: Efficient Hybrid Trade-offs", loc="left", fontweight="bold", pad=18, fontsize=28)
-    ax.text(
-        0.0,
-        1.015,
-        "Only lanes with both final runtime and final primary-score values are plotted.",
-        transform=ax.transAxes,
-        fontsize=12,
-        color="#4B5563",
-        va="bottom",
-    )
+    ax.set_title("Runtime vs Accuracy", loc="left", fontweight="bold", pad=18, fontsize=28)
     ax.set_xlabel("average runtime seconds per document", fontsize=15)
     ax.set_ylabel("primary score", fontsize=15)
     ax.grid(axis="x", color=COLORS["grid"], linewidth=0.8, alpha=0.9)
@@ -605,7 +590,7 @@ def figure_09(captions: list[str]) -> None:
     )
     fig.subplots_adjust(left=0.08, right=0.71, top=0.86, bottom=0.13)
     save_figure(fig, "figure_09_runtime_vs_accuracy")
-    add_caption(captions, 9, "Runtime versus accuracy", "The annotated scatter plot compares runtime and primary score only for lanes that have both values in the final reports. The shaded zone marks efficient high-score hybrids, while callouts identify the fastest plotted lane, the strongest plotted hybrid, the GLM OCR cluster, and the slower Surya trade-off.")
+    add_caption(captions, 9, "Runtime versus accuracy", "The annotated scatter plot compares runtime and primary score only for lanes that have both values in the final reports. The shaded zone marks efficient high-score hybrids, while callouts identify the strongest plotted hybrid, the GLM OCR cluster, and the slower Surya trade-off.")
 
 
 def plot_heatmap(df: pd.DataFrame, stem: str, title: str, captions: list[str], number: int, caption: str) -> None:

@@ -18,7 +18,7 @@
 
 **Figure 8B. Department win count.** This companion chart counts how often each model is the top performer across departments. It gives a compact robustness view separate from the heatmap.
 
-**Figure 9. Runtime versus accuracy.** The annotated scatter plot compares runtime and primary score only for lanes that have both values in the final reports. The shaded zone marks efficient high-score hybrids, while callouts identify the fastest plotted lane, the strongest plotted hybrid, the GLM OCR cluster, and the slower Surya trade-off.
+**Figure 9. Runtime versus accuracy.** The annotated scatter plot compares runtime and primary score only for lanes that have both values in the final reports. The shaded zone marks efficient high-score hybrids, while callouts identify the strongest plotted hybrid, the GLM OCR cluster, and the slower Surya trade-off.
 
 **Figure 10. Models x Metrics Heatmap.** The heatmap summarizes primary score, schema success, hallucination rate, and missing entity rate across models. It provides a compact cross-metric diagnostic view.
 
