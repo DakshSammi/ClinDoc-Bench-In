@@ -426,28 +426,186 @@ def figure_09(captions: list[str]) -> None:
     overall = read_csv("overall_benchmark_tables.csv")
     runtime = read_csv("runtime_tables.csv").merge(overall[["system", "track", "primary_score"]], on=["system", "track"], how="left")
     data = display_df(runtime.dropna(subset=["avg_runtime_seconds", "primary_score"]).copy())
-    fig, ax = plt.subplots(figsize=(8.3, 4.8))
-    marker_map = {"raw_ocr": "o", "direct_vlm": "s", "hybrid": "^"}
-    systems = list(data.sort_values(["track", "avg_runtime_seconds"])["system"])
+
+    lane_labels = {
+        "trocr_qwen25_14b": "TrOCR -> Qwen2.5-14B",
+        "docling_qwen25_14b": "Docling -> Qwen2.5-14B",
+        "easyocr_qwen25_14b": "EasyOCR -> Qwen2.5-14B",
+        "doctr_qwen25_14b": "DocTR -> Qwen2.5-14B",
+        "docling_qwen3_8b": "Docling -> Qwen3-8B",
+        "glm_ocr_qwen25_14b": "GLM OCR -> Qwen2.5-14B",
+        "qwen3_vl_raw_ocr_qwen25_14b": "Qwen3-VL OCR -> Qwen2.5-14B",
+        "glm_ocr_qwen3_8b": "GLM OCR -> Qwen3-8B",
+        "qwen3_vl_raw_ocr_qwen3_8b": "Qwen3-VL OCR -> Qwen3-8B",
+        "surya_qwen25_14b": "Surya -> Qwen2.5-14B",
+    }
+
+    fig, ax = plt.subplots(figsize=(13.76, 7.68))
+    fig.patch.set_facecolor("white")
+
+    x_min = float(data["avg_runtime_seconds"].min())
+    x_max = float(data["avg_runtime_seconds"].max())
+    y_min = float(data["primary_score"].min())
+    y_max = float(data["primary_score"].max())
+    ax.set_xlim(max(0, x_min - 1.0), x_max + 3.0)
+    ax.set_ylim(y_min - 0.007, y_max + 0.004)
+
+    ax.add_patch(
+        Rectangle(
+            (9.5, 0.320),
+            6.9,
+            0.028,
+            facecolor=COLORS["hybrid"],
+            edgecolor="#4F9C98",
+            linewidth=1.2,
+            alpha=0.28,
+            zorder=0,
+        )
+    )
+    ax.text(
+        9.7,
+        0.3455,
+        "Efficient high-score zone",
+        fontsize=13,
+        fontweight="bold",
+        color="#184E4B",
+        va="top",
+    )
+    ax.text(
+        9.7,
+        0.3417,
+        "Complete lanes that maintain strong extraction\nquality without drifting into the slowest runtimes.",
+        fontsize=10,
+        color="#184E4B",
+        va="top",
+        linespacing=1.2,
+    )
+
+    systems = list(data.sort_values(["avg_runtime_seconds", "primary_score"])["system"])
     palette = matplotlib.colormaps.get_cmap("tab20").resampled(max(1, len(systems)))
     color_map = {system: palette(i) for i, system in enumerate(systems)}
-    for _, row in data.sort_values(["track", "avg_runtime_seconds"]).iterrows():
+    for _, row in data.sort_values(["avg_runtime_seconds", "primary_score"]).iterrows():
+        label = lane_labels.get(str(row["system"]), str(row["system"]))
         ax.scatter(
             row["avg_runtime_seconds"],
             row["primary_score"],
-            label=row["system"],
-            marker=marker_map.get(str(row["track"]), "o"),
-            s=72,
-            alpha=0.9,
+            label=label,
+            marker="^",
+            s=155,
+            alpha=0.96,
             color=color_map[str(row["system"])],
             edgecolor="#2F3A45",
-            linewidth=0.4,
+            linewidth=0.8,
+            zorder=3,
         )
-    ax.legend(frameon=False, fontsize=7, title="Benchmark lane", loc="center left", bbox_to_anchor=(1.02, 0.5), borderaxespad=0.0)
-    clean_axis(ax, "Runtime vs Accuracy", "average runtime seconds", "primary score")
-    fig.subplots_adjust(right=0.67)
+
+    def lane_row(system: str) -> pd.Series:
+        matches = data[data["system"] == system]
+        if matches.empty:
+            raise KeyError(system)
+        return matches.iloc[0]
+
+    def callout(system: str, text: str, xytext: tuple[float, float], *, ha: str = "left") -> None:
+        row = lane_row(system)
+        ax.annotate(
+            text,
+            xy=(row["avg_runtime_seconds"], row["primary_score"]),
+            xytext=xytext,
+            fontsize=12,
+            color="#111827",
+            ha=ha,
+            va="center",
+            linespacing=1.12,
+            bbox={
+                "boxstyle": "round,pad=0.35,rounding_size=0.12",
+                "facecolor": "white",
+                "edgecolor": "#E87561",
+                "linewidth": 1.5,
+                "alpha": 0.96,
+            },
+            arrowprops={
+                "arrowstyle": "-",
+                "color": "#6BA7A3",
+                "linewidth": 1.4,
+                "shrinkA": 6,
+                "shrinkB": 7,
+            },
+            zorder=4,
+        )
+
+    callout(
+        "glm_ocr_qwen25_14b",
+        "GLM OCR hybrids cluster near\n14-16 s/document while retaining\ntop-tier extraction accuracy.",
+        (17.45, 0.3376),
+    )
+    callout(
+        "qwen3_vl_raw_ocr_qwen3_8b",
+        "Highest plotted hybrid score:\nQwen3-VL OCR -> Qwen3-8B\n0.346 primary score at 17.3 s/doc.",
+        (18.4, 0.3460),
+    )
+    callout(
+        "surya_qwen25_14b",
+        "Surya -> Qwen2.5-14B remains\ncompetitive, but moves beyond\n21 s/document.",
+        (16.25, 0.3090),
+    )
+    callout(
+        "trocr_qwen25_14b",
+        "Fastest plotted lane:\n8.7 s/document, with lower\nstructured extraction score.",
+        (10.25, 0.2963),
+    )
+
+    ax.text(
+        0.03,
+        0.07,
+        "Lower runtime  <<",
+        transform=ax.transAxes,
+        fontsize=11,
+        color="#4B5563",
+        fontweight="bold",
+    )
+    ax.text(
+        0.02,
+        0.98,
+        "Higher score",
+        transform=ax.transAxes,
+        fontsize=11,
+        color="#4B5563",
+        fontweight="bold",
+        va="top",
+        rotation=90,
+    )
+
+    ax.set_title("Runtime vs Accuracy: Efficient Hybrid Trade-offs", loc="left", fontweight="bold", pad=18, fontsize=28)
+    ax.text(
+        0.0,
+        1.015,
+        "Only lanes with both final runtime and final primary-score values are plotted.",
+        transform=ax.transAxes,
+        fontsize=12,
+        color="#4B5563",
+        va="bottom",
+    )
+    ax.set_xlabel("average runtime seconds per document", fontsize=15)
+    ax.set_ylabel("primary score", fontsize=15)
+    ax.grid(axis="x", color=COLORS["grid"], linewidth=0.8, alpha=0.9)
+    ax.grid(axis="y", color=COLORS["grid"], linewidth=0.45, alpha=0.55)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["left"].set_color("#8792A2")
+    ax.spines["bottom"].set_color("#8792A2")
+    ax.tick_params(labelsize=12)
+    ax.legend(
+        frameon=False,
+        fontsize=11,
+        title="Full benchmark lane",
+        title_fontsize=14,
+        loc="center left",
+        bbox_to_anchor=(1.01, 0.52),
+        borderaxespad=0.0,
+    )
+    fig.subplots_adjust(left=0.08, right=0.71, top=0.86, bottom=0.13)
     save_figure(fig, "figure_09_runtime_vs_accuracy")
-    add_caption(captions, 9, "Runtime versus accuracy", "The scatter plot compares runtime and primary score only for lanes that have both values in the frozen reports. Each color represents one full benchmark lane, so repeated OCR sources paired with different downstream models remain visually distinct.")
+    add_caption(captions, 9, "Runtime versus accuracy", "The annotated scatter plot compares runtime and primary score only for lanes that have both values in the final reports. The shaded zone marks efficient high-score hybrids, while callouts identify the fastest plotted lane, the strongest plotted hybrid, the GLM OCR cluster, and the slower Surya trade-off.")
 
 
 def plot_heatmap(df: pd.DataFrame, stem: str, title: str, captions: list[str], number: int, caption: str) -> None:
