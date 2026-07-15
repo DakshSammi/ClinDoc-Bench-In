@@ -106,15 +106,16 @@ def paste_panel(
 
 
 def make_figure_1() -> Image.Image:
-    canvas = Image.new("RGB", (6000, 2700), WHITE)
-    font = load_font(72)
-    margin_x = 150
-    top = 130
-    gutter = 120
-    caption_gap = 52
-    caption_h = 110
+    canvas = Image.new("RGB", (6000, 2250), WHITE)
+    font = load_font(68)
+    margin_x = 70
+    top = 60
+    gutter = 70
+    caption_gap = 30
+    caption_h = 95
+    bottom = 40
     panel_w = (canvas.width - 2 * margin_x - gutter) // 2
-    panel_h = canvas.height - top - caption_gap - caption_h - 110
+    panel_h = canvas.height - top - caption_gap - caption_h - bottom
     panels = [
         Panel("figure_15_good_vs_bad_prescription_examples.png", "(a) Visual-quality examples"),
         Panel("figure_02_dataset_composition.png", "(b) Dataset composition"),
