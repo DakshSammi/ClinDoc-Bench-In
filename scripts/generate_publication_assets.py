@@ -34,7 +34,11 @@ from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORTS = ROOT / "benchmark" / "final" / "reports"
-MANIFEST = ROOT / "benchmark" / "data" / "benchmark_manifest_v2.csv"
+MANIFEST_CANDIDATES = [
+    ROOT / "benchmark" / "data" / "benchmark_manifest.csv",
+    ROOT / "benchmark" / "data" / "benchmark_manifest_v2.csv",
+]
+MANIFEST = next((path for path in MANIFEST_CANDIDATES if path.exists()), MANIFEST_CANDIDATES[0])
 FIGURES = ROOT / "paper_assets" / "figures"
 TABLES = ROOT / "paper_assets" / "tables"
 APPENDIX = ROOT / "paper_assets" / "appendix"
@@ -136,7 +140,7 @@ def save_table(df: pd.DataFrame, stem: str) -> None:
 def save_figure(fig: plt.Figure, stem: str) -> None:
     fig.savefig(FIGURES / f"{stem}.svg", bbox_inches="tight")
     fig.savefig(FIGURES / f"{stem}.pdf", bbox_inches="tight")
-    fig.savefig(FIGURES / f"{stem}.png", bbox_inches="tight", dpi=600)
+    fig.savefig(FIGURES / f"{stem}.png", bbox_inches="tight", dpi=1200)
     plt.close(fig)
 
 
@@ -681,7 +685,10 @@ def anonymize_examples() -> dict[str, Path]:
     }
     out: dict[str, Path] = {}
     for doc_id, path in source_map.items():
+        dest = EXAMPLES / f"{doc_id}_anonymized.png"
         if not path.exists():
+            if dest.exists():
+                out[doc_id] = dest
             continue
         image = Image.open(path).convert("RGB")
         if doc_id == "p89":
@@ -689,7 +696,6 @@ def anonymize_examples() -> dict[str, Path]:
         draw = ImageDraw.Draw(image)
         for coords in redaction_boxes(doc_id):
             draw.rectangle(coords, fill=(0, 0, 0))
-        dest = EXAMPLES / f"{doc_id}_anonymized.png"
         image.save(dest)
         out[doc_id] = dest
     return out
@@ -907,7 +913,7 @@ Generated from frozen benchmark reports. No benchmark outputs were rerun or over
 - Primary table lanes: {primary}
 - Appendix lanes: {appendix}
 - Excluded lanes: {excluded}
-- Figures 1-19 plus Figures 8B, 12B, and 12C are exported as SVG, PDF, and 600 dpi PNG.
+- Figures 1-19 plus Figures 8B, 12B, and 12C are exported as SVG, PDF, and 1200 dpi PNG.
 - Figure 20 was intentionally removed.
 - Tables 1-12 are exported as CSV, LaTeX, and Markdown.
 - Figure captions are stored in `paper_assets/figures/captions.md`.
